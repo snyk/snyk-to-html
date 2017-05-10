@@ -1,6 +1,6 @@
 var fs = require('fs');
 var Handlebars = require('Handlebars');
-var htmlTemplate = fs.readFileSync('./index.hbs', 'utf8');
+var htmlTemplate = fs.readFileSync('./template/test-report.hbs', 'utf8');
 var marked = require('marked');
 var moment = require('moment');
 var hbTemplate = Handlebars.compile(htmlTemplate);
@@ -34,7 +34,7 @@ function groupVulns(vulns) {
   return result;
 }
 
-fs.readFile('output.json', 'utf8', (err, data) => {
+fs.readFile('./data/test-report.json', 'utf8', (err, data) => {
  if (err) throw err;
  data = JSON.parse(data);
  data.vulnerabilities = groupVulns(data.vulnerabilities);
@@ -61,6 +61,10 @@ Handlebars.registerHelper('if_eq', function (a, b, opts) {
 
 Handlebars.registerHelper('count', function (data) {
   return data && data.length;
+});
+
+Handlebars.registerHelper('dump', function (data, spacer) {
+    return JSON.stringify(data, null, spacer || null);
 });
 
 Handlebars.registerHelper('if_any', function () { // important: not an arrow fn

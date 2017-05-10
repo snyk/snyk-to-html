@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Language" content="en-us">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Snyk test report</title>
+    <meta name="description" content="18 known vulnerabilities found in 33 vulnerable dependency paths.">
+    <link rel="icon" type="image/png" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.png" sizes="194x194">
+    <link rel="shortcut icon" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.ico">
+    <link rel="stylesheet" href="https://static.snyk.io/prod/static-assets/style/build/initial.min.67beb0802da87abfd2bd1a320acac842.md5.css">
+  </head>
+  <body class="section-projects">
+
+<main class="layout-stacked">
+
+  <link rel="stylesheet" href="https://static.snyk.io/prod/static-assets/style/build/main.min.c03bcdc81577e6d89403274fe3835f56.md5.css"><script></script><!-- Why this is here: https://jakearchibald.com/2016/link-in-body/ -->
+
+  <div class="layout-stacked__header header">
+
+    <header class="project__header">
+      <div class="layout-container--short">
+        <h1 class="project__header__title" style="margin-bottom: 0.5em;">
+          Snyk test report
+        </h1>
+        <div class="meta-counts">
+          <div class="label label--counter meta-count">
+            <span>Known vulnerabilities</span>
+            <span>18</span>
+          </div>
+          <div class="label label--counter meta-count"><span>Vulnerable paths</span><span></span></div>
+          <div class="label label--counter meta-count"><span>Dependencies</span><span>428</span></div>
+        </div><!-- .meta-counts -->
+      </div><!-- .layout-container--short -->
+    </header><!-- .project__header -->
+
+  </div><!-- .layout-stacked__header -->
+
+  <div class="layout-stacked__content">
+
+    <div class="layout-container--short" style="padding-top: 35px;">
+
+      <div class="cards--vuln filter--patch filter--ignore">
+
+        <div class="card card--vuln  disclosure--not-new severity--medium" >
+          <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
+          <div class="card__section">
+            <strong class="card__label label severity--medium">medium severity</strong>
+            <ul class="card__meta">
+              <li class="card__meta__item">Vulnerable module:
+                brace-expansion
+              </li>
+
+              <li class="card__meta__item">Introduced through:
+
+                  
+
+                  
+                  goof@0.0.3, tap@5.8.0 and others
+
+
+              </li>
+
+            </ul>
+
+            <!-- Overview -->
+            <h2 id="overview">Overview</h2>
+<p><a href="https://www.npmjs.com/package/brace-expansion"><code>brace-expansion</code></a> is a package that performs brace expansion as known from sh/bash.
+Affected versions of this package are vulnerable to Regular Expression Denial of Service (ReDoS) attacks.
+Running:</p>
+<pre><code class="lang-js">const expand = require(&#39;brace-expansion&#39;);
+expand(&#39;{,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\n}&#39;)
+</code></pre>
+<p>Will hang for long periods of time.</p>
+<h2 id="details">Details</h2>
+<p>The Regular expression Denial of Service (ReDoS) is a type of Denial of Service attack.  Many Regular Expression implementations may reach edge cases that causes them to work very slowly (exponentially related to input size), allowing an attacker to exploit this and can cause the program to enter these extreme situations by using a Regex string and cause the service to hang for a large periods of time.</p>
+<p>You can read more about <code>Regular Expression Denial of Service (ReDoS)</code> on our <a href="https://snyk.io/blog/redos-and-catastrophic-backtracking/">blog</a>.</p>
+<h2 id="remediation">Remediation</h2>
+<p>Upgrade <code>brace-expansion</code> to version 1.1.7 or higher.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://github.com/juliangruber/brace-expansion/pull/35">Github PR</a></li>
+<li><a href="https://github.com/juliangruber/brace-expansion/issues/33">Github Issue</a></li>
+<li><a href="https://github.com/juliangruber/brace-expansion/pull/35/commits/b13381281cead487cbdbfd6a69fb097ea5e456c3">Github Commit</a></li>
+</ul>
+
+
+          </div>
+
+          <div class="cta card__cta">
+            <p><a href="https://snyk.io/vuln/npm:brace-expansion:20170302">More about this vulnerability</a></p>
+          </div>
+
+        </div><!-- .card -->
+
+      </div><!-- cards -->
+      <div class="cards--vuln filter--patch filter--ignore">
+
+        <div class="card card--vuln  disclosure--not-new severity--high" >
+          <h2 class="card__title">Remote Code Execution</h2>
+          <div class="card__section">
+            <strong class="card__label label severity--high">high severity</strong>
+            <ul class="card__meta">
+              <li class="card__meta__item">Vulnerable module:
+                ejs
+              </li>
+
+              <li class="card__meta__item">Introduced through:
+
+                  
+
+                  goof@0.0.3 and ejs@1.0.0
+
+                  
+
+
+              </li>
+
+            </ul>
+
+            <!-- Overview -->
+            <h2 id="overview">Overview</h2>
+<p><a href="https://www.npmjs.com/package/ejs"><code>ejs</code></a> is a popular JavaScript templating engine.
+Affected versions of the package are vulnerable to <em>Remote Code Execution</em> by letting the attacker under certain conditions control the source folder from which the engine renders include files.
+You can read more about this vulnerability on the <a href="https://snyk.io/blog/fixing-ejs-rce-vuln">Snyk blog</a>.</p>
+<p>There&#39;s also a <a href="https://snyk.io/vuln/npm:ejs:20161130">Cross-site Scripting</a> &amp; <a href="https://snyk.io/vuln/npm:ejs:20161130-1">Denial of Service</a> vulnerabilities caused by the same behaviour. </p>
+<h2 id="details">Details</h2>
+<p><code>ejs</code> provides a few different options for you to render a template, two being very similar: <code>ejs.render()</code> and <code>ejs.renderFile()</code>. The only difference being that <code>render</code> expects a string to be used for the template and <code>renderFile</code> expects a path to a template file.</p>
+<p>Both functions can be invoked in two ways. The first is calling them with <code>template</code>, <code>data</code>, and <code>options</code>:</p>
+<pre><code class="lang-js">ejs.render(str, data, options);
+
+ejs.renderFile(filename, data, options, callback)
+</code></pre>
+<p>The second way would be by calling only the <code>template</code> and <code>data</code>, while <code>ejs</code> lets the <code>options</code> be passed as part of the <code>data</code>:</p>
+<pre><code class="lang-js">ejs.render(str, dataAndOptions);
+
+ejs.renderFile(filename, dataAndOptions, callback)
+</code></pre>
+<p>If used with a variable list supplied by the user (e.g. by reading it from the URI with <code>qs</code> or equivalent), an attacker can control <code>ejs</code> options. This includes the <code>root</code> option, which allows changing the project root for includes with an absolute path.  </p>
+<pre><code class="lang-js">ejs.renderFile(&#39;my-template&#39;, {root:&#39;/bad/root/&#39;}, callback);
+</code></pre>
+<p>By passing along the root directive in the line above, any includes would now be pulled from <code>/bad/root</code> instead of the path intended. This allows the attacker to take control of the root directory for included scripts and divert it to a library under his control, thus leading to remote code execution.</p>
+<p>The <a href="https://github.com/mde/ejs/commit/3d447c5a335844b25faec04b1132dbc721f9c8f6">fix</a> introduced in version <code>2.5.3</code> blacklisted <code>root</code> options from options passed via the <code>data</code> object.</p>
+<h2 id="disclosure-timeline">Disclosure Timeline</h2>
+<ul>
+<li>November 27th, 2016 - Reported the issue to package owner.</li>
+<li>November 27th, 2016 - Issue acknowledged by package owner.</li>
+<li>November 28th, 2016 - Issue fixed and version <code>2.5.3</code> released.</li>
+</ul>
+<h2 id="remediation">Remediation</h2>
+<p>The vulnerability can be resolved by either using the GitHub integration to <a href="https://snyk.io/org/projects">generate a pull-request</a> from your dashboard or by running <code>snyk wizard</code> from the command-line interface.
+Otherwise, Upgrade <code>ejs</code> to version <code>2.5.3</code> or higher.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://snyk.io/blog/fixing-ejs-rce-vuln">Snyk Blog</a></li>
+<li><a href="https://github.com/mde/ejs/commit/3d447c5a335844b25faec04b1132dbc721f9c8f6">Fix commit</a></li>
+</ul>
+
+
+          </div>
+
+          <div class="cta card__cta">
+            <p><a href="https://snyk.io/vuln/npm:ejs:20161128">More about this vulnerability</a></p>
+          </div>
+
+        </div><!-- .card -->
+
+      </div><!-- cards -->
+      <div class="cards--vuln filter--patch filter--ignore">
+
+        <div class="card card--vuln  disclosure--not-new severity--medium" >
+          <h2 class="card__title">Cross-site Scripting (XSS)</h2>
+          <div class="card__section">
+            <strong class="card__label label severity--medium">medium severity</strong>
+            <ul class="card__meta">
+              <li class="card__meta__item">Vulnerable module:
+                ejs
+              </li>
+
+              <li class="card__meta__item">Introduced through:
+
+                  
+
+                  goof@0.0.3 and ejs@1.0.0
+
+                  
+
+
+              </li>
+
+            </ul>
+
+            <!-- Overview -->
+            <h2 id="overview">Overview</h2>
+<p><a href="https://www.npmjs.com/package/ejs"><code>ejs</code></a> is a popular JavaScript templating engine.
+Affected versions of the package are vulnerable to <em>Cross-site Scripting</em> by letting the attacker under certain conditions control and override the <code>filename</code> option causing it to render the value as is, without escaping it.
+You can read more about this vulnerability on the <a href="https://snyk.io/blog/fixing-ejs-rce-vuln">Snyk blog</a>.</p>
+<p>There&#39;s also a <a href="https://snyk.io/vuln/npm:ejs:20161128">Remote Code Execution</a> &amp; <a href="https://snyk.io/vuln/npm:ejs:20161130-1">Denial of Service</a> vulnerabilities caused by the same behaviour.</p>
+<h2 id="details">Details</h2>
+<p><code>ejs</code> provides a few different options for you to render a template, two being very similar: <code>ejs.render()</code> and <code>ejs.renderFile()</code>. The only difference being that <code>render</code> expects a string to be used for the template and <code>renderFile</code> expects a path to a template file.</p>
+<p>Both functions can be invoked in two ways. The first is calling them with <code>template</code>, <code>data</code>, and <code>options</code>:</p>
+<pre><code class="lang-js">ejs.render(str, data, options);
+
+ejs.renderFile(filename, data, options, callback)
+</code></pre>
+<p>The second way would be by calling only the <code>template</code> and <code>data</code>, while <code>ejs</code> lets the <code>options</code> be passed as part of the <code>data</code>:</p>
+<pre><code class="lang-js">ejs.render(str, dataAndOptions);
+
+ejs.renderFile(filename, dataAndOptions, callback)
+</code></pre>
+<p>If used with a variable list supplied by the user (e.g. by reading it from the URI with <code>qs</code> or equivalent), an attacker can control <code>ejs</code> options. This includes the <code>filename</code> option, which will be rendered as is when an error occurs during rendering. </p>
+<pre><code class="lang-js">ejs.renderFile(&#39;my-template&#39;, {filename:&#39;&lt;script&gt;alert(1)&lt;/script&gt;&#39;}, callback);
+</code></pre>
+<p>The <a href="https://github.com/mde/ejs/commit/49264e0037e313a0a3e033450b5c184112516d8f">fix</a> introduced in version <code>2.5.3</code> blacklisted <code>root</code> options from options passed via the <code>data</code> object.</p>
+<h2 id="disclosure-timeline">Disclosure Timeline</h2>
+<ul>
+<li>November 28th, 2016 - Reported the issue to package owner.</li>
+<li>November 28th, 2016 - Issue acknowledged by package owner.</li>
+<li>December 06th, 2016 - Issue fixed and version <code>2.5.5</code> released.</li>
+</ul>
+<h2 id="remediation">Remediation</h2>
+<p>The vulnerability can be resolved by either using the GitHub integration to <a href="https://snyk.io/org/projects">generate a pull-request</a> from your dashboard or by running <code>snyk wizard</code> from the command-line interface.
+Otherwise, Upgrade <code>ejs</code> to version <code>2.5.5</code> or higher.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://snyk.io/blog/fixing-ejs-rce-vuln">Snyk Blog</a></li>
+<li><a href="https://github.com/mde/ejs/commit/49264e0037e313a0a3e033450b5c184112516d8f">Fix commit</a></li>
+</ul>
+
+
+          </div>
+
+          <div class="cta card__cta">
+            <p><a href="https://snyk.io/vuln/npm:ejs:20161130">More about this vulnerability</a></p>
+          </div>
+
+        </div><!-- .card -->
+
+      </div><!-- cards -->
+      <div class="cards--vuln filter--patch filter--ignore">
+
+        <div class="card card--vuln  disclosure--not-new severity--medium" >
+          <h2 class="card__title">Denial of Service (DoS)</h2>
+          <div class="card__section">
+            <strong class="card__label label severity--medium">medium severity</strong>
+            <ul class="card__meta">
+              <li class="card__meta__item">Vulnerable module:
+                ejs
+              </li>
+
+              <li class="card__meta__item">Introduced through:
+
+                  
+
+                  goof@0.0.3 and ejs@1.0.0
+
+                  
+
+
+              </li>
+
+            </ul>
+
+            <!-- Overview -->
+            <h2 id="overview">Overview</h2>
+<p><a href="https://www.npmjs.com/package/ejs"><code>ejs</code></a> is a popular JavaScript templating engine.
+Affected versions of the package are vulnerable to <em>Denial of Service</em> by letting the attacker under certain conditions control and override the <code>localNames</code> option causing it to crash.
+You can read more about this vulnerability on the <a href="https://snyk.io/blog/fixing-ejs-rce-vuln">Snyk blog</a>.</p>
+<p>There&#39;s also a <a href="https://snyk.io/vuln/npm:ejs:20161128">Remote Code Execution</a> &amp; <a href="https://snyk.io/vuln/npm:ejs:20161130">Cross-site Scripting</a> vulnerabilities caused by the same behaviour.</p>
+<h2 id="details">Details</h2>
+<p><code>ejs</code> provides a few different options for you to render a template, two being very similar: <code>ejs.render()</code> and <code>ejs.renderFile()</code>. The only difference being that <code>render</code> expects a string to be used for the template and <code>renderFile</code> expects a path to a template file.</p>
+<p>Both functions can be invoked in two ways. The first is calling them with <code>template</code>, <code>data</code>, and <code>options</code>:</p>
+<pre><code class="lang-js">ejs.render(str, data, options);
+
+ejs.renderFile(filename, data, options, callback)
+</code></pre>
+<p>The second way would be by calling only the <code>template</code> and <code>data</code>, while <code>ejs</code> lets the <code>options</code> be passed as part of the <code>data</code>:</p>
+<pre><code class="lang-js">ejs.render(str, dataAndOptions);
+
+ejs.renderFile(filename, dataAndOptions, callback)
+</code></pre>
+<p>If used with a variable list supplied by the user (e.g. by reading it from the URI with <code>qs</code> or equivalent), an attacker can control <code>ejs</code> options. This includes the <code>localNames</code> option, which will cause the renderer to crash.</p>
+<pre><code class="lang-js">ejs.renderFile(&#39;my-template&#39;, {localNames:&#39;try&#39;}, callback);
+</code></pre>
+<p>The <a href="https://github.com/mde/ejs/commit/49264e0037e313a0a3e033450b5c184112516d8f">fix</a> introduced in version <code>2.5.3</code> blacklisted <code>root</code> options from options passed via the <code>data</code> object.</p>
+<h2 id="disclosure-timeline">Disclosure Timeline</h2>
+<ul>
+<li>November 28th, 2016 - Reported the issue to package owner.</li>
+<li>November 28th, 2016 - Issue acknowledged by package owner.</li>
+<li>December 06th, 2016 - Issue fixed and version <code>2.5.5</code> released.</li>
+</ul>
+<h2 id="remediation">Remediation</h2>
+<p>The vulnerability can be resolved by either using the GitHub integration to <a href="https://snyk.io/org/projects">generate a pull-request</a> from your dashboard or by running <code>snyk wizard</code> from the command-line interface.
+Otherwise, Upgrade <code>ejs</code> to version <code>2.5.5</code> or higher.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://snyk.io/blog/fixing-ejs-rce-vuln">Snyk Blog</a></li>
+<li><a href="https://github.com/mde/ejs/commit/49264e0037e313a0a3e033450b5c184112516d8f">Fix commit</a></li>
+</ul>
+
+
+          </div>
+
+          <div class="cta card__cta">
+            <p><a href="https://snyk.io/vuln/npm:ejs:20161130-1">More about this vulnerability</a></p>
+          </div>
+
+        </div><!-- .card -->
+
+      </div><!-- cards -->
+      <div class="cards--vuln filter--patch filter--ignore">
+
+        <div class="card card--vuln  disclosure--not-new severity--low" >
+          <h2 class="card__title">Regular Expression Denial of Service (DoS)</h2>
+          <div class="card__section">
+            <strong class="card__label label severity--low">low severity</strong>
+            <ul class="card__meta">
+              <li class="card__meta__item">Vulnerable module:
+                hawk
+              </li>
+
+              <li class="card__meta__item">Introduced through:
+
+                  
+
+                  
+                  goof@0.0.3, tap@5.8.0 and others
+
+
+              </li>
+
+            </ul>
+
+            <!-- Overview -->
+            <h2 id="overview">Overview</h2>
+<p>A <a href="https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS">Regular expression Denial of Service (ReDoS)</a> vulnerability exists in <code>hawk</code> package, affecting version 4.1.0 and below.</p>
+<p>&quot;The Regular expression Denial of Service (ReDoS) is a Denial of Service attack, that exploits the fact that most Regular Expression implementations may reach extreme situations that cause them to work very slowly (exponentially related to input size). An attacker can then cause a program using a Regular Expression to enter these extreme situations and then hang for a very long time.&quot; <a href="https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS">1</a></p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://github.com/hueniverse/hawk/issues/168">https://github.com/hueniverse/hawk/issues/168</a></li>
+<li><a href="https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS">https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS</a></li>
+</ul>
+
+
+          </div>
+
+          <div class="cta card__cta">
+            <p><a href="https://snyk.io/vuln/npm:hawk:20160119">More about this vulnerability</a></p>
+          </div>
+
+        </div><!-- .card -->
+
+      </div><!-- cards -->
+      <div class="cards--vuln filter--patch filter--ignore">
+
+        <div class="card card--vuln  disclosure--not-new severity--medium" >
+          <h2 class="card__title">Cross-site Scripting (XSS)</h2>
+          <div class="card__section">
+            <strong class="card__label label severity--medium">medium severity</strong>
+            <ul class="card__meta">
+              <li class="card__meta__item">Vulnerable module:
+                jquery
+              </li>
+
+              <li class="card__meta__item">Introduced through:
+
+                  
+
+                  goof@0.0.3 and jquery@2.2.4
+
+                  
+
+
+              </li>
+
+            </ul>
+
+            <!-- Overview -->
+            <h2 id="overview">Overview</h2>
+<p><a href="https://www.npmjs.com/package/jquery"><code>jquery</code></a> is JavaScript library for DOM operations.</p>
+<p>Affected versions of the package are vulnerable to Cross-site Scripting (XSS) attacks when a cross-domain ajax request is performed without the <code>dataType</code> option causing <code>text/javascript</code> responses to be executed.</p>
+<h2 id="remediation">Remediation</h2>
+<p>Upgrade <code>jquery</code> to version <code>3.0.0</code> or higher.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://github.com/jquery/jquery/issues/2432">Github Issue</a></li>
+<li><a href="https://github.com/jquery/jquery/pull/2588">Github PR</a></li>
+<li><a href="https://github.com/jquery/jquery/pull/2588/commits/c254d308a7d3f1eac4d0b42837804cfffcba4bb2">Github Commit 3.0.0</a></li>
+<li><a href="https://github.com/jquery/jquery/commit/f60729f3903d17917dc351f3ac87794de379b0cc">Github Commit 1.12</a></li>
+<li><a href="https://github.com/jquery/jquery/blob/250a1990baa571de60325ab2c52eabb399c4cf9e/src/ajax/script.js#L18">Vulnerable code</a></li>
+</ul>
+
+
+          </div>
+
+          <div class="cta card__cta">
+            <p><a href="https://snyk.io/vuln/npm:jquery:20150627">More about this vulnerability</a></p>
+          </div>
+
+        </div><!-- .card -->
+
+      </div><!-- cards -->
+      <div class="cards--vuln filter--patch filter--ignore">
+
+        <div class="card card--vuln  disclosure--not-new severity--low" >
+          <h2 class="card__title">Denial of Service (DoS)</h2>
+          <div class="card__section">
+            <strong class="card__label label severity--low">low severity</strong>
+            <ul class="card__meta">
+              <li class="card__meta__item">Vulnerable module:
+                jquery
+              </li>
+
+              <li class="card__meta__item">Introduced through:
+
+                  
+
+                  goof@0.0.3 and jquery@2.2.4
+
+                  
+
+
+              </li>
+
+            </ul>
+
+            <!-- Overview -->
+            <h2 id="overview">Overview</h2>
+<p><a href="https://www.npmjs.com/package/jquery"><code>jquery</code></a> is JavaScript library for DOM operations.
+Affected versions of the package are vulnerable to Denial of Service (DoS) due to removing a logic that lowercased attribute names. Any attribute getter using a mixed-cased name for boolean attributes goes into an infinite recursion, exceeding the stack call limit.</p>
+<h2 id="remediation">Remediation</h2>
+<p>Upgrade <code>jquery</code> to version 3.0.0 or higher.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://github.com/jquery/jquery/issues/3133">Github Issue</a></li>
+<li><a href="https://github.com/jquery/jquery/pull/3134">Github Commit</a></li>
+<li><a href="https://jsfiddle.net/shnann6y/2/">jsfiddle</a></li>
+</ul>
+
+
+          </div>
+
+          <div class="cta card__cta">
+            <p><a href="https://snyk.io/vuln/npm:jquery:20160529">More about this vulnerability</a></p>
+          </div>
+
+        </div><!-- .card -->
+
+      </div><!-- cards -->
+      <div class="cards--vuln filter--patch filter--ignore">
+
+        <div class="card card--vuln  disclosure--not-new severity--high" >
+          <h2 class="card__title">Content &amp; Code Injection (XSS)</h2>
+          <div class="card__section">
+            <strong class="card__label label severity--high">high severity</strong>
+            <ul class="card__meta">
+              <li class="card__meta__item">Vulnerable module:
+                marked
+              </li>
+
+              <li class="card__meta__item">Introduced through:
+
+                  
+
+                  goof@0.0.3 and marked@0.3.5
+
+                  
+
+
+              </li>
+
+            </ul>
+
+            <!-- Overview -->
+            <h2 id="overview">Overview</h2>
+<p><a href="https://www.npmjs.com/package/marked"><code>marked</code></a> is a markdown parser and compiler used for rendering markdown content to html. It is vulnerable to content injection attack allowing the attacker to bypass its output sanitization (<code>sanitize: true</code>) protection. Using the <a href="https://www.w3.org/MarkUp/html-spec/html-spec_13.html#SEC13">HTML Coded Character Set</a>, attackers can inject <code>javascript:</code> code snippets into the output. For example, the following input <code>javascript&amp;#x58document;alert&amp;#40;1&amp;#41;</code>  will result in <code>alert(1)</code> being executed when the user clicks on the link.</p>
+<h2 id="remediation">Remediation</h2>
+<p>Upgrade <code>marked</code> to version 0.3.6 or higher.
+Also, you can patch the vulnerability using <a href="https://snyk.io/docs/using-snyk/#wizard">Snyk wizard</a>. Alternatively you can use <code>remarkable</code> or other markdown libraries.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://github.com/chjj/marked/pull/592">Github PR</a></li>
+<li><a href="https://github.com/chjj/marked/pull/592/commits/2cff85979be8e7a026a9aca35542c470cf5da523">Github Commit</a></li>
+</ul>
+
+
+          </div>
+
+          <div class="cta card__cta">
+            <p><a href="https://snyk.io/vuln/npm:marked:20150520">More about this vulnerability</a></p>
+          </div>
+
+        </div><!-- .card -->
+
+      </div><!-- cards -->
+      <div class="cards--vuln filter--patch filter--ignore">
+
+        <div class="card card--vuln  disclosure--not-new severity--high" >
+          <h2 class="card__title">Cross-site Scripting (XSS) via Data URIs</h2>
+          <div class="card__section">
+            <strong class="card__label label severity--high">high severity</strong>
+            <ul class="card__meta">
+              <li class="card__meta__item">Vulnerable module:
+                marked
+              </li>
+
+              <li class="card__meta__item">Introduced through:
+
+                  
+
+                  goof@0.0.3 and marked@0.3.5
+
+                  
+
+
+              </li>
+
+            </ul>
+
+            <!-- Overview -->
+            <h2 id="overview">Overview</h2>
+<p><a href="https://www.npmjs.com/package/marked"><code>marked</code></a> is a markdown parser and compiler used for rendering markdown content to html.
+Affected versions of the package allowed the use of <code>data:</code> URIs for all mime types by default potentially opening a door for Cross-site Scripting (XSS) attacks.</p>
+<h2 id="details">Details</h2>
+<p>Data URIs enable embedding small files in line in HTML documents, provided in the URL itself.
+Attackers can craft malicious web pages containing either HTML or script code that utilizes the data URI scheme, allowing them to bypass access controls or steal sensitive information.</p>
+<p>An example of data URI used to deliver javascript code. The data holds <code>&lt;script&gt;alert(&#39;XSS&#39;)&lt;/script&gt;</code> tag in base64 encoded format.</p>
+<pre><code class="lang-html">[xss link](data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K)
+</code></pre>
+<h2 id="remediation">Remediation</h2>
+<p>The fix is merged to the master branch but not yet published to npm. We recommend patching it using <a href="https://snyk.io/docs/using-snyk/#wizard">Snyk wizard</a>.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://github.com/chjj/marked/commit/cd2f6f5b7091154c5526e79b5f3bfb4d15995a51">Github Commit</a></li>
+</ul>
+
+
+          </div>
+
+          <div class="cta card__cta">
+            <p><a href="https://snyk.io/vuln/npm:marked:20170112">More about this vulnerability</a></p>
+          </div>
+
+        </div><!-- .card -->
+
+      </div><!-- cards -->
+      <div class="cards--vuln filter--patch filter--ignore">
+
+        <div class="card card--vuln  disclosure--not-new severity--high" >
+          <h2 class="card__title">Regular Expression Denial of Service (DoS)</h2>
+          <div class="card__section">
+            <strong class="card__label label severity--high">high severity</strong>
+            <ul class="card__meta">
+              <li class="card__meta__item">Vulnerable module:
+                minimatch
+              </li>
+
+              <li class="card__meta__item">Introduced through:
+
+                  
+
+                  
+                  goof@0.0.3, tap@5.8.0 and others
+
+
+              </li>
+
+            </ul>
+
+            <!-- Overview -->
+            <h2 id="overview">Overview</h2>
+<p><a href="https://www.npmjs.com/package/minimatch"><code>minimatch</code></a> is a minimalistic matching library used for converting glob expressions into JavaScript RegExp objects.</p>
+<p>An attacker can provide a long value to the <code>minimatch</code> function, which nearly matches the pattern being matched. This will cause the regular expression matching to take a long time, all the while occupying the event loop and preventing it from processing other requests and making the server unavailable (a Denial of Service attack).</p>
+<p>&quot;The Regular expression Denial of Service (ReDoS) is a Denial of Service attack, that exploits the fact that most Regular Expression implementations may reach extreme situations that cause them to work very slowly (exponentially related to input size). An attacker can then cause a program using a Regular Expression to enter these extreme situations and then hang for a very long time.&quot; <a href="https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS">1</a></p>
+<h2 id="remediation">Remediation</h2>
+<p>Upgrade <code>minimatch</code> to version <code>3.0.2</code> or greater.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS">https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS</a></li>
+<li><a href="https://github.com/isaacs/minimatch/commit/6944abf9e0694bd22fd9dad293faa40c2bc8a955">https://github.com/isaacs/minimatch/commit/6944abf9e0694bd22fd9dad293faa40c2bc8a955</a></li>
+</ul>
+
+
+          </div>
+
+          <div class="cta card__cta">
+            <p><a href="https://snyk.io/vuln/npm:minimatch:20160620">More about this vulnerability</a></p>
+          </div>
+
+        </div><!-- .card -->
+
+      </div><!-- cards -->
+      <div class="cards--vuln filter--patch filter--ignore">
+
+        <div class="card card--vuln  disclosure--not-new severity--medium" >
+          <h2 class="card__title">Regular Expression Denial of Service (DoS)</h2>
+          <div class="card__section">
+            <strong class="card__label label severity--medium">medium severity</strong>
+            <ul class="card__meta">
+              <li class="card__meta__item">Vulnerable module:
+                moment
+              </li>
+
+              <li class="card__meta__item">Introduced through:
+
+                  
+
+                  goof@0.0.3 and moment@2.15.1
+
+                  
+
+
+              </li>
+
+            </ul>
+
+            <!-- Overview -->
+            <h2 id="overview">Overview</h2>
+<p><a href="https://www.npmjs.com/package/moment"><code>moment</code></a> is a lightweight JavaScript date library for parsing, validating, manipulating, and formatting dates.</p>
+<p>Affected versions of the package are vulnerable to Regular Expression Denial of Service (ReDoS) attacks for any locale that has separate format and standalone options and <code>format</code> input can be controlled by the user.</p>
+<p>An attacker can provide a specially crafted input to the <code>format</code> function, which nearly matches the pattern being matched. This will cause the regular expression matching to take a long time, all the while occupying the event loop and preventing it from processing other requests and making the server unavailable (a Denial of Service attack).</p>
+<h2 id="disclosure-timeline">Disclosure Timeline</h2>
+<ul>
+<li>October 19th, 2016 - Reported the issue to package owner.</li>
+<li>October 19th, 2016 - Issue acknowledged by package owner.</li>
+<li>October 24th, 2016 - Issue fixed and version <code>2.15.2</code> released.</li>
+</ul>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://gist.github.com/grnd/50192ce22681848a7de812d95241b7fc">Proof of concept</a></li>
+<li><a href="https://github.com/moment/moment/commit/663f33e333212b3800b63592cd8e237ac8fabdb9">Fix commit</a></li>
+</ul>
+
+
+          </div>
+
+          <div class="cta card__cta">
+            <p><a href="https://snyk.io/vuln/npm:moment:20161019">More about this vulnerability</a></p>
+          </div>
+
+        </div><!-- .card -->
+
+      </div><!-- cards -->
+      <div class="cards--vuln filter--patch filter--ignore">
+
+        <div class="card card--vuln  disclosure--not-new severity--medium" >
+          <h2 class="card__title">Remote Memory Exposure</h2>
+          <div class="card__section">
+            <strong class="card__label label severity--medium">medium severity</strong>
+            <ul class="card__meta">
+              <li class="card__meta__item">Vulnerable module:
+                mongoose
+              </li>
+
+              <li class="card__meta__item">Introduced through:
+
+                  
+
+                  goof@0.0.3 and mongoose@4.2.4
+
+                  
+
+
+              </li>
+
+            </ul>
+
+            <!-- Overview -->
+            <h2 id="overview">Overview</h2>
+<p>A potential memory disclosure vulnerability exists in mongoose.
+A <code>Buffer</code> field in a MongoDB document can be used to expose sensitive
+information such as code, runtime memory and user data into MongoDB.</p>
+<h3 id="details">Details</h3>
+<p>Initializing a <code>Buffer</code> field in a document with integer <code>N</code> creates a <code>Buffer</code>
+of length <code>N</code> with non zero-ed out memory.
+<strong>Example:</strong></p>
+<pre><code>var x = new Buffer(100); // uninitialized Buffer of length 100
+// vs
+var x = new Buffer(&#39;100&#39;); // initialized Buffer with value of &#39;100&#39;
+</code></pre><p>Initializing a MongoDB document field in such manner will dump uninitialized
+memory into MongoDB.
+The patch wraps <code>Buffer</code> field initialization in mongoose by converting a
+<code>number</code> value <code>N</code> to array <code>[N]</code>, initializing the <code>Buffer</code> with <code>N</code> in its
+binary form.</p>
+<h4 id="proof-of-concept">Proof of concept</h4>
+<pre><code class="lang-javascript">var mongoose = require(&#39;mongoose&#39;);
+mongoose.connect(&#39;mongodb://localhost/bufftest&#39;);
+
+// data: Buffer is not uncommon, taken straight from the docs: http://mongoosejs.com/docs/schematypes.html
+mongoose.model(&#39;Item&#39;, new mongoose.Schema({id: String, data: Buffer}));
+
+var Item = mongoose.model(&#39;Item&#39;);
+
+var sample = new Item();
+sample.id = &#39;item1&#39;;
+
+// This will create an uninitialized buffer of size 100
+sample.data = 100;
+sample.save(function () {
+    Item.findOne(function (err, result) {
+        // Print out the data (exposed memory)
+        console.log(result.data.toString(&#39;ascii&#39;))
+        mongoose.connection.db.dropDatabase(); // Clean up everything
+        process.exit();
+    });
+});
+</code></pre>
+<h2 id="remediation">Remediation</h2>
+<p>Upgrade <code>mongoose</code> to version &gt;= 3.8.39 or &gt;= 4.3.6.</p>
+<p>If a direct dependency update is not possible, use <a href="https://snyk.io/docs/using-snyk#wizard"><code>snyk wizard</code></a> to patch this vulnerability.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://github.com/Automattic/mongoose/issues/3764">Github Issue</a></li>
+<li><a href="https://github.com/ChALkeR/notes/blob/master/Lets-fix-Buffer-API.md#previous-materials">Blog: Node Buffer API fix</a></li>
+<li><a href="https://github.com/ChALkeR/notes/blob/master/Buffer-knows-everything.md">Blog: Information about Buffer</a></li>
+</ul>
+
+
+          </div>
+
+          <div class="cta card__cta">
+            <p><a href="https://snyk.io/vuln/npm:mongoose:20160116">More about this vulnerability</a></p>
+          </div>
+
+        </div><!-- .card -->
+
+      </div><!-- cards -->
+      <div class="cards--vuln filter--patch filter--ignore">
+
+        <div class="card card--vuln  disclosure--not-new severity--medium" >
+          <h2 class="card__title">Regular Expression Denial of Service (DoS)</h2>
+          <div class="card__section">
+            <strong class="card__label label severity--medium">medium severity</strong>
+            <ul class="card__meta">
+              <li class="card__meta__item">Vulnerable module:
+                ms
+              </li>
+
+              <li class="card__meta__item">Introduced through:
+
+                  
+
+                  
+                  goof@0.0.3, humanize-ms@1.0.1 and others
+
+
+              </li>
+
+            </ul>
+
+            <!-- Overview -->
+            <h2 id="overview">Overview</h2>
+<p>The <a href="https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS">Regular expression Denial of Service (ReDoS)</a> vulnerability exists in the <code>ms</code> package, affecting version 0.7.0 and below.</p>
+<h2 id="details">Details</h2>
+<p><code>ms</code> is a milliseconds conversion utility, used to convert a time period string (i.e. <code>&quot;2 days&quot;</code>, <code>&quot;1h&quot;</code>) into milliseconds integer.
+The regular expression used by the function to parse the time is vulnerable to a denial of service attack, where extremely long strings passed to <code>ms()</code> can take a long time to process, subsequently blocking the event loop for that extended period.</p>
+<p>&quot;The Regular expression Denial of Service (ReDoS) is a Denial of Service attack, that exploits the fact that most Regular Expression implementations may reach extreme situations that cause them to work very slowly (exponentially related to input size). An attacker can then cause a program using a Regular Expression to enter these extreme situations and then hang for a very long time.&quot; <a href="https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS">1</a></p>
+<h2 id="remediation">Remediation</h2>
+<p>Upgrade <code>ms</code> to version 0.7.1. </p>
+<p>If direct dependency upgrade is not possible, use <a href="https://snyk.io/docs/using-snyk#wizard">snyk wizard</a> to patch this vulnerability.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS">https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS</a></li>
+</ul>
+
+
+          </div>
+
+          <div class="cta card__cta">
+            <p><a href="https://snyk.io/vuln/npm:ms:20151024">More about this vulnerability</a></p>
+          </div>
+
+        </div><!-- .card -->
+
+      </div><!-- cards -->
+      <div class="cards--vuln filter--patch filter--ignore">
+
+        <div class="card card--vuln  disclosure--not-new severity--high" >
+          <h2 class="card__title">Regular Expression Denial of Service (DoS)</h2>
+          <div class="card__section">
+            <strong class="card__label label severity--high">high severity</strong>
+            <ul class="card__meta">
+              <li class="card__meta__item">Vulnerable module:
+                negotiator
+              </li>
+
+              <li class="card__meta__item">Introduced through:
+
+                  
+
+                  
+                  goof@0.0.3, errorhandler@1.2.0 and others
+
+
+              </li>
+
+            </ul>
+
+            <!-- Overview -->
+            <h2 id="overview">Overview</h2>
+<p><a href="https://npmjs.org/package/negotiator"><code>negotiator</code></a> is an HTTP content negotiator for Node.js. Versions prior to <code>0.6.1</code> are vulnerable to <a href="https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS">Regular expression Denial of Service (ReDoS)</a> attack when parsing &quot;Accept-Language&quot; http header.</p>
+<p>An attacker can provide a long value in the Accept-Language header, which nearly matches the pattern being matched. This will cause the regular expression matching to take a long time, all the while occupying the thread and preventing it from processing other requests. By repeatedly sending multiple such requests, the attacker can make the server unavailable (a Denial of Service attack).</p>
+<h2 id="details">Details</h2>
+<p>The Regular expression Denial of Service (ReDoS) is a Denial of Service attack, that exploits the fact that most Regular Expression implementations may reach extreme situations that cause them to work very slowly (exponentially related to input size). An attacker can then cause a program using a Regular Expression to enter these extreme situations and then hang for a very long time. [1]</p>
+<h2 id="remediation">Remediation</h2>
+<p>Upgrade <code>negotiator</code> to to version <code>0.6.1</code> or greater.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS">https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS</a></li>
+<li><a href="https://github.com/jshttp/negotiator/commit/26a05ec15cf7d1fa56000d66ebe9c9a1a62cb75c">https://github.com/jshttp/negotiator/commit/26a05ec15cf7d1fa56000d66ebe9c9a1a62cb75c</a></li>
+</ul>
+
+
+          </div>
+
+          <div class="cta card__cta">
+            <p><a href="https://snyk.io/vuln/npm:negotiator:20160616">More about this vulnerability</a></p>
+          </div>
+
+        </div><!-- .card -->
+
+      </div><!-- cards -->
+      <div class="cards--vuln filter--patch filter--ignore">
+
+        <div class="card card--vuln  disclosure--not-new severity--high" >
+          <h2 class="card__title">Prototype Override Protection Bypass</h2>
+          <div class="card__section">
+            <strong class="card__label label severity--high">high severity</strong>
+            <ul class="card__meta">
+              <li class="card__meta__item">Vulnerable module:
+                qs
+              </li>
+
+              <li class="card__meta__item">Introduced through:
+
+                  
+
+                  
+                  goof@0.0.3, body-parser@1.9.0 and others
+
+
+              </li>
+
+            </ul>
+
+            <!-- Overview -->
+            <h2 id="overview">Overview</h2>
+<p><a href="https://www.npmjs.com/package/qs"><code>qs</code></a> is a querystring parser that supports nesting and arrays, with a depth limit.</p>
+<p>By default <code>qs</code> protects against attacks that attempt to overwrite an object&#39;s existing prototype properties, such as <code>toString()</code>, <code>hasOwnProperty()</code>,etc.</p>
+<p>From <a href="https://github.com/ljharb/qs"><code>qs</code> documentation</a>:</p>
+<blockquote>
+<p>By default parameters that would overwrite properties on the object prototype are ignored, if you wish to keep the data from those fields either use plainObjects as mentioned above, or set allowPrototypes to true which will allow user input to overwrite those properties. WARNING It is generally a bad idea to enable this option as it can cause problems when attempting to use the properties that have been overwritten. Always be careful with this option.</p>
+</blockquote>
+<p>Overwriting these properties can impact application logic, potentially allowing attackers to work around security controls, modify data, make the application unstable and more.</p>
+<p>In versions of the package affected by this vulnerability, it is possible to circumvent this protection and overwrite prototype properties and functions by prefixing the name of the parameter with <code>[</code> or <code>]</code>. e.g. <code>qs.parse(&quot;]=toString&quot;)</code> will return <code>{toString = true}</code>, as a result, calling <code>toString()</code> on the object will throw an exception.</p>
+<p><strong>Example:</strong></p>
+<pre><code class="lang-js">qs.parse(&#39;toString=foo&#39;, { allowPrototypes: false })
+// {}
+
+qs.parse(&quot;]=toString&quot;, { allowPrototypes: false })
+// {toString = true} &lt;== prototype overwritten
+</code></pre>
+<p>For more information, you can check out our <a href="https://snyk.io/blog/high-severity-vulnerability-qs/">blog</a>.</p>
+<h2 id="disclosure-timeline">Disclosure Timeline</h2>
+<ul>
+<li>February 13th, 2017 - Reported the issue to package owner.</li>
+<li>February 13th, 2017 - Issue acknowledged by package owner.</li>
+<li>February 16th, 2017 - Partial fix released in versions <code>6.0.3</code>, <code>6.1.1</code>, <code>6.2.2</code>, <code>6.3.1</code>.</li>
+<li>March 6th, 2017     - Final fix released in versions <code>6.4.0</code>,<code>6.3.2</code>, <code>6.2.3</code>, <code>6.1.2</code> and <code>6.0.4</code></li>
+</ul>
+<h2 id="remediation">Remediation</h2>
+<p>Upgrade <code>qs</code> to version <code>6.4.0</code> or higher.
+<strong>Note:</strong> The fix was backported to the following versions <code>6.3.2</code>, <code>6.2.3</code>, <code>6.1.2</code>, <code>6.0.4</code>.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://github.com/ljharb/qs/commit/beade029171b8cef9cee0d03ebe577e2dd84976d">Github Commit</a></li>
+<li><a href="https://github.com/ljharb/qs/issues/200">Report of an insufficient fix</a></li>
+</ul>
+
+
+          </div>
+
+          <div class="cta card__cta">
+            <p><a href="https://snyk.io/vuln/npm:qs:20170213">More about this vulnerability</a></p>
+          </div>
+
+        </div><!-- .card -->
+
+      </div><!-- cards -->
+      <div class="cards--vuln filter--patch filter--ignore">
+
+        <div class="card card--vuln  disclosure--not-new severity--medium" >
+          <h2 class="card__title">Remote Memory Exposure</h2>
+          <div class="card__section">
+            <strong class="card__label label severity--medium">medium severity</strong>
+            <ul class="card__meta">
+              <li class="card__meta__item">Vulnerable module:
+                request
+              </li>
+
+              <li class="card__meta__item">Introduced through:
+
+                  
+
+                  
+                  goof@0.0.3, tap@5.8.0 and others
+
+
+              </li>
+
+            </ul>
+
+            <!-- Overview -->
+            <h2 id="overview">Overview</h2>
+<p><a href="https://www.npmjs.com/package/request"><code>request</code></a> is a simplified http request client.
+A potential remote memory exposure vulnerability exists in <code>request</code>. If a <code>request</code> uses a multipart attachment and the <em>body type</em> option is <code>number</code> with value X, then X bytes of uninitialized memory will be sent in the body of the request.</p>
+<p>Note that while the impact of this vulnerability is high (memory exposure), exploiting it is likely difficult, as the attacker needs to somehow control the body type of the request. One potential exploit scenario is when a request is composed based on JSON input, including the body type, allowing a malicious JSON to trigger the memory leak.</p>
+<h3 id="details">Details</h3>
+<p>Constructing a <code>Buffer</code> class with integer <code>N</code> creates a <code>Buffer</code>
+of length <code>N</code> with non zero-ed out memory.
+<strong>Example:</strong></p>
+<pre><code>var x = new Buffer(100); // uninitialized Buffer of length 100
+// vs
+var x = new Buffer(&#39;100&#39;); // initialized Buffer with value of &#39;100&#39;
+</code></pre><p>Initializing a multipart body in such manner will cause uninitialized memory to be sent in the body of the request.</p>
+<h4 id="proof-of-concept">Proof of concept</h4>
+<pre><code class="lang-javascript">var http = require(&#39;http&#39;)
+var request = require(&#39;request&#39;)
+
+http.createServer(function (req, res) {
+  var data = &#39;&#39;
+  req.setEncoding(&#39;utf8&#39;)
+  req.on(&#39;data&#39;, function (chunk) {
+    console.log(&#39;data&#39;)
+    data += chunk
+  })
+  req.on(&#39;end&#39;, function () {
+    // this will print uninitialized memory from the client
+    console.log(&#39;Client sent:\n&#39;, data)
+  })
+  res.end()
+}).listen(8000)
+
+request({
+  method: &#39;POST&#39;,
+  uri: &#39;http://localhost:8000&#39;,
+  multipart: [{ body: 1000 }]
+},
+function (err, res, body) {
+  if (err) return console.error(&#39;upload failed:&#39;, err)
+  console.log(&#39;sent&#39;)
+})
+</code></pre>
+<h2 id="remediation">Remediation</h2>
+<p>Upgrade <code>request</code> to version 2.68.0 or higher.</p>
+<p>If a direct dependency update is not possible, use <a href="https://snyk.io/documentation/#wizard"><code>snyk wizard</code></a> to patch this vulnerability.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://github.com/request/request/pull/2018">Github PR</a></li>
+<li><a href="https://github.com/ChALkeR/notes/blob/master/Lets-fix-Buffer-API.md#previous-materials">Blog: Node Buffer API fix</a></li>
+<li><a href="https://github.com/ChALkeR/notes/blob/master/Buffer-knows-everything.md">Blog: Information about Buffer</a></li>
+</ul>
+
+
+          </div>
+
+          <div class="cta card__cta">
+            <p><a href="https://snyk.io/vuln/npm:request:20160119">More about this vulnerability</a></p>
+          </div>
+
+        </div><!-- .card -->
+
+      </div><!-- cards -->
+      <div class="cards--vuln filter--patch filter--ignore">
+
+        <div class="card card--vuln  disclosure--not-new severity--medium" >
+          <h2 class="card__title">semver Regular Expression Denial of Service (DoS)</h2>
+          <div class="card__section">
+            <strong class="card__label label severity--medium">medium severity</strong>
+            <ul class="card__meta">
+              <li class="card__meta__item">Vulnerable module:
+                semver
+              </li>
+
+              <li class="card__meta__item">Introduced through:
+
+                  
+
+                  
+                  goof@0.0.3, npmconf@0.0.24 and others
+
+
+              </li>
+
+            </ul>
+
+            <!-- Overview -->
+            <h2 id="overview">Overview</h2>
+<p>The semver module uses regular expressions when parsing a version string. For a carefully crafted input, the time it takes to process these regular expressions is not linear to the length of the input. Since the semver module did not enforce a limit on the version string length, an attacker could provide a long string that would take up a large amount of resources, potentially taking a server down. This issue therefore enables a potential Denial of Service attack. This is a slightly differnt variant of a typical Regular Expression Denial of Service (<a href="https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS">ReDoS</a>) vulnerability.</p>
+<h2 id="remediation">Remediation</h2>
+<p>Update to a version 4.3.2 or greater. From the issue description [2]: &quot;Package version can no longer be more than 256 characters long. This prevents a situation in which parsing the version number can use exponentially more time and memory to parse, leading to a potential denial of service.&quot;</p>
+<h2 id="references">References</h2>
+<ul>
+<li>[1] <a href="https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS">https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS</a></li>
+<li>[2] <a href="https://github.com/npm/npm/releases/tag/v2.7.5">https://github.com/npm/npm/releases/tag/v2.7.5</a></li>
+</ul>
+
+
+          </div>
+
+          <div class="cta card__cta">
+            <p><a href="https://snyk.io/vuln/npm:semver:20150403">More about this vulnerability</a></p>
+          </div>
+
+        </div><!-- .card -->
+
+      </div><!-- cards -->
+      <div class="cards--vuln filter--patch filter--ignore">
+
+        <div class="card card--vuln  disclosure--not-new severity--medium" >
+          <h2 class="card__title">Directory Traversal</h2>
+          <div class="card__section">
+            <strong class="card__label label severity--medium">medium severity</strong>
+            <ul class="card__meta">
+              <li class="card__meta__item">Vulnerable module:
+                st
+              </li>
+
+              <li class="card__meta__item">Introduced through:
+
+                  
+
+                  goof@0.0.3 and st@0.2.4
+
+                  
+
+
+              </li>
+
+            </ul>
+
+            <!-- Overview -->
+            <h2 id="overview">Overview</h2>
+<p>Versions prior to 0.2.5 did not properly prevent path traversal. Literal dots in a path were resolved out, but url encoded dots were not. Thus, a request like <code>/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/etc/passwd</code> would leak sensitive files and data from the server.</p>
+<p>As of version 0.2.5, any <code>&#39;/../&#39;</code> in the request path, urlencoded or not, will be replaced with <code>&#39;/&#39;</code>. If your application depends on url traversal, then you are encouraged to please refactor so that you do not depend on having <code>..</code> in url paths, as this tends to expose data that you may be surprised to be exposing.</p>
+<h2 id="remediation">Remediation</h2>
+<p>Upgrade to version 0.2.5 or greater.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://github.com/isaacs/st#security-status">https://github.com/isaacs/st#security-status</a></li>
+<li><a href="http://blog.npmjs.org/post/80277229932/newly-paranoid-maintainers">http://blog.npmjs.org/post/80277229932/newly-paranoid-maintainers</a></li>
+</ul>
+
+
+          </div>
+
+          <div class="cta card__cta">
+            <p><a href="https://snyk.io/vuln/npm:st:20140206">More about this vulnerability</a></p>
+          </div>
+
+        </div><!-- .card -->
+
+      </div><!-- cards -->
+
+    </div>
+
+  </div><!-- .layout-container -->
+
+</main><!-- .layout-stacked__content -->
+
+</body>
+</html>
+

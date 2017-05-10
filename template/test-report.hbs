@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Language" content="en-us">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Snyk test report</title>
+    <meta name="description" content="{{uniqueCount}} known vulnerabilities found in {{summary}}.">
+    <link rel="icon" type="image/png" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.png" sizes="194x194">
+    <link rel="shortcut icon" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.ico">
+    <link rel="stylesheet" href="https://static.snyk.io/prod/static-assets/style/build/initial.min.67beb0802da87abfd2bd1a320acac842.md5.css">
+  </head>
+  <body class="section-projects">
+
+<main class="layout-stacked">
+
+  <link rel="stylesheet" href="https://static.snyk.io/prod/static-assets/style/build/main.min.c03bcdc81577e6d89403274fe3835f56.md5.css"><script></script><!-- Why this is here: https://jakearchibald.com/2016/link-in-body/ -->
+
+  <div class="layout-stacked__header header">
+
+    <header class="project__header">
+      <div class="layout-container--short">
+        <h1 class="project__header__title" style="margin-bottom: 0.5em;">
+          Snyk test report
+        </h1>
+        <div class="meta-counts">
+          <div class="label label--counter meta-count">
+            <span>Known vulnerabilities</span>
+            <span>{{uniqueCount}}</span>
+          </div>
+          <div class="label label--counter meta-count"><span>Vulnerable paths</span><span>{{vulnerabilities.count}}</span></div>
+          <div class="label label--counter meta-count"><span>Dependencies</span><span>{{dependencyCount}}</span></div>
+        </div><!-- .meta-counts -->
+      </div><!-- .layout-container--short -->
+    </header><!-- .project__header -->
+
+  </div><!-- .layout-stacked__header -->
+
+  <div class="layout-stacked__content">
+
+    <div class="layout-container--short" style="padding-top: 35px;">
+
+      {{#each vulnerabilities}}
+      <div class="cards--vuln filter--patch filter--ignore">
+
+        <div class="card card--vuln  disclosure--not-new severity--{{metadata.severity}}" >
+          <h2 class="card__title">{{metadata.title}}</h2>
+          <div class="card__section">
+            <strong class="card__label label severity--{{metadata.severity}}">{{metadata.severity}} severity</strong>
+            <ul class="card__meta">
+              <li class="card__meta__item">{{#if_eq list.0.type "license"}}Module:{{else}}Vulnerable module:{{/if_eq}}
+              {{#if_eq @root.project.type "npm"}}
+                <a href="/test/{{@root.project.type}}/{{metadata.name}}">{{metadata.name}}</a>
+              {{else}}
+                {{metadata.name}}
+              {{/if_eq}}
+              </li>
+
+              <li class="card__meta__item">Introduced through:
+
+                {{#if_eq @root.project.type "npm"}}
+
+                  {{#if_eq (count list.[0].from) 1}}<a href="/test/{{@root.project.type}}/{{list.[0].from.[0]}}">{{list.[0].from}}</a>{{/if_eq}}
+                  {{else}}
+                  {{#if_eq (count list.[0].from) 1}}{{list.[0].from}}{{/if_eq}}
+                  {{/if_eq}}
+
+                  {{#if_eq @root.project.type "npm"}}
+                  {{#if_eq (count list.[0].from) 2}}<a href="/test/{{@root.project.type}}/{{list.[0].from.[0]}}">{{list.[0].from.[0]}}</a> and <a href="/test/{{@root.project.type}}/{{list.[0].from.[1]}}">{{list.[0].from.[1]}}</a>{{/if_eq}}
+                  {{else}}
+                  {{#if_eq (count list.[0].from) 2}}{{list.[0].from.[0]}} and {{list.[0].from.[1]}}
+                  {{/if_eq}}
+
+                  {{#if_eq @root.project.type "npm"}}
+                  {{#ifCond (count list.[0].from) '>=' 3}}<a href="/test/{{@root.project.type}}/{{list.[0].from.[0]}}">{{list.[0].from.[0]}}</a>, <a href="/test/{{@root.project.type}}/{{list.[0].from.[1]}}">{{list.[0].from.[1]}}</a> and others{{/ifCond}}
+                  {{else}}
+                  {{#ifCond (count list.[0].from) '>=' 3}}{{list.[0].from.[0]}}, {{list.[0].from.[1]}} and others{{/ifCond}}
+                  {{/if_eq}}
+
+                {{/if_eq}}
+
+              </li>
+
+            </ul>
+
+            <!-- Overview -->
+            {{{markdown metadata.description}}}
+
+          </div>
+
+          <div class="cta card__cta">
+            <p><a href="https://snyk.io/vuln/{{metadata.id}}">More about this vulnerability</a></p>
+          </div>
+
+        </div><!-- .card -->
+
+      </div><!-- cards -->
+      {{/each}}
+
+    </div>
+
+  </div><!-- .layout-container -->
+
+</main><!-- .layout-stacked__content -->
+
+</body>
+</html>
