@@ -1,10 +1,10 @@
-const fs = require('fs');
-const Handlebars = require('Handlebars');
-const htmlTemplate = fs.readFileSync('./index.hbs', 'utf8');
-const marked = require('marked');
-const moment = require('moment');
-const hbTemplate = Handlebars.compile(htmlTemplate);
-const severityMap = {low: 0, medium: 1, high: 2};
+var fs = require('fs');
+var Handlebars = require('Handlebars');
+var htmlTemplate = fs.readFileSync('./index.hbs', 'utf8');
+var marked = require('marked');
+var moment = require('moment');
+var hbTemplate = Handlebars.compile(htmlTemplate);
+var severityMap = {low: 0, medium: 1, high: 2};
 
 function metadataForVuln(vuln) {
  return {
@@ -14,28 +14,32 @@ function metadataForVuln(vuln) {
    info: vuln.info,
    severity: vuln.severity,
    severityValue: severityMap[vuln.severity],
+   description: vuln.description,
  };
 }
 
 function groupVulns(vulns) {
- return vulns.reduce(function (map, curr) {
-   if (!map[curr.id]) {
-     map[curr.id] = {};
-     map[curr.id].list = [];
-     map[curr.id].metadata = metadataForVuln(curr);
-
-   }
-   map[curr.id].list.push(curr);
-   return map;
- }, {});
+  var result = {};
+  if (!vulns || typeof vulns.length === 'undefined') {
+    return result;
+  }
+  for (var i = 0; i < vulns.length; i++) {
+    if (!result[vulns[i].id]) {
+      result[vulns[i].id] = {};
+      result[vulns[i].id].list = [];
+      result[vulns[i].id].metadata = metadataForVuln(vulns[i]);
+    }
+    result[vulns[i].id].list.push(vulns[i]);
+  }
+  return result;
 }
 
 fs.readFile('output.json', 'utf8', (err, data) => {
  if (err) throw err;
  data = JSON.parse(data);
  data.vulnerabilities = groupVulns(data.vulnerabilities);
- // console.log(JSON.stringify(data));
- const result = hbTemplate(JSON.parse(data));
+//  console.log(JSON.stringify(data));
+ var result = hbTemplate(data);
  console.log(result);
 });
 
@@ -60,8 +64,8 @@ Handlebars.registerHelper('count', function (data) {
 });
 
 Handlebars.registerHelper('if_any', function () { // important: not an arrow fn
-  const args = [].slice.call(arguments);
-  const opts = args.pop();
+  var args = [].slice.call(arguments);
+  var opts = args.pop();
 
   return args.some(v => !!v) ? opts.fn(this) : opts.inverse(this);
 });
