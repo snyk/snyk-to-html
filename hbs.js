@@ -51,8 +51,8 @@ Handlebars.registerHelper('moment', function (date, format) {
   return moment.utc(date).format(format);
 });
 
-Handlebars.registerHelper('fullDate', function (date) {
-  return moment.utc(date).format('DD MMM, YYYY');
+Handlebars.registerHelper('isDoubleArray', function (data, options) {
+  return Array.isArray(data[0]) ? options.fn(data) : options.inverse(data);
 });
 
 Handlebars.registerHelper('if_eq', function (a, b, opts) {

@@ -9,13 +9,279 @@
     <meta name="description" content="18 known vulnerabilities found in 33 vulnerable dependency paths.">
     <link rel="icon" type="image/png" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.png" sizes="194x194">
     <link rel="shortcut icon" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.ico">
-    <link rel="stylesheet" href="https://static.snyk.io/prod/static-assets/style/build/initial.min.67beb0802da87abfd2bd1a320acac842.md5.css">
+    <!--<link rel="stylesheet" href="https://static.snyk.io/prod/static-assets/style/build/initial.min.67beb0802da87abfd2bd1a320acac842.md5.css">-->
   </head>
   <body class="section-projects">
 
 <main class="layout-stacked">
 
-  <link rel="stylesheet" href="https://static.snyk.io/prod/static-assets/style/build/main.min.c03bcdc81577e6d89403274fe3835f56.md5.css"><script></script><!-- Why this is here: https://jakearchibald.com/2016/link-in-body/ -->
+  <style type="text/css">
+
+  body {
+    -moz-font-feature-settings: "pnum";
+    -webkit-font-feature-settings: "pnum";
+    font-variant-numeric: proportional-nums;
+    display: flex;
+    flex-direction: column;
+    font-feature-settings: "pnum";
+    font-size: 100%;
+    line-height: 1.5;
+    min-height: 100vh;
+    -webkit-text-size-adjust: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #F5F5F5;
+    font-family: 'Arial', 'Helvetica', Calibri, sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 500;
+  }
+
+  a,
+  a:link,
+  a:visited {
+    border-bottom: 1px solid #4b45a9;
+    text-decoration: none;
+    color: #4b45a9;
+  }
+
+  a:hover,
+  a:focus,
+  a:active {
+    border-bottom: 2px solid #4b45a9;
+  }
+
+  hr {
+    border: none;
+    margin: 1em 0;
+    border-top: 1px solid #c5c5c5;
+  }
+
+  ul {
+    padding: 0 1em;
+    margin: 1em 0;
+  }
+
+  code {
+    background-color: #EEE;
+    color: #333;
+    padding: 0.25em 0.5em;
+    border-radius: 0.25em;
+  }
+
+  pre {
+    background-color: #333;
+    font-family: monospace;
+    padding: 0.5em 1em 0.75em;
+    border-radius: 0.25em;
+    font-size: 14px;
+  }
+
+  pre code {
+    padding: 0;
+    background-color: transparent;
+    color: #fff;
+  }
+
+  a code {
+    border-radius: .125rem .125rem 0 0;
+    padding-bottom: 0;
+    color: #4b45a9;
+  }
+
+  a[href^="http://"]:after,
+  a[href^="https://"]:after {
+    background-image: linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20112%20109%22%3E%3Cg%20id%3D%22Page-1%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20id%3D%22link-external%22%3E%3Cg%20id%3D%22arrow%22%3E%3Cpath%20id%3D%22Line%22%20stroke%3D%22%234B45A9%22%20stroke-width%3D%2215%22%20d%3D%22M88.5%2021l-43%2042.5%22%20stroke-linecap%3D%22square%22%2F%3E%3Cpath%20id%3D%22Triangle%22%20fill%3D%22%234B45A9%22%20d%3D%22M111.2%200v50L61%200z%22%2F%3E%3C%2Fg%3E%3Cpath%20id%3D%22square%22%20fill%3D%22%234B45A9%22%20d%3D%22M66%2015H0v94h94V44L79%2059v35H15V30h36z%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-size: .75rem;
+    content: "";
+    display: inline-block;
+    height: .75rem;
+    margin-left: .25rem;
+    width: .75rem;
+  }
+
+
+/* Layout */
+
+  [class*=layout-container] {
+    margin: 0 auto;
+    max-width: 71.25em;
+    padding: 1.9em 1.3em;
+    position: relative;
+  }
+  .layout-container--short {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .layout-container--short:after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+
+/* Header */
+
+  .header {
+    padding-bottom: 1px;
+  }
+
+  .project__header {
+    background-color: #4C4A73;
+    color: #fff;
+    margin-bottom: -1px;
+    padding-top: 1em;
+    padding-bottom: 0.25em;
+    border-bottom: 2px solid #BBB;
+  }
+
+  .project__header__title {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-all;
+    margin-bottom: .1em;
+    margin-top: 0;
+    float: left;
+  }
+
+  .timestamp {
+    float: right;
+    clear: none;
+    margin-bottom: 0;
+  }
+
+  .meta-counts {
+    clear: both;
+    display: block;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 0 1.5em;
+    color: #fff;
+    clear: both;
+    font-size: 1.1em;
+  }
+
+  .meta-count {
+    display: block;
+    flex-basis: 100%;
+    margin: 0 1em 1em 0;
+    float: left;
+    padding-right: 1em;
+    border-right: 2px solid #fff;
+  }
+
+  .meta-count:last-child {
+    border-right: 0;
+    padding-right: 0;
+    margin-right: 0;
+  }
+
+/* Card */
+
+  .card {
+    background-color: #fff;
+    border: 1px solid #c5c5c5;
+    border-radius: .25rem;
+    margin: 0 0 2em 0;
+    position: relative;
+    min-height: 40px;
+    padding: 1.5em;
+  }
+
+  .card .label {
+    background-color: #767676;
+    border: 2px solid #767676;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    display: inline-block;
+    margin: 0;
+    border-radius: 0.25rem;
+  }
+
+  .card .label__text {
+    vertical-align: text-top;
+  }
+
+  .card .label--high {
+    background-color: #B51B72;
+    border-color: #B51B72;
+  }
+
+  .card .label--medium {
+    background-color: #E29022;
+    border-color: #E29022;
+  }
+
+  .card .label--low {
+    background-color: #222049;
+    border-color: #222049;
+  }
+
+  .card .card.severity--low {
+    border-color: #222049;
+  }
+
+  .card .card.severity--medium {
+    border-color: #E29022;
+  }
+
+  .card .card.severity--high {
+    border-color: #B51B72;
+  }
+
+  .card--vuln {
+    padding-top: 4em;
+    max-width: 48.75em;
+  }
+
+  .card--vuln .label {
+    left: 0;
+    position: absolute;
+    top: 1.1em;
+    padding-left: 1.9em;
+    padding-right: 1.9em;
+    border-radius: 0 0.25rem 0.25rem 0;
+  }
+
+  .card--vuln .card__section h2 {
+    font-size: 22px;
+    margin-bottom: 0.5em;
+  }
+
+  .card--vuln .card__section p {
+    margin: 0 0 0.5em 0;
+  }
+
+  .card--vuln .card__meta {
+    padding: 0 0 0 1em;
+    margin: 0;
+    font-size: 1.1em;
+  }
+
+  .card .card__meta__paths {
+    font-size: 0.9em;
+  }
+
+  .card--vuln .card__title {
+    font-size: 28px;
+    margin-top: 0;
+  }
+
+  .card--vuln .card__cta p {
+    margin: 0;
+    text-align: right;
+  }
+
+  </style>
 
   <div class="layout-stacked__header header">
 
@@ -24,13 +290,14 @@
         <h1 class="project__header__title" style="margin-bottom: 0.5em;">
           Snyk test report
         </h1>
+        <p class="timestamp">May 11th 2017, 1:27:37 pm</p>
         <div class="meta-counts">
-          <div class="label label--counter meta-count">
-            <span>Known vulnerabilities</span>
-            <span>18</span>
+          <div class="meta-count">
+            <span>18</span> <span>known vulnerabilities</span>
+
           </div>
-          <div class="label label--counter meta-count"><span>Vulnerable paths</span><span></span></div>
-          <div class="label label--counter meta-count"><span>Dependencies</span><span>428</span></div>
+          <div class="meta-count"><span>33 vulnerable dependency paths</span></div>
+          <div class="meta-count"><span>428</span> <span>dependencies</span></div>
         </div><!-- .meta-counts -->
       </div><!-- .layout-container--short -->
     </header><!-- .project__header -->
@@ -44,9 +311,17 @@
       <div class="cards--vuln filter--patch filter--ignore">
 
         <div class="card card--vuln  disclosure--not-new severity--medium" >
+
           <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
+
           <div class="card__section">
-            <strong class="card__label label severity--medium">medium severity</strong>
+
+            <div class="label label--medium">
+              <span class="label__text">medium severity</span>
+            </div>
+
+            <hr/>
+
             <ul class="card__meta">
               <li class="card__meta__item">Vulnerable module:
                 brace-expansion
@@ -60,9 +335,41 @@
                   goof@0.0.3, tap@5.8.0 and others
 
 
+                </li>
+
+              </ul>
+
+            <hr/>
+
+            <h3 class="card__section__title">Detailed paths</h3>
+
+            <ul class="card__meta__paths">
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> tap@5.8.0 <span class="list-paths__item__arrow">›</span> nyc@6.6.1 <span class="list-paths__item__arrow">›</span> glob@7.0.3 <span class="list-paths__item__arrow">›</span> minimatch@3.0.0 <span class="list-paths__item__arrow">›</span> brace-expansion@1.1.4</span>
+                </li>
+              </li>
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> tap@5.8.0 <span class="list-paths__item__arrow">›</span> nyc@6.6.1 <span class="list-paths__item__arrow">›</span> rimraf@2.5.2 <span class="list-paths__item__arrow">›</span> glob@7.0.3 <span class="list-paths__item__arrow">›</span> minimatch@3.0.0 <span class="list-paths__item__arrow">›</span> brace-expansion@1.1.4</span>
+                </li>
+              </li>
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> tap@5.8.0 <span class="list-paths__item__arrow">›</span> nyc@6.6.1 <span class="list-paths__item__arrow">›</span> spawn-wrap@1.2.3 <span class="list-paths__item__arrow">›</span> rimraf@2.5.2 <span class="list-paths__item__arrow">›</span> glob@7.0.3 <span class="list-paths__item__arrow">›</span> minimatch@3.0.0 <span class="list-paths__item__arrow">›</span> brace-expansion@1.1.4</span>
+                </li>
+              </li>
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> tap@5.8.0 <span class="list-paths__item__arrow">›</span> nyc@6.6.1 <span class="list-paths__item__arrow">›</span> istanbul@0.4.3 <span class="list-paths__item__arrow">›</span> fileset@0.2.1 <span class="list-paths__item__arrow">›</span> minimatch@2.0.10 <span class="list-paths__item__arrow">›</span> brace-expansion@1.1.4</span>
+                </li>
+              </li>
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> tap@5.8.0 <span class="list-paths__item__arrow">›</span> nyc@6.6.1 <span class="list-paths__item__arrow">›</span> istanbul@0.4.3 <span class="list-paths__item__arrow">›</span> fileset@0.2.1 <span class="list-paths__item__arrow">›</span> glob@5.0.15 <span class="list-paths__item__arrow">›</span> minimatch@2.0.10 <span class="list-paths__item__arrow">›</span> brace-expansion@1.1.4</span>
+                </li>
               </li>
 
-            </ul>
+            </ul><!-- .list-paths -->
+
+          </div><!-- .card__section -->
+
+          <hr/>
 
             <!-- Overview -->
             <h2 id="overview">Overview</h2>
@@ -86,7 +393,7 @@ expand(&#39;{,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\n}&#39;)
 </ul>
 
 
-          </div>
+          <hr/>
 
           <div class="cta card__cta">
             <p><a href="https://snyk.io/vuln/npm:brace-expansion:20170302">More about this vulnerability</a></p>
@@ -98,9 +405,17 @@ expand(&#39;{,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\n}&#39;)
       <div class="cards--vuln filter--patch filter--ignore">
 
         <div class="card card--vuln  disclosure--not-new severity--high" >
+
           <h2 class="card__title">Remote Code Execution</h2>
+
           <div class="card__section">
-            <strong class="card__label label severity--high">high severity</strong>
+
+            <div class="label label--high">
+              <span class="label__text">high severity</span>
+            </div>
+
+            <hr/>
+
             <ul class="card__meta">
               <li class="card__meta__item">Vulnerable module:
                 ejs
@@ -115,9 +430,29 @@ expand(&#39;{,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\n}&#39;)
                   
 
 
+                </li>
+
+              </ul>
+
+            <hr/>
+
+            <h3 class="card__section__title">Detailed paths</h3>
+
+            <ul class="card__meta__paths">
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> ejs@1.0.0</span>
+                </li>
+              </li>
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> ejs-locals@1.0.2 <span class="list-paths__item__arrow">›</span> ejs@0.8.8</span>
+                </li>
               </li>
 
-            </ul>
+            </ul><!-- .list-paths -->
+
+          </div><!-- .card__section -->
+
+          <hr/>
 
             <!-- Overview -->
             <h2 id="overview">Overview</h2>
@@ -158,7 +493,7 @@ Otherwise, Upgrade <code>ejs</code> to version <code>2.5.3</code> or higher.</p>
 </ul>
 
 
-          </div>
+          <hr/>
 
           <div class="cta card__cta">
             <p><a href="https://snyk.io/vuln/npm:ejs:20161128">More about this vulnerability</a></p>
@@ -170,9 +505,17 @@ Otherwise, Upgrade <code>ejs</code> to version <code>2.5.3</code> or higher.</p>
       <div class="cards--vuln filter--patch filter--ignore">
 
         <div class="card card--vuln  disclosure--not-new severity--medium" >
+
           <h2 class="card__title">Cross-site Scripting (XSS)</h2>
+
           <div class="card__section">
-            <strong class="card__label label severity--medium">medium severity</strong>
+
+            <div class="label label--medium">
+              <span class="label__text">medium severity</span>
+            </div>
+
+            <hr/>
+
             <ul class="card__meta">
               <li class="card__meta__item">Vulnerable module:
                 ejs
@@ -187,9 +530,29 @@ Otherwise, Upgrade <code>ejs</code> to version <code>2.5.3</code> or higher.</p>
                   
 
 
+                </li>
+
+              </ul>
+
+            <hr/>
+
+            <h3 class="card__section__title">Detailed paths</h3>
+
+            <ul class="card__meta__paths">
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> ejs@1.0.0</span>
+                </li>
+              </li>
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> ejs-locals@1.0.2 <span class="list-paths__item__arrow">›</span> ejs@0.8.8</span>
+                </li>
               </li>
 
-            </ul>
+            </ul><!-- .list-paths -->
+
+          </div><!-- .card__section -->
+
+          <hr/>
 
             <!-- Overview -->
             <h2 id="overview">Overview</h2>
@@ -229,7 +592,7 @@ Otherwise, Upgrade <code>ejs</code> to version <code>2.5.5</code> or higher.</p>
 </ul>
 
 
-          </div>
+          <hr/>
 
           <div class="cta card__cta">
             <p><a href="https://snyk.io/vuln/npm:ejs:20161130">More about this vulnerability</a></p>
@@ -241,9 +604,17 @@ Otherwise, Upgrade <code>ejs</code> to version <code>2.5.5</code> or higher.</p>
       <div class="cards--vuln filter--patch filter--ignore">
 
         <div class="card card--vuln  disclosure--not-new severity--medium" >
+
           <h2 class="card__title">Denial of Service (DoS)</h2>
+
           <div class="card__section">
-            <strong class="card__label label severity--medium">medium severity</strong>
+
+            <div class="label label--medium">
+              <span class="label__text">medium severity</span>
+            </div>
+
+            <hr/>
+
             <ul class="card__meta">
               <li class="card__meta__item">Vulnerable module:
                 ejs
@@ -258,9 +629,29 @@ Otherwise, Upgrade <code>ejs</code> to version <code>2.5.5</code> or higher.</p>
                   
 
 
+                </li>
+
+              </ul>
+
+            <hr/>
+
+            <h3 class="card__section__title">Detailed paths</h3>
+
+            <ul class="card__meta__paths">
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> ejs@1.0.0</span>
+                </li>
+              </li>
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> ejs-locals@1.0.2 <span class="list-paths__item__arrow">›</span> ejs@0.8.8</span>
+                </li>
               </li>
 
-            </ul>
+            </ul><!-- .list-paths -->
+
+          </div><!-- .card__section -->
+
+          <hr/>
 
             <!-- Overview -->
             <h2 id="overview">Overview</h2>
@@ -300,7 +691,7 @@ Otherwise, Upgrade <code>ejs</code> to version <code>2.5.5</code> or higher.</p>
 </ul>
 
 
-          </div>
+          <hr/>
 
           <div class="cta card__cta">
             <p><a href="https://snyk.io/vuln/npm:ejs:20161130-1">More about this vulnerability</a></p>
@@ -312,9 +703,17 @@ Otherwise, Upgrade <code>ejs</code> to version <code>2.5.5</code> or higher.</p>
       <div class="cards--vuln filter--patch filter--ignore">
 
         <div class="card card--vuln  disclosure--not-new severity--low" >
+
           <h2 class="card__title">Regular Expression Denial of Service (DoS)</h2>
+
           <div class="card__section">
-            <strong class="card__label label severity--low">low severity</strong>
+
+            <div class="label label--low">
+              <span class="label__text">low severity</span>
+            </div>
+
+            <hr/>
+
             <ul class="card__meta">
               <li class="card__meta__item">Vulnerable module:
                 hawk
@@ -328,9 +727,25 @@ Otherwise, Upgrade <code>ejs</code> to version <code>2.5.5</code> or higher.</p>
                   goof@0.0.3, tap@5.8.0 and others
 
 
+                </li>
+
+              </ul>
+
+            <hr/>
+
+            <h3 class="card__section__title">Detailed paths</h3>
+
+            <ul class="card__meta__paths">
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> tap@5.8.0 <span class="list-paths__item__arrow">›</span> codecov.io@0.1.6 <span class="list-paths__item__arrow">›</span> request@2.42.0 <span class="list-paths__item__arrow">›</span> hawk@1.1.1</span>
+                </li>
               </li>
 
-            </ul>
+            </ul><!-- .list-paths -->
+
+          </div><!-- .card__section -->
+
+          <hr/>
 
             <!-- Overview -->
             <h2 id="overview">Overview</h2>
@@ -343,7 +758,7 @@ Otherwise, Upgrade <code>ejs</code> to version <code>2.5.5</code> or higher.</p>
 </ul>
 
 
-          </div>
+          <hr/>
 
           <div class="cta card__cta">
             <p><a href="https://snyk.io/vuln/npm:hawk:20160119">More about this vulnerability</a></p>
@@ -355,9 +770,17 @@ Otherwise, Upgrade <code>ejs</code> to version <code>2.5.5</code> or higher.</p>
       <div class="cards--vuln filter--patch filter--ignore">
 
         <div class="card card--vuln  disclosure--not-new severity--medium" >
+
           <h2 class="card__title">Cross-site Scripting (XSS)</h2>
+
           <div class="card__section">
-            <strong class="card__label label severity--medium">medium severity</strong>
+
+            <div class="label label--medium">
+              <span class="label__text">medium severity</span>
+            </div>
+
+            <hr/>
+
             <ul class="card__meta">
               <li class="card__meta__item">Vulnerable module:
                 jquery
@@ -372,9 +795,25 @@ Otherwise, Upgrade <code>ejs</code> to version <code>2.5.5</code> or higher.</p>
                   
 
 
+                </li>
+
+              </ul>
+
+            <hr/>
+
+            <h3 class="card__section__title">Detailed paths</h3>
+
+            <ul class="card__meta__paths">
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> jquery@2.2.4</span>
+                </li>
               </li>
 
-            </ul>
+            </ul><!-- .list-paths -->
+
+          </div><!-- .card__section -->
+
+          <hr/>
 
             <!-- Overview -->
             <h2 id="overview">Overview</h2>
@@ -392,7 +831,7 @@ Otherwise, Upgrade <code>ejs</code> to version <code>2.5.5</code> or higher.</p>
 </ul>
 
 
-          </div>
+          <hr/>
 
           <div class="cta card__cta">
             <p><a href="https://snyk.io/vuln/npm:jquery:20150627">More about this vulnerability</a></p>
@@ -404,9 +843,17 @@ Otherwise, Upgrade <code>ejs</code> to version <code>2.5.5</code> or higher.</p>
       <div class="cards--vuln filter--patch filter--ignore">
 
         <div class="card card--vuln  disclosure--not-new severity--low" >
+
           <h2 class="card__title">Denial of Service (DoS)</h2>
+
           <div class="card__section">
-            <strong class="card__label label severity--low">low severity</strong>
+
+            <div class="label label--low">
+              <span class="label__text">low severity</span>
+            </div>
+
+            <hr/>
+
             <ul class="card__meta">
               <li class="card__meta__item">Vulnerable module:
                 jquery
@@ -421,9 +868,25 @@ Otherwise, Upgrade <code>ejs</code> to version <code>2.5.5</code> or higher.</p>
                   
 
 
+                </li>
+
+              </ul>
+
+            <hr/>
+
+            <h3 class="card__section__title">Detailed paths</h3>
+
+            <ul class="card__meta__paths">
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> jquery@2.2.4</span>
+                </li>
               </li>
 
-            </ul>
+            </ul><!-- .list-paths -->
+
+          </div><!-- .card__section -->
+
+          <hr/>
 
             <!-- Overview -->
             <h2 id="overview">Overview</h2>
@@ -439,7 +902,7 @@ Affected versions of the package are vulnerable to Denial of Service (DoS) due t
 </ul>
 
 
-          </div>
+          <hr/>
 
           <div class="cta card__cta">
             <p><a href="https://snyk.io/vuln/npm:jquery:20160529">More about this vulnerability</a></p>
@@ -451,9 +914,17 @@ Affected versions of the package are vulnerable to Denial of Service (DoS) due t
       <div class="cards--vuln filter--patch filter--ignore">
 
         <div class="card card--vuln  disclosure--not-new severity--high" >
+
           <h2 class="card__title">Content &amp; Code Injection (XSS)</h2>
+
           <div class="card__section">
-            <strong class="card__label label severity--high">high severity</strong>
+
+            <div class="label label--high">
+              <span class="label__text">high severity</span>
+            </div>
+
+            <hr/>
+
             <ul class="card__meta">
               <li class="card__meta__item">Vulnerable module:
                 marked
@@ -468,9 +939,25 @@ Affected versions of the package are vulnerable to Denial of Service (DoS) due t
                   
 
 
+                </li>
+
+              </ul>
+
+            <hr/>
+
+            <h3 class="card__section__title">Detailed paths</h3>
+
+            <ul class="card__meta__paths">
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> marked@0.3.5</span>
+                </li>
               </li>
 
-            </ul>
+            </ul><!-- .list-paths -->
+
+          </div><!-- .card__section -->
+
+          <hr/>
 
             <!-- Overview -->
             <h2 id="overview">Overview</h2>
@@ -485,7 +972,7 @@ Also, you can patch the vulnerability using <a href="https://snyk.io/docs/using-
 </ul>
 
 
-          </div>
+          <hr/>
 
           <div class="cta card__cta">
             <p><a href="https://snyk.io/vuln/npm:marked:20150520">More about this vulnerability</a></p>
@@ -497,9 +984,17 @@ Also, you can patch the vulnerability using <a href="https://snyk.io/docs/using-
       <div class="cards--vuln filter--patch filter--ignore">
 
         <div class="card card--vuln  disclosure--not-new severity--high" >
+
           <h2 class="card__title">Cross-site Scripting (XSS) via Data URIs</h2>
+
           <div class="card__section">
-            <strong class="card__label label severity--high">high severity</strong>
+
+            <div class="label label--high">
+              <span class="label__text">high severity</span>
+            </div>
+
+            <hr/>
+
             <ul class="card__meta">
               <li class="card__meta__item">Vulnerable module:
                 marked
@@ -514,9 +1009,25 @@ Also, you can patch the vulnerability using <a href="https://snyk.io/docs/using-
                   
 
 
+                </li>
+
+              </ul>
+
+            <hr/>
+
+            <h3 class="card__section__title">Detailed paths</h3>
+
+            <ul class="card__meta__paths">
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> marked@0.3.5</span>
+                </li>
               </li>
 
-            </ul>
+            </ul><!-- .list-paths -->
+
+          </div><!-- .card__section -->
+
+          <hr/>
 
             <!-- Overview -->
             <h2 id="overview">Overview</h2>
@@ -536,7 +1047,7 @@ Attackers can craft malicious web pages containing either HTML or script code th
 </ul>
 
 
-          </div>
+          <hr/>
 
           <div class="cta card__cta">
             <p><a href="https://snyk.io/vuln/npm:marked:20170112">More about this vulnerability</a></p>
@@ -548,9 +1059,17 @@ Attackers can craft malicious web pages containing either HTML or script code th
       <div class="cards--vuln filter--patch filter--ignore">
 
         <div class="card card--vuln  disclosure--not-new severity--high" >
+
           <h2 class="card__title">Regular Expression Denial of Service (DoS)</h2>
+
           <div class="card__section">
-            <strong class="card__label label severity--high">high severity</strong>
+
+            <div class="label label--high">
+              <span class="label__text">high severity</span>
+            </div>
+
+            <hr/>
+
             <ul class="card__meta">
               <li class="card__meta__item">Vulnerable module:
                 minimatch
@@ -564,9 +1083,41 @@ Attackers can craft malicious web pages containing either HTML or script code th
                   goof@0.0.3, tap@5.8.0 and others
 
 
+                </li>
+
+              </ul>
+
+            <hr/>
+
+            <h3 class="card__section__title">Detailed paths</h3>
+
+            <ul class="card__meta__paths">
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> tap@5.8.0 <span class="list-paths__item__arrow">›</span> nyc@6.6.1 <span class="list-paths__item__arrow">›</span> glob@7.0.3 <span class="list-paths__item__arrow">›</span> minimatch@3.0.0</span>
+                </li>
+              </li>
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> tap@5.8.0 <span class="list-paths__item__arrow">›</span> nyc@6.6.1 <span class="list-paths__item__arrow">›</span> rimraf@2.5.2 <span class="list-paths__item__arrow">›</span> glob@7.0.3 <span class="list-paths__item__arrow">›</span> minimatch@3.0.0</span>
+                </li>
+              </li>
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> tap@5.8.0 <span class="list-paths__item__arrow">›</span> nyc@6.6.1 <span class="list-paths__item__arrow">›</span> spawn-wrap@1.2.3 <span class="list-paths__item__arrow">›</span> rimraf@2.5.2 <span class="list-paths__item__arrow">›</span> glob@7.0.3 <span class="list-paths__item__arrow">›</span> minimatch@3.0.0</span>
+                </li>
+              </li>
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> tap@5.8.0 <span class="list-paths__item__arrow">›</span> nyc@6.6.1 <span class="list-paths__item__arrow">›</span> istanbul@0.4.3 <span class="list-paths__item__arrow">›</span> fileset@0.2.1 <span class="list-paths__item__arrow">›</span> minimatch@2.0.10</span>
+                </li>
+              </li>
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> tap@5.8.0 <span class="list-paths__item__arrow">›</span> nyc@6.6.1 <span class="list-paths__item__arrow">›</span> istanbul@0.4.3 <span class="list-paths__item__arrow">›</span> fileset@0.2.1 <span class="list-paths__item__arrow">›</span> glob@5.0.15 <span class="list-paths__item__arrow">›</span> minimatch@2.0.10</span>
+                </li>
               </li>
 
-            </ul>
+            </ul><!-- .list-paths -->
+
+          </div><!-- .card__section -->
+
+          <hr/>
 
             <!-- Overview -->
             <h2 id="overview">Overview</h2>
@@ -582,7 +1133,7 @@ Attackers can craft malicious web pages containing either HTML or script code th
 </ul>
 
 
-          </div>
+          <hr/>
 
           <div class="cta card__cta">
             <p><a href="https://snyk.io/vuln/npm:minimatch:20160620">More about this vulnerability</a></p>
@@ -594,9 +1145,17 @@ Attackers can craft malicious web pages containing either HTML or script code th
       <div class="cards--vuln filter--patch filter--ignore">
 
         <div class="card card--vuln  disclosure--not-new severity--medium" >
+
           <h2 class="card__title">Regular Expression Denial of Service (DoS)</h2>
+
           <div class="card__section">
-            <strong class="card__label label severity--medium">medium severity</strong>
+
+            <div class="label label--medium">
+              <span class="label__text">medium severity</span>
+            </div>
+
+            <hr/>
+
             <ul class="card__meta">
               <li class="card__meta__item">Vulnerable module:
                 moment
@@ -611,9 +1170,25 @@ Attackers can craft malicious web pages containing either HTML or script code th
                   
 
 
+                </li>
+
+              </ul>
+
+            <hr/>
+
+            <h3 class="card__section__title">Detailed paths</h3>
+
+            <ul class="card__meta__paths">
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> moment@2.15.1</span>
+                </li>
               </li>
 
-            </ul>
+            </ul><!-- .list-paths -->
+
+          </div><!-- .card__section -->
+
+          <hr/>
 
             <!-- Overview -->
             <h2 id="overview">Overview</h2>
@@ -633,7 +1208,7 @@ Attackers can craft malicious web pages containing either HTML or script code th
 </ul>
 
 
-          </div>
+          <hr/>
 
           <div class="cta card__cta">
             <p><a href="https://snyk.io/vuln/npm:moment:20161019">More about this vulnerability</a></p>
@@ -645,9 +1220,17 @@ Attackers can craft malicious web pages containing either HTML or script code th
       <div class="cards--vuln filter--patch filter--ignore">
 
         <div class="card card--vuln  disclosure--not-new severity--medium" >
+
           <h2 class="card__title">Remote Memory Exposure</h2>
+
           <div class="card__section">
-            <strong class="card__label label severity--medium">medium severity</strong>
+
+            <div class="label label--medium">
+              <span class="label__text">medium severity</span>
+            </div>
+
+            <hr/>
+
             <ul class="card__meta">
               <li class="card__meta__item">Vulnerable module:
                 mongoose
@@ -662,9 +1245,25 @@ Attackers can craft malicious web pages containing either HTML or script code th
                   
 
 
+                </li>
+
+              </ul>
+
+            <hr/>
+
+            <h3 class="card__section__title">Detailed paths</h3>
+
+            <ul class="card__meta__paths">
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> mongoose@4.2.4</span>
+                </li>
               </li>
 
-            </ul>
+            </ul><!-- .list-paths -->
+
+          </div><!-- .card__section -->
+
+          <hr/>
 
             <!-- Overview -->
             <h2 id="overview">Overview</h2>
@@ -717,7 +1316,7 @@ sample.save(function () {
 </ul>
 
 
-          </div>
+          <hr/>
 
           <div class="cta card__cta">
             <p><a href="https://snyk.io/vuln/npm:mongoose:20160116">More about this vulnerability</a></p>
@@ -729,9 +1328,17 @@ sample.save(function () {
       <div class="cards--vuln filter--patch filter--ignore">
 
         <div class="card card--vuln  disclosure--not-new severity--medium" >
+
           <h2 class="card__title">Regular Expression Denial of Service (DoS)</h2>
+
           <div class="card__section">
-            <strong class="card__label label severity--medium">medium severity</strong>
+
+            <div class="label label--medium">
+              <span class="label__text">medium severity</span>
+            </div>
+
+            <hr/>
+
             <ul class="card__meta">
               <li class="card__meta__item">Vulnerable module:
                 ms
@@ -745,9 +1352,25 @@ sample.save(function () {
                   goof@0.0.3, humanize-ms@1.0.1 and others
 
 
+                </li>
+
+              </ul>
+
+            <hr/>
+
+            <h3 class="card__section__title">Detailed paths</h3>
+
+            <ul class="card__meta__paths">
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> humanize-ms@1.0.1 <span class="list-paths__item__arrow">›</span> ms@0.6.2</span>
+                </li>
               </li>
 
-            </ul>
+            </ul><!-- .list-paths -->
+
+          </div><!-- .card__section -->
+
+          <hr/>
 
             <!-- Overview -->
             <h2 id="overview">Overview</h2>
@@ -765,7 +1388,7 @@ The regular expression used by the function to parse the time is vulnerable to a
 </ul>
 
 
-          </div>
+          <hr/>
 
           <div class="cta card__cta">
             <p><a href="https://snyk.io/vuln/npm:ms:20151024">More about this vulnerability</a></p>
@@ -777,9 +1400,17 @@ The regular expression used by the function to parse the time is vulnerable to a
       <div class="cards--vuln filter--patch filter--ignore">
 
         <div class="card card--vuln  disclosure--not-new severity--high" >
+
           <h2 class="card__title">Regular Expression Denial of Service (DoS)</h2>
+
           <div class="card__section">
-            <strong class="card__label label severity--high">high severity</strong>
+
+            <div class="label label--high">
+              <span class="label__text">high severity</span>
+            </div>
+
+            <hr/>
+
             <ul class="card__meta">
               <li class="card__meta__item">Vulnerable module:
                 negotiator
@@ -793,9 +1424,33 @@ The regular expression used by the function to parse the time is vulnerable to a
                   goof@0.0.3, errorhandler@1.2.0 and others
 
 
+                </li>
+
+              </ul>
+
+            <hr/>
+
+            <h3 class="card__section__title">Detailed paths</h3>
+
+            <ul class="card__meta__paths">
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> errorhandler@1.2.0 <span class="list-paths__item__arrow">›</span> accepts@1.1.4 <span class="list-paths__item__arrow">›</span> negotiator@0.4.9</span>
+                </li>
+              </li>
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> st@0.2.4 <span class="list-paths__item__arrow">›</span> negotiator@0.2.8</span>
+                </li>
+              </li>
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> express@4.12.4 <span class="list-paths__item__arrow">›</span> accepts@1.2.13 <span class="list-paths__item__arrow">›</span> negotiator@0.5.3</span>
+                </li>
               </li>
 
-            </ul>
+            </ul><!-- .list-paths -->
+
+          </div><!-- .card__section -->
+
+          <hr/>
 
             <!-- Overview -->
             <h2 id="overview">Overview</h2>
@@ -812,7 +1467,7 @@ The regular expression used by the function to parse the time is vulnerable to a
 </ul>
 
 
-          </div>
+          <hr/>
 
           <div class="cta card__cta">
             <p><a href="https://snyk.io/vuln/npm:negotiator:20160616">More about this vulnerability</a></p>
@@ -824,9 +1479,17 @@ The regular expression used by the function to parse the time is vulnerable to a
       <div class="cards--vuln filter--patch filter--ignore">
 
         <div class="card card--vuln  disclosure--not-new severity--high" >
+
           <h2 class="card__title">Prototype Override Protection Bypass</h2>
+
           <div class="card__section">
-            <strong class="card__label label severity--high">high severity</strong>
+
+            <div class="label label--high">
+              <span class="label__text">high severity</span>
+            </div>
+
+            <hr/>
+
             <ul class="card__meta">
               <li class="card__meta__item">Vulnerable module:
                 qs
@@ -840,9 +1503,33 @@ The regular expression used by the function to parse the time is vulnerable to a
                   goof@0.0.3, body-parser@1.9.0 and others
 
 
+                </li>
+
+              </ul>
+
+            <hr/>
+
+            <h3 class="card__section__title">Detailed paths</h3>
+
+            <ul class="card__meta__paths">
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> body-parser@1.9.0 <span class="list-paths__item__arrow">›</span> qs@2.2.4</span>
+                </li>
+              </li>
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> express@4.12.4 <span class="list-paths__item__arrow">›</span> qs@2.4.2</span>
+                </li>
+              </li>
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> tap@5.8.0 <span class="list-paths__item__arrow">›</span> codecov.io@0.1.6 <span class="list-paths__item__arrow">›</span> request@2.42.0 <span class="list-paths__item__arrow">›</span> qs@1.2.2</span>
+                </li>
               </li>
 
-            </ul>
+            </ul><!-- .list-paths -->
+
+          </div><!-- .card__section -->
+
+          <hr/>
 
             <!-- Overview -->
             <h2 id="overview">Overview</h2>
@@ -879,7 +1566,7 @@ qs.parse(&quot;]=toString&quot;, { allowPrototypes: false })
 </ul>
 
 
-          </div>
+          <hr/>
 
           <div class="cta card__cta">
             <p><a href="https://snyk.io/vuln/npm:qs:20170213">More about this vulnerability</a></p>
@@ -891,9 +1578,17 @@ qs.parse(&quot;]=toString&quot;, { allowPrototypes: false })
       <div class="cards--vuln filter--patch filter--ignore">
 
         <div class="card card--vuln  disclosure--not-new severity--medium" >
+
           <h2 class="card__title">Remote Memory Exposure</h2>
+
           <div class="card__section">
-            <strong class="card__label label severity--medium">medium severity</strong>
+
+            <div class="label label--medium">
+              <span class="label__text">medium severity</span>
+            </div>
+
+            <hr/>
+
             <ul class="card__meta">
               <li class="card__meta__item">Vulnerable module:
                 request
@@ -907,9 +1602,25 @@ qs.parse(&quot;]=toString&quot;, { allowPrototypes: false })
                   goof@0.0.3, tap@5.8.0 and others
 
 
+                </li>
+
+              </ul>
+
+            <hr/>
+
+            <h3 class="card__section__title">Detailed paths</h3>
+
+            <ul class="card__meta__paths">
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> tap@5.8.0 <span class="list-paths__item__arrow">›</span> codecov.io@0.1.6 <span class="list-paths__item__arrow">›</span> request@2.42.0</span>
+                </li>
               </li>
 
-            </ul>
+            </ul><!-- .list-paths -->
+
+          </div><!-- .card__section -->
+
+          <hr/>
 
             <!-- Overview -->
             <h2 id="overview">Overview</h2>
@@ -963,7 +1674,7 @@ function (err, res, body) {
 </ul>
 
 
-          </div>
+          <hr/>
 
           <div class="cta card__cta">
             <p><a href="https://snyk.io/vuln/npm:request:20160119">More about this vulnerability</a></p>
@@ -975,9 +1686,17 @@ function (err, res, body) {
       <div class="cards--vuln filter--patch filter--ignore">
 
         <div class="card card--vuln  disclosure--not-new severity--medium" >
+
           <h2 class="card__title">semver Regular Expression Denial of Service (DoS)</h2>
+
           <div class="card__section">
-            <strong class="card__label label severity--medium">medium severity</strong>
+
+            <div class="label label--medium">
+              <span class="label__text">medium severity</span>
+            </div>
+
+            <hr/>
+
             <ul class="card__meta">
               <li class="card__meta__item">Vulnerable module:
                 semver
@@ -991,9 +1710,25 @@ function (err, res, body) {
                   goof@0.0.3, npmconf@0.0.24 and others
 
 
+                </li>
+
+              </ul>
+
+            <hr/>
+
+            <h3 class="card__section__title">Detailed paths</h3>
+
+            <ul class="card__meta__paths">
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> npmconf@0.0.24 <span class="list-paths__item__arrow">›</span> semver@1.1.4</span>
+                </li>
               </li>
 
-            </ul>
+            </ul><!-- .list-paths -->
+
+          </div><!-- .card__section -->
+
+          <hr/>
 
             <!-- Overview -->
             <h2 id="overview">Overview</h2>
@@ -1007,7 +1742,7 @@ function (err, res, body) {
 </ul>
 
 
-          </div>
+          <hr/>
 
           <div class="cta card__cta">
             <p><a href="https://snyk.io/vuln/npm:semver:20150403">More about this vulnerability</a></p>
@@ -1019,9 +1754,17 @@ function (err, res, body) {
       <div class="cards--vuln filter--patch filter--ignore">
 
         <div class="card card--vuln  disclosure--not-new severity--medium" >
+
           <h2 class="card__title">Directory Traversal</h2>
+
           <div class="card__section">
-            <strong class="card__label label severity--medium">medium severity</strong>
+
+            <div class="label label--medium">
+              <span class="label__text">medium severity</span>
+            </div>
+
+            <hr/>
+
             <ul class="card__meta">
               <li class="card__meta__item">Vulnerable module:
                 st
@@ -1036,9 +1779,25 @@ function (err, res, body) {
                   
 
 
+                </li>
+
+              </ul>
+
+            <hr/>
+
+            <h3 class="card__section__title">Detailed paths</h3>
+
+            <ul class="card__meta__paths">
+              <li>
+                <span class="list-paths__item__introduced"><em>Introduced through</em>: goof@0.0.3 <span class="list-paths__item__arrow">›</span> st@0.2.4</span>
+                </li>
               </li>
 
-            </ul>
+            </ul><!-- .list-paths -->
+
+          </div><!-- .card__section -->
+
+          <hr/>
 
             <!-- Overview -->
             <h2 id="overview">Overview</h2>
@@ -1053,7 +1812,7 @@ function (err, res, body) {
 </ul>
 
 
-          </div>
+          <hr/>
 
           <div class="cta card__cta">
             <p><a href="https://snyk.io/vuln/npm:st:20140206">More about this vulnerability</a></p>
