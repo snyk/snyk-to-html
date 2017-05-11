@@ -19,7 +19,7 @@ The Snyk JSON to HTML Mapper takes the json outputted from `snyk test --json` an
 
 3. Pass the resulting JSON file to Snyk's JSON to HTML Mapper
 
-   `snyk-to-cli -i results.json > results.html`
+   `snyk-to-html -i results.json > results.html`
 
 4. Open your new file (`results.html` above), and rejoice.
 
