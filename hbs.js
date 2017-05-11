@@ -5,12 +5,24 @@ var Handlebars = require("Handlebars");
 var marked = require('marked');
 var moment = require('moment');
 var argv = require('minimist')(process.argv.slice(2));
+var output, template, source;
 
-if(argv['t']){ //does our flag exist?
+if(argv['t']){ //template
   template = argv['t']; //grab the next item
 } else {
-  template = "template/test-report.hbs";
+  template = "./template/test-report.hbs";
 }
+if(argv['s']){ //input source
+  source = argv['s']; //grab the next item
+} else {
+  source = "./data/test-report.json";
+}
+
+if(argv['o']){ //output destination
+  output = argv['o']; //grab the next item
+}
+
+
 var htmlTemplate = fs.readFileSync(template, 'utf8');
 var hbTemplate = Handlebars.compile(htmlTemplate);
 var severityMap = {low: 0, medium: 1, high: 2};
@@ -43,13 +55,24 @@ function groupVulns(vulns) {
   return result;
 }
 
-fs.readFile('./data/test-report.json', 'utf8', (err, data) => {
+fs.readFile(source, 'utf8', (err, data) => {
  if (err) throw err;
  data = JSON.parse(data);
  data.vulnerabilities = groupVulns(data.vulnerabilities);
 //  console.log(JSON.stringify(data));
  var result = hbTemplate(data);
- console.log(result);
+
+ if (output) {
+  fs.writeFile(output, result, function(err) {
+    if (err) {
+      return console.log(err);
+    }
+    console.log('Vulnerability snapshot saved at ' + output);
+  });
+ } else {
+  console.log(result);
+ }
+ 
 });
 
 Handlebars.registerHelper('markdown', function (source) {
