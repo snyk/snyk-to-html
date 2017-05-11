@@ -15,7 +15,8 @@ if(argv['t']){ //template
 if(argv['s']){ //input source
   source = argv['s']; //grab the next item
 } else {
-  source = "./data/test-report.json";
+  console.error("\x1b[31mNo json specified. Please make sure you've provided a path to your JSON using the `-i` flag.");
+  process.exit(1);
 }
 
 if(argv['o']){ //output destination
