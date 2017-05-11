@@ -12,7 +12,8 @@
   "dependencies": {
     "handlebars": "^4.0.8",
     "marked": "^0.3.6",
-    "moment": "^2.18.1"
+    "moment": "^2.18.1",
+    "snyk": "^1.30.0"
   },
   "devDependencies": {
     "minimist": "^1.2.0"
