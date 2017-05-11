@@ -10,10 +10,10 @@ var output, template, source;
 if(argv['t']){ //template
   template = argv['t']; //grab the next item
 } else {
-  template = "./template/test-report.hbs";
+  template = __dirname + "/template/test-report.hbs";
 }
-if(argv['s']){ //input source
-  source = argv['s']; //grab the next item
+if(argv['i']){ //input source
+  source = argv['i']; //grab the next item
 } else {
   console.error("\x1b[31mNo json specified. Please make sure you've provided a path to your JSON using the `-i` flag.");
   process.exit(1);

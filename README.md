@@ -9,7 +9,7 @@ The Snyk JSON to HTML Mapper takes the json outputted from `snyk test --json` an
 
 1. Install the Snyk JSON to HTML Mapper using npm
 
-   `npm install snyk-to-cli -g`
+   `npm install snyk-to-html -g`
 
    Alternatively, you can skip this step, clone the repo and run the script locally (using `node ./snyk-to-html.js`)
 
