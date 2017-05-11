@@ -10,10 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "handlebars": "^4.0.8"
-  },
-  "devDependencies": {
+    "handlebars": "^4.0.8",
     "marked": "^0.3.6",
     "moment": "^2.18.1"
+  },
+  "devDependencies": {
+    "minimist": "^1.2.0"
   }
 }

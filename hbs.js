@@ -1,8 +1,17 @@
-var fs = require('fs');
-var Handlebars = require('Handlebars');
-var htmlTemplate = fs.readFileSync('./template/test-report.hbs', 'utf8');
+#!/usr/bin/env node
+
+var fs = require("fs");
+var Handlebars = require("Handlebars");
 var marked = require('marked');
 var moment = require('moment');
+var argv = require('minimist')(process.argv.slice(2));
+
+if(argv['t']){ //does our flag exist?
+  template = argv['t']; //grab the next item
+} else {
+  template = "template/test-report.hbs";
+}
+var htmlTemplate = fs.readFileSync(template, 'utf8');
 var hbTemplate = Handlebars.compile(htmlTemplate);
 var severityMap = {low: 0, medium: 1, high: 2};
 
