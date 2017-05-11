@@ -1,16 +1,28 @@
-# Setup
+[![Snyk logo](https://snyk.io/style/asset/logo/snyk-print.svg)](https://snyk.io)
 
-Pull down the repo and run
+***
 
-```
-npm install
-```
-Load your output data into
+# Snyk JSON to HTML Mapper
+The Snyk JSON to HTML Mapper takes the json outputted from `snyk test --json` and creates a local HTML file displaying the vulnerabilities discovered as well as a list of all dependencies.
 
-When the dependencies have been installed, run
+# How do I use it?
 
-```
-npm run report
-```
+1. Install the Snyk JSON to HTML Mapper using npm
 
-to convert the data into the test report, and open the test report.
+   `npm install snyk-to-cli -g`
+
+   Alternatively, you can skip this step, clone the repo and run the script locally (using `node ./snyk-to-html.js`)
+
+2. Generate JSON data by running `snyk test` and save the output to a file
+
+   `snyk test --json > results.json`
+
+3. Pass the resulting JSON file to Snyk's JSON to HTML Mapper
+
+   `snyk-to-cli -i results.json > results.html`
+
+4. Open your new file (`results.html` above), and rejoice.
+
+### License
+
+[License: Apache License, Version 2.0](LICENSE)
