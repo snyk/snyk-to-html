@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var fs = require("fs");
-var Handlebars = require("Handlebars");
+var Handlebars = require("handlebars");
 var marked = require('marked');
 var moment = require('moment');
 var argv = require('minimist')(process.argv.slice(2));
@@ -14,15 +14,10 @@ if(argv['t']){ //template
 }
 if(argv['i']){ //input source
   source = argv['i']; //grab the next item
-} else {
-  console.error("\x1b[31mNo json specified. Please make sure you've provided a path to your JSON using the `-i` flag.");
-  process.exit(1);
 }
-
 if(argv['o']){ //output destination
   output = argv['o']; //grab the next item
 }
-
 
 var htmlTemplate = fs.readFileSync(template, 'utf8');
 var hbTemplate = Handlebars.compile(htmlTemplate);
@@ -56,26 +51,57 @@ function groupVulns(vulns) {
   return result;
 }
 
-fs.readFile(source, 'utf8', (err, data) => {
- if (err) throw err;
- data = JSON.parse(data);
- data.vulnerabilities = groupVulns(data.vulnerabilities);
-//  console.log(JSON.stringify(data));
- var result = hbTemplate(data);
+function generateTemplate(data) {
+  data.vulnerabilities = groupVulns(data.vulnerabilities);
+  return hbTemplate(data);
+}
 
- if (output) {
-  fs.writeFile(output, result, function(err) {
-    if (err) {
-      return console.log(err);
-    }
-    console.log('Vulnerability snapshot saved at ' + output);
+function onDataCallback(data) {
+  var template = generateTemplate(data);
+  if (output) {
+    fs.writeFile(output, template, function(err) {
+      if (err) {
+        return console.log(err);
+      }
+      console.log('Vulnerability snapshot saved at ' + output);
+    });
+  } else {
+    console.log(template);
+  }
+}
+
+function readInputFromFile(source) {
+  fs.readFile(source, 'utf8', function(err, data) {
+    if (err) throw err;
+    onDataCallback(JSON.parse(data));
   });
- } else {
-  console.log(result);
- }
- 
-});
+}
 
+function readInputFromStdin() {
+  var data = '';
+  process.stdin.setEncoding('utf8');
+  process.stdin.on('readable', function() {
+    var chunk = process.stdin.read();
+    if (chunk !== null) {
+      data += chunk;
+    }
+  });
+  process.stdin.on('end', function() {
+    onDataCallback(JSON.parse(data));
+  });
+}
+
+function run() {
+  if (source) {
+    readInputFromFile(source, onDataCallback);
+  } else {
+    readInputFromStdin();
+  }
+}
+
+run();
+
+// handlebar helpers
 Handlebars.registerHelper('markdown', function (source) {
   return marked(source);
 });
@@ -104,11 +130,12 @@ Handlebars.registerHelper('if_any', function () { // important: not an arrow fn
   var args = [].slice.call(arguments);
   var opts = args.pop();
 
-  return args.some(v => !!v) ? opts.fn(this) : opts.inverse(this);
+  return args.some(function(v) {return !!v;}) ?
+    opts.fn(this) :
+    opts.inverse(this);
 });
 
 Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
-
   switch (operator) {
     case '==': {
       return (v1 == v2) ? options.fn(this) // jshint ignore:line
