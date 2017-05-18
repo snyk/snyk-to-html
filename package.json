@@ -1,13 +1,15 @@
 {
   "name": "snyk-to-html",
-  "version": "1.2.0",
-  "description": "",
+  "description": "Convert JSON output from `snyk test --json` into a static HTML report",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "tap": "COVERALLS_REPO_TOKEN=0 tap --timeout=180 --cov --coverage-report=text-summary test/*.test.js",
+    "test": "snyk test && npm run lint && npm run tap",
+    "lint": "jscs index.js -v && jscs `find ./lib -name '*.js'` -v",
     "report": "node hbs.js > output/test-report.html && open output/test-report.html",
     "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect"
+    "prepublish": "npm run snyk-protect",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "author": "",
   "license": "ISC",
@@ -19,7 +21,17 @@
     "minimist": "^1.2.0"
   },
   "bin": {
-    "snyk-to-html": "./snyk-to-html.js"
+    "snyk-to-html": "./index.js"
   },
-  "snyk": true
+  "snyk": true,
+  "devDependencies": {
+    "jscs": "^3.0.7",
+    "semantic-release": "^6.3.6",
+    "tap": "^10.3.2",
+    "tap-only": "0.0.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/snyk/snyk-to-html.git"
+  }
 }
