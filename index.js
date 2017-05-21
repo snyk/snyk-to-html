@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var fs = require('fs');
 var snykToHtml = require('./lib/snyk-to-html.js');
 var argv = require('minimist')(process.argv.slice(2));
