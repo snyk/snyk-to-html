@@ -45,6 +45,10 @@ ignore:
     - snyk > snyk-resolve-deps > snyk-module > debug > ms:
         reason: None given
         expires: '2017-06-15T18:12:58.586Z'
+  'npm:marked:20170907':
+    - marked:
+        reason: None given
+        expires: '2017-10-26T07:31:32.111Z'
 # patches apply the minimum changes required to fix a vulnerability
 patch:
   'npm:marked:20170112':
