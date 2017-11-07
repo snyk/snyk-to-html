@@ -24,6 +24,9 @@ var hbTemplate = Handlebars.compile(htmlTemplate);
 var severityMap = {low: 0, medium: 1, high: 2};
 
 function metadataForVuln(vuln) {
+  // Handling empty description cases
+  var description = vuln.description?vuln.description:"No description available.";
+
  return {
    id: vuln.id,
    title: vuln.title,
@@ -31,7 +34,7 @@ function metadataForVuln(vuln) {
    info: vuln.info,
    severity: vuln.severity,
    severityValue: severityMap[vuln.severity],
-   description: vuln.description,
+   description: description,
  };
 }
 
