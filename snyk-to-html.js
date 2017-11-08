@@ -18,14 +18,14 @@ if(argv['i']){ //input source
 if(argv['o']){ //output destination
   output = argv['o']; //grab the next item
 }
-
 var htmlTemplate = fs.readFileSync(template, 'utf8');
 var hbTemplate = Handlebars.compile(htmlTemplate);
 var severityMap = {low: 0, medium: 1, high: 2};
 
 function metadataForVuln(vuln) {
-  // Handling empty description cases
+  // Handling empty description and/or info cases - only description is causing the crash.
   var description = vuln.description?vuln.description:"No description available.";
+  var info = vuln.description?vuln.description:"No information available.";
 
  return {
    id: vuln.id,
@@ -95,6 +95,7 @@ function readInputFromStdin() {
 }
 
 function run() {
+
   if (source) {
     readInputFromFile(source, onDataCallback);
   } else {
