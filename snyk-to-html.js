@@ -23,19 +23,15 @@ var hbTemplate = Handlebars.compile(htmlTemplate);
 var severityMap = {low: 0, medium: 1, high: 2};
 
 function metadataForVuln(vuln) {
-  // Handling empty description and/or info cases - only description is causing the crash.
-  var description = vuln.description?vuln.description:"No description available.";
-  var info = vuln.description?vuln.description:"No information available.";
-
- return {
-   id: vuln.id,
-   title: vuln.title,
-   name: vuln.name,
-   info: vuln.info,
-   severity: vuln.severity,
-   severityValue: severityMap[vuln.severity],
-   description: description,
- };
+  return {
+    id: vuln.id,
+    title: vuln.title,
+    name: vuln.name,
+    info: vuln.info || "No information available.",
+    severity: vuln.severity,
+    severityValue: severityMap[vuln.severity],
+    description: vuln.description || 'No description available.',
+  };
 }
 
 function groupVulns(vulns) {
