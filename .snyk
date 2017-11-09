@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.7.1
+version: v1.8.0
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
   'npm:marked:20170907':
@@ -11,3 +11,6 @@ patch:
   'npm:marked:20170112':
     - marked:
         patched: '2017-05-18T09:25:23.798Z'
+  'npm:marked:20170907':
+    - marked:
+        patched: '2017-10-27T06:34:13.231Z'
