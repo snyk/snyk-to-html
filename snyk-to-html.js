@@ -27,7 +27,7 @@ function metadataForVuln(vuln) {
     id: vuln.id,
     title: vuln.title,
     name: vuln.name,
-    info: vuln.info || "No information available.",
+    info: vuln.info || 'No information available.',
     severity: vuln.severity,
     severityValue: severityMap[vuln.severity],
     description: vuln.description || 'No description available.',
