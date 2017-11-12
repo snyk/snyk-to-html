@@ -12,3 +12,14 @@ test('all-around test', function (t) {
       t.contains(report, '<h2 class="card__title">Regular Expression Denial of Service (DoS)</h2>');
     });
 });
+
+
+test('empty values test (description and info)', function (t) {
+  t.plan(1);
+  snykToHtml.run(
+    __dirname + '/fixtures/test-report-empty-descr.json',
+    __dirname + '/../template/test-report.hbs',
+    function (report) {
+      t.contains(report, '<p>No description available.</p>');
+    });
+});
