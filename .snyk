@@ -9,7 +9,7 @@ ignore:
   'npm:moment:20170905':
     - moment:
         reason: None given
-        expires: '2017-12-29T16:11:24.450Z'
+        expires: '2018-12-29T16:11:24.450Z'
 # patches apply the minimum changes required to fix a vulnerability
 patch:
   'npm:marked:20170112':
