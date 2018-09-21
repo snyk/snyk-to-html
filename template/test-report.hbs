@@ -10,278 +10,15 @@
     <link rel="icon" type="image/png" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.png" sizes="194x194">
     <link rel="shortcut icon" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.ico">
     <!--<link rel="stylesheet" href="https://static.snyk.io/prod/static-assets/style/build/initial.min.67beb0802da87abfd2bd1a320acac842.md5.css">-->
+
+
+    {{> inline-css }}
+
   </head>
   <body class="section-projects">
 
 <main class="layout-stacked">
 
-  <style type="text/css">
-
-  body {
-    -moz-font-feature-settings: "pnum";
-    -webkit-font-feature-settings: "pnum";
-    font-variant-numeric: proportional-nums;
-    display: flex;
-    flex-direction: column;
-    font-feature-settings: "pnum";
-    font-size: 100%;
-    line-height: 1.5;
-    min-height: 100vh;
-    -webkit-text-size-adjust: 100%;
-    margin: 0;
-    padding: 0;
-    background-color: #F5F5F5;
-    font-family: 'Arial', 'Helvetica', Calibri, sans-serif;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-weight: 500;
-  }
-
-  a,
-  a:link,
-  a:visited {
-    border-bottom: 1px solid #4b45a9;
-    text-decoration: none;
-    color: #4b45a9;
-  }
-
-  a:hover,
-  a:focus,
-  a:active {
-    border-bottom: 2px solid #4b45a9;
-  }
-
-  hr {
-    border: none;
-    margin: 1em 0;
-    border-top: 1px solid #c5c5c5;
-  }
-
-  ul {
-    padding: 0 1em;
-    margin: 1em 0;
-  }
-
-  code {
-    background-color: #EEE;
-    color: #333;
-    padding: 0.25em 0.5em;
-    border-radius: 0.25em;
-  }
-
-  pre {
-    background-color: #333;
-    font-family: monospace;
-    padding: 0.5em 1em 0.75em;
-    border-radius: 0.25em;
-    font-size: 14px;
-  }
-
-  pre code {
-    padding: 0;
-    background-color: transparent;
-    color: #fff;
-  }
-
-  a code {
-    border-radius: .125rem .125rem 0 0;
-    padding-bottom: 0;
-    color: #4b45a9;
-  }
-
-  a[href^="http://"]:after,
-  a[href^="https://"]:after {
-    background-image: linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20112%20109%22%3E%3Cg%20id%3D%22Page-1%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20id%3D%22link-external%22%3E%3Cg%20id%3D%22arrow%22%3E%3Cpath%20id%3D%22Line%22%20stroke%3D%22%234B45A9%22%20stroke-width%3D%2215%22%20d%3D%22M88.5%2021l-43%2042.5%22%20stroke-linecap%3D%22square%22%2F%3E%3Cpath%20id%3D%22Triangle%22%20fill%3D%22%234B45A9%22%20d%3D%22M111.2%200v50L61%200z%22%2F%3E%3C%2Fg%3E%3Cpath%20id%3D%22square%22%20fill%3D%22%234B45A9%22%20d%3D%22M66%2015H0v94h94V44L79%2059v35H15V30h36z%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");
-    background-repeat: no-repeat;
-    background-size: .75rem;
-    content: "";
-    display: inline-block;
-    height: .75rem;
-    margin-left: .25rem;
-    width: .75rem;
-  }
-
-
-/* Layout */
-
-  [class*=layout-container] {
-    margin: 0 auto;
-    max-width: 71.25em;
-    padding: 1.9em 1.3em;
-    position: relative;
-  }
-  .layout-container--short {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-
-  .layout-container--short:after {
-    display: block;
-    content: "";
-    clear: both;
-  }
-
-/* Header */
-
-  .header {
-    padding-bottom: 1px;
-  }
-
-  .project__header {
-    background-color: #4C4A73;
-    color: #fff;
-    margin-bottom: -1px;
-    padding-top: 1em;
-    padding-bottom: 0.25em;
-    border-bottom: 2px solid #BBB;
-  }
-
-  .project__header__title {
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    word-break: break-all;
-    margin-bottom: .1em;
-    margin-top: 0;
-    float: left;
-  }
-
-  .timestamp {
-    float: right;
-    clear: none;
-    margin-bottom: 0;
-  }
-
-  .meta-counts {
-    clear: both;
-    display: block;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin: 0 0 1.5em;
-    color: #fff;
-    clear: both;
-    font-size: 1.1em;
-  }
-
-  .meta-count {
-    display: block;
-    flex-basis: 100%;
-    margin: 0 1em 1em 0;
-    float: left;
-    padding-right: 1em;
-    border-right: 2px solid #fff;
-  }
-
-  .meta-count:last-child {
-    border-right: 0;
-    padding-right: 0;
-    margin-right: 0;
-  }
-
-/* Card */
-
-  .card {
-    background-color: #fff;
-    border: 1px solid #c5c5c5;
-    border-radius: .25rem;
-    margin: 0 0 2em 0;
-    position: relative;
-    min-height: 40px;
-    padding: 1.5em;
-  }
-
-  .card .label {
-    background-color: #767676;
-    border: 2px solid #767676;
-    color: white;
-    padding: 0.25rem 0.75rem;
-    font-size: 0.875rem;
-    text-transform: uppercase;
-    display: inline-block;
-    margin: 0;
-    border-radius: 0.25rem;
-  }
-
-  .card .label__text {
-    vertical-align: text-top;
-  }
-
-  .card .label--high {
-    background-color: #B51B72;
-    border-color: #B51B72;
-  }
-
-  .card .label--medium {
-    background-color: #E29022;
-    border-color: #E29022;
-  }
-
-  .card .label--low {
-    background-color: #222049;
-    border-color: #222049;
-  }
-
-  .card .card.severity--low {
-    border-color: #222049;
-  }
-
-  .card .card.severity--medium {
-    border-color: #E29022;
-  }
-
-  .card .card.severity--high {
-    border-color: #B51B72;
-  }
-
-  .card--vuln {
-    padding-top: 4em;
-    max-width: 48.75em;
-  }
-
-  .card--vuln .label {
-    left: 0;
-    position: absolute;
-    top: 1.1em;
-    padding-left: 1.9em;
-    padding-right: 1.9em;
-    border-radius: 0 0.25rem 0.25rem 0;
-  }
-
-  .card--vuln .card__section h2 {
-    font-size: 22px;
-    margin-bottom: 0.5em;
-  }
-
-  .card--vuln .card__section p {
-    margin: 0 0 0.5em 0;
-  }
-
-  .card--vuln .card__meta {
-    padding: 0 0 0 1em;
-    margin: 0;
-    font-size: 1.1em;
-  }
-
-  .card .card__meta__paths {
-    font-size: 0.9em;
-  }
-
-  .card--vuln .card__title {
-    font-size: 28px;
-    margin-top: 0;
-  }
-
-  .card--vuln .card__cta p {
-    margin: 0;
-    text-align: right;
-  }
-
-  </style>
 
   <div class="layout-stacked__header header">
 
@@ -292,10 +29,17 @@
         </h1>
         <p class="timestamp">{{moment d "MMMM Do YYYY, h:mm:ss a"}}</p>
         <div class="meta-counts">
-          <div class="meta-count">
-            <span>{{uniqueCount}}</span> <span>known vulnerabilities</span>
-
-          </div>
+            <span>for</span>
+            <ul>
+              {{#each paths}}
+                <li>{{this}}</li>
+              {{else}}
+                <li>{{path}}</li>
+              {{/each}}
+            </div>
+          </ul>
+        <div class="meta-counts">
+          <div class="meta-count"><span>{{uniqueCount}}</span> <span>known vulnerabilities</span></div>
           <div class="meta-count"><span>{{summary}}</span></div>
           <div class="meta-count"><span>{{dependencyCount}}</span> <span>dependencies</span></div>
         </div><!-- .meta-counts -->
@@ -310,11 +54,8 @@
 
       {{#each vulnerabilities}}
       <div class="cards--vuln filter--patch filter--ignore">
-
         <div class="card card--vuln  disclosure--not-new severity--{{metadata.severity}}" >
-
           <h2 class="card__title">{{metadata.title}}</h2>
-
           <div class="card__section">
 
             <div class="label label--{{metadata.severity}}">
@@ -333,85 +74,96 @@
               </li>
 
               <li class="card__meta__item">Introduced through:
-
                 {{#if_eq metadata.packageManager "npm"}}
-
-                  {{#if_eq (count list.[0].from) 1}}<a href="/test/{{@root.project.type}}/{{list.[0].from.[0]}}">{{list.[0].from}}</a>{{/if_eq}}
-                  {{else}}
+                  {{#if_eq (count list.[0].from) 1}}
+                    <a href="/test/{{@root.project.type}}/{{list.[0].from.[0]}}">{{list.[0].from}}</a>
+                  {{/if_eq}}
+                {{else}}
                   {{#if_eq (count list.[0].from) 1}}{{list.[0].from}}{{/if_eq}}
-                  {{/if_eq}}
-
-                  {{#if_eq @root.project.type "npm"}}
-                  {{#if_eq (count list.[0].from) 2}}<a href="/test/{{@root.project.type}}/{{list.[0].from.[0]}}">{{list.[0].from.[0]}}</a> and <a href="/test/{{@root.project.type}}/{{list.[0].from.[1]}}">{{list.[0].from.[1]}}</a>{{/if_eq}}
-                  {{else}}
-                  {{#if_eq (count list.[0].from) 2}}{{list.[0].from.[0]}} and {{list.[0].from.[1]}}
-                  {{/if_eq}}
-
-                  {{#if_eq @root.project.type "npm"}}
-                  {{#ifCond (count list.[0].from) '>=' 3}}<a href="/test/{{@root.project.type}}/{{list.[0].from.[0]}}">{{list.[0].from.[0]}}</a>, <a href="/test/{{@root.project.type}}/{{list.[0].from.[1]}}">{{list.[0].from.[1]}}</a> and others{{/ifCond}}
-                  {{else}}
-                  {{#ifCond (count list.[0].from) '>=' 3}}{{list.[0].from.[0]}}, {{list.[0].from.[1]}} and others{{/ifCond}}
-                  {{/if_eq}}
-
                 {{/if_eq}}
 
-                </li>
+                {{#if_eq @root.project.type "npm"}}
+                  {{#if_eq (count list.[0].from) 2}}
+                    <a href="/test/{{@root.project.type}}/{{list.[0].from.[0]}}">{{list.[0].from.[0]}}</a>
+                    and <a href="/test/{{@root.project.type}}/{{list.[0].from.[1]}}">{{list.[0].from.[1]}}</a>
+                  {{/if_eq}}
+                {{else}}
+                  {{#if_eq (count list.[0].from) 2}}
+                    {{list.[0].from.[0]}} and {{list.[0].from.[1]}}
+                  {{/if_eq}}
 
-              </ul>
+                  {{#if_eq @root.project.type "npm"}}
+                    {{#ifCond (count list.[0].from) '>=' 3}}
+                      <a href="/test/{{@root.project.type}}/{{list.[0].from.[0]}}">{{list.[0].from.[0]}}</a>,
+                      <a href="/test/{{@root.project.type}}/{{list.[0].from.[1]}}">{{list.[0].from.[1]}}</a> and others
+                    {{/ifCond}}
+                  {{else}}
+                    {{#ifCond (count list.[0].from) '>=' 3}}
+                      {{list.[0].from.[0]}}, {{list.[0].from.[1]}} and others
+                    {{/ifCond}}
+                  {{/if_eq}}
+                {{/if_eq}}
+              </li>
+            </ul>
 
             <hr/>
 
             {{#if_eq @root.project.type "npm"}}
-            <h3 class="card__section__title">Detailed paths and remediation</h3>
+              <h3 class="card__section__title">Detailed paths and remediation</h3>
             {{else}}
-            <h3 class="card__section__title">Detailed paths</h3>
+              <h3 class="card__section__title">Detailed paths</h3>
             {{/if_eq}}
 
             <ul class="card__meta__paths">
               {{#each list}}
-              {{#isDoubleArray from}}
-              {{#each .}}
-              <li class="list-paths__item">
-                <span class="list-paths__item__introduced"><em>Introduced through</em>: {{#each .}}{{.}}{{#unless @last}} <span class="list-paths__item__arrow">›</span> {{/unless}}{{/each}}</span>
-              {{/each}}
-              {{else}}
-              <li>
-                <span class="list-paths__item__introduced"><em>Introduced through</em>: {{#each .}}{{.}}{{#unless @last}} <span class="list-paths__item__arrow">›</span> {{/unless}}{{/each}}</span>
-              {{/isDoubleArray}}
-              {{#if_eq @root.project.type "npm"}}
-                <span class="list-paths__item__remediation">
-                  <strong>Remediation:</strong>
-                  {{#if_any isUpgradable isPatchable}}
+                {{#isDoubleArray from}}
+                  {{#each .}}
+                    <li class="list-paths__item">
+                      <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                        {{#each .}}{{.}}{{#unless @last}} <span class="list-paths__item__arrow">›</span> {{/unless}}{{/each}}
+                      </span>
+                  {{/each}}
+                {{else}}
+                  <li>
+                    <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                      {{#each .}}{{.}}{{#unless @last}} <span class="list-paths__item__arrow">›</span> {{/unless}}{{/each}}
+                    </span>
+                {{/isDoubleArray}}
 
-                    {{#upgradeAvailable upgradePath}}{{!-- Direct dependency with upgrade. --}}
+                {{#if_eq @root.project.type "npm"}}
+                  <span class="list-paths__item__remediation">
+                    <strong>Remediation:</strong>
+                    {{#if_any isUpgradable isPatchable}}
 
-                      {{#if_eq upgradePath.[1] from.[1]}}{{!-- Dependencies are out of date. --}}
-                      Your dependencies are out of date, otherwise you would be using a newer {{name}} than {{name}}@{{version}}. Try deleting node_modules, reinstalling and running <code><a href="/docs/using-snyk/#wizard">snyk wizard</a></code>. If the problem persists, one of your dependencies may be bundling outdated modules.
-                      {{else}}{{!-- Dependencies are not out of date. --}}
-                        Upgrade to {{#firstNonFalse upgradePath}}{{.}}{{/firstNonFalse}}.
-                      {{/if_eq}}
+                      {{#upgradeAvailable upgradePath}}{{!-- Direct dependency with upgrade. --}}
+                        {{#if_eq upgradePath.[1] from.[1]}}{{!-- Dependencies are out of date. --}}
+                          Your dependencies are out of date, otherwise you would be using a newer {{name}} than {{name}}@{{version}}.
+                          Try deleting node_modules, reinstalling and running <code><a href="/docs/using-snyk/#wizard">snyk wizard</a></code>.
+                          If the problem persists, one of your dependencies may be bundling outdated modules.
+                        {{else}}{{!-- Dependencies are not out of date. --}}
+                          Upgrade to {{#firstNonFalse upgradePath}}{{.}}{{/firstNonFalse}}.
+                        {{/if_eq}}
+                      {{else}}{{!-- This is not a direct dependency, but there is an upgrade --}}
+                        {{#if patches}}{{!-- There are patches --}}
+                          Run <code><a href="/docs/using-snyk/#wizard">snyk wizard</a></code> to patch {{name}}@{{version}}.
+                        {{else}}{{!-- There are no patches --}}
+                          {{#if @root.isTest}}{{!-- This is a test page --}}
+                            No direct dependency upgrade can address this issue.
+                            If possible, manually upgrade to {{#firstNonFalse upgradePath}}{{.}}{{/firstNonFalse}},
+                            or run <code><a href="/docs/using-snyk/#monitor">snyk monitor</a></code> to get notified when an easier upgrade or a patch becomes available.
+                          {{else}}{{!-- This is a monitor page --}}
+                            No direct dependency upgrade can address this issue.
+                            If possible, manually upgrade to {{#firstNonFalse upgradePath}}{{.}}{{/firstNonFalse}}.
+                            We'll notify you when an easier upgrade or a patch is available.
+                          {{/if}}
+                        {{/if}}
+                      {{/upgradeAvailable}}
 
-                    {{else}}{{!-- This is not a direct dependency, but there is an upgrade --}}
-
-                    {{#if patches}}{{!-- There are patches --}}
-                      Run <code><a href="/docs/using-snyk/#wizard">snyk wizard</a></code> to patch {{name}}@{{version}}.
-                    {{else}}{{!-- There are no patches --}}
-                      {{#if @root.isTest}}{{!-- This is a test page --}}
-                        No direct dependency upgrade can address this issue. If possible, manually upgrade to {{#firstNonFalse upgradePath}}{{.}}{{/firstNonFalse}}, or run <code><a href="/docs/using-snyk/#monitor">snyk monitor</a></code> to get notified when an easier upgrade or a patch becomes available.
-                      {{else}}{{!-- This is a monitor page --}}
-                        No direct dependency upgrade can address this issue. If possible, manually upgrade to {{#firstNonFalse upgradePath}}{{.}}{{/firstNonFalse}}. We'll notify you when an easier upgrade or a patch is available.
-                      {{/if}}
-                    {{/if}}
-
-                  {{/upgradeAvailable}}
-
-                  {{else}}{{!-- There are no upgrades or patches --}}
-                  No remediation path available.
-
-                  {{/if_any}}
-                </span><!-- .list-paths__item__remediation -->
-
-                  {{/if_eq}}
+                    {{else}}{{!-- There are no upgrades or patches --}}
+                      No remediation path available.
+                    {{/if_any}}
+                  </span><!-- .list-paths__item__remediation -->
+                {{/if_eq}}
                 </li>
               </li>
               {{/each}}

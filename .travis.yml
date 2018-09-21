@@ -11,11 +11,17 @@ matrix:
     - node_js: "6"
     - node_js: "4"
 script:
+  - npm run lint
   - npm test
 before_script:
   - npm prune
-after_success:
-  - npm run semantic-release
+jobs:
+  include:
+    - stage: npm release
+      node_js: "8"
+      script: skip
+      after_success:
+        - npx semantic-release
 branches:
   only:
     - master
