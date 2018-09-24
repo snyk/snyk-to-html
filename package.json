@@ -8,17 +8,16 @@
     "lint": "jscs index.js -v && jscs `find ./lib -name '*.js'` -v",
     "report": "node hbs.js > output/test-report.html && open output/test-report.html",
     "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "prepublish": "npm run snyk-protect"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "handlebars": "^4.0.8",
     "marked": "^0.3.6",
+    "minimist": "^1.2.0",
     "moment": "^2.18.1",
-    "snyk": "^1.52.0",
-    "minimist": "^1.2.0"
+    "snyk": "^1.97.0"
   },
   "bin": {
     "snyk-to-html": "./index.js"
@@ -26,7 +25,6 @@
   "snyk": true,
   "devDependencies": {
     "jscs": "^3.0.7",
-    "semantic-release": "^6.3.6",
     "tap": "^10.3.2",
     "tap-only": "0.0.5"
   },
