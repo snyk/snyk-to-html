@@ -1,43 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-    <meta http-equiv="Content-Language" content="en-us">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Snyk test report</title>
-    <meta name="description" content="{{uniqueCount}} known vulnerabilities found in {{summary}}.">
-    <link rel="icon" type="image/png" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.png" sizes="194x194">
-    <link rel="shortcut icon" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.ico">
-    <!--<link rel="stylesheet" href="https://static.snyk.io/prod/static-assets/style/build/initial.min.67beb0802da87abfd2bd1a320acac842.md5.css">-->
 
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Language" content="en-us">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Snyk test report</title>
+  <meta name="description" content="{{uniqueCount}} known vulnerabilities found in {{summary}}.">
+  <link rel="icon" type="image/png" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.png" sizes="194x194">
+  <link rel="shortcut icon" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.ico">
+  <!--<link rel="stylesheet" href="https://static.snyk.io/prod/static-assets/style/build/initial.min.67beb0802da87abfd2bd1a320acac842.md5.css">-->
+  {{> inline-css }}
+</head>
 
-    {{> inline-css }}
-
-  </head>
-  <body class="section-projects">
-
+<body class="section-projects">
 <main class="layout-stacked">
 
-
   <div class="layout-stacked__header header">
-
     <header class="project__header">
       <div class="layout-container--short">
-        <h1 class="project__header__title" style="margin-bottom: 0.5em;">
+        <h1 class="project__header__title">
           Snyk test report
         </h1>
         <p class="timestamp">{{moment d "MMMM Do YYYY, h:mm:ss a"}}</p>
-        <div class="meta-counts">
-            <span>for</span>
-            <ul>
-              {{#each paths}}
-                <li>{{this}}</li>
-              {{else}}
-                <li>{{path}}</li>
-              {{/each}}
-            </div>
+        <div class="source-panel">
+          <span>Scanned the following path(s):</span>
+          <ul>
+            {{#each paths}}
+              <li>{{this}}</li>
+            {{else}}
+              <li>{{path}}</li>
+            {{/each}}
           </ul>
+        </div>
+
         <div class="meta-counts">
           <div class="meta-count"><span>{{uniqueCount}}</span> <span>known vulnerabilities</span></div>
           <div class="meta-count"><span>{{summary}}</span></div>
@@ -45,7 +42,6 @@
         </div><!-- .meta-counts -->
       </div><!-- .layout-container--short -->
     </header><!-- .project__header -->
-
   </div><!-- .layout-stacked__header -->
 
   <div class="layout-stacked__content">
@@ -193,6 +189,5 @@
   </div><!-- .layout-container -->
 
 </main><!-- .layout-stacked__content -->
-
 </body>
 </html>
