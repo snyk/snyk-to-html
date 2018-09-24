@@ -1,15 +1,16 @@
 sudo: false
 language: node_js
+node_js:
+  - "8"
+  - "6"
+  - "4"
+
 cache:
   directories:
     - node_modules
 notifications:
   email: false
-matrix:
-  include:
-    - node_js: "8"
-    - node_js: "6"
-    - node_js: "4"
+
 script:
   - npm run lint
   - npm test
