@@ -8,14 +8,14 @@ import path = require('path');
 
 const severityMap = {low: 0, medium: 1, high: 2};
 
-function readFile(path: string, encoding: string): Promise<string> {
+function readFile(filePath: string, encoding: string): Promise<string> {
   return new Promise<string>((resolve, reject) => {
-    fs.readFile(path, encoding, (err, data) => {
-      if (err) reject(err);
+    fs.readFile(filePath, encoding, (err, data) => {
+      if (err) { reject(err); }
       resolve(data);
     });
   });
-} 
+}
 
 class SnykToHtml {
   public static run(dataSource: string, hbsTemplate: string, reportCallback: (value: string | void) => void): void {
