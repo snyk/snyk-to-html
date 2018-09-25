@@ -65,15 +65,19 @@ async function compileTemplate(fileName: string): Promise<HandlebarsTemplateDele
   return readFile(fileName, 'utf8').then(Handlebars.compile);
 }
 
+async function registerPeerPartial(templatePath: string, name: string): Promise<void> {
+  const dir = path.dirname(templatePath);
+  const file = path.join(dir, `test-report.${name}.hbs`);
+  const template = await compileTemplate(file);
+  Handlebars.registerPartial(name, template);
+}
+
 async function generateTemplate(data: any, template: string): Promise<string> {
   data.vulnerabilities = groupVulns(data.vulnerabilities);
-  const cssFile = path.join(
-    path.dirname(template),
-    'test-report.inline-css.hbs',
-    );
 
-  const cssTemplate = await compileTemplate(cssFile);
-  Handlebars.registerPartial('inline-css', cssTemplate);
+  await registerPeerPartial(template, 'inline-css');
+  await registerPeerPartial(template, 'vuln-card');
+
   const htmlTemplate = await compileTemplate(template);
   return htmlTemplate(data);
 }
@@ -113,7 +117,7 @@ async function readInputFromStdin(): Promise<string> {
         jsonString += chunk;
       }
     });
-    process.stdin.on('error', err => reject(err));
+    process.stdin.on('error', reject);
     process.stdin.on('end', () => resolve(jsonString));
   });
 }
