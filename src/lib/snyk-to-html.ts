@@ -122,61 +122,39 @@ async function readInputFromStdin(): Promise<string> {
   });
 }
 
-// handlebar simple helpers
-Handlebars.registerHelper('markdown', source => marked(source));
-
-Handlebars.registerHelper('moment', (date, format) => moment.utc(date).format(format));
-
-Handlebars.registerHelper('count', data => data && data.length);
-
-Handlebars.registerHelper('dump', (data, spacer) => JSON.stringify(data, null, spacer || null));
-
-// handlebar block helpers
-/* tslint:disable:only-arrow-functions */
-Handlebars.registerHelper('isDoubleArray', function(data, options) {
-  return Array.isArray(data[0]) ? options.fn(data) : options.inverse(data);
-});
-
-Handlebars.registerHelper('if_eq', function(this: void, a, b, opts) {
-  return (a === b) ? opts.fn(this) : opts.inverse(this);
-});
-
-Handlebars.registerHelper('if_any', function(this: void, opts, ...args) {
-  return args.some(v => !!v) ?
-    opts.fn(this) :
-    opts.inverse(this);
-});
-
-Handlebars.registerHelper('ifCond', function(this: void, v1, operator, v2, options) {
-  switch (operator) {
-    case '==': {
+// handlebar helpers
+const hh = {
+  markdown: marked,
+  moment: (date, format) => moment.utc(date).format(format),
+  count: data => data && data.length,
+  dump: (data, spacer) => JSON.stringify(data, null, spacer || null),
+  // block helpers
+  /* tslint:disable:only-arrow-functions */
+  /* tslint:disable:object-literal-shorthand */
+  isDoubleArray: function(data, options) {
+    return Array.isArray(data[0]) ? options.fn(data) : options.inverse(data);
+  },
+  if_eq: function(this: void, a, b, opts) {
+    return (a === b) ? opts.fn(this) : opts.inverse(this);
+  },
+  if_any: function(this: void, opts, ...args) {
+    return args.some(v => !!v) ? opts.fn(this) : opts.inverse(this);
+  },
+  ifCond: function(this: void, v1, operator, v2, options) {
+    const choose = (pred: boolean) => pred ? options.fn(this) : options.inverse(this);
+    switch (operator) {
       // tslint:disable-next-line:triple-equals
-      return (v1 == v2) ? options.fn(this) // jshint ignore:line
-                        : options.inverse(this);
+      case '==': return choose(v1 == v2);
+      case '===': return choose(v1 === v2);
+      case '<': return choose(v1 < v2);
+      case '<=': return choose(v1 <= v2);
+      case '>': return choose(v1 > v2);
+      case '>=': return choose(v1 >= v2);
+      case '&&': return choose(v1 && v2);
+      case '||': return choose(v1 || v2);
+      default: return choose(false);
     }
-    case '===': {
-      return (v1 === v2) ? options.fn(this) : options.inverse(this);
-    }
-    case '<': {
-      return (v1 < v2) ? options.fn(this) : options.inverse(this);
-    }
-    case '<=': {
-      return (v1 <= v2) ? options.fn(this) : options.inverse(this);
-    }
-    case '>': {
-      return (v1 > v2) ? options.fn(this) : options.inverse(this);
-    }
-    case '>=': {
-      return (v1 >= v2) ? options.fn(this) : options.inverse(this);
-    }
-    case '&&': {
-      return (v1 && v2) ? options.fn(this) : options.inverse(this);
-    }
-    case '||': {
-      return (v1 || v2) ? options.fn(this) : options.inverse(this);
-    }
-    default: {
-      return options.inverse(this);
-    }
-  }
-});
+  },
+};
+
+Object.keys(hh).forEach(k => Handlebars.registerHelper(k, hh[k]));

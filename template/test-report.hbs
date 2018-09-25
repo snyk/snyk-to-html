@@ -19,9 +19,7 @@
   <div class="layout-stacked__header header">
     <header class="project__header">
       <div class="layout-container--short">
-        <h1 class="project__header__title">
-          Snyk test report
-        </h1>
+        <h1 class="project__header__title">Snyk test report</h1>
         <p class="timestamp">{{moment d "MMMM Do YYYY, h:mm:ss a"}}</p>
         {{#if paths}}
           <div class="source-panel">
@@ -48,18 +46,13 @@
   </div><!-- .layout-stacked__header -->
 
   <div class="layout-stacked__content">
-
-    <div class="layout-container--short" style="padding-top: 35px;">
-
-      
+    <div class="layout-container--short" style="padding-top: 35px;">   
       <div class="cards--vuln filter--patch filter--ignore">
       {{#each vulnerabilities}}
         {{> vuln-card }}
       {{/each}}
       </div><!-- cards -->
-
     </div>
-
   </div><!-- .layout-container -->
 
 </main><!-- .layout-stacked__content -->
