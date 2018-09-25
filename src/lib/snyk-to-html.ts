@@ -5,11 +5,17 @@ import Handlebars = require('handlebars');
 import marked = require('marked');
 import moment = require('moment');
 import path = require('path');
-import util = require('util');
 
 const severityMap = {low: 0, medium: 1, high: 2};
 
-const readFile = util.promisify(fs.readFile);
+function readFile(path: string, encoding: string): Promise<string> {
+  return new Promise<string>((resolve, reject) => {
+    fs.readFile(path, encoding, (err, data) => {
+      if (err) reject(err);
+      resolve(data);
+    });
+  });
+} 
 
 class SnykToHtml {
   public static run(dataSource: string, hbsTemplate: string, reportCallback: (value: string | void) => void): void {
