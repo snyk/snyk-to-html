@@ -7,9 +7,7 @@
     "build-watch": "tsc -w",
     "tap": "tap test/*.test.* -Rspec --timeout=180 --node-path ts-node --test-file-pattern '/\\.[tj]s$/'",
     "test": "snyk test && npm run lint && npm run tap",
-    "lint": "npm run eslint && npm run tslint",
-    "eslint": "eslint -c .eslintrc src",
-    "tslint": "tslint --project tsconfig.json --format stylish --exclude **/src/**/*.js",
+    "lint": "tslint --project tsconfig.json --format stylish --exclude **/src/**/*.js",
     "report": "mkdir -p output && cat sample-data/test-report.json | node dist/. > output/test-report.html && open output/test-report.html",
     "multi-report": "mkdir -p output && cat sample-data/multi-test-report.json | node dist/. > output/multi-test-report.html && open output/multi-test-report.html",
     "snyk-protect": "snyk protect",
@@ -22,7 +20,7 @@
     "marked": "^0.3.6",
     "minimist": "^1.2.0",
     "moment": "^2.18.1",
-    "snyk": "^1.97.0"
+    "snyk": "^1.99.0"
   },
   "bin": {
     "snyk-to-html": "dist/index.js"
@@ -33,7 +31,6 @@
     "@types/marked": "^0.4.1",
     "@types/minimist": "^1.2.0",
     "@types/node": "^4.0.47",
-    "eslint": "^4.11.0",
     "tap": "github:snyk/node-tap#alternative-runtimes",
     "tape": "^4.0.0",
     "ts-node": "^7.0.1",
