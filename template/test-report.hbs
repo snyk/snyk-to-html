@@ -23,16 +23,20 @@
           Snyk test report
         </h1>
         <p class="timestamp">{{moment d "MMMM Do YYYY, h:mm:ss a"}}</p>
-        <div class="source-panel">
-          <span>Scanned the following path(s):</span>
-          <ul>
-            {{#each paths}}
-              <li>{{this}}</li>
-            {{else}}
-              <li>{{path}}</li>
-            {{/each}}
-          </ul>
-        </div>
+        {{#if paths}}
+          <div class="source-panel">
+            <span>Scanned the following paths:</span>
+            <ul>
+              {{#each paths}}<li>{{this}}</li>{{/each}}
+            </ul>
+          </div>
+        {{/if}}
+        {{#if path}}
+          <div class="source-panel">
+            <span>Scanned the following path:</span>
+            <ul><li>{{path}}</li></ul>
+          </div>
+        {{/if}}
 
         <div class="meta-counts">
           <div class="meta-count"><span>{{uniqueCount}}</span> <span>known vulnerabilities</span></div>
