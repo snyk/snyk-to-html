@@ -1,18 +1,23 @@
 #!/usr/bin/env node
 
-var fs = require('fs');
-var snykToHtml = require('./lib/snyk-to-html.js');
-var argv = require('minimist')(process.argv.slice(2));
+import fs = require('fs');
+import minimist = require('minimist');
+import path = require('path');
+import { SnykToHtml } from './lib/snyk-to-html';
 
-var template, source, output;
+const argv = minimist(process.argv.slice(2));
+
+let template;
+let source;
+let output;
 
 if (argv.t) { // template
   template = argv.t; // grab the next item
   if (typeof template === 'boolean') {
-    template = __dirname + '/template/test-report.hbs';
+    template = path.join(__dirname, '../template/test-report.hbs');
   }
 } else {
-  template = __dirname + '/template/test-report.hbs';
+  template = path.join(__dirname, '../template/test-report.hbs');
 }
 if (argv.i) { // input source
   source = argv.i; // grab the next item
@@ -27,11 +32,11 @@ if (argv.o) { // output destination
   }
 }
 
-snykToHtml.run(source, template, onReportOutput);
+SnykToHtml.run(source, template, onReportOutput);
 
-function onReportOutput(report) {
+function onReportOutput(report: string | void): void {
   if (output) {
-    fs.writeFile(output, report, function (err) {
+    fs.writeFile(output, report, err => {
       if (err) {
         return console.log(err);
       }
