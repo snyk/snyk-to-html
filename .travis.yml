@@ -14,8 +14,6 @@ notifications:
 script:
   - npm run lint
   - npm test
-before_script:
-  - npm prune
 jobs:
   include:
     - stage: npm release
