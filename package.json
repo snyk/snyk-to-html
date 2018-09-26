@@ -13,6 +13,7 @@
     "snyk-protect": "snyk protect",
     "prepare": "npm run build"
   },
+  "types": "./dist/index.d.ts",
   "files": [
     "dist",
     "template"
