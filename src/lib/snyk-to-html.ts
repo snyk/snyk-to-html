@@ -27,6 +27,7 @@ class SnykToHtml {
     const output = promisedString
       .then(JSON.parse)
       .then(data => processData(data, template))
+      // tslint:disable-next-line:no-console
       .catch (error => console.log(error));
     return output;
   }
