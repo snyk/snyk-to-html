@@ -9,6 +9,7 @@
         "module": "commonjs",
         "allowJs": false,
         "sourceMap": true,
+        "declaration": true,
         "strict": true,
         "noImplicitAny": false // Needed to compile tap and ansi-escapes
     },

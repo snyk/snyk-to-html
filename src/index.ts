@@ -34,7 +34,7 @@ if (argv.o) { // output destination
 
 SnykToHtml.run(source, template, onReportOutput);
 
-function onReportOutput(report: string | void): void {
+function onReportOutput(report: string): void {
   if (output) {
     fs.writeFile(output, report, err => {
       if (err) {

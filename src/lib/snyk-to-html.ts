@@ -18,17 +18,19 @@ function readFile(filePath: string, encoding: string): Promise<string> {
 }
 
 class SnykToHtml {
-  public static run(dataSource: string, hbsTemplate: string, reportCallback: (value: string | void) => void): void {
-    SnykToHtml.runAsync(dataSource, hbsTemplate).then(reportCallback);
+  public static run(dataSource: string, hbsTemplate: string, reportCallback: (value: string) => void): void {
+    SnykToHtml
+      .runAsync(dataSource, hbsTemplate)
+      .then(reportCallback)
+      .catch(console.log);
   }
 
-  public static runAsync(source: string, template: string): Promise<string | void> {
+  public static async runAsync(source: string, template: string): Promise<string> {
     const promisedString = source ? readFile(source, 'utf8') : readInputFromStdin();
-    const output = promisedString
+    const report = promisedString
       .then(JSON.parse)
-      .then(data => processData(data, template))
-      .catch (error => console.log(error));
-    return output;
+      .then(data => processData(data, template));
+    return report;
   }
 }
 
