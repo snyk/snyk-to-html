@@ -6,6 +6,7 @@
         "interface-name": false,
         "quotemark": [true, "single", "avoid-escape", "avoid-template"],
         "arrow-parens": false,
-        "object-literal-sort-keys": false
+        "object-literal-sort-keys": false,
+        "no-console": false
     }
 }
