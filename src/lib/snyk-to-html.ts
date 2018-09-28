@@ -1,23 +1,21 @@
 #!/usr/bin/env node
 
-import fs = require('fs');
 import Handlebars = require('handlebars');
-import marked = require('marked');
-import moment = require('moment');
 import path = require('path');
+
+import {Hbars} from './hbars';
+import {loadSource} from './loader';
+
+import Viz = require('viz.js');
+import { Module, render } from 'viz.js/full.render.js';
+
+import graphlib = require('graphlib');
 
 const severityMap = {low: 0, medium: 1, high: 2};
 
-function readFile(filePath: string, encoding: string): Promise<string> {
-  return new Promise<string>((resolve, reject) => {
-    fs.readFile(filePath, encoding, (err, data) => {
-      if (err) { reject(err); }
-      resolve(data);
-    });
-  });
-}
+const viz = new Viz({ Module, render });
 
-class SnykToHtml {
+export class SnykToHtml {
   public static run(dataSource: string, hbsTemplate: string, reportCallback: (value: string) => void): void {
     SnykToHtml
       .runAsync(dataSource, hbsTemplate)
@@ -26,18 +24,16 @@ class SnykToHtml {
   }
 
   public static async runAsync(source: string, template: string): Promise<string> {
-    const promisedString = source ? readFile(source, 'utf8') : readInputFromStdin();
-    const report = promisedString
+    const report = loadSource(source)
       .then(JSON.parse)
       .then(data => processData(data, template));
     return report;
   }
 }
 
-export { SnykToHtml };
-
 function metadataForVuln(vuln: any) {
   return {
+    type: vuln.type || 'vulnerability',
     id: vuln.id,
     title: vuln.title,
     name: vuln.name,
@@ -45,60 +41,120 @@ function metadataForVuln(vuln: any) {
     severity: vuln.severity,
     severityValue: severityMap[vuln.severity],
     description: vuln.description || 'No description available.',
+    isLicense: (vuln.type === 'license'),
+    packageManager: vuln.packageManager,
+    introductions: [],
+    introducedThru: '',
+    graph: '',
   };
 }
 
-function groupVulns(vulns) {
-  const result = {};
+function mkGraph(vulns): string {
+  const nodes: Set<string> = new Set();
+  const edges: Set<string> = new Set();
+  let prev: string | null = null;
+
+  const slug = (s: string) => s.replace(/\-/g, '').replace(/\@/g, '').replace(/\:/g, '').replace(/\./g, '');
+  const mkLabel = (s: string) => s.replace(/\@/g, '\\n@').replace(/\:/g, ':\\n');
+
+  vulns.map(v => {
+    prev = 'root';
+    v.from.slice(1).map(entry => {
+      nodes.add(entry);
+      if (prev) {
+        if (prev === 'root') {
+          edges.add(`root -> ${slug(entry)} [arrowhead=none]`);
+        } else {
+          edges.add(`${slug(prev)} -> ${slug(entry)}`);
+        }
+      }
+      prev = entry;
+    });
+  });
+
+  const header = [
+    'digraph G {',
+    '  rankdir=LR;',
+    '  root [shape=point];',
+    '  fontsize=10;',
+    '  fontname="helvetica";',
+    '  margin=0.5;',
+    ];
+  const nodelines = Array.from(nodes).map(n => `  ${slug(n)} [margin=1 shape=plain label="${mkLabel(n)}"]`);
+  const edgelines = Array.from(edges).map(e => `  ${e} [penwidth=.5 arrowsize=.5]`);
+  const footer = ['}'];
+  const output = header.concat(nodelines).concat(edgelines).concat(footer);
+  const outputText = output.join('\n');
+  return outputText;
+}
+
+function groupVulns(data) {
+  const vulns = data.vulnerabilities;
+  const results = {};
   if (!vulns || typeof vulns.length === 'undefined') {
-    return result;
+    return results;
   }
   vulns.map( vuln => {
-    if (!result[vuln.id]) {
-      result[vuln.id] = {list: [vuln], metadata: metadataForVuln(vuln)};
+    if (!results[vuln.id]) {
+      results[vuln.id] = {list: [vuln], metadata: metadataForVuln(vuln)};
     } else {
-      result[vuln.id].list.push(vuln);
+      results[vuln.id].list.push(vuln);
     }
   });
-  return result;
+  Object.keys(results).forEach(k => {
+    const r = results[k];
+    const introductions = r.list.map(v => v.from[1]);
+    const uniqIntroductions = Array.from(new Set(introductions));
+    if (!r.metadata.packageManager) {
+      r.metadata.packageManager = data.packageManager;
+    }
+    r.metadata.introductions = uniqIntroductions;
+    switch (uniqIntroductions.length) {
+      case 1:
+        r.metadata.introducedThru = `${uniqIntroductions[0]}`;
+        break;
+      case 2:
+        r.metadata.introducedThru = `${uniqIntroductions[0]} and ${uniqIntroductions[1]}`;
+        break;
+      default:
+        r.metadata.introducedThru = `${uniqIntroductions[0]}, ${uniqIntroductions[1]}, and others`;
+        break;
+    }
+    viz.renderString(mkGraph(r.list), {engine: 'dot'})
+    .then(svg => {
+      r.metadata.graph = svg;
+    });
+    // r.metadata.graph = mkGraph(r.list);
+  });
+  return results;
 }
 
-async function compileTemplate(fileName: string): Promise<HandlebarsTemplateDelegate> {
-  return readFile(fileName, 'utf8').then(Handlebars.compile);
+declare global {
+  interface Array<T> {
+    sumOf(fn: (T) => number | undefined): T[];
+  }
 }
 
-async function registerPeerPartial(templatePath: string, name: string): Promise<void> {
-  const dir = path.dirname(templatePath);
-  const file = path.join(dir, `test-report.${name}.hbs`);
-  const template = await compileTemplate(file);
-  Handlebars.registerPartial(name, template);
-}
-
-async function generateTemplate(data: any, template: string): Promise<string> {
-  data.vulnerabilities = groupVulns(data.vulnerabilities);
-
-  await registerPeerPartial(template, 'inline-css');
-  await registerPeerPartial(template, 'vuln-card');
-
-  const htmlTemplate = await compileTemplate(template);
-  return htmlTemplate(data);
-}
+Array.prototype.sumOf = function(fn: (x) => number | undefined) {
+  return this.reduce((acc, item) => acc + fn(item) || 0, 0);
+};
 
 function mergeData(dataArray: any[]): any {
+  dataArray.forEach(d => {
+    const pm = d.packageManager;
+    d.vulnerabilities.forEach(v => v.packageManager = pm);
+  });
   const vulnsArrays = dataArray.map(d => d.vulnerabilities || []);
   const aggregateVulnerabilities = [].concat(...vulnsArrays);
 
-  const totalUniqueCount =
-    dataArray.reduce((acc, item) => acc + item.uniqueCount || 0, 0);
-  const totalDepCount =
-    dataArray.reduce((acc, item) => acc + item.dependencyCount || 0, 0);
-
+  const totalUniqueCount = dataArray.sumOf(i => i.uniqueCount);
+  const totalDepCount = dataArray.sumOf(x => x.dependencyCount);
   const paths = dataArray.map(d => d.path);
 
   return {
     vulnerabilities: aggregateVulnerabilities,
     uniqueCount: totalUniqueCount,
-    summary: aggregateVulnerabilities.length + ' vulnerable dependency paths',
+    summary: `${aggregateVulnerabilities.length} vulnerable dependency paths`,
     dependencyCount: totalDepCount,
     paths,
   };
@@ -106,57 +162,7 @@ function mergeData(dataArray: any[]): any {
 
 async function processData(data: any, template: string): Promise<string> {
   const mergedData = Array.isArray(data) ? mergeData(data) : data;
-  return generateTemplate(mergedData, template);
+  mergedData.vulnerabilities = groupVulns(mergedData);
+  const hbars = new Hbars(template);
+  return hbars.renderMaster(mergedData);
 }
-
-async function readInputFromStdin(): Promise<string> {
-  return new Promise<string>((resolve, reject) => {
-    let jsonString = '';
-    process.stdin.setEncoding('utf8');
-    process.stdin.on('readable', () => {
-      const chunk = process.stdin.read();
-      if (chunk !== null) {
-        jsonString += chunk;
-      }
-    });
-    process.stdin.on('error', reject);
-    process.stdin.on('end', () => resolve(jsonString));
-  });
-}
-
-// handlebar helpers
-const hh = {
-  markdown: marked,
-  moment: (date, format) => moment.utc(date).format(format),
-  count: data => data && data.length,
-  dump: (data, spacer) => JSON.stringify(data, null, spacer || null),
-  // block helpers
-  /* tslint:disable:only-arrow-functions */
-  /* tslint:disable:object-literal-shorthand */
-  isDoubleArray: function(data, options) {
-    return Array.isArray(data[0]) ? options.fn(data) : options.inverse(data);
-  },
-  if_eq: function(this: void, a, b, opts) {
-    return (a === b) ? opts.fn(this) : opts.inverse(this);
-  },
-  if_any: function(this: void, opts, ...args) {
-    return args.some(v => !!v) ? opts.fn(this) : opts.inverse(this);
-  },
-  ifCond: function(this: void, v1, operator, v2, options) {
-    const choose = (pred: boolean) => pred ? options.fn(this) : options.inverse(this);
-    switch (operator) {
-      // tslint:disable-next-line:triple-equals
-      case '==': return choose(v1 == v2);
-      case '===': return choose(v1 === v2);
-      case '<': return choose(v1 < v2);
-      case '<=': return choose(v1 <= v2);
-      case '>': return choose(v1 > v2);
-      case '>=': return choose(v1 >= v2);
-      case '&&': return choose(v1 && v2);
-      case '||': return choose(v1 || v2);
-      default: return choose(false);
-    }
-  },
-};
-
-Object.keys(hh).forEach(k => Handlebars.registerHelper(k, hh[k]));

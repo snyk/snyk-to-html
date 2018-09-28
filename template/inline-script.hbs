@@ -1,0 +1,47 @@
+<script language="javascript">
+
+    Array.from(document.getElementsByClassName('markdown')).forEach(e => {
+        e.classList.remove('markdown');
+        e.parentNode.className = e.className;
+        e.className = '';
+    });
+
+    const checkboxes = Array.from(document.getElementsByTagName('input'))
+                    .filter(i => i.type === 'checkbox');
+
+    checkboxes.forEach(cb => {
+        cb.addEventListener('change', function() {
+            if(this.checked) {
+                display(this.id);
+            } else {
+                hide(this.id);
+            }
+        });
+    });
+
+    function display(className) {
+        const elems = document.getElementsByClassName(className);
+        Array.from(elems).map(e => {
+            e.classList.remove("hidden");
+            let n = e.nextSibling;
+            while(n && n.nodeName !== 'h2') {
+                e.classList.remove("hidden");
+                n = n.nextSibling;
+            }
+        });
+    }
+
+    function hide(className) {
+        const elems = document.getElementsByClassName(className);
+        Array.from(elems).map(e => {
+            e.classList.add("hidden");
+            let n = e.nextSibling;
+            while(n && n.nodeName !== 'h2') {
+                if (n.nodeName !== '#text') {
+                    e.classList.add("hidden");
+                }
+                n = n.nextSibling;
+            }
+        });
+    }
+</script>

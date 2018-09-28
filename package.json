@@ -8,8 +8,8 @@
     "tap": "tap test/*.test.* -Rspec --timeout=180 --node-path ts-node --test-file-pattern '/\\.[tj]s$/'",
     "test": "snyk test && npm run lint && npm run tap",
     "lint": "tslint --project tsconfig.json --format stylish --exclude **/src/**/*.js",
-    "report": "mkdir -p output && cat sample-data/test-report.json | node dist/. > output/test-report.html && open output/test-report.html",
-    "multi-report": "mkdir -p output && cat sample-data/multi-test-report.json | node dist/. > output/multi-test-report.html && open output/multi-test-report.html",
+    "report": "tsc && mkdir -p output && cat sample-data/test-report.json | node dist/. > output/test-report.html && open output/test-report.html",
+    "multi-report": "tsc && mkdir -p output && cat sample-data/multi-test-report.json | node dist/. > output/multi-test-report.html && open output/multi-test-report.html",
     "snyk-protect": "snyk protect",
     "prepare": "npm run build"
   },
@@ -21,18 +21,23 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dagre": "^0.8.2",
+    "graphlib": "^2.1.5",
     "handlebars": "^4.0.8",
+    "handlebars-directory": "^1.0.0",
     "marked": "^0.3.6",
     "minimist": "^1.2.0",
     "moment": "^2.18.1",
     "snyk": "^1.99.0",
-    "source-map-support": "^0.5.7"
+    "source-map-support": "^0.5.7",
+    "viz.js": "^2.0.0"
   },
   "bin": {
     "snyk-to-html": "dist/index.js"
   },
   "snyk": true,
   "devDependencies": {
+    "@types/graphlib": "^2.1.4",
     "@types/handlebars": "^4.0.39",
     "@types/marked": "^0.4.1",
     "@types/minimist": "^1.2.0",

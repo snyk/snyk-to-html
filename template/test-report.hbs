@@ -1,3 +1,10 @@
+{{#*inline "checkbox"}}
+  <span>
+    <input type="checkbox" id="{{id}}" checked="checked">
+    <label for="{{id}}">{{label}}</label>
+  </span>
+{{/inline}}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,6 +54,17 @@
 
   <div class="layout-stacked__content">
     <div class="layout-container--short" style="padding-top: 35px;">   
+        <div class="filter-box">
+          <h3>filter</h3>
+          <hr/>
+          {{> checkbox id="introduced" label="Introduced Through"}}
+          {{> checkbox id="overview" label="Overview"}}
+          {{> checkbox id="details" label="Details"}}
+          {{> checkbox id="proof-of-concept" label="Proof of Concept"}}
+          {{> checkbox id="remediation" label="Remediation"}}
+          {{> checkbox id="disclosure-timeline" label="Disclosure Timeline"}}
+          {{> checkbox id="references" label="References"}}
+        </div>
       <div class="cards--vuln filter--patch filter--ignore">
       {{#each vulnerabilities}}
         {{> vuln-card }}
@@ -56,5 +74,6 @@
   </div><!-- .layout-container -->
 
 </main><!-- .layout-stacked__content -->
+{{> inline-script }}
 </body>
 </html>

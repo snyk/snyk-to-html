@@ -1,0 +1,41 @@
+<div class="card card--vuln  disclosure--not-new severity--{{metadata.severity}}">
+
+    <div class="label label--{{metadata.severity}}">
+        <span class="label__text">{{metadata.severity}} severity</span>
+    </div>
+
+    <div class="packagemanager">
+        <span class="packagemanager__text">{{metadata.packageManager}}</span>
+    </div>
+
+    <h2 class="card__title">{{metadata.title}}</h2>
+    <div class="card__section">
+        <ul class="card__meta">
+            <li class="card__meta__item">
+                {{#if metadata.isLicense}}Module:{{else}}Vulnerable module:{{/if}}
+                {{metadata.name}}
+            </li>
+        </ul>
+        
+
+        <div class="introduced">
+            <hr/>
+            <h3 class="card__section__title">Introduced through</h3>
+            <ul class="card__meta__paths">
+                <div style="width: 100$; overflow: scroll">
+                    {{{metadata.graph}}}
+                </div>
+            </ul><!-- .list-paths -->
+        </div>
+        <hr/>
+    </div><!-- .card__section -->
+
+
+    <!-- Overview -->
+    {{{markdown metadata.description}}}
+
+    <div class="cta card__cta">
+        <p><a href="https://snyk.io/vuln/{{metadata.id}}">More about this vulnerability</a></p>
+    </div>
+
+</div><!-- .card -->
