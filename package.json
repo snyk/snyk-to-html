@@ -21,8 +21,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dagre": "^0.8.2",
-    "graphlib": "^2.1.5",
     "handlebars": "^4.0.8",
     "handlebars-directory": "^1.0.0",
     "marked": "^0.3.6",
@@ -37,7 +35,6 @@
   },
   "snyk": true,
   "devDependencies": {
-    "@types/graphlib": "^2.1.4",
     "@types/handlebars": "^4.0.39",
     "@types/marked": "^0.4.1",
     "@types/minimist": "^1.2.0",

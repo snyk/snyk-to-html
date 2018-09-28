@@ -9,8 +9,6 @@ import {loadSource} from './loader';
 import Viz = require('viz.js');
 import { Module, render } from 'viz.js/full.render.js';
 
-import graphlib = require('graphlib');
-
 const severityMap = {low: 0, medium: 1, high: 2};
 
 const viz = new Viz({ Module, render });
