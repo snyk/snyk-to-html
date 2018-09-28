@@ -1,5 +1,6 @@
 import Handlebars = require('handlebars');
-import HandlebarsDirectory = require('handlebars-directory');
+import {HandlebarsDirectory} from './handlebars-directory';
+
 import marked = require('marked');
 import moment = require('moment');
 import path = require('path');

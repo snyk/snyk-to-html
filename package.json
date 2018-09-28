@@ -22,13 +22,13 @@
   "license": "ISC",
   "dependencies": {
     "handlebars": "^4.0.8",
-    "handlebars-directory": "^1.0.0",
     "marked": "^0.3.6",
     "minimist": "^1.2.0",
     "moment": "^2.18.1",
     "snyk": "^1.99.0",
     "source-map-support": "^0.5.7",
-    "viz.js": "^2.0.0"
+    "viz.js": "^2.0.0",
+    "web-template-file-tree": "^1.1.1"
   },
   "bin": {
     "snyk-to-html": "dist/index.js"
