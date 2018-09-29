@@ -11,6 +11,15 @@
         e.className = '';
     });
 
+    Array.from(document.getElementsByTagName('text')).forEach(e => {
+        if (e.textContent.startsWith("@")) {
+            e.classList.add('version');
+        }
+        if (e.textContent.endsWith(":")) {
+            e.classList.add('group');
+        }
+    });
+
     const checkboxes = Array.from(document.getElementsByTagName('input'))
                     .filter(i => i.type === 'checkbox');
 
