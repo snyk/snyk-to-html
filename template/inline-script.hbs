@@ -1,5 +1,10 @@
 <script language="javascript">
 
+    // Takes each section defined in details markdown and lifts the css
+    // class attribute from the leading h2 element onto the surrounding div.
+    //
+    // Builds on the markdown restructuring work performed by the `remarked`
+    // function defined in hbars.ts
     Array.from(document.getElementsByClassName('markdown')).forEach(e => {
         e.classList.remove('markdown');
         e.parentNode.className = e.className;
