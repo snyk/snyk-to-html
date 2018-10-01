@@ -55,7 +55,7 @@
   <div class="layout-stacked__content">
     <div class="layout-container--short" style="padding-top: 35px;">   
         <div class="filter-box">
-          <h3>filter</h3>
+          <b>filter</b>
           <hr/>
           {{> checkbox id="introduced" label="Introduced Through"}}
           {{> checkbox id="overview" label="Overview"}}
@@ -64,6 +64,10 @@
           {{> checkbox id="remediation" label="Remediation"}}
           {{> checkbox id="disclosure-timeline" label="Disclosure Timeline"}}
           {{> checkbox id="references" label="References"}}
+          <hr/>
+          {{> checkbox id="severity--high" label="High Severity"}}
+          {{> checkbox id="severity--medium" label="Medium Severity"}}
+          {{> checkbox id="severity--low" label="Low Severity"}}
         </div>
       <div class="cards--vuln filter--patch filter--ignore">
       {{#each vulnerabilities}}
