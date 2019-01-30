@@ -3,7 +3,7 @@
     "@semantic-release/npm",
     {
       "path": "@semantic-release/exec",
-      "cmd": "npm i -g pkg && pkg . && shasum -a 256 snyk-to-html-linux > snyk-to-html-linux.sha256 && shasum -a 256 snyk-to-html-macos > snyk-to-html-macos.sha256 && shasum -a 256 snyk-to-html-windows.exe > snyk-to-html-windows.exe.sha256"
+      "cmd": "npm i -g pkg && pkg . && shasum -a 256 snyk-to-html-linux > snyk-to-html-linux.sha256 && shasum -a 256 snyk-to-html-macos > snyk-to-html-macos.sha256 && shasum -a 256 snyk-to-html-win.exe > snyk-to-html-win.exe.sha256"
     }
   ],
   "publish": [
