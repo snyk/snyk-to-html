@@ -45,5 +45,10 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/snyk/snyk-to-html.git"
+  },
+  "pkg": {
+    "scripts": [
+      "dist/**/*.js"
+    ]
   }
 }
