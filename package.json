@@ -49,6 +49,9 @@
   "pkg": {
     "scripts": [
       "dist/**/*.js"
+    ],
+    "assets": [
+      "template/**/*.hbs"
     ]
   }
 }
