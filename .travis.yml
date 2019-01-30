@@ -20,7 +20,7 @@ jobs:
       node_js: "8"
       script: skip
       after_success:
-        - npx semantic-release
+        - npm i -g semantic-release @semantic-release/exec && semantic-release
 branches:
   only:
     - master
