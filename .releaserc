@@ -32,14 +32,14 @@
           "label": "snyk-to-html-macos.sha256"
         },
         {
-          "path": "./snyk-to-html-windows.exe",
-          "name": "snyk-to-html-windows.exe",
-          "label": "snyk-to-html-windows.exe"
+          "path": "./snyk-to-html-win.exe",
+          "name": "snyk-to-html-win.exe",
+          "label": "snyk-to-html-win.exe"
         },
         {
-          "path": "./snyk-to-html-windows.exe.sha256",
-          "name": "snyk-to-html-windows.exe.sha256",
-          "label": "snyk-to-html-windows.exe.sha256"
+          "path": "./snyk-to-html-win.exe.sha256",
+          "name": "snyk-to-html-win.exe.sha256",
+          "label": "snyk-to-html-win.exe.sha256"
         }
       ]
     }
