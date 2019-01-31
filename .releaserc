@@ -1,0 +1,47 @@
+{
+  "prepare": [
+    "@semantic-release/npm",
+    {
+      "path": "@semantic-release/exec",
+      "cmd": "npm i -g pkg && pkg . && shasum -a 256 snyk-to-html-linux > snyk-to-html-linux.sha256 && shasum -a 256 snyk-to-html-macos > snyk-to-html-macos.sha256 && shasum -a 256 snyk-to-html-win.exe > snyk-to-html-win.exe.sha256"
+    }
+  ],
+  "publish": [
+    "@semantic-release/npm",
+    {
+      "path": "@semantic-release/github",
+      "assets": [
+        {
+          "path": "./snyk-to-html-linux",
+          "name": "snyk-to-html-linux",
+          "label": "snyk-to-html-linux"
+        },
+        {
+          "path": "./snyk-to-html-linux.sha256",
+          "name": "snyk-to-html-linux.sha256",
+          "label": "snyk-to-html-linux.sha256"
+        },
+        {
+          "path": "./snyk-to-html-macos",
+          "name": "snyk-to-html-macos",
+          "label": "snyk-to-html-macos"
+        },
+        {
+          "path": "./snyk-to-html-macos.sha256",
+          "name": "snyk-to-html-macos.sha256",
+          "label": "snyk-to-html-macos.sha256"
+        },
+        {
+          "path": "./snyk-to-html-windows.exe",
+          "name": "snyk-to-html-windows.exe",
+          "label": "snyk-to-html-windows.exe"
+        },
+        {
+          "path": "./snyk-to-html-windows.exe.sha256",
+          "name": "snyk-to-html-windows.exe.sha256",
+          "label": "snyk-to-html-windows.exe.sha256"
+        }
+      ]
+    }
+  ]
+}
