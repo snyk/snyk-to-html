@@ -1,24 +1,10 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.12.0
+version: v1.13.3
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
-  'npm:marked:20170907':
+  SNYK-JS-MARKED-73637:
     - marked:
-        reason: None given
-        expires: '2018-10-26T07:31:32.111Z'
-  'npm:moment:20170905':
-    - moment:
-        reason: None given
-        expires: '2018-12-29T16:11:24.450Z'
-  'npm:mem:20180117':
-    - nyc > yargs > os-locale > mem:
-        reason: None given
-        expires: '2018-10-25T12:41:19.172Z'
-    - tap > nyc > yargs > os-locale > mem:
-        reason: None given
-        expires: '2018-10-25T12:41:19.172Z'
+        reason: Not expliotable when snyk output is used as intended
+        expires: '2020-03-07T08:13:38.206Z'
 # patches apply the minimum changes required to fix a vulnerability
-patch:
-  'npm:marked:20170112':
-    - marked:
-        patched: '2017-05-18T09:25:23.798Z'
+patch: {}

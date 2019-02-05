@@ -21,26 +21,26 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "handlebars": "^4.0.8",
-    "marked": "^0.3.6",
+    "handlebars": "^4.0.12",
+    "marked": "^0.6.0",
     "minimist": "^1.2.0",
-    "moment": "^2.18.1",
-    "snyk": "^1.99.0",
-    "source-map-support": "^0.5.7"
+    "moment": "^2.24.0",
+    "snyk": "^1.124.1",
+    "source-map-support": "^0.5.10"
   },
   "bin": {
     "snyk-to-html": "dist/index.js"
   },
   "snyk": true,
   "devDependencies": {
-    "@types/handlebars": "^4.0.39",
-    "@types/marked": "^0.4.1",
+    "@types/handlebars": "^4.0.40",
+    "@types/marked": "^0.4.2",
     "@types/minimist": "^1.2.0",
-    "@types/node": "^4.0.47",
+    "@types/node": "^4.9.1",
     "tap": "github:snyk/node-tap#alternative-runtimes",
     "ts-node": "^7.0.1",
-    "tslint": "^5.11.0",
-    "typescript": "^3.0.3"
+    "tslint": "^5.12.1",
+    "typescript": "^3.3.1"
   },
   "repository": {
     "type": "git",
