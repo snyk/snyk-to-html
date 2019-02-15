@@ -21,7 +21,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "handlebars": "^4.0.12",
+    "handlebars": "^4.0.13",
     "marked": "^0.6.0",
     "minimist": "^1.2.0",
     "moment": "^2.24.0",
