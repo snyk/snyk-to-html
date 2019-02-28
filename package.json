@@ -10,7 +10,6 @@
     "lint": "tslint --project tsconfig.json --format stylish --exclude **/src/**/*.js",
     "report": "mkdir -p output && cat sample-data/test-report.json | node dist/. > output/test-report.html && open output/test-report.html",
     "multi-report": "mkdir -p output && cat sample-data/multi-test-report.json | node dist/. > output/multi-test-report.html && open output/multi-test-report.html",
-    "snyk-protect": "snyk protect",
     "prepare": "npm run build"
   },
   "types": "./dist/index.d.ts",
@@ -21,11 +20,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "handlebars": "^4.0.12",
-    "marked": "^0.6.0",
+    "handlebars": "^4.1.0",
+    "marked": "^0.6.1",
     "minimist": "^1.2.0",
     "moment": "^2.24.0",
-    "snyk": "^1.124.1",
     "source-map-support": "^0.5.10"
   },
   "bin": {
@@ -33,14 +31,14 @@
   },
   "snyk": true,
   "devDependencies": {
-    "@types/handlebars": "^4.0.40",
-    "@types/marked": "^0.4.2",
+    "@types/marked": "^0.6.1",
     "@types/minimist": "^1.2.0",
-    "@types/node": "^4.9.1",
+    "@types/node": "^4.9.2",
+    "snyk": "^1.135.1",
     "tap": "github:snyk/node-tap#alternative-runtimes",
     "ts-node": "^7.0.1",
-    "tslint": "^5.12.1",
-    "typescript": "^3.3.1"
+    "tslint": "^5.13.0",
+    "typescript": "^3.3.3333"
   },
   "repository": {
     "type": "git",
