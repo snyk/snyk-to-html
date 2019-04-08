@@ -21,7 +21,7 @@
   "license": "ISC",
   "dependencies": {
     "handlebars": "^4.1.0",
-    "marked": "^0.6.1",
+    "marked": "^0.6.2",
     "minimist": "^1.2.0",
     "moment": "^2.24.0",
     "source-map-support": "^0.5.10"
