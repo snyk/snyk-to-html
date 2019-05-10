@@ -45,6 +45,7 @@ function metadataForVuln(vuln: any) {
     severity: vuln.severity,
     severityValue: severityMap[vuln.severity],
     description: vuln.description || 'No description available.',
+    packageManager: vuln.packageManager,
   };
 }
 
@@ -93,7 +94,7 @@ function mergeData(dataArray: any[]): any {
   const totalDepCount =
     dataArray.reduce((acc, item) => acc + item.dependencyCount || 0, 0);
 
-  const paths = dataArray.map(d => d.path);
+  const paths = dataArray.map(d => ({path: d.path, packageManager: d.packageManager}));
 
   return {
     vulnerabilities: aggregateVulnerabilities,
