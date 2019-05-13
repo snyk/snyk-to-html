@@ -45,6 +45,7 @@ function metadataForVuln(vuln: any) {
     severity: vuln.severity,
     severityValue: severityMap[vuln.severity],
     description: vuln.description || 'No description available.',
+    packageManager: vuln.packageManager,
   };
 }
 
@@ -85,7 +86,7 @@ async function generateTemplate(data: any, template: string): Promise<string> {
 }
 
 function mergeData(dataArray: any[]): any {
-  const vulnsArrays = dataArray.map(d => d.vulnerabilities || []);
+  const vulnsArrays = dataArray.map(project => project.vulnerabilities || []);
   const aggregateVulnerabilities = [].concat(...vulnsArrays);
 
   const totalUniqueCount =
@@ -93,7 +94,7 @@ function mergeData(dataArray: any[]): any {
   const totalDepCount =
     dataArray.reduce((acc, item) => acc + item.dependencyCount || 0, 0);
 
-  const paths = dataArray.map(d => d.path);
+  const paths = dataArray.map(project => ({path: project.path, packageManager: project.packageManager}));
 
   return {
     vulnerabilities: aggregateVulnerabilities,
