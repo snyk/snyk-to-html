@@ -2,8 +2,14 @@
   "prepare": [
     "@semantic-release/npm",
     {
+      "//": "build the alpine, macos, linux and windows binaries",
       "path": "@semantic-release/exec",
-      "cmd": "npm i -g pkg && pkg . && shasum -a 256 snyk-to-html-linux > snyk-to-html-linux.sha256 && shasum -a 256 snyk-to-html-macos > snyk-to-html-macos.sha256 && shasum -a 256 snyk-to-html-win.exe > snyk-to-html-win.exe.sha256"
+      "cmd": "npm i -g pkg && pkg . -t node8-alpine-x64,node8-linux-x64,node8-macos-x64,node8-win-x64"
+    },
+    {
+      "//": "shasum all binaries",
+      "path": "@semantic-release/exec",
+      "cmd": "shasum -a 256 snyk-to-html-linux > snyk-to-html-linux.sha256 && shasum -a 256 snyk-to-html-macos > snyk-to-html-macos.sha256 && shasum -a 256 snyk-to-html-win.exe > snyk-to-html-win.exe.sha256 && shasum -a 256 snyk-to-html-alpine > snyk-to-html-alpine.sha256"
     }
   ],
   "publish": [
@@ -40,6 +46,16 @@
           "path": "./snyk-to-html-win.exe.sha256",
           "name": "snyk-to-html-win.exe.sha256",
           "label": "snyk-to-html-win.exe.sha256"
+        },
+        {
+          "path": "./snyk-to-html-alpine",
+          "name": "snyk-to-html-alpine",
+          "label": "snyk-to-html-alpine"
+        },
+        {
+          "path": "./snyk-to-html-alpine.sha256",
+          "name": "snyk-to-html-alpine.sha256",
+          "label": "snyk-to-html-alpine.sha256"
         }
       ]
     }
