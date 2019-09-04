@@ -51,17 +51,27 @@ function metadataForVuln(vuln: any) {
 
 function groupVulns(vulns) {
   const result = {};
-  if (!vulns || typeof vulns.length === 'undefined') {
-    return result;
+  let uniqueCount = 0;
+  let pathsCount = 0;
+
+  if (vulns && Array.isArray(vulns)) {
+    vulns.map(vuln => {
+      if (!result[vuln.id]) {
+        result[vuln.id] = { list: [vuln], metadata: metadataForVuln(vuln) };
+        pathsCount++;
+        uniqueCount++;
+      } else {
+        result[vuln.id].list.push(vuln);
+        pathsCount++;
+      }
+    });
   }
-  vulns.map(vuln => {
-    if (!result[vuln.id]) {
-      result[vuln.id] = { list: [vuln], metadata: metadataForVuln(vuln) };
-    } else {
-      result[vuln.id].list.push(vuln);
-    }
-  });
-  return result;
+
+  return {
+    vulnerabilities: result,
+    vulnerabilitiesUniqueCount: uniqueCount,
+    vulnerabilitiesPathsCount: pathsCount,
+  };
 }
 
 async function compileTemplate(fileName: string): Promise<HandlebarsTemplateDelegate> {
@@ -76,8 +86,10 @@ async function registerPeerPartial(templatePath: string, name: string): Promise<
 }
 
 async function generateTemplate(data: any, template: string): Promise<string> {
-  data.vulnerabilities = groupVulns(data.vulnerabilities);
-  data.uniqueCount = Object.keys(data.vulnerabilities).length;
+  const vulnMetadata = groupVulns(data.vulnerabilities);
+  data.vulnerabilities = vulnMetadata.vulnerabilities;
+  data.uniqueCount = vulnMetadata.vulnerabilitiesUniqueCount;
+  data.summary = vulnMetadata.vulnerabilitiesPathsCount + ' vulnerable dependency paths';
 
   await registerPeerPartial(template, 'inline-css');
   await registerPeerPartial(template, 'vuln-card');
