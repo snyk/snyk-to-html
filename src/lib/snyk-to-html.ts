@@ -77,6 +77,7 @@ async function registerPeerPartial(templatePath: string, name: string): Promise<
 
 async function generateTemplate(data: any, template: string): Promise<string> {
   data.vulnerabilities = groupVulns(data.vulnerabilities);
+  data.uniqueCount = Object.keys(data.vulnerabilities).length;
 
   await registerPeerPartial(template, 'inline-css');
   await registerPeerPartial(template, 'vuln-card');
@@ -106,14 +107,7 @@ function mergeData(dataArray: any[]): any {
 }
 
 async function processData(data: any, template: string): Promise<string> {
-  let mergedData = {};
-  if (Array.isArray(data)) {
-    mergedData = mergeData(data);
-  } else {
-    data.uniqueCount = data.vulnerabilities.length;
-    mergedData = data;
-  }
-
+  const mergedData = Array.isArray(data) ? mergeData(data) : data;
   return generateTemplate(mergedData, template);
 }
 
