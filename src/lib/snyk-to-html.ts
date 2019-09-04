@@ -108,7 +108,7 @@ function mergeData(dataArray: any[]): any {
 async function processData(data: any, template: string): Promise<string> {
   let mergedData = {};
   if (Array.isArray(data)) {
-    mergeData(data);
+    mergedData = mergeData(data);
   } else {
     data.uniqueCount = data.vulnerabilities.length;
     mergedData = data;
