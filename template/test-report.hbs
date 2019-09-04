@@ -8,53 +8,57 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Snyk test report</title>
   <meta name="description" content="{{uniqueCount}} known vulnerabilities found in {{summary}}.">
-  <link rel="icon" type="image/png" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.png" sizes="194x194">
+  <link rel="icon" type="image/png" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.png"
+    sizes="194x194">
   <link rel="shortcut icon" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.ico">
   {{> inline-css }}
 </head>
 
 <body class="section-projects">
-<main class="layout-stacked">
+  <main class="layout-stacked">
 
-  <div class="layout-stacked__header header">
-    <header class="project__header">
-      <div class="layout-container--short">
-        <h1 class="project__header__title">Snyk test report</h1>
-        <p class="timestamp">{{moment d "MMMM Do YYYY, h:mm:ss a"}}</p>
-        {{#if paths}}
+    <div class="layout-stacked__header header">
+      <header class="project__header">
+        <div class="layout-container--short">
+          <h1 class="project__header__title">Snyk test report</h1>
+          <p class="timestamp">{{moment d "MMMM Do YYYY, h:mm:ss a"}}</p>
+          {{#if paths}}
           <div class="source-panel">
             <span>Scanned the following paths:</span>
             <ul>
               {{#each paths}}<li>{{path}} ({{packageManager}})</li>{{/each}}
             </ul>
           </div>
-        {{/if}}
-        {{#if path}}
+          {{/if}}
+          {{#if path}}
           <div class="source-panel">
             <span>Scanned the following path:</span>
-            <ul><li>{{path}} ({{packageManager}})</li></ul>
+            <ul>
+              <li>{{path}} ({{packageManager}})</li>
+            </ul>
           </div>
-        {{/if}}
+          {{/if}}
 
-        <div class="meta-counts">
-          <div class="meta-count"><span>{{uniqueCount}}</span> <span>known vulnerabilities</span></div>
-          <div class="meta-count"><span>{{summary}}</span></div>
-          <div class="meta-count"><span>{{dependencyCount}}</span> <span>dependencies</span></div>
-        </div><!-- .meta-counts -->
-      </div><!-- .layout-container--short -->
-    </header><!-- .project__header -->
-  </div><!-- .layout-stacked__header -->
+          <div class="meta-counts">
+            <div class="meta-count"><span>{{uniqueCount}}</span> <span>known vulnerabilities</span></div>
+            <div class="meta-count"><span>{{summary}}</span></div>
+            <div class="meta-count"><span>{{dependencyCount}}</span> <span>dependencies</span></div>
+          </div><!-- .meta-counts -->
+        </div><!-- .layout-container--short -->
+      </header><!-- .project__header -->
+    </div><!-- .layout-stacked__header -->
 
-  <div class="layout-stacked__content">
-    <div class="layout-container--short" style="padding-top: 35px;">   
-      <div class="cards--vuln filter--patch filter--ignore">
-      {{#each vulnerabilities}}
-        {{> vuln-card }}
-      {{/each}}
-      </div><!-- cards -->
-    </div>
-  </div><!-- .layout-container -->
+    <div class="layout-stacked__content">
+      <div class="layout-container--short" style="padding-top: 35px;">
+        <div class="cards--vuln filter--patch filter--ignore">
+          {{#each vulnerabilities}}
+          {{> vuln-card }}
+          {{/each}}
+        </div><!-- cards -->
+      </div>
+    </div><!-- .layout-container -->
 
-</main><!-- .layout-stacked__content -->
+  </main><!-- .layout-stacked__content -->
 </body>
+
 </html>

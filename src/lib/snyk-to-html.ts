@@ -6,7 +6,7 @@ import marked = require('marked');
 import moment = require('moment');
 import path = require('path');
 
-const severityMap = {low: 0, medium: 1, high: 2};
+const severityMap = { low: 0, medium: 1, high: 2 };
 
 function readFile(filePath: string, encoding: string): Promise<string> {
   return new Promise<string>((resolve, reject) => {
@@ -54,9 +54,9 @@ function groupVulns(vulns) {
   if (!vulns || typeof vulns.length === 'undefined') {
     return result;
   }
-  vulns.map( vuln => {
+  vulns.map(vuln => {
     if (!result[vuln.id]) {
-      result[vuln.id] = {list: [vuln], metadata: metadataForVuln(vuln)};
+      result[vuln.id] = { list: [vuln], metadata: metadataForVuln(vuln) };
     } else {
       result[vuln.id].list.push(vuln);
     }
@@ -90,11 +90,11 @@ function mergeData(dataArray: any[]): any {
   const aggregateVulnerabilities = [].concat(...vulnsArrays);
 
   const totalUniqueCount =
-    dataArray.reduce((acc, item) => acc + item.uniqueCount || 0, 0);
+    dataArray.reduce((acc, item) => acc + item.vulnerabilities.length || 0, 0);
   const totalDepCount =
     dataArray.reduce((acc, item) => acc + item.dependencyCount || 0, 0);
 
-  const paths = dataArray.map(project => ({path: project.path, packageManager: project.packageManager}));
+  const paths = dataArray.map(project => ({ path: project.path, packageManager: project.packageManager }));
 
   return {
     vulnerabilities: aggregateVulnerabilities,
@@ -106,7 +106,14 @@ function mergeData(dataArray: any[]): any {
 }
 
 async function processData(data: any, template: string): Promise<string> {
-  const mergedData = Array.isArray(data) ? mergeData(data) : data;
+  let mergedData = {};
+  if (Array.isArray(data)) {
+    mergeData(data);
+  } else {
+    data.uniqueCount = data.vulnerabilities.length;
+    mergedData = data;
+  }
+
   return generateTemplate(mergedData, template);
 }
 
