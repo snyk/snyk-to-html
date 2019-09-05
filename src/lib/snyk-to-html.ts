@@ -6,7 +6,7 @@ import marked = require('marked');
 import moment = require('moment');
 import path = require('path');
 
-const severityMap = {low: 0, medium: 1, high: 2};
+const severityMap = { low: 0, medium: 1, high: 2 };
 
 function readFile(filePath: string, encoding: string): Promise<string> {
   return new Promise<string>((resolve, reject) => {
@@ -51,17 +51,27 @@ function metadataForVuln(vuln: any) {
 
 function groupVulns(vulns) {
   const result = {};
-  if (!vulns || typeof vulns.length === 'undefined') {
-    return result;
+  let uniqueCount = 0;
+  let pathsCount = 0;
+
+  if (vulns && Array.isArray(vulns)) {
+    vulns.map(vuln => {
+      if (!result[vuln.id]) {
+        result[vuln.id] = { list: [vuln], metadata: metadataForVuln(vuln) };
+        pathsCount++;
+        uniqueCount++;
+      } else {
+        result[vuln.id].list.push(vuln);
+        pathsCount++;
+      }
+    });
   }
-  vulns.map( vuln => {
-    if (!result[vuln.id]) {
-      result[vuln.id] = {list: [vuln], metadata: metadataForVuln(vuln)};
-    } else {
-      result[vuln.id].list.push(vuln);
-    }
-  });
-  return result;
+
+  return {
+    vulnerabilities: result,
+    vulnerabilitiesUniqueCount: uniqueCount,
+    vulnerabilitiesPathsCount: pathsCount,
+  };
 }
 
 async function compileTemplate(fileName: string): Promise<HandlebarsTemplateDelegate> {
@@ -76,7 +86,10 @@ async function registerPeerPartial(templatePath: string, name: string): Promise<
 }
 
 async function generateTemplate(data: any, template: string): Promise<string> {
-  data.vulnerabilities = groupVulns(data.vulnerabilities);
+  const vulnMetadata = groupVulns(data.vulnerabilities);
+  data.vulnerabilities = vulnMetadata.vulnerabilities;
+  data.uniqueCount = vulnMetadata.vulnerabilitiesUniqueCount;
+  data.summary = vulnMetadata.vulnerabilitiesPathsCount + ' vulnerable dependency paths';
 
   await registerPeerPartial(template, 'inline-css');
   await registerPeerPartial(template, 'vuln-card');
@@ -90,11 +103,11 @@ function mergeData(dataArray: any[]): any {
   const aggregateVulnerabilities = [].concat(...vulnsArrays);
 
   const totalUniqueCount =
-    dataArray.reduce((acc, item) => acc + item.uniqueCount || 0, 0);
+    dataArray.reduce((acc, item) => acc + item.vulnerabilities.length || 0, 0);
   const totalDepCount =
     dataArray.reduce((acc, item) => acc + item.dependencyCount || 0, 0);
 
-  const paths = dataArray.map(project => ({path: project.path, packageManager: project.packageManager}));
+  const paths = dataArray.map(project => ({ path: project.path, packageManager: project.packageManager }));
 
   return {
     vulnerabilities: aggregateVulnerabilities,
