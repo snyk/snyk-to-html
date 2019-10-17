@@ -8,6 +8,7 @@ import path = require('path');
 
 const severityMap = { low: 0, medium: 1, high: 2 };
 
+// Read File
 function readFile(filePath: string, encoding: string): Promise<string> {
   return new Promise<string>((resolve, reject) => {
     fs.readFile(filePath, encoding, (err, data) => {
@@ -16,6 +17,7 @@ function readFile(filePath: string, encoding: string): Promise<string> {
     });
   });
 }
+
 
 class SnykToHtml {
   public static run(dataSource: string, hbsTemplate: string, reportCallback: (value: string) => void): void {
@@ -36,6 +38,7 @@ class SnykToHtml {
 
 export { SnykToHtml };
 
+// Meta Data For Vuln
 function metadataForVuln(vuln: any) {
   return {
     id: vuln.id,
@@ -49,6 +52,7 @@ function metadataForVuln(vuln: any) {
   };
 }
 
+// Group Vulns
 function groupVulns(vulns) {
   const result = {};
   let uniqueCount = 0;
@@ -74,6 +78,7 @@ function groupVulns(vulns) {
   };
 }
 
+// Compile Template
 async function compileTemplate(fileName: string): Promise<HandlebarsTemplateDelegate> {
   return readFile(fileName, 'utf8').then(Handlebars.compile);
 }
@@ -85,6 +90,7 @@ async function registerPeerPartial(templatePath: string, name: string): Promise<
   Handlebars.registerPartial(name, template);
 }
 
+// Generate Template
 async function generateTemplate(data: any, template: string): Promise<string> {
   const vulnMetadata = groupVulns(data.vulnerabilities);
   data.vulnerabilities = vulnMetadata.vulnerabilities;
@@ -98,6 +104,7 @@ async function generateTemplate(data: any, template: string): Promise<string> {
   return htmlTemplate(data);
 }
 
+// Merge Data
 function mergeData(dataArray: any[]): any {
   const vulnsArrays = dataArray.map(project => project.vulnerabilities || []);
   const aggregateVulnerabilities = [].concat(...vulnsArrays);
@@ -118,6 +125,7 @@ function mergeData(dataArray: any[]): any {
   };
 }
 
+// Process Data
 async function processData(data: any, template: string): Promise<string> {
   const mergedData = Array.isArray(data) ? mergeData(data) : data;
   return generateTemplate(mergedData, template);
