@@ -24,7 +24,7 @@
     "marked": "^0.7.0",
     "minimist": "^1.2.0",
     "moment": "^2.24.0",
-    "source-map-support": "^0.5.13"
+    "source-map-support": "^0.5.16"
   },
   "bin": {
     "snyk-to-html": "dist/index.js"
