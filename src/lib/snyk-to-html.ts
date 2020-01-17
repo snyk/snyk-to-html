@@ -6,31 +6,36 @@ import marked = require('marked');
 import moment = require('moment');
 import path = require('path');
 
-const severityMap = { low: 0, medium: 1, high: 2 };
+const severityMap = {low: 0, medium: 1, high: 2};
+const defaultRemediationText = '## Remediation\nThere is no remediation at the moment';
 
 function readFile(filePath: string, encoding: string): Promise<string> {
   return new Promise<string>((resolve, reject) => {
     fs.readFile(filePath, encoding, (err, data) => {
-      if (err) { reject(err); }
+      if (err) {
+        reject(err);
+      }
       resolve(data);
     });
   });
 }
 
 class SnykToHtml {
-  public static run(dataSource: string, hbsTemplate: string, reportCallback: (value: string) => void): void {
+  public static run(dataSource: string,
+                    hbsTemplate: string,
+                    summary: boolean,
+                    reportCallback: (value: string) => void): void {
     SnykToHtml
-      .runAsync(dataSource, hbsTemplate)
+      .runAsync(dataSource, hbsTemplate, summary)
       .then(reportCallback)
       .catch(console.log);
   }
 
-  public static async runAsync(source: string, template: string): Promise<string> {
+  public static async runAsync(source: string, template: string, summary: boolean): Promise<string> {
     const promisedString = source ? readFile(source, 'utf8') : readInputFromStdin();
-    const report = promisedString
+    return promisedString
       .then(JSON.parse)
-      .then(data => processData(data, template));
-    return report;
+      .then(data => processData(data, template, summary));
   }
 }
 
@@ -57,7 +62,7 @@ function groupVulns(vulns) {
   if (vulns && Array.isArray(vulns)) {
     vulns.map(vuln => {
       if (!result[vuln.id]) {
-        result[vuln.id] = { list: [vuln], metadata: metadataForVuln(vuln) };
+        result[vuln.id] = {list: [vuln], metadata: metadataForVuln(vuln)};
         pathsCount++;
         uniqueCount++;
       } else {
@@ -85,11 +90,12 @@ async function registerPeerPartial(templatePath: string, name: string): Promise<
   Handlebars.registerPartial(name, template);
 }
 
-async function generateTemplate(data: any, template: string): Promise<string> {
+async function generateTemplate(data: any, template: string, summary: boolean): Promise<string> {
   const vulnMetadata = groupVulns(data.vulnerabilities);
   data.vulnerabilities = vulnMetadata.vulnerabilities;
   data.uniqueCount = vulnMetadata.vulnerabilitiesUniqueCount;
   data.summary = vulnMetadata.vulnerabilitiesPathsCount + ' vulnerable dependency paths';
+  data.showSummaryOnly = summary;
 
   await registerPeerPartial(template, 'inline-css');
   await registerPeerPartial(template, 'vuln-card');
@@ -118,9 +124,9 @@ function mergeData(dataArray: any[]): any {
   };
 }
 
-async function processData(data: any, template: string): Promise<string> {
+async function processData(data: any, template: string, summary: boolean): Promise<string> {
   const mergedData = Array.isArray(data) ? mergeData(data) : data;
-  return generateTemplate(mergedData, template);
+  return generateTemplate(mergedData, template, summary);
 }
 
 async function readInputFromStdin(): Promise<string> {
@@ -170,6 +176,13 @@ const hh = {
       case '||': return choose(v1 || v2);
       default: return choose(false);
     }
+  },
+  getRemediation: function(description) {
+    const index = description.indexOf('## Remediation');
+    if (index === -1) {
+      return marked(defaultRemediationText);
+    }
+    return marked(description.substring(index));
   },
 };
 

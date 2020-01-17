@@ -70,77 +70,83 @@
 
         <hr/>
 
-        {{#if_eq @root.project.type "npm"}}
-            <h3 class="card__section__title">Detailed paths and remediation</h3>
-        {{else}}
-            <h3 class="card__section__title">Detailed paths</h3>
-        {{/if_eq}}
+        {{#unless showSummaryOnly}}
 
-        <ul class="card__meta__paths">
-            {{#each list}}
-                {{#isDoubleArray from}}
-                    {{#each .}}
-                    <li class="list-paths__item">
+            {{#if_eq @root.project.type "npm"}}
+                <h3 class="card__section__title">Detailed paths and remediation</h3>
+            {{else}}
+                <h3 class="card__section__title">Detailed paths</h3>
+            {{/if_eq}}
+
+            <ul class="card__meta__paths">
+                {{#each list}}
+                    {{#isDoubleArray from}}
+                        {{#each .}}
+                        <li class="list-paths__item">
+                            <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                                {{#each .}}
+                                    {{.}}
+                                    {{#unless @last}} <span class="list-paths__item__arrow">›</span> {{/unless}}
+                                {{/each}}
+                            </span>
+                        {{/each}}
+                    {{else}}
+                        <li>
                         <span class="list-paths__item__introduced"><em>Introduced through</em>:
                             {{#each .}}
                                 {{.}}
                                 {{#unless @last}} <span class="list-paths__item__arrow">›</span> {{/unless}}
                             {{/each}}
                         </span>
-                    {{/each}}
-                {{else}}
-                    <li>
-                    <span class="list-paths__item__introduced"><em>Introduced through</em>:
-                        {{#each .}}
-                            {{.}}
-                            {{#unless @last}} <span class="list-paths__item__arrow">›</span> {{/unless}}
-                        {{/each}}
-                    </span>
-                {{/isDoubleArray}}
+                    {{/isDoubleArray}}
 
-                {{#if_eq @root.project.type "npm"}}
-                    <span class="list-paths__item__remediation">
-                    <strong>Remediation:</strong>
-                    {{#if_any isUpgradable isPatchable}}
-                        {{#upgradeAvailable upgradePath}}{{!-- Direct dependency with upgrade. --}}
-                            {{#if_eq upgradePath.[1] from.[1]}}{{!-- Dependencies are out of date. --}}
-                                Your dependencies are out of date, otherwise you would be using a newer {{name}} than {{name}}@{{version}}.
-                                Try deleting node_modules, reinstalling and running <code><a href="/docs/using-snyk/#wizard">snyk wizard</a></code>.
-                                If the problem persists, one of your dependencies may be bundling outdated modules.
-                            {{else}}{{!-- Dependencies are not out of date. --}}
-                                Upgrade to {{#firstNonFalse upgradePath}}{{.}}{{/firstNonFalse}}.
-                            {{/if_eq}}
-                            {{else}}{{!-- This is not a direct dependency, but there is an upgrade --}}
-                            {{#if patches}}{{!-- There are patches --}}
-                                Run <code><a href="/docs/using-snyk/#wizard">snyk wizard</a></code> to patch {{name}}@{{version}}.
-                            {{else}}{{!-- There are no patches --}}
-                                {{#if @root.isTest}}{{!-- This is a test page --}}
-                                No direct dependency upgrade can address this issue.
-                                If possible, manually upgrade to {{#firstNonFalse upgradePath}}{{.}}{{/firstNonFalse}},
-                                or run <code><a href="/docs/using-snyk/#monitor">snyk monitor</a></code> to get notified when an easier upgrade or a patch becomes available.
-                                {{else}}{{!-- This is a monitor page --}}
-                                No direct dependency upgrade can address this issue.
-                                If possible, manually upgrade to {{#firstNonFalse upgradePath}}{{.}}{{/firstNonFalse}}.
-                                We'll notify you when an easier upgrade or a patch is available.
+                    {{#if_eq @root.project.type "npm"}}
+                        <span class="list-paths__item__remediation">
+                        <strong>Remediation:</strong>
+                        {{#if_any isUpgradable isPatchable}}
+                            {{#upgradeAvailable upgradePath}}{{!-- Direct dependency with upgrade. --}}
+                                {{#if_eq upgradePath.[1] from.[1]}}{{!-- Dependencies are out of date. --}}
+                                    Your dependencies are out of date, otherwise you would be using a newer {{name}} than {{name}}@{{version}}.
+                                    Try deleting node_modules, reinstalling and running <code><a href="/docs/using-snyk/#wizard">snyk wizard</a></code>.
+                                    If the problem persists, one of your dependencies may be bundling outdated modules.
+                                {{else}}{{!-- Dependencies are not out of date. --}}
+                                    Upgrade to {{#firstNonFalse upgradePath}}{{.}}{{/firstNonFalse}}.
+                                {{/if_eq}}
+                                {{else}}{{!-- This is not a direct dependency, but there is an upgrade --}}
+                                {{#if patches}}{{!-- There are patches --}}
+                                    Run <code><a href="/docs/using-snyk/#wizard">snyk wizard</a></code> to patch {{name}}@{{version}}.
+                                {{else}}{{!-- There are no patches --}}
+                                    {{#if @root.isTest}}{{!-- This is a test page --}}
+                                    No direct dependency upgrade can address this issue.
+                                    If possible, manually upgrade to {{#firstNonFalse upgradePath}}{{.}}{{/firstNonFalse}},
+                                    or run <code><a href="/docs/using-snyk/#monitor">snyk monitor</a></code> to get notified when an easier upgrade or a patch becomes available.
+                                    {{else}}{{!-- This is a monitor page --}}
+                                    No direct dependency upgrade can address this issue.
+                                    If possible, manually upgrade to {{#firstNonFalse upgradePath}}{{.}}{{/firstNonFalse}}.
+                                    We'll notify you when an easier upgrade or a patch is available.
+                                    {{/if}}
                                 {{/if}}
-                            {{/if}}
-                        {{/upgradeAvailable}}
-                    {{else}}{{!-- There are no upgrades or patches --}}
-                        No remediation path available.
-                    {{/if_any}}
-                    </span><!-- .list-paths__item__remediation -->
-                {{/if_eq}}
-                </li>
-                </li>
-            {{/each}}
-        </ul><!-- .list-paths -->
+                            {{/upgradeAvailable}}
+                        {{else}}{{!-- There are no upgrades or patches --}}
+                            No remediation path available.
+                        {{/if_any}}
+                        </span><!-- .list-paths__item__remediation -->
+                    {{/if_eq}}
+                    </li>
+                {{/each}}
+            </ul><!-- .list-paths -->
+        {{/unless}}
 
     </div><!-- .card__section -->
 
-    <hr/>
-    <!-- Overview -->
-    {{{markdown metadata.description}}}
-    <hr/>
+    {{#unless showSummaryOnly}}
+      <hr/>
+      <!-- Overview -->
+      {{{markdown metadata.description}}}
+      <hr/>
+    {{else}}
+      {{{getRemediation metadata.description}}}
+    {{/unless}}
 
     <div class="cta card__cta">
         <p><a href="https://snyk.io/vuln/{{metadata.id}}">More about this vulnerability</a></p>

@@ -1,38 +1,48 @@
 #!/usr/bin/env node
 
+import program = require('commander');
 import fs = require('fs');
-import minimist = require('minimist');
 import path = require('path');
-import { SnykToHtml } from './lib/snyk-to-html';
+import {SnykToHtml} from './lib/snyk-to-html';
 
-const argv = minimist(process.argv.slice(2));
+program
+.option('-t, --template <path>', 'Template location for generating the html. Defaults to template/test-report.hbs')
+.option('-i, --input <path>', 'Input path from where to read the json. Defaults to stdin')
+.option('-o, --output <path>', 'Output of the resulting HTML. Example: -o snyk.html. Defaults to stdout')
+.option('-s, --summary', 'Generates an HTML with only the summary, instead of the details report')
+.parse(process.argv);
+
+console.log('args ' + JSON.stringify(program.opts()));
+console.log('output ' + program.output);
 
 let template;
 let source;
 let output;
 
-if (argv.t) { // template
-  template = argv.t; // grab the next item
+if (program.template) { // template
+  template = program.template; // grab the next item
   if (typeof template === 'boolean') {
     template = path.join(__dirname, '../template/test-report.hbs');
   }
 } else {
   template = path.join(__dirname, '../template/test-report.hbs');
 }
-if (argv.i) { // input source
-  source = argv.i; // grab the next item
+if (program.input) { // input source
+  source = program.input; // grab the next item
   if (typeof source === 'boolean') {
     source = undefined;
   }
 }
-if (argv.o) { // output destination
-  output = argv.o; // grab the next item
+if (program.output) { // output destination
+  output = program.output; // grab the next item
   if (typeof output === 'boolean') {
     output = undefined;
   }
 }
 
-SnykToHtml.run(source, template, onReportOutput);
+console.log('summary: ' + program.summary);
+
+SnykToHtml.run(source, template, !!program.summary, onReportOutput);
 
 function onReportOutput(report: string): void {
   if (output) {
