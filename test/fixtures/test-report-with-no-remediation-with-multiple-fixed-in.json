@@ -1,0 +1,82 @@
+{
+  "ok": false,
+  "vulnerabilities": [
+    {
+      "title": "Regular Expression Denial of Service (ReDoS)",
+      "credit": [
+        "kamael"
+      ],
+      "moduleName": "brace-expansion",
+      "packageName": "brace-expansion",
+      "language": "js",
+      "packageManager": "npm",
+      "description": "## Overview\n[`brace-expansion`](https://www.npmjs.com/package/brace-expansion) is a package that performs brace expansion as known from sh/bash.\nAffected versions of this package are vulnerable to Regular Expression Denial of Service (ReDoS) attacks.\nRunning:\n```js\nconst expand = require('brace-expansion');\nexpand('{,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\\n}')\n```\nWill hang for long periods of time.\n\n## Details\nThe Regular expression Denial of Service (ReDoS) is a type of Denial of Service attack.  Many Regular Expression implementations may reach edge cases that causes them to work very slowly (exponentially related to input size), allowing an attacker to exploit this and can cause the program to enter these extreme situations by using a Regex string and cause the service to hang for a large periods of time.\n\nYou can read more about `Regular Expression Denial of Service (ReDoS)` on our [blog](https://snyk.io/blog/redos-and-catastrophic-backtracking/).\n\n",
+      "identifiers": {
+        "CWE": [
+          "CWE-400"
+        ],
+        "CVE": [],
+        "NSP": 338,
+        "ALTERNATIVE": [
+          "SNYK-JS-BRACEEXPANSION-10483"
+        ]
+      },
+      "semver": {
+        "unaffected": ">=1.1.7",
+        "vulnerable": "<1.1.7"
+      },
+      "patches": [],
+      "severity": "medium",
+      "CVSSv3": "CVSS:3.0/AV:L/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "disclosureTime": "2017-03-01T22:00:00.000Z",
+      "publicationTime": "2017-04-26T09:19:21.663Z",
+      "modificationTime": "2017-04-26T09:19:21.663Z",
+      "creationTime": "2017-04-26T09:19:21.663Z",
+      "id": "npm:brace-expansion:20170302",
+      "alternativeIds": [
+        "SNYK-JS-BRACEEXPANSION-10483"
+      ],
+      "from": [
+        "goof@0.0.3",
+        "tap@5.8.0",
+        "nyc@6.6.1",
+        "glob@7.0.3",
+        "minimatch@3.0.0",
+        "brace-expansion@1.1.4"
+      ],
+      "upgradePath": [
+        false,
+        "tap@5.8.0",
+        "nyc@6.6.1",
+        "glob@7.0.3",
+        "minimatch@3.0.0",
+        "brace-expansion@1.1.7"
+      ],
+      "version": "1.1.4",
+      "name": "brace-expansion",
+      "isUpgradable": true,
+      "isPatchable": false,
+      "__filename": "/Users/dror/work/repos/snyk/goof/node_modules/nyc/node_modules/glob/node_modules/minimatch/node_modules/brace-expansion/package.json",
+      "bundled": [
+        "goof@0.0.3",
+        "nyc@6.6.1",
+        "spawn-wrap@1.2.3"
+      ],
+      "parentDepType": "prod",
+      "fixedIn": [
+        "2.9.10",
+        "4.5.6"
+      ]
+    }
+  ],
+  "dependencyCount": 428,
+  "org": "deebugger",
+  "licensesPolicy": null,
+  "summary": "33 vulnerable dependency paths",
+  "filtered": {
+    "ignore": [],
+    "patch": []
+  },
+  "uniqueCount": 18,
+  "packageManager": "npm"
+}
