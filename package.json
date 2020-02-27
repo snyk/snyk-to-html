@@ -20,7 +20,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "commander": "^4.1.0",
+    "commander": "^4.1.1",
     "handlebars": "^4.7.2",
     "marked": "^0.7.0",
     "moment": "^2.24.0",
