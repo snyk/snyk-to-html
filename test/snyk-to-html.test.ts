@@ -121,3 +121,14 @@ test('empty values test (description and info)', (t) => {
         t.contains(report, '<p>No description available.</p>', 'should contain "No description available"');
       });
 });
+
+test('should not generate report for invalid json', (t) => {
+  t.plan(0);
+  SnykToHtml.run(
+      path.join(__dirname, 'fixtures', 'invalid-input.json'),
+      path.join(__dirname, '..', 'template', 'test-report.hbs'),
+      noSummary,
+      (report) => {
+        t.match(report, '', 'report object is empty');
+      });
+});

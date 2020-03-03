@@ -1,0 +1,10 @@
+Testing banana...
+
+Organization:      snyk
+Package manager:   npm
+Open source:       yes
+Project path:      banana
+
+✓ Tested banana for known vulnerabilities, no vulnerable paths found.
+
+Tip: Snyk only tests production dependencies by default. You can try re-running with the `--dev` flag.
