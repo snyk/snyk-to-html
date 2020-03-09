@@ -21,6 +21,7 @@ Alternatively, you can skip this step, clone the repo and run the script locally
 2. `-i` or `--input`   -  Input path from where to read the json. Defaults to stdin
 3. `-o` or `--output`  -  Output of the resulting HTML. Example: -o snyk.html. Defaults to stdout
 4. `-s` or `--summary` -  Generates an HTML with only the summary, instead of the details report. Defaults to details vulnerability report
+5. `-d` or `--debug`   -  Runs the CLI in debug mode 
 
 When in doubt, use `snyk-to-html --help` or `snyk-to-html -h`.
 

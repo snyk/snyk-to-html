@@ -1,10 +1,14 @@
 #!/usr/bin/env node
 
+import chalk from 'chalk';
+import * as debugModule from 'debug';
 import fs = require('fs');
 import Handlebars = require('handlebars');
 import marked = require('marked');
 import moment = require('moment');
 import path = require('path');
+
+const debug = debugModule('snyk-to-html');
 
 const severityMap = {low: 0, medium: 1, high: 2};
 const defaultRemediationText = '## Remediation\nThere is no remediation at the moment';
@@ -20,6 +24,28 @@ function readFile(filePath: string, encoding: string): Promise<string> {
   });
 }
 
+function handleInvalidJson(reason: any) {
+  if (reason.isInvalidJson) {
+    reason.message = reason.message +  'Error running `snyk-to-html`. Please check you are providing the correct parameters. ' +
+        'Is the issue persists contact support@snyk.io';
+  }
+  console.log(reason.message);
+}
+
+function promisedParseJSON(json) {
+  return new Promise((resolve, reject) => {
+    try {
+      resolve(JSON.parse(json));
+    } catch (error) {
+      error.message = chalk.red.bold('The source provided is not a valid json! Please validate that the input provided to the CLI is an actual JSON\n\n' +
+          'Tip: To find more information, try running `snyk-to-html` in debug mode by appending to the CLI the `-d` parameter\n\n');
+      debug(`Input provided to the CLI: \n${json}\n\n`);
+      error.isInvalidJson = true;
+      reject(error);
+    }
+  });
+}
+
 class SnykToHtml {
   public static run(dataSource: string,
                     hbsTemplate: string,
@@ -28,13 +54,13 @@ class SnykToHtml {
     SnykToHtml
       .runAsync(dataSource, hbsTemplate, summary)
       .then(reportCallback)
-      .catch(console.log);
+      .catch(handleInvalidJson);
   }
 
   public static async runAsync(source: string, template: string, summary: boolean): Promise<string> {
     const promisedString = source ? readFile(source, 'utf8') : readInputFromStdin();
     return promisedString
-      .then(JSON.parse)
+      .then(promisedParseJSON)
       .then(data => processData(data, template, summary));
   }
 }
