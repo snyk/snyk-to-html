@@ -120,12 +120,12 @@ async function registerPeerPartial(templatePath: string, name: string): Promise<
 
 async function generateTemplate(data: any, template: string, summary: boolean): Promise<string> {
   const vulnMetadata = groupVulns(data.vulnerabilities);
-  const sortedGroupedVulns = _.orderBy(
+  const sortedVulns = _.orderBy(
     vulnMetadata.vulnerabilities,
     ["metadata.severityValue", "metadata.name"],
     ["desc", "desc"]
   );
-  data.vulnerabilities = sortedGroupedVulns;
+  data.vulnerabilities = sortedVulns;
   data.uniqueCount = vulnMetadata.vulnerabilitiesUniqueCount;
   data.summary = vulnMetadata.vulnerabilitiesPathsCount + ' vulnerable dependency paths';
   data.showSummaryOnly = summary;
