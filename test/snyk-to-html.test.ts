@@ -132,3 +132,17 @@ test('should not generate report for invalid json', (t) => {
         t.match(report, '', 'report object is empty');
       });
 });
+
+test('template output displays vulns in descending order of severity ', (t) => {
+  t.plan(1);
+  SnykToHtml.run(
+    path.join(__dirname, 'fixtures', 'multi-test-report.json'),
+    path.join(__dirname, '..', 'template', 'test-report.hbs'),
+      summaryOnly,
+      (report) => {
+        const cleanTimestamp = rep => rep.replace(rep.split('<p class="timestamp">')[1].split('</p>')[0], 'TIMESTAMP');
+        const cleanedReport = cleanTimestamp(report);
+        // compares against snapshot in tap-snapshots/test-snyk-to-html.test.ts-TAP.test.js
+        t.matchSnapshot(cleanedReport, 'should be expected snapshot');
+      });
+});
