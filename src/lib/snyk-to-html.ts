@@ -122,8 +122,8 @@ async function generateTemplate(data: any, template: string, summary: boolean): 
   const vulnMetadata = groupVulns(data.vulnerabilities);
   const sortedVulns = _.orderBy(
     vulnMetadata.vulnerabilities,
-    ["metadata.severityValue", "metadata.name"],
-    ["desc", "desc"]
+    ['metadata.severityValue', 'metadata.name'],
+    ['desc', 'desc']
   );
   data.vulnerabilities = sortedVulns;
   data.uniqueCount = vulnMetadata.vulnerabilitiesUniqueCount;
