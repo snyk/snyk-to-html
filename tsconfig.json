@@ -4,7 +4,9 @@
         "pretty": true,
         "target": "es2015",
         "lib": [
-          "es2015"
+          "es6",
+          "dom",
+          "es2017.object"
         ],
         "module": "commonjs",
         "allowJs": false,
