@@ -2,9 +2,9 @@
 
 import chalk from 'chalk';
 import * as debugModule from 'debug';
-import * as _ from 'lodash';
 import fs = require('fs');
 import Handlebars = require('handlebars');
+import * as _ from 'lodash';
 import marked = require('marked');
 import moment = require('moment');
 import path = require('path');
@@ -123,7 +123,7 @@ async function generateTemplate(data: any, template: string, summary: boolean): 
   const sortedVulns = _.orderBy(
     vulnMetadata.vulnerabilities,
     ['metadata.severityValue', 'metadata.name'],
-    ['desc', 'desc']
+    ['desc', 'desc'],
   );
   data.vulnerabilities = sortedVulns;
   data.uniqueCount = vulnMetadata.vulnerabilitiesUniqueCount;
