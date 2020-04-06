@@ -24,6 +24,7 @@
     "commander": "^4.1.1",
     "debug": "^4.1.1",
     "handlebars": "^4.7.3",
+    "lodash": "^4.17.15",
     "marked": "^0.7.0",
     "moment": "^2.24.0",
     "source-map-support": "^0.5.16"
