@@ -12,6 +12,7 @@ program
 .option('-o, --output <path>', 'Output of the resulting HTML. Example: -o snyk.html. Defaults to stdout')
 .option('-s, --summary', 'Generates an HTML with only the summary, instead of the details report')
 .option('-d, --debug', 'Runs the CLI in debug mode')
+.option('-a, --actionable-remediation', 'Display actionable remediation info if available')
 .parse(process.argv);
 
 let template;
@@ -46,7 +47,11 @@ if (program.debug) {
   debugModule.enable(nameSpace);
 }
 
-SnykToHtml.run(source, template, !!program.summary, onReportOutput);
+SnykToHtml.run(source,
+  !!program.actionableRemediation,
+  template,
+  !!program.summary,
+  onReportOutput);
 
 function onReportOutput(report: string): void {
   if (output) {

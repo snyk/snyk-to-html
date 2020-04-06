@@ -38,19 +38,19 @@
           {{!-- end of Snyk brand SVG --}}
           <div class="layout-container--short">
             {{#unless showSummaryOnly}}
-              <h1 class="project__header__title" style="color: white!important">Snyk test report</h1>
+            <h1 class="project__header__title" style="color: white!important">Test report</h1>
             {{else}}
-              <h1 class="project__header__title" style="color: white!important">Snyk test summary</h1>
+            <h1 class="project__header__title" style="color: white!important">Test summary</h1>
             {{/unless}}
           </div><!-- .layout-container--short -->
-          <div class="timestamp">{{moment d "MMMM Do YYYY, h:mm:ss a"}}</div>
+          <p class="timestamp">{{moment d "MMMM Do YYYY, h:mm:ss a"}}</p>
         </span>
       </header><!-- .project__header -->
     </div><!-- .layout-stacked__header -->
 
-    <div class="layout-stacked__content content_body">
-      <div class="layout-container--short"> <!--create styles -->
-        {{#if paths}}
+      <div class="layout-stacked__content content_body">
+        <div class="layout-container--short"> <!--create styles -->
+          {{#if paths}}
           <div class="source-panel">
             <h1 class="title-content">Scanned the following paths:</h1>
             <ul>
@@ -58,40 +58,48 @@
             </ul>
             <tr class="meta-count"><span>{{summary}}</span></tr>
           </div>
-        {{/if}}
-        {{#if path}}
+          {{/if}}
+          {{#if path}}
           <div class="source-panel">
             <h1 class="title-content">Scanned the following path:</h1>
-            <h2>{{path}} ({{packageManager}})</h2>
+            <li>{{path}} ({{packageManager}})</li>
             <tr class="meta-count"><span>{{summary}}</span></tr>
           </div>
-        {{/if}}
-        <table class="metatable">
-          <tbody>
-            <tr class="meta-row"><th class="meta-row-label">Vulnerabilities</th> <td class="meta-row-value">{{uniqueCount}}</td></tr>
-            <tr class="meta-row"><th class="meta-row-label">Dependencies</th> <td class="meta-row-value">{{dependencyCount}}</td></tr>
-            <tr class="meta-row"><th class="meta-row-label">Taken by CLI</th></tr>
-            <tr class="meta-row"><th class="meta-row-label">Created on</th> <td class="meta-row-value"><div class="timestamp">{{moment d "MMMM Do YYYY, h:mm:ss a"}}</div></td></tr>
-            <tr class="meta-row"><th class="meta-row-label">Tested with</th> <td class="meta-row-value">{{packageManager}}</td></tr>
-            <tr class="meta-row"><th class="meta-row-label">Repository</th> <td class="meta-row-value">{{path}}</td></tr>
-            <tr class="meta-row"><th class="meta-row-label">Branch</th> <td class="meta-row-value">{{path}}</td></tr>
-            <tr class="meta-row"><th class="meta-row-label">Manifest</th> <td class="meta-row-value">{{packageManager}}</td></tr>
-          </tbody>
-        </table><!-- .meta-counts -->
-      </div><!-- .layout-container--short -->
-    </div>
+          {{/if}}
+          
+          <table class="metatable">
+            <tbody>
+              <tr class="meta-row"><th class="meta-row-label">Vulnerabilities</th> <td class="meta-row-value">{{uniqueCount}}</td></tr>
+              <tr class="meta-row"><th class="meta-row-label">Dependencies</th> <td class="meta-row-value">{{dependencyCount}}</td></tr>
+              <tr class="meta-row"><th class="meta-row-label">Taken by CLI</th></tr>
+              <tr class="meta-row"><th class="meta-row-label">Created on</th> <td class="meta-row-value">{{moment d "MMMM Do YYYY, h:mm:ss a"}}</td></tr>
+              <tr class="meta-row"><th class="meta-row-label">Tested with</th> <td class="meta-row-value">{{packageManager}}</td></tr>
+              <tr class="meta-row"><th class="meta-row-label">Repository</th> <td class="meta-row-value">{{path}}</td></tr>
+              <tr class="meta-row"><th class="meta-row-label">Branch</th> <td class="meta-row-value">{{path}}</td></tr>
+              <tr class="meta-row"><th class="meta-row-label">Manifest</th> <td class="meta-row-value">{{packageManager}}</td></tr>
+            </tbody>
+          </table><!-- .meta-counts -->
+        </div>
 
-    <div class="layout-stacked__content">
-      <div class="layout-container--short" style="padding-top: 35px;">
-        <div class="cards--vuln filter--patch filter--ignore">
-          <div class="card card-container">
-            {{#each vulnerabilities}}
+        <div class="layout-container--short" style="padding-top: 35px;">
+          <div class="cards--vuln">
+            <h2>Remediation advice</h2>
+            {{> actionable-remediations}}
+          </div><!-- cards -->
+        </div>
+      </div><!-- .layout-container -->
+
+      <div class="layout-stacked__content">
+        <div class="layout-container--short" style="padding-top: 35px;">
+          <div class="cards--vuln">
+            <h2>No remediation</h2>
+            {{#each unresolved.vulnerabilities}}
             {{> vuln-card showSummaryOnly=../showSummaryOnly}}
             {{/each}}
           </div><!-- cards -->
-        </div><!-- cards -->
-      </div>
-    </div><!-- .layout-container -->
+        </div>
+      </div><!-- .layout-container -->
+
 
   </main><!-- .layout-stacked__content -->
 </body>

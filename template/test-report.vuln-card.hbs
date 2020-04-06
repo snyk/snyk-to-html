@@ -145,7 +145,9 @@
       {{{markdown metadata.description}}}
       <hr/>
     {{else}}
-      {{{getRemediation metadata.description metadata.fixedIn}}}
+      {{#if metadata}}
+        {{{getRemediation metadata.description metadata.fixedIn}}}
+      {{/if}}
     {{/unless}}
 
     <div class="cta card__cta">
