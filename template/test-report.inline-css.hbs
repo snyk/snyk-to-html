@@ -13,8 +13,9 @@
     -webkit-text-size-adjust: 100%;
     margin: 0;
     padding: 0;
-    background-color: #F5F5F5;
-    font-family: 'Arial', 'Helvetica', Calibri, sans-serif;
+    color: #393842;
+    background-color: #f6fafd;
+    font-family: prenton, 'Gill Sans', 'Arial', 'Helvetica', Calibri, sans-serif;
   }
 
   h1,
@@ -24,6 +25,10 @@
   h5,
   h6 {
     font-weight: 500;
+    font-family: prenton, 'Gill Sans', 'Arial', 'Helvetica', Calibri, sans-serif;
+    padding: 0!important;
+    margin: 0!important;
+    color: #393842;
   }
 
   a,
@@ -112,17 +117,16 @@
 
 /* Header */
 
-  .header {
-    padding-bottom: 1px;
+  .banner-logo {
+    margin-left: 2em;
   }
 
   .project__header {
-    background-color: #4C4A73;
+    background-color: #4b45a9;
     color: #fff;
-    margin-bottom: -1px;
-    padding-top: 1em;
-    padding-bottom: 0.25em;
-    border-bottom: 2px solid #BBB;
+    height: auto;
+    padding: .75rem 1.25rem;
+}
   }
 
   .project__header__title {
@@ -132,12 +136,14 @@
     margin-bottom: .1em;
     margin-top: 0;
     float: left;
+    color: #fff;
   }
 
   .timestamp {
     float: right;
     clear: none;
     margin-bottom: 0;
+    margin-right: 2em;
   }
 
   .meta-counts {
@@ -146,18 +152,17 @@
     flex-wrap: wrap;
     justify-content: space-between;
     margin: 0 0 1.5em;
-    color: #fff;
+    color: #000;
     clear: both;
     font-size: 1.1em;
   }
 
   .meta-count {
     display: block;
-    flex-basis: 100%;
     margin: 0 1em 1em 0;
     float: left;
-    padding-right: 1em;
-    border-right: 2px solid #fff;
+    width: 30%;
+    border-right: 2px solid #000;
   }
 
   .meta-count:last-child {
@@ -166,16 +171,205 @@
     margin-right: 0;
   }
 
+  .title-content {
+    text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-direction: normal;
+    color: #4c4a73;
+    box-sizing: border-box;
+    background: transparent;
+    border: 0;
+    font: inherit;
+    outline: none;
+    padding: 0;
+    text-align: left;
+    text-decoration: none;
+    vertical-align: baseline;
+    z-index: auto;
+    font-family: prenton,"Gill Sans","Calibri",sans-serif;
+    font-style: normal;
+    font-size: 2.25rem;
+    font-feature-settings: "pnum";
+    font-variant: common-ligatures proportional-nums;
+    line-height: 1;
+    text-rendering: optimizeLegibility;
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .content_body {
+    text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-direction: normal;
+    color: inherit;
+    font-feature-settings: "pnum";
+    box-sizing: border-box;
+    background: transparent;
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    margin: 0;
+    outline: none;
+    padding: 0;
+    text-align: left;
+    text-decoration: none;
+    vertical-align: baseline;
+    z-index: auto;
+    margin-top: 32px;
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .metatable {
+    text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-direction: normal;
+    color: inherit;
+    font-feature-settings: "pnum";
+    box-sizing: border-box;
+    background: transparent;
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    margin: 0;
+    outline: none;
+    padding: 0;
+    text-align: left;
+    text-decoration: none;
+    vertical-align: baseline;
+    z-index: auto;
+    margin-top: 12px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-variant-numeric: tabular-nums;
+    width: 100%;
+  }
+
+  tbody {
+    text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-direction: normal;
+    color: inherit;
+    font-feature-settings: "pnum";
+    border-collapse: collapse;
+    border-spacing: 0;
+    box-sizing: border-box;
+    background: transparent;
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    margin: 0;
+    outline: none;
+    padding: 0;
+    text-align: left;
+    text-decoration: none;
+    vertical-align: baseline;
+    z-index: auto;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .meta-row {
+    text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-direction: normal;
+    color: inherit;
+    font-feature-settings: "pnum";
+    border-collapse: collapse;
+    border-spacing: 0;
+    box-sizing: border-box;
+    background: transparent;
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    outline: none;
+    text-align: left;
+    text-decoration: none;
+    vertical-align: baseline;
+    z-index: auto;
+    display: flex;
+    align-items: start;
+    border-top: 1px solid #d3d3d9;
+    padding: 8px 0 0 0;
+    border-bottom: none;
+    margin: 8px 0 0;
+    width: 30%;
+    margin-right: 5%;
+  }
+
+  .meta-row-label {
+    text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-direction: normal;
+    font-feature-settings: "pnum";
+    border-collapse: collapse;
+    border-spacing: 0;
+    color: #4c4a73;
+    box-sizing: border-box;
+    background: transparent;
+    border: 0;
+    font: inherit;
+    margin: 0;
+    outline: none;
+    text-decoration: none;
+    z-index: auto;
+    align-self: start;
+    flex: 1;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    padding: 0;
+    text-align: left;
+    vertical-align: top;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .meta-row-value {
+    text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-direction: normal;
+    color: inherit;
+    font-feature-settings: "pnum";
+    border-collapse: collapse;
+    border-spacing: 0;
+    word-break: break-word;
+    box-sizing: border-box;
+    background: transparent;
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    margin: 0;
+    outline: none;
+    padding: 0;
+    text-align: right;
+    text-decoration: none;
+    vertical-align: baseline;
+    z-index: auto;
+  }
+
+  tr {
+    margin: 8px 0 0;
+  }
 /* Card */
 
   .card {
     background-color: #fff;
     border: 1px solid #c5c5c5;
-    border-radius: .25rem;
+    border-radius: 2px;
     margin: 0 0 2em 0;
     position: relative;
     min-height: 40px;
     padding: 1.5em;
+  }
+
+  .card-container {
+    border: 0;
+    padding: .5rem;
   }
 
   .card .label {
@@ -186,7 +380,7 @@
     font-size: 0.875rem;
     text-transform: uppercase;
     display: inline-block;
-    margin: 0;
+    margin-left: -1px;
     border-radius: 0.25rem;
   }
 
@@ -201,20 +395,20 @@
 
   .card .label--medium {
     background-color: #E29022;
-    border-color: #E29022;
+    border-color: #DF861F;
   }
 
   .card .label--low {
-    background-color: #222049;
-    border-color: #222049;
+    background-color: #5A5775;
+    border-color: #5A5775;
   }
 
   .card .card.severity--low {
-    border-color: #222049;
+    border-color: #5A5775;
   }
 
   .card .card.severity--medium {
-    border-color: #E29022;
+    border-color: #DF861F;
   }
 
   .card .card.severity--high {
@@ -222,7 +416,6 @@
   }
 
   .card--vuln {
-    padding-top: 4em;
     max-width: 48.75em;
   }
 
@@ -272,9 +465,31 @@
     align-items: flex-start;
     padding: 0.5em 0;
     width: fit-content;
-    padding: 0.5em;
   }
 
-
-
+  .block-expandable__chevron {
+    text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-direction: normal;
+    color: inherit;
+    font-feature-settings: "pnum";
+    cursor: pointer;
+    box-sizing: border-box;
+    background: transparent;
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    margin: 0;
+    outline: none;
+    padding: 0;
+    text-align: left;
+    text-decoration: none;
+    vertical-align: baseline;
+    z-index: auto;
+    display: inline-block;
+    margin-right: 8px;
+    transition: transform .2s ease-in-out;
+    position: relative;
+    transform: rotate(-90deg);
+  }
 </style>

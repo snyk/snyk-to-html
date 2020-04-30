@@ -1,0 +1,7 @@
+<div class="card card--vuln  disclosure--not-new severity--{{severity}}">
+  <div class="label label--{{severity}}">
+    <span class="label__text">{{severity}} severity</span>
+  </div>
+  {{#getRemediation description fixedIn}}
+  {{/getRemediation}}
+</div>

@@ -1,0 +1,106 @@
+{
+  "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:H/A:H/E:H/RL:O/RC:C",
+  "alternativeIds": [
+    "SNYK-JS-ADMZIP-11093"
+  ],
+  "creationTime": "2018-05-30T12:09:16.138000Z",
+  "credit": [
+    "Snyk Security Research",
+    "Sébastien Mignot",
+    "Alex Chapman"
+  ],
+  "cvssScore": 9.4,
+  "description": "## Overview\n\n[adm-zip](https://www.npmjs.com/package/adm-zip) is a JavaScript implementation for zip data compression for NodeJS.\n\n\nAffected versions of this package are vulnerable to Arbitrary File Write via Archive Extraction (Zip Slip).\n\n## Details\nIt is exploited using a specially crafted zip archive, that holds path traversal filenames. When exploited, a filename in a malicious archive is concatenated to the target extraction directory, which results in the final path ending up outside of the target folder. For instance, a zip may hold a file with a \"../../file.exe\" location and thus break out of the target folder. If an executable or a configuration file is overwritten with a file containing malicious code, the problem can turn into an arbitrary code execution issue quite easily.\r\n\r\nThe following is an example of a zip archive with one benign file and one malicious file. Extracting the malicous file will result in traversing out of the target folder, ending up in `/root/.ssh/` overwriting the `authorized_keys` file:\r\n\r\n```\r\n\r\n+2018-04-15 22:04:29 ..... 19 19 good.txt\r\n\r\n+2018-04-15 22:04:42 ..... 20 20 ../../../../../../root/.ssh/authorized_keys\r\n\r\n```\n\n## Remediation\n\nUpgrade `adm-zip` to version 0.4.11 or higher.\n\n\n## References\n\n- [GitHub Commit](https://github.com/cthackers/adm-zip/commit/d01fa8c80c3a5fcf5ce1eda82d96600c62910d3f)\n\n- [GitHub Commit](https://github.com/cthackers/adm-zip/pull/212/commits/6f4dfeb9a2166e93207443879988f97d88a37cde)\n\n- [Hackerone Report](https://hackerone.com/reports/362118)\n\n- [Zip Slip Advisory](https://github.com/snyk/zip-slip-vulnerability)\n\n- [Zip Slip Advisory](https://snyk.io/research/zip-slip-vulnerability)\n",
+  "disclosureTime": "2018-04-14T21:00:00Z",
+  "exploit": "High",
+  "fixedIn": [
+    "0.4.11"
+  ],
+  "functions": [
+    {
+      "functionId": {
+        "className": null,
+        "filePath": "adm-zip.js",
+        "functionName": "module.exports.getEntry"
+      },
+      "version": [
+        ">0.1.1 <0.4.11"
+      ]
+    }
+  ],
+  "functions_new": [
+    {
+      "functionId": {
+        "filePath": "adm-zip.js",
+        "functionName": "module.exports.getEntry"
+      },
+      "version": [
+        ">0.1.1 <0.4.11"
+      ]
+    }
+  ],
+  "id": "npm:adm-zip:20180415",
+  "identifiers": {
+    "ALTERNATIVE": [
+      "SNYK-JS-ADMZIP-11093"
+    ],
+    "CVE": [
+      "CVE-2018-1002204"
+    ],
+    "CWE": [
+      "CWE-29"
+    ],
+    "NSP": [
+      994,
+      681
+    ]
+  },
+  "language": "js",
+  "modificationTime": "2019-12-23T12:23:32.020915Z",
+  "moduleName": "adm-zip",
+  "packageManager": "npm",
+  "packageName": "adm-zip",
+  "patches": [],
+  "publicationTime": "2018-05-31T07:09:16Z",
+  "references": [
+    {
+      "title": "GitHub Commit",
+      "url": "https://github.com/cthackers/adm-zip/commit/d01fa8c80c3a5fcf5ce1eda82d96600c62910d3f"
+    },
+    {
+      "title": "GitHub Commit",
+      "url": "https://github.com/cthackers/adm-zip/pull/212/commits/6f4dfeb9a2166e93207443879988f97d88a37cde"
+    },
+    {
+      "title": "Hackerone Report",
+      "url": "https://hackerone.com/reports/362118"
+    },
+    {
+      "title": "Zip Slip Advisory",
+      "url": "https://github.com/snyk/zip-slip-vulnerability"
+    },
+    {
+      "title": "Zip Slip Advisory",
+      "url": "https://snyk.io/research/zip-slip-vulnerability"
+    }
+  ],
+  "semver": {
+    "vulnerable": [
+      "<0.4.11"
+    ]
+  },
+  "severity": "high",
+  "title": "Arbitrary File Write via Archive Extraction (Zip Slip)",
+  "from": [
+    "goof@1.0.1",
+    "adm-zip@0.4.7"
+  ],
+  "upgradePath": [
+    false,
+    "adm-zip@0.4.11"
+  ],
+  "isUpgradable": true,
+  "isPatchable": false,
+  "name": "adm-zip",
+  "version": "0.4.7"
+}

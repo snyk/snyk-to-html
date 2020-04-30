@@ -1,0 +1,40 @@
+<script>
+  const cards = document.getElementsByClassName('card--vuln');
+  cards.forEach(card => card.addEventListener('click'));
+  cards.forEach(card, e => card.children.getElementsByClassName('card--vuln').forEach(vuln => vuln.toggleClass('collapsed')));
+</script>
+<div>
+  {{#if upgrades}}
+  <div class="card--vuln card__title">Upgradable issues ({{upgrades.length}})</div>
+  {{#each upgrades}}
+  <div class="collapsible">
+    <div>
+      <div class="upgrade--container">
+        <div class="card--title">
+          <!-- draw chevron icon -->
+          <span class="upgrade--arrow" aria-label="Chevron Down icon" role="img"><svg fill="currentColor" width="24" height="24" viewBox="0 0 24 24"
+              class="material-design-icon__svg block-expandable__chevron">
+              <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z">
+                <title>Chevron Down icon</title>
+              </path>
+            </svg>
+          </span>
+          <!-- end of chevron icon -->
+          <div>Upgrade <strong> {{ upgradeFrom }} </strong> to <strong> {{ upgradeTo }} </strong></div>
+        </div>
+        <div class="card--content">
+          <ul>
+            {{#each vulns}}
+            <div class="card--vuln card__section card--item">
+              <div class="vuln--marker label--{{severity}}">{{severity}}</div>
+              <a href="https://app.snyk.io/vuln/{{id}}">{{title}}</a>
+            </div>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+  {{/if}}
+</div>

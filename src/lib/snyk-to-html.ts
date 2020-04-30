@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 
+import * as _ from '@snyk/lodash';
 import chalk from 'chalk';
 import * as debugModule from 'debug';
 import fs = require('fs');
 import Handlebars = require('handlebars');
-import * as _ from 'lodash';
 import marked = require('marked');
 import moment = require('moment');
 import path = require('path');
+import { getUpgrades, severityMap } from './vuln';
 
 const debug = debugModule('snyk-to-html');
 
-const severityMap = {low: 0, medium: 1, high: 2};
 const defaultRemediationText = '## Remediation\nThere is no remediation at the moment';
 
 function readFile(filePath: string, encoding: string): Promise<string> {
@@ -49,20 +49,24 @@ function promisedParseJSON(json) {
 
 class SnykToHtml {
   public static run(dataSource: string,
+                    remediation: boolean,
                     hbsTemplate: string,
                     summary: boolean,
                     reportCallback: (value: string) => void): void {
     SnykToHtml
-      .runAsync(dataSource, hbsTemplate, summary)
+      .runAsync(dataSource, remediation, hbsTemplate, summary)
       .then(reportCallback)
       .catch(handleInvalidJson);
   }
 
-  public static async runAsync(source: string, template: string, summary: boolean): Promise<string> {
+  public static async runAsync(source: string,
+                               remediation: boolean,
+                               template: string,
+                               summary: boolean): Promise<string> {
     const promisedString = source ? readFile(source, 'utf8') : readInputFromStdin();
     return promisedString
       .then(promisedParseJSON)
-      .then(data => processData(data, template, summary));
+      .then(data => processData(data, remediation, template, summary));
   }
 }
 
@@ -118,7 +122,12 @@ async function registerPeerPartial(templatePath: string, name: string): Promise<
   Handlebars.registerPartial(name, template);
 }
 
-async function generateTemplate(data: any, template: string, summary: boolean): Promise<string> {
+async function generateTemplate(data: any, template: string, remediation: boolean, summary: boolean): Promise<string> {
+  if (remediation && data.remediation) {
+    data.showRemediations = remediation;
+    data.unresolved = groupVulns(data.remediation.unresolved);
+    data.upgrades = getUpgrades(data.remediation.upgrade, data.vulnerabilities);
+  }
   const vulnMetadata = groupVulns(data.vulnerabilities);
   const sortedVulns = _.orderBy(
     vulnMetadata.vulnerabilities,
@@ -132,6 +141,8 @@ async function generateTemplate(data: any, template: string, summary: boolean): 
 
   await registerPeerPartial(template, 'inline-css');
   await registerPeerPartial(template, 'vuln-card');
+  await registerPeerPartial(template, 'actionable-remediations');
+  await registerPeerPartial(template, 'remediation-card');
 
   const htmlTemplate = await compileTemplate(template);
   return htmlTemplate(data);
@@ -157,9 +168,9 @@ function mergeData(dataArray: any[]): any {
   };
 }
 
-async function processData(data: any, template: string, summary: boolean): Promise<string> {
+async function processData(data: any, remediation: boolean, template: string, summary: boolean): Promise<string> {
   const mergedData = Array.isArray(data) ? mergeData(data) : data;
-  return generateTemplate(mergedData, template, summary);
+  return generateTemplate(mergedData, template, remediation, summary);
 }
 
 async function readInputFromStdin(): Promise<string> {
@@ -224,7 +235,6 @@ const hh = {
 
     // otherwise, fallback to default message, i.e. No remediation at the moment
     return marked(defaultRemediationText);
-
   },
 };
 
