@@ -47,6 +47,10 @@ if (program.debug) {
   debugModule.enable(nameSpace);
 }
 
+if (!source) {
+  console.log('Detected no input. Please validate that the input provided to the CLI is an actual JSON. \nFor more options see `snyk-to-html --help`');
+}
+
 SnykToHtml.run(source,
   !!program.actionableRemediation,
   template,

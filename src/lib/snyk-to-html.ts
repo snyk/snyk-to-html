@@ -63,10 +63,9 @@ class SnykToHtml {
                                remediation: boolean,
                                template: string,
                                summary: boolean): Promise<string> {
-    const promisedString = source ? readFile(source, 'utf8') : readInputFromStdin();
-    return promisedString
-      .then(promisedParseJSON)
-      .then(data => processData(data, remediation, template, summary));
+    const jsonData = await (source ? readFile(source, 'utf8') : readInputFromStdin());
+    const data = await promisedParseJSON(jsonData);
+    return processData(data, remediation, template, summary);
   }
 }
 
