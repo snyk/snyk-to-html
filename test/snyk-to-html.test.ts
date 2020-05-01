@@ -131,6 +131,18 @@ test('empty values test (description and info)', (t) => {
       });
 });
 
+test('0 vulns test (description)', (t) => {
+  t.plan(1);
+  SnykToHtml.run(
+    path.join(__dirname, 'fixtures', 'no-vulns.json'),
+    noRemediation,
+    path.join(__dirname, '..', 'template', 'test-report.hbs'),
+    noSummary,
+    (report) => {
+      t.contains(report, 'No known vulnerabilities detected.', 'should contain "No known vulnerabilities detected."');
+    });
+});
+
 test('should not generate report for invalid json', (t) => {
   t.plan(0);
   SnykToHtml.run(

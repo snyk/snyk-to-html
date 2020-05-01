@@ -55,11 +55,15 @@
 
     <div class="layout-stacked__content">
       <div class="layout-container--short" style="padding-top: 35px;">
+      {{#if vulnerabilities}}
         <div class="cards--vuln filter--patch filter--ignore">
           {{#each vulnerabilities}}
           {{> vuln-card showSummaryOnly=../showSummaryOnly}}
           {{/each}}
         </div><!-- cards -->
+      {{else}}
+        No known vulnerabilities detected.
+      {{/if}}
       </div>
     </div><!-- .layout-container -->
 
