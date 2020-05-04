@@ -6,7 +6,7 @@
     "build": "tsc",
     "build-watch": "tsc -w",
     "tap": "tap test/*.test.* -Rspec --timeout=180 --node-path ts-node --test-file-pattern '/\\.[tj]s$/'",
-    "test": "npm run lint && npm run tap",
+    "test": "npm run build && npm run lint && npm run tap",
     "lint": "tslint --project tsconfig.json --format stylish --exclude **/src/**/*.js",
     "report": "mkdir -p output && cat sample-data/test-report.json | node dist/. > output/test-report.html && open output/test-report.html",
     "multi-report": "mkdir -p output && cat sample-data/multi-test-report.json | node dist/. > output/multi-test-report.html && open output/multi-test-report.html",

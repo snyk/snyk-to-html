@@ -22,10 +22,18 @@ let output;
 if (program.template) { // template
   template = program.template; // grab the next item
   if (typeof template === 'boolean') {
-    template = path.join(__dirname, '../template/test-report.hbs');
+    if (program.actionableRemediation) {
+      template = path.join(__dirname, '../template/remediation-report.hbs');
+    } else {
+      template = path.join(__dirname, '../template/test-report.hbs');
+    }
   }
 } else {
-  template = path.join(__dirname, '../template/test-report.hbs');
+  if (program.actionableRemediation) {
+    template = path.join(__dirname, '../template/remediation-report.hbs');
+  } else {
+    template = path.join(__dirname, '../template/test-report.hbs');
+  }
 }
 if (program.input) { // input source
   source = program.input; // grab the next item

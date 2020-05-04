@@ -1,5 +1,5 @@
 import * as _ from '@snyk/lodash';
-import { ActionableRemediation, Vuln } from './types';
+import { PatchRemediation, UpgradeRemediation, Vuln } from './types';
 
 export const severityMap = { low: 0, medium: 1, high: 2 };
 
@@ -19,19 +19,43 @@ export function getSeverityScore(vulns: Vuln[]) {
 export function getUpgrades(
   upgrade: any,
   vulnerabilities: any,
-): ActionableRemediation[] {
-  const result: ActionableRemediation[] = [];
+): UpgradeRemediation[] {
+  const result: UpgradeRemediation[] = [];
   Object.keys(upgrade).forEach((key) => {
-    const { upgradeTo, vulns: vulnIds } = upgrade[key];
+    const { upgradeTo, vulns: vulnIds, isTransitive } = upgrade[key];
     const vulns: Vuln[] = vulnIds.map((id) => getVuln(id, vulnerabilities));
-    const actionableRemediation: ActionableRemediation = {
+    const actionableRemediation: UpgradeRemediation = {
       upgradeFrom: key,
       upgradeTo,
-      severityScore: getSeverityScore(vulns),
       vulns,
+      severityScore: getSeverityScore(vulns),
     };
+    if (isTransitive) {
+      actionableRemediation.isTransitive = isTransitive;
+    }
     result.push(actionableRemediation);
   });
   const sortedResult = _.orderBy(result, 'severityScore', 'desc');
   return sortedResult;
+}
+
+export function addIssueDataToPatch(remediation, vulnerabilities) {
+  const patches: PatchRemediation[] = [];
+  Object.entries(remediation).forEach(([pkg, pkgData]) => {
+    const vuln = vulnerabilities.find((v) => v.id === pkg);
+    const issueData = {
+      severity: vuln.severity,
+      title: vuln.title,
+      id: pkg,
+    };
+    patches.push({
+      issueData,
+      paths: (pkgData as any).paths,
+      name: vuln.packageName,
+      version: vuln.version,
+      severityScore: severityMap[vuln.severity],
+    });
+  });
+  const sortedPatches = _.orderBy(patches, 'severityScore', 'desc');
+  return sortedPatches;
 }

@@ -1,8 +1,9 @@
 [![Snyk logo](https://snyk.io/style/asset/logo/snyk-print.svg)](https://snyk.io)
 
-***
+---
 
 # Snyk JSON to HTML Mapper
+
 The Snyk JSON to HTML Mapper takes the json outputted from `snyk test --json` and creates a local HTML file displaying the vulnerabilities discovered.
 
 # How do I use it?
@@ -13,15 +14,24 @@ First, Install the Snyk JSON to HTML Mapper using npm:
 
 `npm install snyk-to-html -g`
 
-Alternatively, you can skip this step, clone the repo and run the script locally (using `node ./snyk-to-html.js`)
+Alternatively, you can clone the repo and run the script locally using:
 
-## Options of the CLI
+```javascript
+npm install
+npm run build
+node ./dist/index.js
+```
 
-1. `-t` or `--template`-  Template location for generating the html. Defaults to template/test-report.hbs
-2. `-i` or `--input`   -  Input path from where to read the json. Defaults to stdin
-3. `-o` or `--output`  -  Output of the resulting HTML. Example: -o snyk.html. Defaults to stdout
-4. `-s` or `--summary` -  Generates an HTML with only the summary, instead of the details report. Defaults to details vulnerability report
-5. `-d` or `--debug`   -  Runs the CLI in debug mode 
+## Options
+
+| Short | Long                       | Description                                                                                                      |
+| ----- | -------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `-t`  | `--template`               | Template location for generating the html. Defaults to template/test-report.hbs                                  |
+| `-i`  | `--input`                  | Input path from where to read the json. Defaults to stdin                                                        |
+| `-o`  | `--output`                 | Output of the resulting HTML. Example: -o snyk.html. Defaults to stdout                                          |
+| `-s`  | `--summary`                | Generates an HTML with only the summary, instead of the details report. Defaults to details vulnerability report |
+| `-d`  | `--debug`                  | Runs the CLI in debug mode                                                                                       |
+| `-a`  | `--actionable-remediation` | Display actionable remediation info if available                                                                 |
 
 When in doubt, use `snyk-to-html --help` or `snyk-to-html -h`.
 
@@ -32,7 +42,7 @@ Change directory to your package's root folder, then use of the two ways below t
 1. Directly streaming the results to snyk-to-html:
 
    Run the following line to create a file called `results.html`:
-   
+
    `snyk test --json | snyk-to-html -o results.html`
 
 2. Using a temporary file:
@@ -45,18 +55,36 @@ Change directory to your package's root folder, then use of the two ways below t
 
    `snyk-to-html -i results.json -o results.html`
 
-3. By default, details about each vulnerability is shown. 
+   Note input files should be valid JSON and use UTF-8 encoding.
 
-    If you want a simpler version of the report to be shown, you can pass `-s` or `--summary` to only
-    display the summary of the report.
+3. If you want a simpler version of the report to be shown, you can pass `-s` or `--summary` to only
+   display the summary of the report.
 
-    `snyk-to-html -i results.json -o results.html -s`
+   `snyk-to-html -i results.json -o results.html -s`
+
+4. Show actionable remediation:
+
+   To display the actions you can take to remedy vulnerabilities, pass `-a` or `--actionable-remediation`.
+
+   `snyk-to-html -i results.json -o results.html -a`
+
+   The report orders remediations (upgrades and patches) by the number and severity of vulnerabilities it fixes.
+   Use this to guide when selecting the order to upgrade and patch packages.
+
+   Note we currently support remediation advice with the following package managers:
+
+   * npm
+   * yarn
+   * rubygems
+   * maven
+   * gradle
+   * sbt
+   * pip
 
 ## View the HTML report
 
-   Simply open your new file (`results.html` above) in a browser, and rejoice.
+Simply open your new file (`results.html` above) in a browser, and rejoice.
 
 ### License
 
 [License: Apache License, Version 2.0](LICENSE)
-
