@@ -3976,4 +3976,5 @@ exports[`test/snyk-to-html.test.ts TAP template output displays vulns in descend
 </body>
 
 </html>
+
 `

@@ -1,0 +1,36 @@
+{
+  "ok": true,
+  "vulnerabilities": [],
+  "dependencyCount": 140,
+  "org": "snyk",
+  "licensesPolicy": {
+    "severities": {
+      "MS-RL": "medium",
+      "EPL-1.0": "medium",
+      "GPL-2.0": "high",
+      "GPL-3.0": "high",
+      "MPL-1.1": "medium",
+      "MPL-2.0": "medium",
+      "AGPL-1.0": "high",
+      "AGPL-3.0": "high",
+      "CDDL-1.0": "medium",
+      "LGPL-2.0": "medium",
+      "LGPL-2.1": "medium",
+      "LGPL-3.0": "medium",
+      "CPOL-1.02": "high",
+      "LGPL-2.1+": "medium",
+      "LGPL-3.0+": "medium",
+      "SimPL-2.0": "high",
+      "Artistic-1.0": "medium",
+      "Artistic-2.0": "medium"
+    }
+  },
+  "isPrivate": true,
+  "packageManager": "maven",
+  "summary": "0 vulnerable dependency paths",
+  "filtered": {
+    "ignore": [],
+    "patch": []
+  },
+  "uniqueCount": 11
+}
