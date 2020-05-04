@@ -141,6 +141,8 @@ async function generateTemplate(data: any, template: string, remediation: boolea
 
   await registerPeerPartial(template, 'inline-css');
   await registerPeerPartial(template, 'header');
+  await registerPeerPartial(template, 'metatable-css');
+  await registerPeerPartial(template, 'metatable');
   await registerPeerPartial(template, 'vuln-card');
   await registerPeerPartial(template, 'actionable-remediations');
   await registerPeerPartial(template, 'remediation-card');

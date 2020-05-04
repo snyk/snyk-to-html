@@ -308,6 +308,133 @@ exports[`test/snyk-to-html.test.ts TAP template output displays vulns in descend
   
   
   </style>
+  <style type="text/css">
+    .metatable {
+      text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+      -webkit-box-direction: normal;
+      color: inherit;
+      font-feature-settings: "pnum";
+      box-sizing: border-box;
+      background: transparent;
+      border: 0;
+      font: inherit;
+      font-size: 100%;
+      margin: 0;
+      outline: none;
+      padding: 0;
+      text-align: left;
+      text-decoration: none;
+      vertical-align: baseline;
+      z-index: auto;
+      margin-top: 12px;
+      border-collapse: collapse;
+      border-spacing: 0;
+      font-variant-numeric: tabular-nums;
+      max-width: 51.75em;
+    }
+  
+    tbody {
+      text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+      -webkit-box-direction: normal;
+      color: inherit;
+      font-feature-settings: "pnum";
+      border-collapse: collapse;
+      border-spacing: 0;
+      box-sizing: border-box;
+      background: transparent;
+      border: 0;
+      font: inherit;
+      font-size: 100%;
+      margin: 0;
+      outline: none;
+      padding: 0;
+      text-align: left;
+      text-decoration: none;
+      vertical-align: baseline;
+      z-index: auto;
+      display: flex;
+      flex-wrap: wrap;
+    }
+  
+    .meta-row {
+      text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+      -webkit-box-direction: normal;
+      color: inherit;
+      font-feature-settings: "pnum";
+      border-collapse: collapse;
+      border-spacing: 0;
+      box-sizing: border-box;
+      background: transparent;
+      border: 0;
+      font: inherit;
+      font-size: 100%;
+      outline: none;
+      text-align: left;
+      text-decoration: none;
+      vertical-align: baseline;
+      z-index: auto;
+      display: flex;
+      align-items: start;
+      border-top: 1px solid #d3d3d9;
+      padding: 8px 0 0 0;
+      border-bottom: none;
+      margin: 8px;
+      width: 47.75%;
+    }
+  
+    .meta-row-label {
+      text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+      -webkit-box-direction: normal;
+      font-feature-settings: "pnum";
+      border-collapse: collapse;
+      border-spacing: 0;
+      color: #4c4a73;
+      box-sizing: border-box;
+      background: transparent;
+      border: 0;
+      font: inherit;
+      margin: 0;
+      outline: none;
+      text-decoration: none;
+      z-index: auto;
+      align-self: start;
+      flex: 1;
+      font-size: 1rem;
+      line-height: 1.5rem;
+      padding: 0;
+      text-align: left;
+      vertical-align: top;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+  
+    .meta-row-value {
+      text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+      -webkit-box-direction: normal;
+      color: inherit;
+      font-feature-settings: "pnum";
+      border-collapse: collapse;
+      border-spacing: 0;
+      word-break: break-word;
+      box-sizing: border-box;
+      background: transparent;
+      border: 0;
+      font: inherit;
+      font-size: 100%;
+      margin: 0;
+      outline: none;
+      padding: 0;
+      text-align: right;
+      text-decoration: none;
+      vertical-align: baseline;
+      z-index: auto;
+    }
+  </style>
 </head>
 
 <body class="section-projects">
@@ -345,6 +472,17 @@ exports[`test/snyk-to-html.test.ts TAP template output displays vulns in descend
             </div><!-- .layout-container--short -->
           </header><!-- .project__header -->
         </div><!-- .layout-stacked__header -->
+    <section class="layout-container--short">
+        <table class="metatable">
+            <tbody>
+            <tr class="meta-row"><th class="meta-row-label">Project</th> <td class="meta-row-value"></td></tr>
+            <tr class="meta-row"><th class="meta-row-label">Path</th> <td class="meta-row-value"></td></tr>
+            <tr class="meta-row"><th class="meta-row-label">Package Manager</th> <td class="meta-row-value"></td></tr>
+            <tr class="meta-row"><th class="meta-row-label">Manifest</th> <td class="meta-row-value"></td></tr>
+            </tbody>
+        </table>
+    </section>
+
     <div class="layout-stacked__content">
       <div class="layout-container--short" style="padding-top: 35px;">
         <div class="cards--vuln filter--patch filter--ignore">
