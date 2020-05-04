@@ -16,43 +16,7 @@
 
 <body class="section-projects">
   <main class="layout-stacked">
-
-    <div class="layout-stacked__header header">
-      <header class="project__header">
-        <div class="layout-container--short">
-          {{#unless showSummaryOnly}}
-            <h1 class="project__header__title">Snyk test report</h1>
-          {{else}}
-            <h1 class="project__header__title">Snyk test summary</h1>
-          {{/unless}}
-
-          <p class="timestamp">{{moment d "MMMM Do YYYY, h:mm:ss a"}}</p>
-          {{#if paths}}
-          <div class="source-panel">
-            <span>Scanned the following paths:</span>
-            <ul>
-              {{#each paths}}<li>{{path}} ({{packageManager}})</li>{{/each}}
-            </ul>
-          </div>
-          {{/if}}
-          {{#if path}}
-          <div class="source-panel">
-            <span>Scanned the following path:</span>
-            <ul>
-              <li>{{path}} ({{packageManager}})</li>
-            </ul>
-          </div>
-          {{/if}}
-
-          <div class="meta-counts">
-            <div class="meta-count"><span>{{uniqueCount}}</span> <span>known vulnerabilities</span></div>
-            <div class="meta-count"><span>{{summary}}</span></div>
-            <div class="meta-count"><span>{{dependencyCount}}</span> <span>dependencies</span></div>
-          </div><!-- .meta-counts -->
-        </div><!-- .layout-container--short -->
-      </header><!-- .project__header -->
-    </div><!-- .layout-stacked__header -->
-
+    {{> header }}
     <div class="layout-stacked__content">
       <div class="layout-container--short" style="padding-top: 35px;">
       {{#if vulnerabilities}}
