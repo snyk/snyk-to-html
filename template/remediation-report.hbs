@@ -12,28 +12,45 @@
     sizes="194x194">
   <link rel="shortcut icon" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.ico">
   {{> inline-css }}
+  {{> remediation-css }}
   {{> metatable-css }}
 </head>
 
-<body class="section-projects">
+<body class="test-remediation-section-projects">
   <main class="layout-stacked">
     {{> header }}
     {{#if hasMetatableData}}
       {{> metatable }}
     {{/if}}
 
-    <div class="layout-container" style="padding-top: 35px;">
-    {{#if vulnerabilities}}
-      <div class="cards--vuln filter--patch filter--ignore">
-        {{#each vulnerabilities}}
-        {{> vuln-card showSummaryOnly=../showSummaryOnly}}
-        {{/each}}
-      </div><!-- cards -->
-    {{else}}
-      No known vulnerabilities detected.
+    {{#if anyRemediations}}
+      {{> actionable-remediations}}
     {{/if}}
-    </div>
+
+    {{#if anyUnresolved}}
+      <!-- unresolved -->
+      <section class="layout-container" style="padding-top: 35px;">
+        <h2>Issues with no direct upgrade or patch</h2>
+        {{#each unresolved.vulnerabilities}}
+          {{> vuln-card showSummaryOnly=../showSummaryOnly}}
+        {{/each}}
+      </section><!-- end unresolved -->
+    {{/if}}
+
+    {{#unless anyRemediations}}
+      <section class="layout-container" style="padding-top: 35px;">
+        <!-- vulnerabilities -->
+        {{#if vulnerabilities}}
+          {{#each vulnerabilities}}
+            {{> vuln-card showSummaryOnly=../showSummaryOnly}}
+          {{/each}}
+        {{else}}
+          <h2>No known vulnerabilities detected.</h2>
+        {{/if}}<!-- .vulnerabilities -->
+      </section>
+    {{/unless}}
   </main><!-- .layout-stacked__content -->
 </body>
+{{> inline-js }}
 
 </html>

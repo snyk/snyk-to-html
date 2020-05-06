@@ -1,0 +1,193 @@
+<style type="text/css">
+  .remediation-card {
+    background-color: #edecf6;
+    border-radius: 2px;
+    padding: 1px;
+    box-shadow: inset 0 0 0 1px #938fc7, 0 0 0 2px transparent;
+    border-radius: 2px;
+  }
+  .remediation-card__header {
+    align-items: center;
+    background-color: #fff;
+    border-radius: 4px 4px 0 0;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+  }
+  .remediation-card__body {
+    background-color: #edecf6;
+    border-top-color: #938fc7;
+    padding: 0;
+    border-top: 1px solid #d3d3d9;
+    position: relative;
+  }
+  .remediation-card__layout-container {
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px;
+  }
+  .remediation-card__pane.shown {
+    background-color: #fff;
+    border-top: 1px solid #d3d3d9;
+    padding: 32px 0;
+    display: block;
+    visibility: visible;
+    height: auto;
+  }
+  .remediation-card__pane {
+    display: none;
+    visibility: hidden;
+    height: 0;
+  }
+  .remediation-card__nav {
+    position: relative;
+    top: 1px;
+  }
+  .remediation-card__nav-list {
+    display: flex;
+    margin: 0 0;
+    padding: 0 0;
+  }
+  .remediation-card__nav-item {
+    white-space: nowrap;
+    list-style-type: none;
+    color: #4b45a1;
+    margin: 0;
+  }
+  .remediation-card__nav-item.active {
+    background-color: #fff;
+    white-space: nowrap;
+    list-style-type: none;
+    color: #4b45a1;
+    margin: 0;
+  }
+  .remediation-card__nav-link {
+    color: #727184;
+    border: 1px solid transparent;
+    border-top-width: 3px;
+    border-bottom-color: #d3d3d9;
+    display: inline-block;
+    height: 44px;
+    padding: 12px 16px 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    outline: none;
+  }
+  .remediation-card__nav-item.active > .remediation-card__nav-link {
+    color: #393842;
+    border: 1px solid #d3d3d9;
+    border-bottom: none;
+    border-top: 3px solid #df8620;
+    border-radius: .25rem .25rem 0 0;
+    display: inline-block;
+    height: 44px;
+    padding: 12px 16px 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    outline: none;
+  }
+  .remediation-card__block {
+    background-color: #fff;
+    box-shadow: inset 0 0 0 1px hsl(244, 8%, 84%);
+    border-radius: 2px;
+    padding: 1px;
+    margin-top: 12px;
+  }
+  .remediation-card__expandable-container {
+    cursor: pointer;
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+  }
+  .remediation-card__expandable-wrapper >  .remediation-card__expand {
+    visibility: hidden;
+    height: 0;
+    display: none;
+  }
+
+  .remediation-card__expandable-wrapper.shown > .remediation-card__expand {
+    visibility: visible;
+    height: auto;
+    display: block;
+  }
+
+  .remediation-card__expandable-title {
+    align-items: center;
+    display: flex;
+    font-size: 1rem;
+    padding: 12px;
+    position: relative;
+    width: 100%;
+  }
+  .remediation-card__chevron {
+    display: inline-block;
+    margin-right: 8px;
+    transition: transform .2s ease-in-out;
+    position: relative;
+  }
+  .remediation-card__expandable-wrapper svg {
+    transform: rotate(-90deg);
+  }
+  .remediation-card__expandable-wrapper.shown svg {
+    transform: initial;
+  }
+  .remediation-card__chevron .block-expandable__chevron {
+    width: 20px;
+    height: 20px;
+  }
+  .remediation-card__chevron .scoped {
+    display: inline-block;
+    fill: currentColor;
+    overflow: hidden;
+    vertical-align: middle;
+  }
+  .remediation-card__severity {
+    margin-right: 8px;
+    font-size: .75rem;
+    line-height: 1.35;
+  }
+  .remediation-card__severity-text {
+    padding: 0;
+    text-align: center;
+    width: 26px;
+    color: white;
+    margin-right: 8px;
+    font-size: .75rem;
+  }
+  .remediation-card__severity-label {
+    position: relative;
+    top: 1px;
+  }
+  .remediation-card__severity--high {
+    background-color: #b31a6b;
+    border-color: #b31a6b;
+  }
+  .remediation-card__severity--medium {
+    background-color: #df8620;
+    border-color: #df8620;
+  }
+  .remediation-card__severity--low {
+    background-color: #595775;
+    border-color: #595775;
+  }
+  .remediation-card__h2 {
+    color: #393842;
+    display: block;
+    padding: 16px 24px 12px;
+    width: 100%;
+  }
+  .remediation-card__item {
+    padding-left: 0;
+    padding-right: 0;
+    list-style: none;
+  }
+  .remediation-card__vuln {
+    align-items: center;
+    border-top: 1px solid #b3b2bd;
+    display: flex;
+    padding: 12px;
+  }
+</style>

@@ -1,9 +1,10 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { test } from 'tap';
-import { getSeverityScore, getUpgrades } from '../src/lib/vuln';
+import { getSeverityScore, getUpgrades, addIssueDataToPatch } from '../src/lib/vuln';
 
 const admZipVulnPath = path.join(__dirname, 'fixtures', 'adm-zip.vuln.json');
+const patchableVulnPath = path.join(__dirname, 'fixtures', 'lodash.patched.vuln.json');
 
 test('getUpgrades with empty data', async (t) => {
   // Arrange
@@ -97,3 +98,27 @@ test('getSeverityScore with multiple vulns', async (t) => {
   // Assert
   t.same(result, expected, 'should return expected severity score');
 });
+
+test('addIssueDataToPatch with data', async (t) => {
+  // Arrange
+  const patch = {
+    "SNYK-JS-LODASH-567746": {paths: [{ "twilio > request > form-data > async > lodash": { patched: "2020-05-05T12:32:26.033Z" }}]},
+  };
+  const vulnerabilities = [
+    JSON.parse(fs.readFileSync(patchableVulnPath, 'utf-8')),
+  ];
+  const expected = [
+    {
+      issueData: { severity: "medium", title: "Prototype Pollution", id: "SNYK-JS-LODASH-567746"},
+      paths: [{"twilio > request > form-data > async > lodash": { "patched": "2020-05-05T12:32:26.033Z" }}],
+      name: "lodash",
+      version: "4.17.15",
+      severityScore: 1,
+    },
+  ];
+  // Act
+  const result = addIssueDataToPatch(patch, vulnerabilities);
+  // Assert
+  t.same(result, expected, 'should return expected array');
+});
+

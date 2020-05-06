@@ -1,0 +1,190 @@
+{
+  "vulnerabilities": [
+    {
+      "CVSSv3": "CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L",
+      "alternativeIds": [],
+      "creationTime": "2017-04-13T12:32:00Z",
+      "credit": [
+        "Benjamin Bach"
+      ],
+      "cvssScore": 5.6,
+      "description": "## Overview\r\n[`Django`](https://pypi.python.org/pypi/Django) is a high-level Python Web framework that encourages rapid development and clean, pragmatic design.\r\n\r\nAffected versions of this package are vulnerable to Arbitrary Code Execution attacks. The `django.core.urlresolvers.reverse` function allows remote attackers to import and execute arbitrary Python modules by leveraging a view that constructs URLs using user input and a \"dotted Python path.\"\r\n\r\n## Remediation\r\nUpgrade to versions `1.7b2`, `1.6.3`, `1.5.6`, `1.4.11` or greater.\r\n\r\n## References\r\n- [Django Vulnerability Description](https://www.djangoproject.com/weblog/2014/apr/21/security/)\r\n- [Redhat Bugzilla](https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2014-0472)\r\n- [Redhat Vulnerability Advisory](https://rhn.redhat.com/errata/RHSA-2014-0456.html)",
+      "disclosureTime": "2014-04-23T12:32:00Z",
+      "exploit": "Not Defined",
+      "fixedIn": [
+        "1.4.11",
+        "1.5.6",
+        "1.6.3",
+        "1.7.1"
+      ],
+      "functions": [],
+      "functions_new": [],
+      "id": "SNYK-PYTHON-DJANGO-40025",
+      "identifiers": {
+        "CVE": [
+          "CVE-2014-0472"
+        ],
+        "CWE": [
+          "CWE-94"
+        ]
+      },
+      "language": "python",
+      "modificationTime": "2019-07-11T13:26:49.758445Z",
+      "moduleName": "django",
+      "packageManager": "pip",
+      "packageName": "django",
+      "patches": [],
+      "publicationTime": "2014-04-23T12:32:00Z",
+      "references": [
+        {
+          "title": "Django Vulnerability Description",
+          "url": "https://www.djangoproject.com/weblog/2014/apr/21/security/"
+        },
+        {
+          "title": "RedHat Bugzilla Bug",
+          "url": "https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2014-0472"
+        },
+        {
+          "title": "RedHat Security Advisory",
+          "url": "https://rhn.redhat.com/errata/RHSA-2014-0456.html"
+        }
+      ],
+      "semver": {
+        "vulnerable": [
+          "[,1.4.11)",
+          "[1.5,1.5.6)",
+          "[1.6,1.6.3)",
+          "[1.7,1.7.1)"
+        ]
+      },
+      "severity": "medium",
+      "title": "Arbitrary Code Execution",
+      "from": [
+        "python-pip-app-with-vulns@0.0.0",
+        "django@1.6.1"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "django",
+      "version": "1.6.1"
+    }
+  ],
+  "ok": false,
+  "dependencyCount": 7,
+  "org": "lili2311",
+  "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.14.1\nlanguage-settings:\n  python: '2.7'\nignore: {}\npatch: {}\n",
+  "isPrivate": true,
+  "licensesPolicy": {
+    "severities": {},
+    "orgLicenseRules": {
+      "0BSD": {
+        "licenseType": "0BSD",
+        "severity": "low",
+        "instructions": ""
+      }
+    }
+  },
+  "packageManager": "pip",
+  "ignoreSettings": {
+    "adminOnly": false,
+    "reasonRequired": false,
+    "disregardFilesystemIgnores": false
+  },
+  "summary": "43 vulnerable dependency paths",
+  "remediation": {
+    "unresolved": [
+      {
+        "CVSSv3": "CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L",
+        "alternativeIds": [],
+        "creationTime": "2017-04-13T12:32:00Z",
+        "credit": [
+          "Benjamin Bach"
+        ],
+        "cvssScore": 5.6,
+        "description": "## Overview\r\n[`Django`](https://pypi.python.org/pypi/Django) is a high-level Python Web framework that encourages rapid development and clean, pragmatic design.\r\n\r\nAffected versions of this package are vulnerable to Arbitrary Code Execution attacks. The `django.core.urlresolvers.reverse` function allows remote attackers to import and execute arbitrary Python modules by leveraging a view that constructs URLs using user input and a \"dotted Python path.\"\r\n\r\n## Remediation\r\nUpgrade to versions `1.7b2`, `1.6.3`, `1.5.6`, `1.4.11` or greater.\r\n\r\n## References\r\n- [Django Vulnerability Description](https://www.djangoproject.com/weblog/2014/apr/21/security/)\r\n- [Redhat Bugzilla](https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2014-0472)\r\n- [Redhat Vulnerability Advisory](https://rhn.redhat.com/errata/RHSA-2014-0456.html)",
+        "disclosureTime": "2014-04-23T12:32:00Z",
+        "exploit": "Not Defined",
+        "fixedIn": [
+          "1.4.11",
+          "1.5.6",
+          "1.6.3",
+          "1.7.1"
+        ],
+        "functions": [],
+        "functions_new": [],
+        "id": "SNYK-PYTHON-DJANGO-40025",
+        "identifiers": {
+          "CVE": [
+            "CVE-2014-0472"
+          ],
+          "CWE": [
+            "CWE-94"
+          ]
+        },
+        "language": "python",
+        "modificationTime": "2019-07-11T13:26:49.758445Z",
+        "moduleName": "django",
+        "packageManager": "pip",
+        "packageName": "django",
+        "patches": [],
+        "publicationTime": "2014-04-23T12:32:00Z",
+        "references": [
+          {
+            "title": "Django Vulnerability Description",
+            "url": "https://www.djangoproject.com/weblog/2014/apr/21/security/"
+          },
+          {
+            "title": "RedHat Bugzilla Bug",
+            "url": "https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2014-0472"
+          },
+          {
+            "title": "RedHat Security Advisory",
+            "url": "https://rhn.redhat.com/errata/RHSA-2014-0456.html"
+          }
+        ],
+        "semver": {
+          "vulnerable": [
+            "[,1.4.11)",
+            "[1.5,1.5.6)",
+            "[1.6,1.6.3)",
+            "[1.7,1.7.1)"
+          ]
+        },
+        "severity": "medium",
+        "title": "Arbitrary Code Execution",
+        "from": [
+          "python-pip-app-with-vulns@0.0.0",
+          "django@1.6.1"
+        ],
+        "upgradePath": [],
+        "isUpgradable": false,
+        "isPatchable": false,
+        "isPinnable": true,
+        "name": "django",
+        "version": "1.6.1"
+      }
+    ],
+    "upgrade": {},
+    "patch": {},
+    "ignore": {},
+    "pin": {
+      "django@1.6.1": {
+        "upgradeTo": "django@1.6.3",
+        "vulns": [
+          "SNYK-PYTHON-DJANGO-40025"
+        ],
+        "isTransitive": false
+      }
+    }
+  },
+  "filesystemPolicy": true,
+  "filtered": {
+    "ignore": [],
+    "patch": []
+  },
+  "uniqueCount": 43,
+  "projectName": "python-pip-app-with-vulns",
+  "displayTargetFile": "requirements.txt",
+  "path": "/Users/lili/www/snyk-fixtures/python-pip-app-with-vulns"
+}

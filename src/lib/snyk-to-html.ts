@@ -8,7 +8,7 @@ import Handlebars = require('handlebars');
 import marked = require('marked');
 import moment = require('moment');
 import path = require('path');
-import { getUpgrades, severityMap } from './vuln';
+import { addIssueDataToPatch, getUpgrades, severityMap } from './vuln';
 
 const debug = debugModule('snyk-to-html');
 
@@ -122,11 +122,24 @@ async function registerPeerPartial(templatePath: string, name: string): Promise<
   Handlebars.registerPartial(name, template);
 }
 
-async function generateTemplate(data: any, template: string, remediation: boolean, summary: boolean): Promise<string> {
-  if (remediation && data.remediation) {
-    data.showRemediations = remediation;
-    data.unresolved = groupVulns(data.remediation.unresolved);
-    data.upgrades = getUpgrades(data.remediation.upgrade, data.vulnerabilities);
+async function generateTemplate(data: any,
+                                template: string,
+                                showRemediation: boolean,
+                                summary: boolean):
+                              Promise<string> {
+  if (showRemediation && data.remediation) {
+    data.showRemediations = showRemediation;
+    const {upgrade, pin, unresolved, patch} = data.remediation;
+    data.anyRemediations = !_.isEmpty(upgrade) ||
+    !_.isEmpty(patch) || !_.isEmpty(pin);
+    data.anyUnresolved = !!unresolved?.vulnerabilities;
+    data.unresolved = groupVulns(unresolved);
+    data.upgrades = getUpgrades(upgrade, data.vulnerabilities);
+    data.pins = getUpgrades(pin, data.vulnerabilities);
+    data.patches = addIssueDataToPatch(
+      patch,
+      data.vulnerabilities,
+    );
   }
   const vulnMetadata = groupVulns(data.vulnerabilities);
   const sortedVulns = _.orderBy(
@@ -134,6 +147,7 @@ async function generateTemplate(data: any, template: string, remediation: boolea
     ['metadata.severityValue', 'metadata.name'],
     ['desc', 'desc'],
   );
+  data.hasMetatableData = !!data.projectName || !!data.path || !!data.displayTargetFile;
   data.vulnerabilities = sortedVulns;
   data.uniqueCount = vulnMetadata.vulnerabilitiesUniqueCount;
   data.summary = vulnMetadata.vulnerabilitiesPathsCount + ' vulnerable dependency paths';
@@ -143,9 +157,10 @@ async function generateTemplate(data: any, template: string, remediation: boolea
   await registerPeerPartial(template, 'header');
   await registerPeerPartial(template, 'metatable-css');
   await registerPeerPartial(template, 'metatable');
+  await registerPeerPartial(template, 'inline-js');
   await registerPeerPartial(template, 'vuln-card');
+  await registerPeerPartial(template, 'remediation-css');
   await registerPeerPartial(template, 'actionable-remediations');
-  await registerPeerPartial(template, 'remediation-card');
 
   const htmlTemplate = await compileTemplate(template);
   return htmlTemplate(data);
@@ -224,7 +239,7 @@ const hh = {
       default: return choose(false);
     }
   },
-  getRemediation: function(description, fixedIn) {
+  getRemediation: (description, fixedIn) => {
     // check remediation in the description
     const index = description.indexOf('## Remediation');
     if (index > -1) {
@@ -238,6 +253,9 @@ const hh = {
 
     // otherwise, fallback to default message, i.e. No remediation at the moment
     return marked(defaultRemediationText);
+  },
+  severityLabel: (severity: string) => {
+    return severity[0].toUpperCase();
   },
 };
 
