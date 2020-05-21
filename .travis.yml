@@ -11,11 +11,13 @@ cache:
 notifications:
   email: false
 
-script:
-  - npm run lint
-  - npm test
 jobs:
   include:
+    - stage: lint
+      node_js: "10"
+      script: npm run lint
+    - stage: test
+      script: npm run tap
     - stage: npm release
       node_js: "10"
       script: skip
