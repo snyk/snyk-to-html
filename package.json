@@ -6,7 +6,7 @@
     "build": "tsc",
     "build-watch": "tsc -w",
     "format": "prettier --write 'src/*.{js,ts}' 'test/*.{js,ts}'",
-    "tap": "tap test/*.test.* -Rspec --timeout=180 --node-path ts-node --test-file-pattern '/\\.[tj]s$/'",
+    "tap": "tap -Rspec",
     "test": "npm run build && npm run lint && npm run tap",
     "lint": "eslint --color --cache 'src/*.?s' 'test/*.?s' && npm run format:check",
     "format:check": "prettier --check 'src/*.{js,ts}' 'test/*.{js,ts}'",
@@ -44,7 +44,7 @@
     "eslint": "6.8.0",
     "eslint-config-prettier": "6.11.0",
     "prettier": "1.19.1",
-    "tap": "github:snyk/node-tap#alternative-runtimes",
+    "tap": "^14.10.7",
     "ts-node": "^8.4.1",
     "tslint": "^5.20.0",
     "typescript": "^3.7.3"
