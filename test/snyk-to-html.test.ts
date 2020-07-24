@@ -635,3 +635,20 @@ test('does not display metatable when no metatable data present', (t) => {
     },
   );
 });
+
+test('cve report summary does not display license issues', (t) => {
+  t.plan(1);
+  SnykToHtml.run(
+    path.join(__dirname, 'fixtures', 'test-report.json'),
+    noRemediation,
+    path.join(__dirname, '..', 'template', 'test-cve-report.hbs'),
+    noSummary,
+    (report) => {
+      t.doesNotHave(
+        report,
+        '<div class="divTableCell"><a href="https://snyk.io/vuln/snyk:lic',
+        'should not contain links to license issues',
+      );
+    },
+  );
+});
