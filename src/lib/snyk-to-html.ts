@@ -73,6 +73,8 @@ class SnykToHtml {
 export { SnykToHtml };
 
 function metadataForVuln(vuln: any) {
+  let {cveSpaced, cveLineBreaks} = concatenateCVEs(vuln)
+
   return {
     id: vuln.id,
     title: vuln.title,
@@ -83,7 +85,33 @@ function metadataForVuln(vuln: any) {
     description: vuln.description || 'No description available.',
     fixedIn: vuln.fixedIn,
     packageManager: vuln.packageManager,
+    version: vuln.version,
+    cvssScore: vuln.cvssScore,
+    cveSpaced: cveSpaced || 'No CVE found.',
+    cveLineBreaks: cveLineBreaks || 'No CVE found.',
+    disclosureTime: dateFromDateTimeString(vuln.disclosureTime || ''),
+    publicationTime: dateFromDateTimeString(vuln.publicationTime || ''),
+    license: vuln.license || undefined
   };
+}
+
+function concatenateCVEs(vuln: any) {
+  let cveSpaced = ''
+  let cveLineBreaks = ''
+
+  if (!(typeof vuln.identifiers === "undefined")) {
+    vuln.identifiers.CVE.forEach(function(c) {
+      let cveLink = `<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=${c}">${c}</a>`
+      cveSpaced += `${cveLink}&nbsp;`
+      cveLineBreaks += `${cveLink}</br>`
+    })
+  }
+
+  return {cveSpaced, cveLineBreaks}
+}
+
+function dateFromDateTimeString(dateTimeString: string) {
+  return dateTimeString.substr(0,10);
 }
 
 function groupVulns(vulns) {
