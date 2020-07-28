@@ -99,7 +99,7 @@ function concatenateCVEs(vuln: any) {
   let cveSpaced = ''
   let cveLineBreaks = ''
 
-  if (!(typeof vuln.identifiers === "undefined")) {
+  if (vuln.identifiers) {
     vuln.identifiers.CVE.forEach(function(c) {
       let cveLink = `<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=${c}">${c}</a>`
       cveSpaced += `${cveLink}&nbsp;`
