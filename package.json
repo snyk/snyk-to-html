@@ -17,6 +17,7 @@
   },
   "types": "./dist/index.d.ts",
   "files": [
+    "bananas",
     "dist",
     "template"
   ],
