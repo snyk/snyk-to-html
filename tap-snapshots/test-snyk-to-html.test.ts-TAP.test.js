@@ -4048,18 +4048,21 @@ exports[`test/snyk-to-html.test.ts TAP template output displays vulns in descend
         <p>If for some reason upgrading is not an option, consider the following workarounds:</p>
         <ol>
         <li><p>Disable handling XML pages and requests to such pages</p>
-        <pre><code class="language-xml">&lt;constant name=&quot;struts.action.extension&quot; value=&quot;xhtml,,json&quot; /&gt;</code></pre>
+        <pre><code class="language-xml">&lt;constant name=&quot;struts.action.extension&quot; value=&quot;xhtml,,json&quot; /&gt;
+        </code></pre>
         </li>
         <li><p>Override getContentType in XStreamHandler</p>
         <pre><code class="language-java">public class MyXStreamHandler extends XStreamHandler { 
         public String getContentType() {
           return &quot;not-existing-content-type-@;/&amp;%$#@&quot;;
         }
-        }</code></pre>
+        }
+        </code></pre>
         </li>
         <li><p>Register the handler by overriding the one provided by the framework in your struts.xml</p>
         <pre><code class="language-xml">&lt;bean type=&quot;org.apache.struts2.rest.handler.ContentTypeHandler&quot; name=&quot;myXStreamHandmer&quot; class=&quot;com.company.MyXStreamHandler&quot;/&gt;
-        &lt;constant name=&quot;struts.rest.handlerOverride.xml&quot; value=&quot;myXStreamHandler&quot;/&gt;</code></pre>
+        &lt;constant name=&quot;struts.rest.handlerOverride.xml&quot; value=&quot;myXStreamHandler&quot;/&gt;
+        </code></pre>
         </li>
         </ol>
         <h2 id="references">References</h2>
