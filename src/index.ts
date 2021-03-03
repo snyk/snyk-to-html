@@ -83,12 +83,12 @@ SnykToHtml.run(
 
 function onReportOutput(report: string): void {
   if (output) {
-    fs.writeFile(output, report, (err) => {
-      if (err) {
-        return console.log(err);
-      }
+    try {
+      fs.writeFileSync(output, report);
       console.log('Vulnerability snapshot saved at ' + output);
-    });
+    } catch (err) {
+      return console.log(err);
+    }
   } else {
     console.log(report);
   }
