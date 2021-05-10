@@ -1,7 +1,7 @@
 import * as _ from '@snyk/lodash';
 import { PatchRemediation, UpgradeRemediation, Vuln } from './types';
 
-export const severityMap = { low: 0, medium: 1, high: 2 };
+export const severityMap = { low: 0, medium: 1, high: 2, critical: 3 };
 
 function getVuln(id, vulnerabilities: any): Vuln {
   const vuln = vulnerabilities.find((v) => v.id === id);
