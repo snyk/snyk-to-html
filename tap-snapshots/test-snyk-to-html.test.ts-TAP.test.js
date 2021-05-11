@@ -224,31 +224,40 @@ exports[`test/snyk-to-html.test.ts TAP template output displays vulns in descend
       vertical-align: text-top;
     }
   
+    .card .label--critical {
+      background-color: #AB1A1A;
+      border-color: #AB1A1A;
+    }
+  
     .card .label--high {
-      background-color: #B51B72;
-      border-color: #B51B72;
+      background-color: #CE5019;
+      border-color: #CE5019;
     }
   
     .card .label--medium {
-      background-color: #E29022;
-      border-color: #E29022;
+      background-color: #D68000;
+      border-color: #D68000;
     }
   
     .card .label--low {
-      background-color: #222049;
-      border-color: #222049;
+      background-color: #88879E;
+      border-color: #88879E;
     }
   
     .severity--low {
-      border-color: #222049;
+      border-color: #88879E;
     }
   
     .severity--medium {
-      border-color: #E29022;
+      border-color: #D68000;
     }
   
     .severity--high {
-      border-color: #B51B72;
+      border-color: #CE5019;
+    }
+  
+    .severity--critical {
+      border-color: #AB1A1A;
     }
   
     .card--vuln {
@@ -4385,31 +4394,40 @@ exports[`test/snyk-to-html.test.ts TAP test snyk-to-html handles -a argument cor
       vertical-align: text-top;
     }
   
+    .card .label--critical {
+      background-color: #AB1A1A;
+      border-color: #AB1A1A;
+    }
+  
     .card .label--high {
-      background-color: #B51B72;
-      border-color: #B51B72;
+      background-color: #CE5019;
+      border-color: #CE5019;
     }
   
     .card .label--medium {
-      background-color: #E29022;
-      border-color: #E29022;
+      background-color: #D68000;
+      border-color: #D68000;
     }
   
     .card .label--low {
-      background-color: #222049;
-      border-color: #222049;
+      background-color: #88879E;
+      border-color: #88879E;
     }
   
     .severity--low {
-      border-color: #222049;
+      border-color: #88879E;
     }
   
     .severity--medium {
-      border-color: #E29022;
+      border-color: #D68000;
     }
   
     .severity--high {
-      border-color: #B51B72;
+      border-color: #CE5019;
+    }
+  
+    .severity--critical {
+      border-color: #AB1A1A;
     }
   
     .card--vuln {
@@ -4547,7 +4565,7 @@ exports[`test/snyk-to-html.test.ts TAP test snyk-to-html handles -a argument cor
       color: #393842;
       border: 1px solid #d3d3d9;
       border-bottom: none;
-      border-top: 3px solid #df8620;
+      border-top: 3px solid #D68000;
       border-radius: .25rem .25rem 0 0;
       display: inline-block;
       height: 44px;
@@ -4630,17 +4648,22 @@ exports[`test/snyk-to-html.test.ts TAP test snyk-to-html handles -a argument cor
       position: relative;
       top: 1px;
     }
+  
+    .remediation-card__severity--critical {
+      background-color: #ab1a1a;
+      border-color: #ab1a1a;
+    }
     .remediation-card__severity--high {
-      background-color: #b31a6b;
-      border-color: #b31a6b;
+      background-color: #CE5019;
+      border-color: #CE5019;
     }
     .remediation-card__severity--medium {
-      background-color: #df8620;
-      border-color: #df8620;
+      background-color: #D68000;
+      border-color: #D68000;
     }
     .remediation-card__severity--low {
-      background-color: #595775;
-      border-color: #595775;
+      background-color: #88879E;
+      border-color: #88879E;
     }
     .remediation-card__h2 {
       color: #393842;
@@ -5218,31 +5241,40 @@ exports[`test/snyk-to-html.test.ts TAP test snyk-to-html handles -s argument cor
       vertical-align: text-top;
     }
   
+    .card .label--critical {
+      background-color: #AB1A1A;
+      border-color: #AB1A1A;
+    }
+  
     .card .label--high {
-      background-color: #B51B72;
-      border-color: #B51B72;
+      background-color: #CE5019;
+      border-color: #CE5019;
     }
   
     .card .label--medium {
-      background-color: #E29022;
-      border-color: #E29022;
+      background-color: #D68000;
+      border-color: #D68000;
     }
   
     .card .label--low {
-      background-color: #222049;
-      border-color: #222049;
+      background-color: #88879E;
+      border-color: #88879E;
     }
   
     .severity--low {
-      border-color: #222049;
+      border-color: #88879E;
     }
   
     .severity--medium {
-      border-color: #E29022;
+      border-color: #D68000;
     }
   
     .severity--high {
-      border-color: #B51B72;
+      border-color: #CE5019;
+    }
+  
+    .severity--critical {
+      border-color: #AB1A1A;
     }
   
     .card--vuln {
@@ -5951,31 +5983,40 @@ exports[`test/snyk-to-html.test.ts TAP test snyk-to-html shows remediation & sum
       vertical-align: text-top;
     }
   
+    .card .label--critical {
+      background-color: #AB1A1A;
+      border-color: #AB1A1A;
+    }
+  
     .card .label--high {
-      background-color: #B51B72;
-      border-color: #B51B72;
+      background-color: #CE5019;
+      border-color: #CE5019;
     }
   
     .card .label--medium {
-      background-color: #E29022;
-      border-color: #E29022;
+      background-color: #D68000;
+      border-color: #D68000;
     }
   
     .card .label--low {
-      background-color: #222049;
-      border-color: #222049;
+      background-color: #88879E;
+      border-color: #88879E;
     }
   
     .severity--low {
-      border-color: #222049;
+      border-color: #88879E;
     }
   
     .severity--medium {
-      border-color: #E29022;
+      border-color: #D68000;
     }
   
     .severity--high {
-      border-color: #B51B72;
+      border-color: #CE5019;
+    }
+  
+    .severity--critical {
+      border-color: #AB1A1A;
     }
   
     .card--vuln {
@@ -6113,7 +6154,7 @@ exports[`test/snyk-to-html.test.ts TAP test snyk-to-html shows remediation & sum
       color: #393842;
       border: 1px solid #d3d3d9;
       border-bottom: none;
-      border-top: 3px solid #df8620;
+      border-top: 3px solid #D68000;
       border-radius: .25rem .25rem 0 0;
       display: inline-block;
       height: 44px;
@@ -6196,17 +6237,22 @@ exports[`test/snyk-to-html.test.ts TAP test snyk-to-html shows remediation & sum
       position: relative;
       top: 1px;
     }
+  
+    .remediation-card__severity--critical {
+      background-color: #ab1a1a;
+      border-color: #ab1a1a;
+    }
     .remediation-card__severity--high {
-      background-color: #b31a6b;
-      border-color: #b31a6b;
+      background-color: #CE5019;
+      border-color: #CE5019;
     }
     .remediation-card__severity--medium {
-      background-color: #df8620;
-      border-color: #df8620;
+      background-color: #D68000;
+      border-color: #D68000;
     }
     .remediation-card__severity--low {
-      background-color: #595775;
-      border-color: #595775;
+      background-color: #88879E;
+      border-color: #88879E;
     }
     .remediation-card__h2 {
       color: #393842;
@@ -6736,31 +6782,40 @@ exports[`test/snyk-to-html.test.ts TAP test snyk-to-html shows remediation with 
       vertical-align: text-top;
     }
   
+    .card .label--critical {
+      background-color: #AB1A1A;
+      border-color: #AB1A1A;
+    }
+  
     .card .label--high {
-      background-color: #B51B72;
-      border-color: #B51B72;
+      background-color: #CE5019;
+      border-color: #CE5019;
     }
   
     .card .label--medium {
-      background-color: #E29022;
-      border-color: #E29022;
+      background-color: #D68000;
+      border-color: #D68000;
     }
   
     .card .label--low {
-      background-color: #222049;
-      border-color: #222049;
+      background-color: #88879E;
+      border-color: #88879E;
     }
   
     .severity--low {
-      border-color: #222049;
+      border-color: #88879E;
     }
   
     .severity--medium {
-      border-color: #E29022;
+      border-color: #D68000;
     }
   
     .severity--high {
-      border-color: #B51B72;
+      border-color: #CE5019;
+    }
+  
+    .severity--critical {
+      border-color: #AB1A1A;
     }
   
     .card--vuln {
@@ -6898,7 +6953,7 @@ exports[`test/snyk-to-html.test.ts TAP test snyk-to-html shows remediation with 
       color: #393842;
       border: 1px solid #d3d3d9;
       border-bottom: none;
-      border-top: 3px solid #df8620;
+      border-top: 3px solid #D68000;
       border-radius: .25rem .25rem 0 0;
       display: inline-block;
       height: 44px;
@@ -6981,17 +7036,22 @@ exports[`test/snyk-to-html.test.ts TAP test snyk-to-html shows remediation with 
       position: relative;
       top: 1px;
     }
+  
+    .remediation-card__severity--critical {
+      background-color: #ab1a1a;
+      border-color: #ab1a1a;
+    }
     .remediation-card__severity--high {
-      background-color: #b31a6b;
-      border-color: #b31a6b;
+      background-color: #CE5019;
+      border-color: #CE5019;
     }
     .remediation-card__severity--medium {
-      background-color: #df8620;
-      border-color: #df8620;
+      background-color: #D68000;
+      border-color: #D68000;
     }
     .remediation-card__severity--low {
-      background-color: #595775;
-      border-color: #595775;
+      background-color: #88879E;
+      border-color: #88879E;
     }
     .remediation-card__h2 {
       color: #393842;

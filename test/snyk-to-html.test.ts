@@ -551,7 +551,11 @@ test('should not generate report for invalid json', (t) => {
 
 test('template output displays vulns in descending order of severity ', (t) => {
   SnykToHtml.run(
-    path.join(__dirname, 'fixtures', 'test-report-with-critical-severity-vuln.json'),
+    path.join(
+      __dirname,
+      'fixtures',
+      'test-report-with-critical-severity-vuln.json',
+    ),
     noRemediation,
     path.join(__dirname, '..', 'template', 'test-report.hbs'),
     summaryOnly,
@@ -560,19 +564,22 @@ test('template output displays vulns in descending order of severity ', (t) => {
       const cleanTimestamp = (rep) =>
         rep.replace(regex, '<p class="timestamp">TIMESTAMP</p>');
       const cleanedReport = cleanTimestamp(report);
-      
-      // Asserting presence using CSS classname :grimace: 
+
+      // Asserting presence using CSS classname :grimace:
       // check each severity combination
       const orderScenarios = [
-        cleanedReport.indexOf(`data-snyk-test="critical"`) < cleanedReport.indexOf(`data-snyk-test="high"`),
-        cleanedReport.indexOf(`data-snyk-test="high"`) < cleanedReport.indexOf(`data-snyk-test="medium"`),
-        cleanedReport.indexOf(`data-snyk-test="medium"`) < cleanedReport.indexOf(`data-snyk-test="low"`),
+        cleanedReport.indexOf(`data-snyk-test="critical"`) <
+          cleanedReport.indexOf(`data-snyk-test="high"`),
+        cleanedReport.indexOf(`data-snyk-test="high"`) <
+          cleanedReport.indexOf(`data-snyk-test="medium"`),
+        cleanedReport.indexOf(`data-snyk-test="medium"`) <
+          cleanedReport.indexOf(`data-snyk-test="low"`),
       ];
 
-      orderScenarios.forEach(orderAsExpected => {
+      orderScenarios.forEach((orderAsExpected) => {
         t.equal(orderAsExpected, true, 'vulns appear in correct order');
       });
-      
+
       // compares against snapshot in tap-snapshots/test-snyk-to-html.test.ts-TAP.test.js
       // to re-generate snapshots: tap test.js --snapshot
       t.matchSnapshot(cleanedReport, 'should be expected snapshot');
