@@ -88,6 +88,11 @@ test('getSeverityScore with multiple vulns', async (t) => {
   const vulnerabilities = [
     {
       id: 'npm:adm-zip:20180415',
+      severity: 'critical',
+      title: 'Arbitrary File Write via Archive Extraction (Zip Slip)',
+    },
+    {
+      id: 'npm:adm-zip:20180415',
       severity: 'high',
       title: 'Arbitrary File Write via Archive Extraction (Zip Slip)',
     },
@@ -102,7 +107,7 @@ test('getSeverityScore with multiple vulns', async (t) => {
       title: 'Arbitrary File Write via Archive Extraction (Zip Slip)',
     },
   ];
-  const expected = 6;
+  const expected = 10;
   // Act
   const result = getSeverityScore(vulnerabilities);
   // Assert
