@@ -222,6 +222,7 @@ exports[`test/snyk-to-html.test.ts TAP template output displays vulns in descend
   
     .card .label__text {
       vertical-align: text-top;
+        font-weight: bold;
     }
   
     .card .label--critical {
@@ -4392,6 +4393,7 @@ exports[`test/snyk-to-html.test.ts TAP test snyk-to-html handles -a argument cor
   
     .card .label__text {
       vertical-align: text-top;
+        font-weight: bold;
     }
   
     .card .label--critical {
@@ -5239,6 +5241,7 @@ exports[`test/snyk-to-html.test.ts TAP test snyk-to-html handles -s argument cor
   
     .card .label__text {
       vertical-align: text-top;
+        font-weight: bold;
     }
   
     .card .label--critical {
@@ -5981,6 +5984,7 @@ exports[`test/snyk-to-html.test.ts TAP test snyk-to-html shows remediation & sum
   
     .card .label__text {
       vertical-align: text-top;
+        font-weight: bold;
     }
   
     .card .label--critical {
@@ -6780,6 +6784,7 @@ exports[`test/snyk-to-html.test.ts TAP test snyk-to-html shows remediation with 
   
     .card .label__text {
       vertical-align: text-top;
+        font-weight: bold;
     }
   
     .card .label--critical {
