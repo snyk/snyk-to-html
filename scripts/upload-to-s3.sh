@@ -14,7 +14,7 @@ declare -a StaticFiles=(
 
 # Upload files to the versioned folder
 for filename in "${StaticFiles[@]}"; do
-  aws s3 cp "${filename}" "s3://${PUBLIC_S3_BUCKET}/snyk-to-html/${1}/"
+  aws s3 cp "${filename}" "s3://${PUBLIC_S3_BUCKET}/snyk-to-html/v${1}/"
 done
 
 # Upload files to the /latest folder

@@ -1,0 +1,74 @@
+name: 'Test and release snyk-to-html'
+
+on:
+  push
+
+jobs:
+  lint: 
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: npm config get cache
+        id: npm-cache-dir
+        run: echo "::set-output name=dir::$(npm config get cache)"
+      - uses: actions/cache@v2
+        with:
+          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-node-14-${{ hashFiles('**/package.json') }}
+          restore-keys: ${{ runner.os }}-node-14-
+      - run: npm install
+      - run: npm run lint
+
+  test:
+    name: test
+    needs: lint
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10, 12, 14, 16]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm config get cache
+        id: npm-cache-dir
+        run: echo "::set-output name=dir::$(npm config get cache)"
+      - uses: actions/cache@v2
+        with:
+          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ matrix.node-version }}-${{ hashFiles('**/package.json') }}
+          restore-keys: ${{ runner.os }}-node-${{ matrix.node-version }}-
+      - run: npm install
+      - run: npm run tap
+
+  release:
+    if: github.ref == 'refs/heads/master'  # only run on master
+    needs: test
+    name: Release snyk-to-html
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: npm config get cache
+        id: npm-cache-dir
+        run: echo "::set-output name=dir::$(npm config get cache)"
+      - uses: actions/cache@v2
+        with:
+          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-node-14-${{ hashFiles('**/package.json') }}
+          restore-keys: ${{ runner.os }}-node-14-
+      - run: npm install
+      - run: npm i -g semantic-release @semantic-release/exec
+      - run: semantic-release
+        env:
+          PUBLIC_S3_BUCKET: ${{secrets.PUBLIC_S3_BUCKET}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
