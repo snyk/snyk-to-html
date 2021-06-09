@@ -58,6 +58,11 @@
           "label": "snyk-to-html-alpine.sha256"
         }
       ]
+    },
+    {
+      "//": "upload to s3",
+      "path": "@semantic-release/exec",
+      "cmd": "./scripts/upload-to-s3.sh ${nextRelease.version}"
     }
   ]
 }
