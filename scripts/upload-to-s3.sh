@@ -2,14 +2,14 @@
 set -euo pipefail # e fail on exit codes of individual commands, u fails on unset vars, o fails on pipe related errors
 
 declare -a StaticFiles=(
-  "snyk-to-html-alpine"
+  # "snyk-to-html-alpine"
   "snyk-to-html-linux"
-  "snyk-to-html-macos"
-  "snyk-to-html-win.exe"
-  "snyk-to-html-alpine.sha256"
+  # "snyk-to-html-macos"
+  # "snyk-to-html-win.exe"
+  # "snyk-to-html-alpine.sha256"
   "snyk-to-html-linux.sha256"
-  "snyk-to-html-macos.sha256"
-  "snyk-to-html-win.exe.sha256"
+  # "snyk-to-html-macos.sha256"
+  # "snyk-to-html-win.exe.sha256"
 )
 
 # Upload files to the versioned folder

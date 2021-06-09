@@ -25,11 +25,11 @@ jobs:
 
   test:
     name: test
-    needs: lint
+    # needs: lint
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [10, 12, 14, 16]
+        node-version: [14]
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
@@ -46,6 +46,34 @@ jobs:
           restore-keys: ${{ runner.os }}-node-${{ matrix.node-version }}-
       - run: npm install
       - run: npm run tap
+
+  test-deploy:
+    needs: test
+    name: Test deployment
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: npm config get cache
+        id: npm-cache-dir
+        run: echo "::set-output name=dir::$(npm config get cache)"
+      - uses: actions/cache@v2
+        with:
+          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-node-14-${{ hashFiles('**/package.json') }}
+          restore-keys: ${{ runner.os }}-node-14-
+      - run: npm install
+      - run: curl -Lo ./snyk-to-html-linux https://static.snyk.io/snyk-to-html/latest/snyk-to-html-linux
+      - run: curl -Lo ./snyk-to-html-linux.sha256 https://static.snyk.io/snyk-to-html/latest/snyk-to-html-linux.sha256
+      - run: aws --version
+      - run: ./scripts/upload-to-s3.sh 0.0.1
+        env:
+          PUBLIC_S3_BUCKET: snyk-se
+          AWS_DEFAULT_REGION: ${{secrets.AWS_DEFAULT_REGION}}
+          AWS_ACCESS_KEY_ID: ${{secrets.SE_AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.SE_AWS_SECRET_ACCESS_KEY}}
 
   release:
     if: github.ref == 'refs/heads/master'  # only run on master
