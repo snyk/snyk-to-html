@@ -28,7 +28,7 @@ function readFile(filePath: string, encoding: string): Promise<string> {
 function handleInvalidJson(reason: any) {
   if (reason.isInvalidJson) {
     reason.message = reason.message +  'Error running `snyk-to-html`. Please check you are providing the correct parameters. ' +
-        'Is the issue persists contact support@snyk.io';
+        'If the issue persists contact support@snyk.io';
   }
   console.log(reason.message);
 }
@@ -73,7 +73,7 @@ class SnykToHtml {
 export { SnykToHtml };
 
 function metadataForVuln(vuln: any) {
-  let {cveSpaced, cveLineBreaks} = concatenateCVEs(vuln)
+  const {cveSpaced, cveLineBreaks} = concatenateCVEs(vuln)
 
   return {
     id: vuln.id,
@@ -101,7 +101,7 @@ function concatenateCVEs(vuln: any) {
 
   if (vuln.identifiers) {
     vuln.identifiers.CVE.forEach(function(c) {
-      let cveLink = `<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=${c}">${c}</a>`
+      const cveLink = `<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=${c}">${c}</a>`
       cveSpaced += `${cveLink}&nbsp;`
       cveLineBreaks += `${cveLink}</br>`
     })
