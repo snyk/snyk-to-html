@@ -16,6 +16,7 @@ exports[`test/snyk-to-html.test.ts TAP template output displays vulns in descend
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Snyk test report</title>
   <meta name="description" content="82 known vulnerabilities found in 139 vulnerable dependency paths.">
+  <base target="_blank">
   <link rel="icon" type="image/png" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.png"
     sizes="194x194">
   <link rel="shortcut icon" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.ico">
@@ -4187,6 +4188,7 @@ exports[`test/snyk-to-html.test.ts TAP test snyk-to-html handles -a argument cor
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Snyk test report</title>
   <meta name="description" content="5 known vulnerabilities found in 8 vulnerable dependency paths.">
+  <base target="_blank">
   <link rel="icon" type="image/png" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.png"
     sizes="194x194">
   <link rel="shortcut icon" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.ico">
@@ -5035,6 +5037,7 @@ exports[`test/snyk-to-html.test.ts TAP test snyk-to-html handles -s argument cor
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Snyk test report</title>
   <meta name="description" content="5 known vulnerabilities found in 8 vulnerable dependency paths.">
+  <base target="_blank">
   <link rel="icon" type="image/png" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.png"
     sizes="194x194">
   <link rel="shortcut icon" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.ico">
@@ -5778,6 +5781,7 @@ exports[`test/snyk-to-html.test.ts TAP test snyk-to-html shows remediation & sum
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Snyk test report</title>
   <meta name="description" content="1 known vulnerabilities found in 1 vulnerable dependency paths.">
+  <base target="_blank">
   <link rel="icon" type="image/png" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.png"
     sizes="194x194">
   <link rel="shortcut icon" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.ico">
@@ -6578,6 +6582,7 @@ exports[`test/snyk-to-html.test.ts TAP test snyk-to-html shows remediation with 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Snyk test report</title>
   <meta name="description" content="1 known vulnerabilities found in 1 vulnerable dependency paths.">
+  <base target="_blank">
   <link rel="icon" type="image/png" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.png"
     sizes="194x194">
   <link rel="shortcut icon" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.ico">
