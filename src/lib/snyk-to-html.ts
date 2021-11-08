@@ -8,7 +8,7 @@ import Handlebars = require('handlebars');
 import marked = require('marked');
 import moment = require('moment');
 import path = require('path');
-import { addIssueDataToPatch, getUpgrades, severityMap } from './vuln';
+import { addIssueDataToPatch, getUpgrades, severityMap, IacProjectType } from './vuln';
 
 const debug = debugModule('snyk-to-html');
 
@@ -65,8 +65,22 @@ class SnykToHtml {
                                summary: boolean): Promise<string> {
     const promisedString = source ? readFile(source, 'utf8') : readInputFromStdin();
     return promisedString
-      .then(promisedParseJSON)
-      .then(data => processData(data, remediation, template, summary));
+      .then(promisedParseJSON).then((data: any) => {
+        if (
+          data?.infrastructureAsCodeIssues ||
+          data[0]?.infrastructureAsCodeIssues
+        ) {
+          // for IaC input we need to change the default template to an IaC specific template
+          // at the same time we also want to support the -t / --template flag
+          template =
+            template === path.join(__dirname, '../../template/test-report.hbs')
+              ? path.join(__dirname, '../../template/iac/test-report.hbs')
+              : template;
+          return processIacData(data, template, summary);
+        } else {
+          return processData(data, remediation, template, summary);
+        }
+      });
   }
 }
 
@@ -194,6 +208,22 @@ async function generateTemplate(data: any,
   return htmlTemplate(data);
 }
 
+async function generateIacTemplate(
+  data: any,
+  template: string,
+): Promise<string> {
+  await registerPeerPartial(template, 'inline-css');
+  await registerPeerPartial(template, 'header');
+  await registerPeerPartial(template, 'metatable-css');
+  await registerPeerPartial(template, 'metatable');
+  await registerPeerPartial(template, 'inline-js');
+  await registerPeerPartial(template, 'vuln-card');
+
+  const htmlTemplate = await compileTemplate(template);
+
+  return htmlTemplate(data);
+}
+
 function mergeData(dataArray: any[]): any {
   const vulnsArrays = dataArray.map(project => project.vulnerabilities || []);
   const aggregateVulnerabilities = [].concat(...vulnsArrays);
@@ -217,6 +247,40 @@ function mergeData(dataArray: any[]): any {
 async function processData(data: any, remediation: boolean, template: string, summary: boolean): Promise<string> {
   const mergedData = Array.isArray(data) ? mergeData(data) : data;
   return generateTemplate(mergedData, template, remediation, summary);
+}
+
+async function processIacData(data: any, template: string, summary: boolean): Promise<string> {
+  if (data.error) {
+    return generateIacTemplate(data, template);
+  }
+
+  const dataArray = Array.isArray(data)? data : [data];
+  dataArray.forEach(project => {
+    project.infrastructureAsCodeIssues.forEach(issue => {
+      issue.severityValue = severityMap[issue.severity];
+    });
+  });
+  const projectsArrays = dataArray.map((project) => {
+    return {
+      targetFile: project.targetFile,
+      targetFilePath: project.targetFilePath,
+      projectType: IacProjectType[project.projectType],
+      infrastructureAsCodeIssues: _.orderBy(
+        project.infrastructureAsCodeIssues,
+        ['severityValue', 'title'],
+        ['desc', 'asc'],
+      ),
+    };
+  });
+  const totalIssues = projectsArrays.reduce((acc, item) => acc + item.infrastructureAsCodeIssues.length || 0, 0);
+  
+  const processedData = {
+    projects: projectsArrays,
+    showSummaryOnly: summary,
+    totalIssues,
+  }
+
+  return generateIacTemplate(processedData, template);
 }
 
 async function readInputFromStdin(): Promise<string> {
@@ -284,6 +348,9 @@ const hh = {
   },
   severityLabel: (severity: string) => {
     return severity[0].toUpperCase();
+  },
+  startsWith: function(str, start, options) {
+    return str.startsWith(start) ? options.fn(this) : options.inverse(this);
   },
 };
 

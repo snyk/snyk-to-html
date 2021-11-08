@@ -1,2 +1,3 @@
 * @snyk/boost
 * @snyk/hammer
+template/iac/* @snyk/cloudconfig

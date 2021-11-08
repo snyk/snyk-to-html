@@ -59,3 +59,12 @@ export function addIssueDataToPatch(remediation, vulnerabilities) {
   const sortedPatches = _.orderBy(patches, 'severityScore', 'desc');
   return sortedPatches;
 }
+
+export const IacProjectType = {
+  k8config: 'Kubernetes',
+  terraformconfig: 'Terraform',
+  cloudformationconfig: 'CloudFormation',
+  armconfig: 'ARM',
+  customconfig: 'Custom',
+  multiiacconfig: 'Multi IaC',
+};
