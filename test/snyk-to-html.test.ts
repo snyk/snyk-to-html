@@ -672,3 +672,89 @@ test('cve report summary does not display license issues', (t) => {
     },
   );
 });
+
+test('IaC input - test calling snyk-to-html from command line', (t) => {
+  t.plan(1);
+  exec(
+    `node ${main} -i ./test/fixtures/iac-test-report.json`,
+    { maxBuffer: 1024 * 1024 },
+    (err) => {
+      if (err) {
+        throw err;
+      }
+      t.pass('should not throw exception');
+    },
+  );
+});
+
+test('IaC input - test snyk-to-html handles -s argument correctly', (t) => {
+  t.plan(4);
+  exec(
+    `node ${main} -i ./test/fixtures/iac-test-report.json -s`,
+    (err, stdout) => {
+      if (err) {
+        throw err;
+      }
+      const regex = /<p class="timestamp">.*<\/p>/g;
+      const cleanTimestamp = (rep) =>
+        rep.replace(regex, '<p class="timestamp">TIMESTAMP</p>');
+      const cleanedReport = cleanTimestamp(stdout);
+      t.doesNotHave(
+        cleanedReport,
+        '<h2>Impact</h2>',
+        'does not contain impact of the issue',
+      );
+      t.doesNotHave(
+        cleanedReport,
+        '<h2>Remediation</h2>',
+        'does not contain remediation of the issue',
+      );
+      t.doesNotHave(
+        cleanedReport,
+        '<h2>References</h2>',
+        'does not contain references of the issue',
+      );
+      t.matchSnapshot(
+        cleanedReport,
+        'should be expected snapshot containing summary template',
+      );
+    },
+  );
+});
+
+test('IaC input - all-around test', (t) => {
+  t.plan(5);
+  SnykToHtml.run(
+    path.join(__dirname, 'fixtures/iac-test-report.json'),
+    noRemediation,
+    path.join(__dirname, '../template/iac/test-report.hbs'),
+    noSummary,
+    (report) => {
+      t.contains(
+        report,
+        '<h2 class="card__title">App Service allows FTP deployments</h2>',
+        'should contain App Service allows FTP deployments issue',
+      );
+      t.contains(
+        report,
+        '<h2>Impact</h2>',
+        'should contain the impact of the issue',
+      );
+      t.contains(
+        report,
+        '<a href="https://snyk.io/security-rules/SNYK-CC-AZURE-533">More about this issue</a>',
+        'should contain a link to the security rules site',
+      );
+      t.contains(
+        report,
+        '<a href="https://snyk.io/security-rules/SNYK-CC-AZURE-533">SNYK-CC-AZURE-533</a>',
+        'should contain public ID of the issue',
+      );
+      t.contains(
+        report,
+        'Line number: 109',
+        'should contain the line number of the issue',
+      );
+    },
+  );
+});

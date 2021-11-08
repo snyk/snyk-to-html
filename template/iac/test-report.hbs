@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Language" content="en-us">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Snyk test report</title>
+  <meta name="description" content="{{uniqueCount}} known vulnerabilities found in {{summary}}.">
+  <base target="_blank">
+  <link rel="icon" type="image/png" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.png"
+    sizes="194x194">
+  <link rel="shortcut icon" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.ico">
+  {{> inline-css }}
+  {{> metatable-css }}
+</head>
+
+<body class="section-projects">
+  <main class="layout-stacked">
+    {{> header }}
+
+    {{#if projects}}
+      {{#each projects}}
+        {{> metatable }}
+        <div class="layout-container" style="padding-top: 35px;">
+          {{#if infrastructureAsCodeIssues}}
+          <div class="cards--vuln filter--patch filter--ignore">
+            {{#each this.infrastructureAsCodeIssues}}
+              {{> vuln-card }}
+            {{/each}}
+          </div>
+          {{else}}
+            No known issues detected.
+          {{/if}}
+        </div>
+        {{#unless @last}} <hr/> {{/unless}}
+      {{/each}}
+    {{else}}
+    <div class="layout-container" style="padding-top: 35px;">
+      {{error}}
+    </div>
+    {{/if}}
+  </main><!-- .layout-stacked__content -->
+</body>
+
+</html>

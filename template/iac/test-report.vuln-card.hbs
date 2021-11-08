@@ -1,0 +1,61 @@
+<div class="card card--vuln  disclosure--not-new severity--{{severity}}" data-snyk-test="{{severity}}">
+    <h2 class="card__title">{{title}}</h2>
+    <div class="card__section">
+
+        <div class="label label--{{severity}}">
+            <span class="label__text">{{severity}} severity</span>
+        </div>
+
+        <hr/>
+
+        <ul class="card__meta">
+            <li class="card__meta__item">
+                Public ID: <a href="{{documentation}}">{{publicId}}</a> 
+            </li>
+
+            <li class="card__meta__item">Introduced through:
+                {{#each path}}
+                    {{this}}
+                    {{#unless @last}} <span class="list-paths__item__arrow">›</span> {{/unless}}
+                {{/each}}
+            </li>
+
+            <li class="card__meta__item">
+                Line number: {{lineNumber}}
+            </li>
+        </ul>
+
+        <hr/>
+
+        {{#unless @root.showSummaryOnly}}
+            <h2>Impact</h2>
+            <p>{{impact}}</p>
+
+            <h2>Remediation</h2>
+            <ul>
+                {{#each remediation}}
+                    <li>{{@key}}: {{this}}</li>
+                {{/each}}
+            </ul>
+            
+
+            <h2>References</h2>
+            <ul>
+                {{#each references}}
+                    {{#startsWith this "https://" }}
+                        <li><a href="{{this}}">{{this}}</a></li>
+                    {{else}}
+                        <li>{{this}}</li>
+                    {{/startsWith}}
+                {{/each}}
+            </ul>
+
+            <hr/>
+        {{/unless}}
+    </div><!-- .card__section -->
+
+    <div class="cta card__cta">
+        <p><a href="{{documentation}}">More about this issue</a></p>
+    </div>
+
+</div><!-- .card -->
