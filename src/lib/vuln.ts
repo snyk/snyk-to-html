@@ -61,7 +61,7 @@ export function addIssueDataToPatch(remediation, vulnerabilities) {
 }
 
 export const IacProjectType = {
-  k8config: 'Kubernetes',
+  k8sconfig: 'Kubernetes',
   terraformconfig: 'Terraform',
   cloudformationconfig: 'CloudFormation',
   armconfig: 'ARM',
