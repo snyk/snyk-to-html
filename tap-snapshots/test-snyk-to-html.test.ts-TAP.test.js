@@ -2602,11 +2602,11 @@ exports[`test/snyk-to-html.test.ts TAP template output displays vulns in descend
         </code></pre>
         </li>
         <li><p>Override getContentType in XStreamHandler</p>
-        <pre><code class="language-java">public class MyXStreamHandler extends XStreamHandler { 
+        <pre><code class="language-java"> public class MyXStreamHandler extends XStreamHandler { 
         public String getContentType() {
           return &quot;not-existing-content-type-@;/&amp;%$#@&quot;;
         }
-        }
+         }
         </code></pre>
         </li>
         <li><p>Register the handler by overriding the one provided by the framework in your struts.xml</p>
