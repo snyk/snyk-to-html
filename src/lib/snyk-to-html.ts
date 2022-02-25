@@ -273,7 +273,7 @@ async function processIacData(data: any, template: string, summary: boolean): Pr
     };
   });
   const totalIssues = projectsArrays.reduce((acc, item) => acc + item.infrastructureAsCodeIssues.length || 0, 0);
-  
+
   const processedData = {
     projects: projectsArrays,
     showSummaryOnly: summary,
@@ -300,7 +300,7 @@ async function readInputFromStdin(): Promise<string> {
 
 // handlebar helpers
 const hh = {
-  markdown: marked,
+  markdown: marked.parse,
   moment: (date, format) => moment.utc(date).format(format),
   count: data => data && data.length,
   dump: (data, spacer) => JSON.stringify(data, null, spacer || null),
@@ -335,16 +335,16 @@ const hh = {
     // check remediation in the description
     const index = description.indexOf('## Remediation');
     if (index > -1) {
-      return marked(description.substring(index));
+      return marked.parse(description.substring(index));
     }
     // if no remediation in description, try to check in `fixedIn` attribute
     if (Array.isArray(fixedIn) && fixedIn.length) {
       const fixedInJoined = fixedIn.join(', ');
-      return marked(`## Remediation\n Fixed in: ${fixedInJoined}`);
+      return marked.parse(`## Remediation\n Fixed in: ${fixedInJoined}`);
     }
 
     // otherwise, fallback to default message, i.e. No remediation at the moment
-    return marked(defaultRemediationText);
+    return marked.parse(defaultRemediationText);
   },
   severityLabel: (severity: string) => {
     return severity[0].toUpperCase();
