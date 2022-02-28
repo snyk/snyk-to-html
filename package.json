@@ -20,8 +20,8 @@
     "dist",
     "template"
   ],
-  "author": "",
-  "license": "ISC",
+  "author": "Snyk Ltd",
+  "license": "Apache-2.0",
   "dependencies": {
     "@snyk/lodash": "^4.17.15-patch",
     "chalk": "^2.4.2",
@@ -39,7 +39,6 @@
   "engines": {
     "node": ">=10"
   },
-  "snyk": true,
   "devDependencies": {
     "@types/chalk": "^2.2.0",
     "@types/marked": "^0.6.5",
