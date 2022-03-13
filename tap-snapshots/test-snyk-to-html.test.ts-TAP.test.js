@@ -3058,8 +3058,7 @@ exports[`test/snyk-to-html.test.ts TAP template output displays vulns in descend
             </div><!-- .card__section -->
         
                 <h2 id="remediation">Remediation</h2>
-        <p>Upgrade <code>marked</code> to version 0.3.6 or higher.
-        Also, you can patch the vulnerability using <a href="https://snyk.io/docs/using-snyk/#wizard">Snyk wizard</a>.</p>
+        <p>Upgrade <code>marked</code> to version 0.3.6 or higher.</p>
         <h2 id="references">References</h2>
         <ul>
         <li><a href="https://github.com/chjj/marked/pull/592">GitHub PR</a></li>
@@ -3105,8 +3104,7 @@ exports[`test/snyk-to-html.test.ts TAP template output displays vulns in descend
             </div><!-- .card__section -->
         
                 <h2 id="remediation">Remediation</h2>
-        <p>Upgrade <code>marked</code> to version 0.3.7 or higher.
-        Also, you can patch the vulnerability using <a href="https://snyk.io/docs/using-snyk/#wizard">Snyk wizard</a>.</p>
+        <p>Upgrade <code>marked</code> to version 0.3.7 or higher.</p>
         <h2 id="references">References</h2>
         <ul>
         <li><a href="https://github.com/chjj/marked/commit/cd2f6f5b7091154c5526e79b5f3bfb4d15995a51">GitHub Commit</a></li>
@@ -3197,8 +3195,7 @@ exports[`test/snyk-to-html.test.ts TAP template output displays vulns in descend
             </div><!-- .card__section -->
         
                 <h2 id="remediation">Remediation</h2>
-        <p>Upgrade <code>marked</code> to version 0.3.9 or higher.
-        In the meantime, you can patch the vulnerability using <a href="https://snyk.io/docs/using-snyk/#wizard">Snyk wizard</a>.</p>
+        <p>Upgrade <code>marked</code> to version 0.3.9 or higher.</p>
         <h2 id="references">References</h2>
         <ul>
         <li><a href="https://github.com/chjj/marked/issues/937">Github Issue</a></li>
@@ -3425,7 +3422,7 @@ exports[`test/snyk-to-html.test.ts TAP template output displays vulns in descend
             </div><!-- .card__section -->
         
                 <h2 id="remediation">Remediation</h2>
-        <p>The vulnerability can be resolved by either using the GitHub integration to <a href="https://snyk.io/org/projects">generate a pull-request</a> from your dashboard or by running <code>snyk wizard</code> from the command-line interface.
+        <p>The vulnerability can be resolved by using the GitHub integration to <a href="https://snyk.io/org/projects">generate a pull-request</a> from your dashboard or ignored by running <code>snyk ignore</code> from the command-line interface.
         Otherwise, Upgrade <code>ejs</code> to version <code>2.5.3</code> or higher.</p>
         <h2 id="references">References</h2>
         <ul>
@@ -3928,7 +3925,6 @@ exports[`test/snyk-to-html.test.ts TAP template output displays vulns in descend
         
                 <h2 id="remediation">Remediation</h2>
         <p>Upgrade <code>request</code> to version 2.68.0 or higher.</p>
-        <p>If a direct dependency update is not possible, use <a href="https://snyk.io/docs#wizard"><code>snyk wizard</code></a> to patch this vulnerability.</p>
         <h2 id="references">References</h2>
         <ul>
         <li><a href="https://github.com/request/request/pull/2018">GitHub PR</a></li>
@@ -4877,7 +4873,6 @@ exports[`test/snyk-to-html.test.ts TAP template output displays vulns in descend
         
                 <h2 id="remediation">Remediation</h2>
         <p>Upgrade <code>ms</code> to version 0.7.1.</p>
-        <p>If direct dependency upgrade is not possible, use <a href="https://snyk.io/docs/using-snyk#wizard">snyk wizard</a> to patch this vulnerability.</p>
         <h2 id="references">References</h2>
         <ul>
         <li><a href="https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS">OWASP - ReDoS</a></li>
@@ -4923,7 +4918,6 @@ exports[`test/snyk-to-html.test.ts TAP template output displays vulns in descend
         
                 <h2 id="remediation">Remediation</h2>
         <p>Upgrade <code>mongoose</code> to version &gt;= 3.8.39 or &gt;= 4.3.6.</p>
-        <p>If a direct dependency update is not possible, use <a href="https://snyk.io/docs/using-snyk#wizard"><code>snyk wizard</code></a> to patch this vulnerability.</p>
         <h2 id="references">References</h2>
         <ul>
         <li><a href="https://github.com/Automattic/mongoose/issues/3764">GitHub Issue</a></li>
@@ -5151,7 +5145,7 @@ exports[`test/snyk-to-html.test.ts TAP template output displays vulns in descend
             </div><!-- .card__section -->
         
                 <h2 id="remediation">Remediation</h2>
-        <p>The vulnerability can be resolved by either using the GitHub integration to <a href="https://snyk.io/org/projects">generate a pull-request</a> from your dashboard or by running <code>snyk wizard</code> from the command-line interface.
+        <p>The vulnerability can be resolved by using the GitHub integration to <a href="https://snyk.io/org/projects">generate a pull-request</a> from your dashboard or ignored by running <code>snyk ignore</code> from the command-line interface.
         Otherwise, Upgrade <code>ejs</code> to version <code>2.5.5</code> or higher.</p>
         <h2 id="references">References</h2>
         <ul>
@@ -5198,7 +5192,7 @@ exports[`test/snyk-to-html.test.ts TAP template output displays vulns in descend
             </div><!-- .card__section -->
         
                 <h2 id="remediation">Remediation</h2>
-        <p>The vulnerability can be resolved by either using the GitHub integration to <a href="https://snyk.io/org/projects">generate a pull-request</a> from your dashboard or by running <code>snyk wizard</code> from the command-line interface.
+        <p>The vulnerability can be resolved by using the GitHub integration to <a href="https://snyk.io/org/projects">generate a pull-request</a> from your dashboard or ignored by running <code>snyk ignore</code> from the command-line interface.
         Otherwise, Upgrade <code>ejs</code> to version <code>2.5.5</code> or higher.</p>
         <h2 id="references">References</h2>
         <ul>

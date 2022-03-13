@@ -485,7 +485,7 @@ ejs.renderFile(filename, dataAndOptions, callback)
 <li>November 28th, 2016 - Issue fixed and version <code>2.5.3</code> released.</li>
 </ul>
 <h2 id="remediation">Remediation</h2>
-<p>The vulnerability can be resolved by either using the GitHub integration to <a href="https://snyk.io/org/projects">generate a pull-request</a> from your dashboard or by running <code>snyk wizard</code> from the command-line interface.
+<p>The vulnerability can be resolved by using the GitHub integration to <a href="https://snyk.io/org/projects">generate a pull-request</a> from your dashboard or ignored by running <code>snyk ignore</code> from the command-line interface.
 Otherwise, Upgrade <code>ejs</code> to version <code>2.5.3</code> or higher.</p>
 <h2 id="references">References</h2>
 <ul>
@@ -584,7 +584,7 @@ ejs.renderFile(filename, dataAndOptions, callback)
 <li>December 06th, 2016 - Issue fixed and version <code>2.5.5</code> released.</li>
 </ul>
 <h2 id="remediation">Remediation</h2>
-<p>The vulnerability can be resolved by either using the GitHub integration to <a href="https://snyk.io/org/projects">generate a pull-request</a> from your dashboard or by running <code>snyk wizard</code> from the command-line interface.
+<p>The vulnerability can be resolved by using the GitHub integration to <a href="https://snyk.io/org/projects">generate a pull-request</a> from your dashboard or ignored by running <code>snyk ignore</code> from the command-line interface.
 Otherwise, Upgrade <code>ejs</code> to version <code>2.5.5</code> or higher.</p>
 <h2 id="references">References</h2>
 <ul>
@@ -683,7 +683,7 @@ ejs.renderFile(filename, dataAndOptions, callback)
 <li>December 06th, 2016 - Issue fixed and version <code>2.5.5</code> released.</li>
 </ul>
 <h2 id="remediation">Remediation</h2>
-<p>The vulnerability can be resolved by either using the GitHub integration to <a href="https://snyk.io/org/projects">generate a pull-request</a> from your dashboard or by running <code>snyk wizard</code> from the command-line interface.
+<p>The vulnerability can be resolved by using the GitHub integration to <a href="https://snyk.io/org/projects">generate a pull-request</a> from your dashboard or ignored by running <code>snyk ignore</code> from the command-line interface.
 Otherwise, Upgrade <code>ejs</code> to version <code>2.5.5</code> or higher.</p>
 <h2 id="references">References</h2>
 <ul>
@@ -965,7 +965,7 @@ Affected versions of the package are vulnerable to Denial of Service (DoS) due t
 <p><a href="https://www.npmjs.com/package/marked"><code>marked</code></a> is a markdown parser and compiler used for rendering markdown content to html. It is vulnerable to content injection attack allowing the attacker to bypass its output sanitization (<code>sanitize: true</code>) protection. Using the <a href="https://www.w3.org/MarkUp/html-spec/html-spec_13.html#SEC13">HTML Coded Character Set</a>, attackers can inject <code>javascript:</code> code snippets into the output. For example, the following input <code>javascript&amp;#x58document;alert&amp;#40;1&amp;#41;</code>  will result in <code>alert(1)</code> being executed when the user clicks on the link.</p>
 <h2 id="remediation">Remediation</h2>
 <p>Upgrade <code>marked</code> to version 0.3.6 or higher.
-Also, you can patch the vulnerability using <a href="https://snyk.io/docs/using-snyk/#wizard">Snyk wizard</a>. Alternatively you can use <code>remarkable</code> or other markdown libraries.</p>
+. Alternatively you can use <code>remarkable</code> or other markdown libraries.</p>
 <h2 id="references">References</h2>
 <ul>
 <li><a href="https://github.com/chjj/marked/pull/592">Github PR</a></li>
@@ -1041,7 +1041,7 @@ Attackers can craft malicious web pages containing either HTML or script code th
 <pre><code class="lang-html">[xss link](data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K)
 </code></pre>
 <h2 id="remediation">Remediation</h2>
-<p>The fix is merged to the master branch but not yet published to npm. We recommend patching it using <a href="https://snyk.io/docs/using-snyk/#wizard">Snyk wizard</a>.</p>
+<p>The fix is merged to the master branch but not yet published to npm.</p>
 <h2 id="references">References</h2>
 <ul>
 <li><a href="https://github.com/chjj/marked/commit/cd2f6f5b7091154c5526e79b5f3bfb4d15995a51">Github Commit</a></li>
@@ -1308,7 +1308,6 @@ sample.save(function () {
 </code></pre>
 <h2 id="remediation">Remediation</h2>
 <p>Upgrade <code>mongoose</code> to version &gt;= 3.8.39 or &gt;= 4.3.6.</p>
-<p>If a direct dependency update is not possible, use <a href="https://snyk.io/docs/using-snyk#wizard"><code>snyk wizard</code></a> to patch this vulnerability.</p>
 <h2 id="references">References</h2>
 <ul>
 <li><a href="https://github.com/Automattic/mongoose/issues/3764">Github Issue</a></li>
@@ -1382,7 +1381,7 @@ The regular expression used by the function to parse the time is vulnerable to a
 <p>&quot;The Regular expression Denial of Service (ReDoS) is a Denial of Service attack, that exploits the fact that most Regular Expression implementations may reach extreme situations that cause them to work very slowly (exponentially related to input size). An attacker can then cause a program using a Regular Expression to enter these extreme situations and then hang for a very long time.&quot; <a href="https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS">1</a></p>
 <h2 id="remediation">Remediation</h2>
 <p>Upgrade <code>ms</code> to version 0.7.1. </p>
-<p>If direct dependency upgrade is not possible, use <a href="https://snyk.io/docs/using-snyk#wizard">snyk wizard</a> to patch this vulnerability.</p>
+
 <h2 id="references">References</h2>
 <ul>
 <li><a href="https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS">https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS</a></li>
@@ -1666,7 +1665,6 @@ function (err, res, body) {
 </code></pre>
 <h2 id="remediation">Remediation</h2>
 <p>Upgrade <code>request</code> to version 2.68.0 or higher.</p>
-<p>If a direct dependency update is not possible, use <a href="https://snyk.io/documentation/#wizard"><code>snyk wizard</code></a> to patch this vulnerability.</p>
 <h2 id="references">References</h2>
 <ul>
 <li><a href="https://github.com/request/request/pull/2018">Github PR</a></li>
