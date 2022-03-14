@@ -9,6 +9,7 @@ import marked = require('marked');
 import moment = require('moment');
 import path = require('path');
 import { addIssueDataToPatch, getUpgrades, severityMap, IacProjectType } from './vuln';
+import { codeSeverityMap, readCodeSnippet, getCurrentDirectory } from './codeutil';
 
 const debug = debugModule('snyk-to-html');
 
@@ -77,6 +78,16 @@ class SnykToHtml {
               ? path.join(__dirname, '../../template/iac/test-report.hbs')
               : template;
           return processIacData(data, template, summary);
+        } else if (
+          data?.runs ||
+          data[0]?.runs
+          //data.runs[0].tool.driver.name == "SnykCode"
+        ) {
+          template =
+          template === path.join(__dirname, '../../template/test-report.hbs')
+            ? path.join(__dirname, '../../template/code/test-report.hbs')
+            : template;
+            return processCodeData(data, template, summary);
         } else {
           return processData(data, remediation, template, summary);
         }
@@ -224,6 +235,22 @@ async function generateIacTemplate(
   return htmlTemplate(data);
 }
 
+async function generateCodeTemplate(
+  data: any,
+  template: string,
+): Promise<string> {
+  await registerPeerPartial(template, 'inline-css');
+  await registerPeerPartial(template, 'inline-js');
+  await registerPeerPartial(template, 'header');
+  await registerPeerPartial(template, 'metatable-css');
+  await registerPeerPartial(template, 'metatable');
+  await registerPeerPartial(template, 'code-snip');
+
+  const htmlTemplate = await compileTemplate(template);
+
+  return htmlTemplate(data);
+}
+
 function mergeData(dataArray: any[]): any {
   const vulnsArrays = dataArray.map(project => project.vulnerabilities || []);
   const aggregateVulnerabilities = [].concat(...vulnsArrays);
@@ -281,6 +308,64 @@ async function processIacData(data: any, template: string, summary: boolean): Pr
   }
 
   return generateIacTemplate(processedData, template);
+}
+
+async function processCodeData(data: any, template: string, summary: boolean): Promise<string> {
+  if (data.error) {
+    return generateCodeTemplate(data, template);
+  }
+  let test =[];
+  let oldLocation = "";
+  let newLocation = "";
+  let findSeverityIndex;
+  const codeSeverityCounter= [
+    {severity: "high", counter: 0}, 
+    {severity: "medium", counter: 0}, 
+    {severity: "low", counter: 0}, 
+  ];
+  const dataArray = Array.isArray(data)? data : [data];
+  const rulesArray = dataArray[0].runs[0].tool.driver.rules;
+  dataArray[0].runs[0].results.forEach(issue => {
+    issue.severitytext = codeSeverityMap[issue.level];
+    findSeverityIndex = codeSeverityCounter.findIndex((f => f.severity === issue.severitytext));
+    codeSeverityCounter[findSeverityIndex].counter++;
+    //add the code snippet here...
+    issue.locations[0].physicalLocation.codeString = readCodeSnippet(issue.locations[0])
+    //code stack
+    issue.codeFlows[0].threadFlows[0].locations.forEach(codeFlowLocations => {
+      codeFlowLocations.location.physicalLocation.codeString = readCodeSnippet(codeFlowLocations.location);
+      newLocation = codeFlowLocations.location.physicalLocation.artifactLocation.uri;
+      if (newLocation === oldLocation){
+        codeFlowLocations.location.physicalLocation.isshowfilename = false;
+      } else {
+        codeFlowLocations.location.physicalLocation.isshowfilename = true;
+      }
+      oldLocation = newLocation;
+    });
+    //find ruleId -> tool.driver.rules
+    test = rulesArray.find(e => e.id === issue.ruleId);
+    issue.ruleiddesc = test;
+  });
+  const currentFolderPath = getCurrentDirectory();
+  const OrderedIssuesArray = dataArray.map((project) => {
+    return {
+      details: project.runs[0].properties,
+      sourceFilePath: currentFolderPath, 
+      vulnsummarycounter: codeSeverityCounter,
+      vulnerabilities: _.orderBy(
+       project.runs[0].results,
+        ['properties.priorityScore'],
+       ['desc'],
+      ),
+    };
+  });
+  const totalIssues = dataArray[0].runs[0].results.length;
+  const processedData = {
+    projects: OrderedIssuesArray,
+    showSummaryOnly: summary,
+    totalIssues,
+  }
+  return generateCodeTemplate(processedData, template);
 }
 
 async function readInputFromStdin(): Promise<string> {

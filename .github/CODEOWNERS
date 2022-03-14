@@ -1,3 +1,4 @@
 * @snyk/boost
 * @snyk/hammer
 template/iac/* @snyk/group-infrastructure-as-code
+template/code/* @snyk/nebula
