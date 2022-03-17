@@ -328,14 +328,15 @@
 .dataflow__step, .dataflow__lineno, .code-lineno { align-self: flex-start; flex:0 0 50px; width: 50px; text-align: right; color:#727184; font-size:12px; }
 .dataflow__step  { flex:0 0 30px; width: 30px; }
 .dataflow__lineno { flex:0 0 60px;  padding:0 20px 0 0; }
-.dataflow__code { align-self: flex-start; flex-grow: 1; word-break: break-all; padding-right:40px; }
+.dataflow__code { display:flex; align-self: flex-start; align-content: flex-start; flex-grow: 1; margin-right:40px; line-height:1; overflow:auto; }
 .dataflow__code h1, .dataflow__code h2, .dataflow__code h3, .dataflow__code h4, .dataflow__code h5, .dataflow__code h6, .dataflow__code strong, .dataflow__code b, .dataflow__code em, .dataflow__code i, .dataflow__code p  { padding:0; margin:0; font-family: monospace; color:#393842; font-size:14px; font-weight:400; font-style: normal;  } /* overriding html default styling within the code */
 .dataflow__code br { display:none  } /* overriding html default styling within the code */
-.dataflow__code * { display:inline-block; line-height:1; margin:0;  } /* overriding html default styling within the code */
+.dataflow__code .dataflow__codeprefix, .dataflow__code .dataflow__codesuffix { display:inline-block; margin:0; white-space:nowrap } 
 .dataflow__badge { align-self:flex-start; padding:2px 3px; border:1px solid #d3d3d9; border-radius:2px; margin-top:2px; background-color:#f4f4f6; font-size:11px; line-height:1; font-family: sans-serif; text-transform: uppercase; color:#646374 } 
 .dataflow__filename { padding:6px 12px; border:1px solid #eee; border-radius: 4px; margin:20px 0 10px; font-size:13px; color:#393842; background-color: #fff; }
 
-.marker { padding:2px 6px; border-radius:4px; background-color: rgba(0,0,0,.1) }
+.marker { padding:2px 6px; border-radius:4px; background-color: rgba(0,0,0,.1); word-break: break-all; white-space: nowrap; }
+.marker.block { white-space: pre; line-height: 1.5; }
 
 .card .card__section h2, .card .card__section h3 { font-size:18px; } 
 .card__panel__heading { padding:5px 0; font-size:22px; font-weight: 600; }
