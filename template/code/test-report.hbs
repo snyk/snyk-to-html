@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Language" content="en-us">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Snyk test report</title>
+  <meta name="description" content="{{uniqueCount}} known vulnerabilities found in {{summary}}.">
+  <base target="_blank">
+  <link rel="icon" type="image/png" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.png"
+    sizes="194x194">
+  <link rel="shortcut icon" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.ico">
+  {{> inline-css }}
+  {{> metatable-css }}
+</head>
+
+{{log this}}
+<body class="section-projects">
+  <main class="layout-stacked">
+    {{> header }}
+
+    <div class="layout-container">
+      <div class="report-summary">
+        <div class="header-wrap">
+          {{#unless showSummaryOnly}}
+            <h1 class="project__header__title">Snyk Code Report</h1>
+          {{else}}
+            <h1 class="project__header__title">Snyk Code Summary</h1>
+          {{/unless}}
+
+          {{#if projects}}
+          <div class="meta-counts">
+            <div class="meta-count">
+              <span class="severity-icon severity-icon--high"></span> <span><strong>{{projects.[0].vulnsummarycounter.[0].counter}}</strong> high issues</span>
+            </div>
+            <div class="meta-count">
+              <span class="severity-icon severity-icon--medium"></span> <span><strong>{{projects.[0].vulnsummarycounter.[1].counter}}</strong> medium issues</span>
+            </div>
+            <div class="meta-count">
+              <span class="severity-icon severity-icon--low"></span> <span><strong>{{projects.[0].vulnsummarycounter.[2].counter}}</strong> low issues</span>
+            </div>
+          </div>
+          {{/if}}
+        </div>
+        <div class="source-panel">
+        {{#if projects}}
+        {{#if projects.[0].details.coverage}}
+          <span class="source-panel__heading">Scan Coverage</span>
+          <ul class="scan-coverage">
+            {{#each projects.[0].details.coverage}}<li class="type">{{this.lang}} files: <strong>{{this.files}}</strong></li>{{/each}}
+          </ul>            
+        {{/if}}
+        {{/if}}
+        </div>
+      </div>
+    {{#if projects}}
+      {{#if projects.[0].vulnerabilities}}
+        <div class="cards--vuln filter--patch filter--ignore">
+        {{#each projects.[0].vulnerabilities}}
+          {{> code-snip }}
+        {{/each}}
+        </div>
+      {{/if}}
+    {{else}}
+      {{error}}
+    {{/if}}
+    </div>
+  </main>
+</body>
+{{> inline-js }}
+</html>

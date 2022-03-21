@@ -1,0 +1,79 @@
+<script>
+  // collapse vulns in remediations
+  const remediations = document.querySelectorAll(".js-remediation");
+  remediations.forEach((remediation) => {
+    remediation.parentElement.classList.toggle("shown");
+    remediation.addEventListener("click", remediationClick);
+  })
+
+  // hide all panes
+  const allPanes = document.querySelectorAll(`[data-pane]`);
+  allPanes.forEach((pane) => {
+    pane.classList.remove('shown');
+  });
+  // set first nav item as active & un-hide it's pane
+  const remediationNav = document.querySelectorAll(".js-nav");
+  remediationNav.forEach((nav) => {
+    nav.addEventListener("click", navClick);
+  })
+  if (remediationNav && remediationNav.length > 0) {
+    remediationNav[0].classList.add('active');
+    const targetPaneData = remediationNav[0].dataset && remediationNav[0].dataset.toggle;
+    if (targetPaneData) {
+      showPane(targetPaneData);
+    }
+  }
+
+  function remediationClick() {
+    this.parentElement.classList.toggle("shown");
+  }
+
+  function navClick() {
+    const remediationNav = document.querySelectorAll(".js-nav");
+    remediationNav.forEach((nav) => {
+      nav.classList.remove('active');
+    });
+    this.classList.toggle('active');
+    const targetPaneData = this.dataset && this.dataset.toggle;
+    if (targetPaneData) {
+      showPane(targetPaneData);
+    }
+  }
+
+  function showPane(targetPaneData) {
+    const targetPanes = document.querySelectorAll(`[data-pane='${targetPaneData}']`);
+    if (targetPanes) {
+      const allPanes = document.querySelectorAll(`[data-pane]`);
+      allPanes.forEach((pane) => {
+        pane.classList.remove('shown');
+      });
+      targetPanes[0].classList.add('shown');
+    }
+  }
+
+// https://gomakethings.com/how-to-get-the-closest-parent-element-with-a-matching-selector-using-vanilla-javascript/
+  function getClosest(element, selector) {
+    for ( ; element && element !== document; element = element.parentNode ) {
+      if ( element.matches( selector ) ) return element;
+    }
+    return null;
+  }
+
+  function toggleCardView(event) {
+    var clickedButton = event.target;
+    var card = this.getClosest(clickedButton, '.card');
+    if (clickedButton.classList.contains('card-fix')){
+      if (clickedButton.classList.contains('is-selected')) 
+        return;
+      clickedButton.classList.add('is-selected');
+      clickedButton.previousElementSibling.classList.remove('is-selected');
+      card.classList.add('show-fix');
+    } else {
+      if (clickedButton.classList.contains('is-selected')) 
+        return;
+      clickedButton.classList.add('is-selected');
+      clickedButton.nextElementSibling.classList.remove('is-selected');
+      card.classList.remove('show-fix');
+    }
+  }
+</script>
