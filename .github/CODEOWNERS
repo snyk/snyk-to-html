@@ -1,2 +1,4 @@
 * @snyk/hammer
 template/iac/* @snyk/group-infrastructure-as-code
+template/code/* @snyk/sast-team
+src/lib/codeutil.ts @snyk/sast-team
