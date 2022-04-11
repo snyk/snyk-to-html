@@ -9,9 +9,6 @@ import marked = require('marked');
 import moment = require('moment');
 import path = require('path');
 import { addIssueDataToPatch, getUpgrades, severityMap, IacProjectType } from './vuln';
-import {
-  processSourceCode,
-} from './codeutil';
 
 const debug = debugModule('snyk-to-html');
 
@@ -80,12 +77,6 @@ class SnykToHtml {
               ? path.join(__dirname, '../../template/iac/test-report.hbs')
               : template;
           return processIacData(data, template, summary);
-        } else if (data?.runs && data?.runs[0].tool.driver.name === 'SnykCode') {
-          template =
-            template === path.join(__dirname, '../../template/test-report.hbs')
-              ? path.join(__dirname, '../../template/code/test-report.hbs')
-              : template;
-          return processCodeData(data, template, summary);
         } else {
           return processData(data, remediation, template, summary);
         }
@@ -233,22 +224,6 @@ async function generateIacTemplate(
   return htmlTemplate(data);
 }
 
-async function generateCodeTemplate(
-  data: any,
-  template: string,
-): Promise<string> {
-  await registerPeerPartial(template, 'inline-css');
-  await registerPeerPartial(template, 'inline-js');
-  await registerPeerPartial(template, 'header');
-  await registerPeerPartial(template, 'metatable-css');
-  await registerPeerPartial(template, 'metatable');
-  await registerPeerPartial(template, 'code-snip');
-
-  const htmlTemplate = await compileTemplate(template);
-
-  return htmlTemplate(data);
-}
-
 function mergeData(dataArray: any[]): any {
   const vulnsArrays = dataArray.map(project => project.vulnerabilities || []);
   const aggregateVulnerabilities = [].concat(...vulnsArrays);
@@ -306,27 +281,6 @@ async function processIacData(data: any, template: string, summary: boolean): Pr
   }
 
   return generateIacTemplate(processedData, template);
-}
-
-async function processCodeData(
-  data: any,
-  template: string,
-  summary: boolean,
-): Promise<string> {
-  if (data.error) {
-    return generateCodeTemplate(data, template);
-  }
-  const dataArray = Array.isArray(data) ? data : [data];
-
-  const OrderedIssuesArray = await processSourceCode(dataArray);
-  
-  const totalIssues = dataArray[0].runs[0].results.length;
-  const processedData = {
-    projects: OrderedIssuesArray,
-    showSummaryOnly: summary,
-    totalIssues,
-  };
-  return generateCodeTemplate(processedData, template);
 }
 
 async function readInputFromStdin(): Promise<string> {
