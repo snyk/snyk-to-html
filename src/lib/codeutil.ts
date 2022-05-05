@@ -81,8 +81,10 @@ async function processCodeLine(filePath, region) {
 };
 
 async function readCodeSnippet(codeInfomation){
+  const decodedpath = decodeURI(codeInfomation.physicalLocation.artifactLocation.uri);
   const filePath = path.resolve(
-    codeInfomation.physicalLocation.artifactLocation.uri,
+    //codeInfomation.physicalLocation.artifactLocation.uri,
+    decodedpath,
   );
   const codeRegion = codeInfomation.physicalLocation.region;
   const result = await processCodeLine(filePath, codeRegion);
