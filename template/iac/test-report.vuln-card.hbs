@@ -10,7 +10,7 @@
 
         <ul class="card__meta">
             <li class="card__meta__item">
-                Public ID: <a href="{{documentation}}">{{publicId}}</a> 
+                Public ID: {{#if documentation}}<a href="{{documentation}}">{{publicId}}</a>{{else}}{{publicId}}{{/if}} 
             </li>
 
             <li class="card__meta__item">Introduced through:
@@ -20,21 +20,35 @@
                 {{/each}}
             </li>
 
+            {{#ifCond lineNumber '>' -1}}
             <li class="card__meta__item">
                 Line number: {{lineNumber}}
             </li>
+            {{/ifCond}}
         </ul>
 
+        {{#if impact}}
         <hr/>
+        {{else if resolve}}
+        <hr/>
+        {{else}}
+        {{#ifCond (count references) '>' 0}}
+        <hr/>
+        {{/ifCond}}
+        {{/if}}
 
         {{#unless @root.showSummaryOnly}}
+            {{#if impact}}
             <h2>Impact</h2>
             <p>{{impact}}</p>
+            {{/if}}
 
+            {{#if resolve}}
             <h2>Remediation</h2>
             <p>{{resolve}}</p>
-            
+            {{/if}}
 
+            {{#ifCond (count references.length) '>' 0}}
             <h2>References</h2>
             <ul>
                 {{#each references}}
@@ -45,13 +59,24 @@
                     {{/startsWith}}
                 {{/each}}
             </ul>
+            {{/ifCond}}
 
+            {{#if impact}}
             <hr/>
+            {{else if resolve}}
+            <hr/>
+            {{else}}
+            {{#ifCond (count references) '>' 0}}
+            <hr/>
+            {{/ifCond}}
+            {{/if}}
         {{/unless}}
     </div><!-- .card__section -->
 
     <div class="cta card__cta">
+        {{#if documentation}}
         <p><a href="{{documentation}}">More about this issue</a></p>
+        {{/if}}
     </div>
 
 </div><!-- .card -->
