@@ -474,7 +474,7 @@ exports[`test/snyk-to-html.test.ts TAP IaC input - test snyk-to-html handles -s 
                 </div>
     
                 <div class="meta-counts">
-                  <div class="meta-count"><span>28</span> <span>total issues</span></div>
+                  <div class="meta-count"><span>30</span> <span>total issues</span></div>
                 </div><!-- .meta-counts -->
             </div><!-- .layout-container--short -->
           </header><!-- .project__header -->
@@ -667,6 +667,44 @@ exports[`test/snyk-to-html.test.ts TAP IaC input - test snyk-to-html handles -s 
               
               </div><!-- .card -->
               <div class="card card--vuln  disclosure--not-new severity--medium" data-snyk-test="medium">
+                  <h2 class="card__title">Missing a description and an owner from tag, or owner tag does not comply with email requirements</h2>
+                  <div class="card__section">
+              
+                      <div class="label label--medium">
+                          <span class="label__text">medium severity</span>
+                      </div>
+              
+                      <hr/>
+              
+                      <ul class="card__meta">
+                          <li class="card__meta__item">
+                              Public ID: CUSTOM-RULE-4 
+                          </li>
+              
+                          <li class="card__meta__item">Introduced through:
+                                  input
+                                   <span class="list-paths__item__arrow">›</span> 
+                                  resource
+                                   <span class="list-paths__item__arrow">›</span> 
+                                  aws_redshift_cluster[denied2]
+                                   <span class="list-paths__item__arrow">›</span> 
+                                  tags
+                                  
+                          </li>
+              
+                          <li class="card__meta__item">
+                              Line number: 16
+                          </li>
+                      </ul>
+              
+                      
+                  </div><!-- .card__section -->
+              
+                  <div class="cta card__cta">
+                  </div>
+              
+              </div><!-- .card -->
+              <div class="card card--vuln  disclosure--not-new severity--medium" data-snyk-test="medium">
                   <h2 class="card__title">Storage Account does not enforce latest TLS</h2>
                   <div class="card__section">
               
@@ -853,6 +891,41 @@ exports[`test/snyk-to-html.test.ts TAP IaC input - test snyk-to-html handles -s 
               
                   <div class="cta card__cta">
                       <p><a href="https://snyk.io/security-rules/SNYK-CC-TF-162">More about this issue</a></p>
+                  </div>
+              
+              </div><!-- .card -->
+              <div class="card card--vuln  disclosure--not-new severity--low" data-snyk-test="low">
+                  <h2 class="card__title">Redshift cluster logging disabled</h2>
+                  <div class="card__section">
+              
+                      <div class="label label--low">
+                          <span class="label__text">low severity</span>
+                      </div>
+              
+                      <hr/>
+              
+                      <ul class="card__meta">
+                          <li class="card__meta__item">
+                              Public ID: <a href="https://snyk.io/security-rules/SNYK-CC-TF-136">SNYK-CC-TF-136</a> 
+                          </li>
+              
+                          <li class="card__meta__item">Introduced through:
+                                  resource
+                                   <span class="list-paths__item__arrow">›</span> 
+                                  aws_redshift_cluster[denied2]
+                                   <span class="list-paths__item__arrow">›</span> 
+                                  logging
+                                  
+                          </li>
+              
+                      </ul>
+              
+                      <hr/>
+              
+                  </div><!-- .card__section -->
+              
+                  <div class="cta card__cta">
+                      <p><a href="https://snyk.io/security-rules/SNYK-CC-TF-136">More about this issue</a></p>
                   </div>
               
               </div><!-- .card -->

@@ -78,6 +78,62 @@
     "infrastructureAsCodeIssues": [
       {
         "severity": "low",
+        "resolve": "Set `logging.enable` attribute to `true`",
+        "id": "SNYK-CC-TF-136",
+        "impact": "Audit records may not be available during investigation",
+        "msg": "resource.aws_redshift_cluster[denied2].logging",
+        "remediation": {
+          "cloudformation": "Set `Properties.LoggingProperties` attribute",
+          "terraform": "Set `logging.enable` attribute to `true`"
+        },
+        "subType": "Redshift",
+        "issue": "Amazon Redshift cluster logging is not enabled",
+        "publicId": "SNYK-CC-TF-136",
+        "title": "Redshift cluster logging disabled",
+        "references": [
+          "https://docs.aws.amazon.com/redshift/latest/mgmt/db-auditing.html"
+        ],
+        "isIgnored": false,
+        "iacDescription": {
+          "issue": "Amazon Redshift cluster logging is not enabled",
+          "impact": "Audit records may not be available during investigation",
+          "resolve": "Set `logging.enable` attribute to `true`"
+        },
+        "lineNumber": -1,
+        "documentation": "https://snyk.io/security-rules/SNYK-CC-TF-136",
+        "isGeneratedByCustomRule": false,
+        "path": [
+          "resource",
+          "aws_redshift_cluster[denied2]",
+          "logging"
+        ]
+      },
+      {
+        "severity": "medium",
+        "impact": "",
+        "msg": "input.resource.aws_redshift_cluster[denied2].tags",
+        "remediation": "",
+        "issue": "",
+        "publicId": "CUSTOM-RULE-4",
+        "title": "Missing a description and an owner from tag, or owner tag does not comply with email requirements",
+        "references": [],
+        "id": "CUSTOM-RULE-4",
+        "isIgnored": false,
+        "iacDescription": {
+          "issue": "",
+          "impact": ""
+        },
+        "lineNumber": 16,
+        "isGeneratedByCustomRule": true,
+        "path": [
+          "input",
+          "resource",
+          "aws_redshift_cluster[denied2]",
+          "tags"
+        ]
+      },
+      {
+        "severity": "low",
         "resolve": "Set `properties.clientCertEnabled` attribute to `true`",
         "impact": "Clients without authorized certificate may be allowed to connect to the application",
         "msg": "resources[3].properties.clientCertEnabled",
