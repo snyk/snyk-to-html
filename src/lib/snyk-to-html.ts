@@ -203,6 +203,9 @@ async function generateTemplate(data: any,
   data.uniqueCount = vulnMetadata.vulnerabilitiesUniqueCount;
   data.summary = vulnMetadata.vulnerabilitiesPathsCount + ' vulnerable dependency paths';
   data.showSummaryOnly = summary;
+  if(data.paths?.length === 1){
+    data.packageManager = data.paths[0].packageManager;
+  }
 
   await registerPeerPartial(template, 'inline-css');
   await registerPeerPartial(template, 'header');
@@ -358,6 +361,12 @@ const hh = {
   },
   if_eq: function(this: void, a, b, opts) {
     return (a === b) ? opts.fn(this) : opts.inverse(this);
+  },
+  if_gt: function(this: void, a, b, opts) {
+    return (a > b) ? opts.fn(this) : opts.inverse(this);
+  },
+  if_not_eq: function(this: void, a, b, opts) {
+    return (a !== b) ? opts.fn(this) : opts.inverse(this);
   },
   if_any: function(this: void, opts, ...args) {
     return args.some(v => !!v) ? opts.fn(this) : opts.inverse(this);

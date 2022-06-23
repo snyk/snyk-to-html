@@ -836,3 +836,64 @@ test('Code input - AltoroJ', (t) => {
     },
   );
 });
+
+test('test snyk-to-html support for unmanaged c/c++', (t) => {
+  t.plan(9);
+  exec(
+    `node ${main} -i ./test/fixtures/test-report-unmanaged-cpp.json`,
+    (err, stdout) => {
+      if (err) {
+        throw err;
+      }
+      const regex = /<p class="timestamp">.*<\/p>/g;
+      const cleanTimestamp = (rep) =>
+        rep.replace(regex, '<p class="timestamp">TIMESTAMP</p>');
+      const cleanedReport = cleanTimestamp(stdout);
+      t.contains(
+        cleanedReport,
+        '<li class="paths">/Users/dagrest/Documents/Snyk/git/temp/cpp-goof (Unmanaged (C/C++))</li>',
+        'should contain project and package manager as Unmanaged (C/C++)',
+      );
+      t.contains(
+        cleanedReport,
+        '<div class="meta-count"><span>41</span> <span>known vulnerabilities</span></div>',
+        'should contain number of known vulnerabilities',
+      );
+      t.contains(
+        cleanedReport,
+        '<div class="meta-count"><span>4</span> <span>dependencies</span></div>',
+        'should contain number of dependencies',
+      );
+      t.doesNotHave(
+        cleanedReport,
+        '<div class="meta-count"><span>41 vulnerable dependency paths</span></div>',
+        'should not contain vulnerable dependency paths',
+      );
+      t.doesNotHave(
+        cleanedReport,
+        '<li class="card__meta__item">Introduced through: https://curl.se|curl@7.58.0\n</li>',
+        'should not contain Introduced through:',
+      );
+      t.doesNotHave(
+        cleanedReport,
+        '<h3 class="card__section__title">Detailed paths</h3>',
+        'should not contain Detailed paths',
+      );
+      t.contains(
+        cleanedReport,
+        '<h2 id="overview">Overview</h2>',
+        'should contain overview of the vulnerability',
+      );
+      t.contains(
+        cleanedReport,
+        '<h2 id="remediation">Remediation</h2>',
+        'should contain remediation section',
+      );
+      t.contains(
+        cleanedReport,
+        '<p>Upgrade <code>curl</code> to version 7.60.0 or higher.</p>',
+        'should contain pins remediation section',
+      );
+    },
+  );
+});
