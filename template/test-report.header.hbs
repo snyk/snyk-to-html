@@ -39,7 +39,9 @@
 
           <div class="meta-counts">
             <div class="meta-count"><span>{{uniqueCount}}</span> <span>known vulnerabilities</span></div>
+            {{#if_not_eq packageManager "Unmanaged (C/C++)"}}
             <div class="meta-count"><span>{{summary}}</span></div>
+            {{/if_not_eq}}
             <div class="meta-count"><span>{{dependencyCount}}</span> <span>dependencies</span></div>
           </div><!-- .meta-counts -->
         </div><!-- .layout-container--short -->

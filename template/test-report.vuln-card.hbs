@@ -26,6 +26,7 @@
                 {{/if_eq}}
             </li>
 
+            {{#if_not_eq list.[0].packageManager "Unmanaged (C/C++)"}}
             <li class="card__meta__item">Introduced through:
                 {{#if_eq metadata.packageManager "npm"}}
                     {{#if_eq (count list.[0].from) 1}}
@@ -66,8 +67,10 @@
                     {{/if_eq}}
                 {{/if_eq}}
             </li>
+            {{/if_not_eq}}
         </ul>
 
+        {{#if_not_eq list.[0].packageManager "Unmanaged (C/C++)"}}
         <hr/>
 
         {{#unless showSummaryOnly}}
@@ -132,6 +135,7 @@
                 {{/each}}
             </ul><!-- .list-paths -->
         {{/unless}}
+        {{/if_not_eq}}
 
     </div><!-- .card__section -->
 
