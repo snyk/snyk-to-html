@@ -897,3 +897,42 @@ test('test snyk-to-html support for unmanaged c/c++', (t) => {
     },
   );
 });
+
+test('test snyk-to-html container app vulnerabilities', (t) => {
+  t.plan(4);
+  // report generated with "snyk container test --app-vulns --json" against an image that is using an old debian-based
+  // python image and the golang.org/x/crypto/ssh package at a version with a known vulnerability.
+  // A lot of vulns have been removed by hand to decrease file-size of the fixture.
+  SnykToHtml.run(
+    path.join(
+      __dirname,
+      'fixtures',
+      'test-report-container-with-app-vulns.json',
+    ),
+    noRemediation,
+    path.join(__dirname, '..', 'template', 'test-report.hbs'),
+    noSummary,
+    (report) => {
+      t.contains(
+        report,
+        '<li class="paths">vulnerable:latest (deb)</li>',
+        'should contain vulnerabilities related to the base image',
+      );
+      t.contains(
+        report,
+        '<li class="paths">vulnerable:latest (gomodules)</li>',
+        'should contain vulnerabilities related to the application',
+      );
+      t.contains(
+        report,
+        '<a href="https://snyk.io/vuln/SNYK-DEBIAN10-ZLIB-2976149">More about this vulnerability</a>',
+        'should contain a link to a vulnerability in the base image',
+      );
+      t.contains(
+        report,
+        '<a href="https://snyk.io/vuln/SNYK-GOLANG-GOLANGORGXCRYPTOSSH-551923">More about this vulnerability</a>',
+        'should contain a link to a vulnerability in the application',
+      );
+    },
+  );
+});
