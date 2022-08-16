@@ -1,4 +1,4 @@
-import * as _ from '@snyk/lodash';
+import * as orderBy from 'lodash.orderby';
 import { PatchRemediation, UpgradeRemediation, Vuln } from './types';
 
 export const severityMap = { low: 0, medium: 1, high: 2, critical: 3 };
@@ -35,7 +35,7 @@ export function getUpgrades(
     }
     result.push(actionableRemediation);
   });
-  const sortedResult = _.orderBy(result, 'severityScore', 'desc');
+  const sortedResult = orderBy(result, 'severityScore', 'desc');
   return sortedResult;
 }
 
@@ -56,7 +56,7 @@ export function addIssueDataToPatch(remediation, vulnerabilities) {
       severityScore: severityMap[vuln.severity],
     });
   });
-  const sortedPatches = _.orderBy(patches, 'severityScore', 'desc');
+  const sortedPatches = orderBy(patches, 'severityScore', 'desc');
   return sortedPatches;
 }
 

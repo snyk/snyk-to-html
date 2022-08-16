@@ -23,11 +23,12 @@
   "author": "Snyk Ltd",
   "license": "Apache-2.0",
   "dependencies": {
-    "@snyk/lodash": "^4.17.15-patch",
     "chalk": "^2.4.2",
     "commander": "^4.1.1",
     "debug": "^4.1.1",
     "handlebars": "^4.7.7",
+    "lodash.isempty": "^4.4.0",
+    "lodash.orderby": "^4.6.0",
     "marked": "^4.0.12",
     "moment": "^2.24.0",
     "source-map-support": "^0.5.16",

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
-import * as _ from '@snyk/lodash';
+import * as isEmpty from 'lodash.isempty';
+import * as orderBy from 'lodash.orderby';
 import chalk from 'chalk';
 import * as debugModule from 'debug';
 import fs = require('fs');
@@ -181,8 +182,8 @@ async function generateTemplate(data: any,
   if (showRemediation && data.remediation) {
     data.showRemediations = showRemediation;
     const {upgrade, pin, unresolved, patch} = data.remediation;
-    data.anyRemediations = !_.isEmpty(upgrade) ||
-    !_.isEmpty(patch) || !_.isEmpty(pin);
+    data.anyRemediations = !isEmpty(upgrade) ||
+    !isEmpty(patch) || !isEmpty(pin);
     data.anyUnresolved = !!unresolved?.vulnerabilities;
     data.unresolved = groupVulns(unresolved);
     data.upgrades = getUpgrades(upgrade, data.vulnerabilities);
@@ -193,7 +194,7 @@ async function generateTemplate(data: any,
     );
   }
   const vulnMetadata = groupVulns(data.vulnerabilities);
-  const sortedVulns = _.orderBy(
+  const sortedVulns = orderBy(
     vulnMetadata.vulnerabilities,
     ['metadata.severityValue', 'metadata.name'],
     ['desc', 'desc'],
@@ -293,7 +294,7 @@ async function processIacData(data: any, template: string, summary: boolean): Pr
       targetFile: project.targetFile,
       targetFilePath: project.targetFilePath,
       projectType: IacProjectType[project.projectType],
-      infrastructureAsCodeIssues: _.orderBy(
+      infrastructureAsCodeIssues: orderBy(
         project.infrastructureAsCodeIssues,
         ['severityValue', 'title'],
         ['desc', 'asc'],
