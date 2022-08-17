@@ -86,6 +86,8 @@ class SnykToHtml {
               ? path.join(__dirname, '../../template/code/test-report.hbs')
               : template;
           return processCodeData(data, template, summary);
+        } else if (data.docker) {
+          return processContainerData(data, remediation, template, summary);
         } else {
           return processData(data, remediation, template, summary);
         }
@@ -330,6 +332,15 @@ async function processCodeData(
     totalIssues,
   };
   return generateCodeTemplate(processedData, template);
+}
+
+async function processContainerData(data: any, remediation: boolean, template: string, summary: boolean): Promise<string> {
+  if (!Array.isArray(data) && data.applications && Array.isArray(data.applications)) {
+    const AppData = data.applications;
+    delete data.applications;
+    data = [data, ...AppData];
+  }
+  return processData(data, remediation, template, summary);
 }
 
 async function readInputFromStdin(): Promise<string> {
