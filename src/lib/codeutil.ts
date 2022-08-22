@@ -1,5 +1,5 @@
 import { RSA_X931_PADDING } from "constants";
-import * as _ from '@snyk/lodash';
+import * as orderBy from 'lodash.orderby';
 
 const path = require('path');
 const events = require('events');
@@ -141,7 +141,7 @@ export async function processSourceCode(dataArray){
       details: project.runs[0].properties,
       sourceFilePath: currentFolderPath,
       vulnsummarycounter: codeSeverityCounter,
-      vulnerabilities: _.orderBy(
+      vulnerabilities: orderBy(
         project.runs[0].results,
         ['properties.priorityScore'],
         ['desc'],
