@@ -2670,25 +2670,24 @@ exports[`test/snyk-to-html.test.ts TAP template output displays vulns in descend
         </ul>
         <p>If for some reason upgrading is not an option, consider the following workarounds:</p>
         <ol>
-        <li>Disable handling XML pages and requests to such pages</li>
-        </ol>
+        <li><p>Disable handling XML pages and requests to such pages</p>
         <pre><code class="language-xml">&lt;constant name=&quot;struts.action.extension&quot; value=&quot;xhtml,,json&quot; /&gt;
         </code></pre>
-        <ol start="2">
-        <li>Override getContentType in XStreamHandler</li>
-        </ol>
+        </li>
+        <li><p>Override getContentType in XStreamHandler</p>
         <pre><code class="language-java"> public class MyXStreamHandler extends XStreamHandler { 
-           public String getContentType() {
-             return &quot;not-existing-content-type-@;/&amp;%$#@&quot;;
-           }
+        public String getContentType() {
+          return &quot;not-existing-content-type-@;/&amp;%$#@&quot;;
+        }
          }
         </code></pre>
-        <ol start="3">
-        <li>Register the handler by overriding the one provided by the framework in your struts.xml</li>
-        </ol>
+        </li>
+        <li><p>Register the handler by overriding the one provided by the framework in your struts.xml</p>
         <pre><code class="language-xml">&lt;bean type=&quot;org.apache.struts2.rest.handler.ContentTypeHandler&quot; name=&quot;myXStreamHandmer&quot; class=&quot;com.company.MyXStreamHandler&quot;/&gt;
         &lt;constant name=&quot;struts.rest.handlerOverride.xml&quot; value=&quot;myXStreamHandler&quot;/&gt;
         </code></pre>
+        </li>
+        </ol>
         <h2 id="references">References</h2>
         <ul>
         <li><a href="https://lgtm.com/blog/apache_struts_CVE-2017-9805_announcement">LGTM Advisory</a></li>
