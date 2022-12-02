@@ -26,7 +26,7 @@ node ./dist/index.js
 
 | Short | Long                       | Description                                                                                                      |
 | ----- | -------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `-t`  | `--template`               | Template location for generating the html. Defaults to template/test-report.hbs                                  |
+| `-t`  | `--template`               | Template location for generating the html. Defaults to template/test-report.hbs<br/><br/>If using a custom template, snyk-to-html expects the template to be installed in the package's templates folder, regardless of any path specified in the `-t` argument. By default, this folder resides at `{npm_prefix}/lib/node_modules/snyk-to-html/template` |
 | `-i`  | `--input`                  | Input path from where to read the json. Defaults to stdin                                                        |
 | `-o`  | `--output`                 | Output of the resulting HTML. Example: -o snyk.html. Defaults to stdout                                          |
 | `-s`  | `--summary`                | Generates an HTML with only the summary, instead of the details report. Defaults to details vulnerability report |
