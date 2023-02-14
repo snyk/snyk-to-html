@@ -1,4 +1,4 @@
-* @snyk/hammer
+* @snyk/hammerhead
 template/iac/* @snyk/group-infrastructure-as-code
 template/code/* @snyk/zenith
 src/lib/codeutil.ts @snyk/zenith
