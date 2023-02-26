@@ -43,32 +43,32 @@ Snyk JSON to HTML Mapper mapper works with the different Snyk Products.  Change 
 
    **For Snyk Open Source**
 
-   Run the following line to create a file called `results-opensource.html`:
+      Run the following line to create a file called `results-opensource.html`:
 
-   `snyk test --json | snyk-to-html -o results-opensource.html`
+      `snyk test --json | snyk-to-html -o results-opensource.html`
 
    **For Snyk Code**
 
-   Run the following line to create a file called `results-code.html`:
+      Run the following line to create a file called `results-code.html`:
 
-   `snyk code test --json | snyk-to-html -o results-code.html`
+      `snyk code test --json | snyk-to-html -o results-code.html`
 
 
    **For Snyk Infrastructure as Code (IaC)**
-   Navigate to the subfolder with the related files.
+      Navigate to the subfolder with the related files.
 
-   Run the following line to create a file called `results-iac.html`:
+      Run the following line to create a file called `results-iac.html`:
 
-   `snyk iac test --json | snyk-to-html -o results-iac.html`
+      `snyk iac test --json | snyk-to-html -o results-iac.html`
 
 
    **For Snyk Container**
 
-   Run the following line to create a file called `results-container.html`:
+    Run the following line to create a file called `results-container.html`:
 
-   `snyk container test [image] --json | snyk-to-html -o results-container.html`
+      `snyk container test [image] --json | snyk-to-html -o results-container.html`
 
-   The following methods/examples will utilize snyk test, however they will also work with the other product commands , as above.
+      The following methods/examples will utilize snyk test, however they will also work with the other product commands , as above.
 
 2. Using a temporary file:
 
