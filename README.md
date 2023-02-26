@@ -41,20 +41,20 @@ Snyk JSON to HTML Mapper mapper works with the different Snyk Products.  Change 
 
 1. Directly streaming the results to snyk-to-html:
 
-   For Snyk Open Source
+   **For Snyk Open Source
 
    Run the following line to create a file called `results-opensource.html`:
 
    `snyk test --json | snyk-to-html -o results-opensource.html`
 
-   For Snyk Code
+   **For Snyk Code
 
    Run the following line to create a file called `results-code.html`:
 
    `snyk code test --json | snyk-to-html -o results-code.html`
 
 
-   For Snyk Infrastructure as Code (IaC)
+   **For Snyk Infrastructure as Code (IaC)
    Navigate to the subfolder with the related files.
 
    Run the following line to create a file called `results-iac.html`:
@@ -62,7 +62,7 @@ Snyk JSON to HTML Mapper mapper works with the different Snyk Products.  Change 
    `snyk iac test --json | snyk-to-html -o results-iac.html`
 
 
-   For Snyk Container
+   **For Snyk Container
 
    Run the following line to create a file called `results-container.html`:
 
