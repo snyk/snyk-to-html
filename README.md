@@ -1,5 +1,6 @@
 [![Snyk logo](https://snyk.io/style/asset/logo/snyk-print.svg)](https://snyk.io)
 
+
 ---
 
 # Snyk JSON to HTML Mapper
