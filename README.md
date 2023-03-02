@@ -37,7 +37,7 @@ When in doubt, use `snyk-to-html --help` or `snyk-to-html -h`.
 
 ## Generate the HTML report
 
-Snyk JSON to HTML Mapper mapper works with the different Snyk Products.  Change directory to your package's root folder, then use  one of the  ways below to generate the HTML report, using the appropriate product's command
+Snyk JSON to HTML Mapper mapper works with the different Snyk Products.  Change the directory to your package's root folder, then use  one of the  ways below to generate the HTML report, using the appropriate product's command
 
 1. Directly streaming the results to snyk-to-html:
 
