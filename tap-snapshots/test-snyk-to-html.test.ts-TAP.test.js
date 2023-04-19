@@ -3596,7 +3596,7 @@ exports[`test/snyk-to-html.test.ts TAP template output displays vulns in descend
         <li><a href="https://github.com/apache/commons-fileupload/blob/b1498c9877d751f8bc4635a6f252ebdfcba28518/src/changes/changes.xml#L84">Github ChangeLog</a></li>
         <li><a href="https://bugzilla.redhat.com/show_bug.cgi?id=1349475">Redhat Bugzilla</a></li>
         <li><a href="http://mail-archives.us.apache.org/mod_mbox/www-announce/201606.mbox/%3C6223ece6-2b41-ef4f-22f9-d3481e492832@apache.org%3E">Apache Mailing Archives</a></li>
-        <li><a href="http://svn.apache.org/viewvc/commons/proper/fileupload/trunk/RELEASE-NOTES.txt?r1=1745717&amp;r2=1749637&amp;diff_format=h">Apache-SVN</a></li>
+        <li><a href="http://svn.apache.org/viewvc/commons/proper/fileupload/trunk/RELEASE-NOTES.txt?r1=1745717&r2=1749637&diff_format=h">Apache-SVN</a></li>
         <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-3092">CVE</a></li>
         </ul>
         
