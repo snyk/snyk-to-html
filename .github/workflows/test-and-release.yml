@@ -57,17 +57,17 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 18
+          node-version: 14
       - name: npm config get cache
         id: npm-cache-dir
         run: echo "::set-output name=dir::$(npm config get cache)"
       - uses: actions/cache@v2
         with:
           path: ${{ steps.npm-cache-dir.outputs.dir }}
-          key: ${{ runner.os }}-node-18-${{ hashFiles('**/package.json') }}
-          restore-keys: ${{ runner.os }}-node-18-
+          key: ${{ runner.os }}-node-14-${{ hashFiles('**/package.json') }}
+          restore-keys: ${{ runner.os }}-node-14-
       - run: npm install
-      - run: semantic-release
+      - run: npx -p node@v18-lts -c "semantic-release"
         env:
           PUBLIC_S3_BUCKET: ${{secrets.PUBLIC_S3_BUCKET}}
           AWS_DEFAULT_REGION: ${{secrets.AWS_DEFAULT_REGION}}
