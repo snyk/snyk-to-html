@@ -67,6 +67,7 @@ jobs:
           key: ${{ runner.os }}-node-14-${{ hashFiles('**/package.json') }}
           restore-keys: ${{ runner.os }}-node-14-
       - run: npm install
+      - run: npm i -g --save-exact semantic-release@21.0.2 @semantic-release/exec@6.0.3
       - run: npx -p node@v18-lts -c "semantic-release"
         env:
           PUBLIC_S3_BUCKET: ${{secrets.PUBLIC_S3_BUCKET}}
