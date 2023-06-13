@@ -100,7 +100,7 @@
           "resolve": "Set `logging.enable` attribute to `true`"
         },
         "lineNumber": -1,
-        "documentation": "https://snyk.io/security-rules/SNYK-CC-TF-136",
+        "documentation": "https://security.snyk.io/rules/cloud//SNYK-CC-TF-136",
         "isGeneratedByCustomRule": false,
         "path": [
           "resource",
@@ -157,7 +157,7 @@
           "resolve": "Set `properties.clientCertEnabled` attribute to `true`"
         },
         "lineNumber": 109,
-        "documentation": "https://snyk.io/security-rules/SNYK-CC-TF-162",
+        "documentation": "https://security.snyk.io/rules/cloud//SNYK-CC-TF-162",
         "isGeneratedByCustomRule": false,
         "path": [
           "resources[3]",
@@ -191,7 +191,7 @@
           "resolve": "Set `properties.enablePurgeProtection` to `true`"
         },
         "lineNumber": 184,
-        "documentation": "https://snyk.io/security-rules/SNYK-CC-AZURE-624",
+        "documentation": "https://security.snyk.io/rules/cloud//SNYK-CC-AZURE-624",
         "isGeneratedByCustomRule": false,
         "path": [
           "resources[5]",
@@ -223,7 +223,7 @@
           "resolve": "Set `properties.minimumTlsVersion`  attribute to `TLS1_2`"
         },
         "lineNumber": 62,
-        "documentation": "https://snyk.io/security-rules/SNYK-CC-TF-149",
+        "documentation": "https://security.snyk.io/rules/cloud//SNYK-CC-TF-149",
         "isGeneratedByCustomRule": false,
         "path": [
           "resources[0]",
@@ -257,7 +257,7 @@
           "resolve": "Set `properties.enableSoftDelete` to `true`"
         },
         "lineNumber": 184,
-        "documentation": "https://snyk.io/security-rules/SNYK-CC-AZURE-625",
+        "documentation": "https://security.snyk.io/rules/cloud//SNYK-CC-AZURE-625",
         "isGeneratedByCustomRule": false,
         "path": [
           "resources[5]",
@@ -290,7 +290,7 @@
           "resolve": "Set `properties.enablePurgeProtection` attribute to `true`, and `properties.enableSoftDelete` attribute to `true`"
         },
         "lineNumber": 184,
-        "documentation": "https://snyk.io/security-rules/SNYK-CC-TF-175",
+        "documentation": "https://security.snyk.io/rules/cloud//SNYK-CC-TF-175",
         "isGeneratedByCustomRule": false,
         "path": [
           "resources[5]",
@@ -323,7 +323,7 @@
           "resolve": "Set `identity` attribute"
         },
         "lineNumber": 103,
-        "documentation": "https://snyk.io/security-rules/SNYK-CC-TF-161",
+        "documentation": "https://security.snyk.io/rules/cloud//SNYK-CC-TF-161",
         "isGeneratedByCustomRule": false,
         "path": [
           "resources[3]",
@@ -355,7 +355,7 @@
           "resolve": "Set `sku.capacity` to `2` or more"
         },
         "lineNumber": 98,
-        "documentation": "https://snyk.io/security-rules/SNYK-CC-AZURE-618",
+        "documentation": "https://security.snyk.io/rules/cloud//SNYK-CC-AZURE-618",
         "isGeneratedByCustomRule": false,
         "path": [
           "resources[2]",
@@ -389,7 +389,7 @@
           "resolve": "Set `ftpsState` to `FtpsOnly` or `Disabled` if not needed"
         },
         "lineNumber": 109,
-        "documentation": "https://snyk.io/security-rules/SNYK-CC-AZURE-533",
+        "documentation": "https://security.snyk.io/rules/cloud//SNYK-CC-AZURE-533",
         "isGeneratedByCustomRule": false,
         "path": [
           "resources[3]",
@@ -421,7 +421,7 @@
           "resolve": "Set `properties.siteConfig.http20Enabled` attribute to `true`"
         },
         "lineNumber": 111,
-        "documentation": "https://snyk.io/security-rules/SNYK-CC-TF-163",
+        "documentation": "https://security.snyk.io/rules/cloud//SNYK-CC-TF-163",
         "isGeneratedByCustomRule": false,
         "path": [
           "resources[3]",
@@ -453,7 +453,7 @@
           "resolve": "Set `properties.remoteDebuggingEnabled` to `false`"
         },
         "lineNumber": 109,
-        "documentation": "https://snyk.io/security-rules/SNYK-CC-AZURE-619",
+        "documentation": "https://security.snyk.io/rules/cloud//SNYK-CC-AZURE-619",
         "isGeneratedByCustomRule": false,
         "path": [
           "resources[3]",
@@ -512,7 +512,7 @@
           "resolve": "Set `sku.capacity` to `2` or more"
         },
         "lineNumber": 48,
-        "documentation": "https://snyk.io/security-rules/SNYK-CC-AZURE-618",
+        "documentation": "https://security.snyk.io/rules/cloud//SNYK-CC-AZURE-618",
         "isGeneratedByCustomRule": false,
         "path": [
           "resources[0]",
@@ -544,7 +544,7 @@
           "resolve": "Set `properties.remoteDebuggingEnabled` to `false`"
         },
         "lineNumber": 58,
-        "documentation": "https://snyk.io/security-rules/SNYK-CC-AZURE-619",
+        "documentation": "https://security.snyk.io/rules/cloud//SNYK-CC-AZURE-619",
         "isGeneratedByCustomRule": false,
         "path": [
           "resources[1]",
@@ -577,7 +577,7 @@
           "resolve": "Set `properties.clientCertEnabled` attribute to `true`"
         },
         "lineNumber": 58,
-        "documentation": "https://snyk.io/security-rules/SNYK-CC-TF-162",
+        "documentation": "https://security.snyk.io/rules/cloud//SNYK-CC-TF-162",
         "isGeneratedByCustomRule": false,
         "path": [
           "resources[1]",
@@ -610,7 +610,7 @@
           "resolve": "Set `httpsOnly` attribute to `true`"
         },
         "lineNumber": 58,
-        "documentation": "https://snyk.io/security-rules/SNYK-CC-AZURE-500",
+        "documentation": "https://security.snyk.io/rules/cloud//SNYK-CC-AZURE-500",
         "isGeneratedByCustomRule": false,
         "path": [
           "resources[1]",
@@ -644,7 +644,7 @@
           "resolve": "Set `identity` attribute"
         },
         "lineNumber": 53,
-        "documentation": "https://snyk.io/security-rules/SNYK-CC-TF-161",
+        "documentation": "https://security.snyk.io/rules/cloud//SNYK-CC-TF-161",
         "isGeneratedByCustomRule": false,
         "path": [
           "resources[1]",
@@ -676,7 +676,7 @@
           "resolve": "Set `properties.siteConfig.http20Enabled` attribute to `true`"
         },
         "lineNumber": 58,
-        "documentation": "https://snyk.io/security-rules/SNYK-CC-TF-163",
+        "documentation": "https://security.snyk.io/rules/cloud//SNYK-CC-TF-163",
         "isGeneratedByCustomRule": false,
         "path": [
           "resources[1]",
@@ -710,7 +710,7 @@
           "resolve": "Set `ftpsState` to `FtpsOnly` or `Disabled` if not needed"
         },
         "lineNumber": 58,
-        "documentation": "https://snyk.io/security-rules/SNYK-CC-AZURE-533",
+        "documentation": "https://security.snyk.io/rules/cloud//SNYK-CC-AZURE-533",
         "isGeneratedByCustomRule": false,
         "path": [
           "resources[1]",
@@ -743,7 +743,7 @@
           "resolve": "Set `properties.httpsOnly` attribute to `true`"
         },
         "lineNumber": 58,
-        "documentation": "https://snyk.io/security-rules/SNYK-CC-TF-144",
+        "documentation": "https://security.snyk.io/rules/cloud//SNYK-CC-TF-144",
         "isGeneratedByCustomRule": false,
         "path": [
           "resources[1]",
@@ -803,7 +803,7 @@
           "resolve": "Set `properties.enableDdosProtection` to `true`"
         },
         "lineNumber": 98,
-        "documentation": "https://snyk.io/security-rules/SNYK-CC-AZURE-516",
+        "documentation": "https://security.snyk.io/rules/cloud//SNYK-CC-AZURE-516",
         "isGeneratedByCustomRule": false,
         "path": [
           "resources[0]",
@@ -862,7 +862,7 @@
           "resolve": "Set `sku.capacity` to `2` or more"
         },
         "lineNumber": 129,
-        "documentation": "https://snyk.io/security-rules/SNYK-CC-AZURE-618",
+        "documentation": "https://security.snyk.io/rules/cloud//SNYK-CC-AZURE-618",
         "isGeneratedByCustomRule": false,
         "path": [
           "resources[0]",
@@ -894,7 +894,7 @@
           "resolve": "Set `properties.remoteDebuggingEnabled` to `false`"
         },
         "lineNumber": 139,
-        "documentation": "https://snyk.io/security-rules/SNYK-CC-AZURE-619",
+        "documentation": "https://security.snyk.io/rules/cloud//SNYK-CC-AZURE-619",
         "isGeneratedByCustomRule": false,
         "path": [
           "resources[1]",
@@ -927,7 +927,7 @@
           "resolve": "Set `properties.clientCertEnabled` attribute to `true`"
         },
         "lineNumber": 139,
-        "documentation": "https://snyk.io/security-rules/SNYK-CC-TF-162",
+        "documentation": "https://security.snyk.io/rules/cloud//SNYK-CC-TF-162",
         "isGeneratedByCustomRule": false,
         "path": [
           "resources[1]",
@@ -960,7 +960,7 @@
           "resolve": "Set `httpsOnly` attribute to `true`"
         },
         "lineNumber": 139,
-        "documentation": "https://snyk.io/security-rules/SNYK-CC-AZURE-500",
+        "documentation": "https://security.snyk.io/rules/cloud//SNYK-CC-AZURE-500",
         "isGeneratedByCustomRule": false,
         "path": [
           "resources[1]",
@@ -994,7 +994,7 @@
           "resolve": "Set `identity` attribute"
         },
         "lineNumber": 134,
-        "documentation": "https://snyk.io/security-rules/SNYK-CC-TF-161",
+        "documentation": "https://security.snyk.io/rules/cloud//SNYK-CC-TF-161",
         "isGeneratedByCustomRule": false,
         "path": [
           "resources[1]",
@@ -1026,7 +1026,7 @@
           "resolve": "Set `properties.siteConfig.http20Enabled` attribute to `true`"
         },
         "lineNumber": 139,
-        "documentation": "https://snyk.io/security-rules/SNYK-CC-TF-163",
+        "documentation": "https://security.snyk.io/rules/cloud//SNYK-CC-TF-163",
         "isGeneratedByCustomRule": false,
         "path": [
           "resources[1]",
@@ -1060,7 +1060,7 @@
           "resolve": "Set `ftpsState` to `FtpsOnly` or `Disabled` if not needed"
         },
         "lineNumber": 139,
-        "documentation": "https://snyk.io/security-rules/SNYK-CC-AZURE-533",
+        "documentation": "https://security.snyk.io/rules/cloud//SNYK-CC-AZURE-533",
         "isGeneratedByCustomRule": false,
         "path": [
           "resources[1]",
@@ -1093,7 +1093,7 @@
           "resolve": "Set `properties.httpsOnly` attribute to `true`"
         },
         "lineNumber": 139,
-        "documentation": "https://snyk.io/security-rules/SNYK-CC-TF-144",
+        "documentation": "https://security.snyk.io/rules/cloud//SNYK-CC-TF-144",
         "isGeneratedByCustomRule": false,
         "path": [
           "resources[1]",
@@ -1152,7 +1152,7 @@
           "resolve": "Set `properties.supportsHttpsTrafficOnly` attribute to `true`"
         },
         "lineNumber": 86,
-        "documentation": "https://snyk.io/security-rules/SNYK-CC-TF-244",
+        "documentation": "https://security.snyk.io/rules/cloud//SNYK-CC-TF-244",
         "isGeneratedByCustomRule": false,
         "path": [
           "resources[2]",

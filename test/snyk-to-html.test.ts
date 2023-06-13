@@ -742,12 +742,12 @@ test('IaC input - all-around test', (t) => {
       );
       t.contains(
         report,
-        '<a href="https://snyk.io/security-rules/SNYK-CC-AZURE-533">More about this issue</a>',
+        '<a href="https://security.snyk.io/rules/cloud//SNYK-CC-AZURE-533">More about this issue</a>',
         'should contain a link to the security rules site',
       );
       t.contains(
         report,
-        '<a href="https://snyk.io/security-rules/SNYK-CC-AZURE-533">SNYK-CC-AZURE-533</a>',
+        '<a href="https://security.snyk.io/rules/cloud//SNYK-CC-AZURE-533">SNYK-CC-AZURE-533</a>',
         'should contain public ID of the issue',
       );
       t.contains(
