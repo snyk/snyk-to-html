@@ -4,7 +4,7 @@
     {
       "//": "build the alpine, macos, linux and windows binaries",
       "path": "@semantic-release/exec",
-      "cmd": "npm i -g pkg && pkg . -t node14-alpine-x64,node14-linux-x64,node14-macos-x64,node14-win-x64"
+      "cmd": "npm i -g pkg@5.8.1 && pkg . --options max_old_space_size=16384 -t node14-alpine-x64,node14-linux-x64,node14-macos-x64,node14-win-x64"
     },
     {
       "//": "shasum all binaries",
