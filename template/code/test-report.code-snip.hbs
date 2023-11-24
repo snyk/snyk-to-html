@@ -12,6 +12,9 @@
             <li class="card__meta__item">SNYK-CODE</li>
             <li class="card__meta__item">{{ruleiddesc.properties.cwe}}</li>
         </ul>
+        <div class="card__meta__item">
+            In-line suppression comment: <code>deepcode {{ruleiddesc.name}}</code>
+        </div>
     </header>
     <div class="card__section">
     {{#unless @root.showSummaryOnly}}
