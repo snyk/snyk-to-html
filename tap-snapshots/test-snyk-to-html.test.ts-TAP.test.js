@@ -2176,7 +2176,8 @@ exports[`test/snyk-to-html.test.ts TAP template output displays vulns in descend
               <div class="source-panel">
                 <span>Scanned the following paths:</span>
                 <ul>
-                  <li class="paths">./java-goof (maven)</li><li class="paths">./goof (npm)</li>
+                    <li class="paths">./java-goof (maven)</li>
+                    <li class="paths">./goof (npm)</li>
                 </ul>
               </div>
     

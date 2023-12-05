@@ -24,7 +24,13 @@
           <div class="source-panel">
             <span>Scanned the following paths:</span>
             <ul>
-              {{#each paths}}<li class="paths">{{path}} ({{packageManager}})</li>{{/each}}
+            {{#each paths}}
+              {{#if_not_eq packageManager "nuget"}}
+                <li class="paths">{{path}} ({{packageManager}})</li>
+              {{else}}
+                <li class="paths">{{path}}/{{displayTargetFile}} ({{packageManager}})</li>
+              {{/if_not_eq}}
+            {{/each}}
             </ul>
           </div>
           {{/if}}
@@ -32,7 +38,11 @@
           <div class="source-panel">
             <span>Scanned the following path:</span>
             <ul>
+            {{#if_not_eq packageManager "nuget"}}
               <li class="paths">{{path}} ({{packageManager}})</li>
+            {{else}}
+              <li class="paths">{{path}}/{{dislpayTargetFile}} ({{packageManager}})</li>
+            {{/if_not_eq}}
             </ul>
           </div>
           {{/if}}
