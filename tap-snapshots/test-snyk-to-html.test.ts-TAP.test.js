@@ -2176,8 +2176,8 @@ exports[`test/snyk-to-html.test.ts TAP template output displays vulns in descend
               <div class="source-panel">
                 <span>Scanned the following paths:</span>
                 <ul>
-                    <li class="paths">./java-goof (maven)</li>
-                    <li class="paths">./goof (npm)</li>
+                  <li class="paths">./java-goof (maven)</li>
+                  <li class="paths">./goof (npm)</li>
                 </ul>
               </div>
     
@@ -6542,7 +6542,7 @@ exports[`test/snyk-to-html.test.ts TAP test snyk-to-html handles -a argument cor
               <div class="source-panel">
                 <span>Scanned the following path:</span>
                 <ul>
-                  <li class="paths">/path/to/npm-lockfile-with-vulns (npm)</li>
+                  <li class="paths">/path/to/npm-lockfile-with-vulns/package-lock.json (npm)</li>
                 </ul>
               </div>
     
@@ -7193,7 +7193,7 @@ exports[`test/snyk-to-html.test.ts TAP test snyk-to-html handles -s argument cor
               <div class="source-panel">
                 <span>Scanned the following path:</span>
                 <ul>
-                  <li class="paths">/path/to/npm-lockfile-with-vulns (npm)</li>
+                  <li class="paths">/path/to/npm-lockfile-with-vulns/package-lock.json (npm)</li>
                 </ul>
               </div>
     
@@ -8135,7 +8135,7 @@ exports[`test/snyk-to-html.test.ts TAP test snyk-to-html shows remediation & sum
               <div class="source-panel">
                 <span>Scanned the following path:</span>
                 <ul>
-                  <li class="paths">/Users/lili/www/snyk-fixtures/python-pip-app-with-vulns (pip)</li>
+                  <li class="paths">/Users/lili/www/snyk-fixtures/python-pip-app-with-vulns/requirements.txt (pip)</li>
                 </ul>
               </div>
     
@@ -8936,7 +8936,7 @@ exports[`test/snyk-to-html.test.ts TAP test snyk-to-html shows remediation with 
               <div class="source-panel">
                 <span>Scanned the following path:</span>
                 <ul>
-                  <li class="paths">/Users/lili/www/snyk-fixtures/python-pip-app-with-vulns (pip)</li>
+                  <li class="paths">/Users/lili/www/snyk-fixtures/python-pip-app-with-vulns/requirements.txt (pip)</li>
                 </ul>
               </div>
     

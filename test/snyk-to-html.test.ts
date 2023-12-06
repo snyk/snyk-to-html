@@ -936,3 +936,21 @@ test('test snyk-to-html container app vulnerabilities', (t) => {
     },
   );
 });
+
+test('test snyk-to-html with custom path descriptors', (t) => {
+  t.plan(1);
+  // report generated with "snyk container test --all-projects --json" on a nuget multi-project with more than one path
+  SnykToHtml.run(
+    path.join(__dirname, 'fixtures', 'test-report-nuget-multi-project.json'),
+    noRemediation,
+    path.join(__dirname, '..', 'template', 'test-report.hbs'),
+    noSummary,
+    (report) => {
+      t.contains(
+        report,
+        '<li class="paths">/root/nugetMultiProjectRepo/DotNetMultiProject/SomeProject.RandomProject.API/obj/project.assets.json (nuget)</li>',
+        'should contain vulnerabilities related to the base image',
+      );
+    },
+  );
+});

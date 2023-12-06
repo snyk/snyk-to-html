@@ -1,0 +1,1463 @@
+[
+  {
+    "vulnerabilities": [],
+    "ok": true,
+    "dependencyCount": 85,
+    "org": "test-organization",
+    "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.25.1\nignore: {}\npatch: {}\n",
+    "isPrivate": true,
+    "licensesPolicy": {
+      "severities": {},
+      "orgLicenseRules": {
+        "AGPL-1.0": {
+          "licenseType": "AGPL-1.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "AGPL-3.0": {
+          "licenseType": "AGPL-3.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "Artistic-1.0": {
+          "licenseType": "Artistic-1.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "Artistic-2.0": {
+          "licenseType": "Artistic-2.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "CDDL-1.0": {
+          "licenseType": "CDDL-1.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "CPOL-1.02": {
+          "licenseType": "CPOL-1.02",
+          "severity": "high",
+          "instructions": ""
+        },
+        "EPL-1.0": {
+          "licenseType": "EPL-1.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "GPL-2.0": {
+          "licenseType": "GPL-2.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "GPL-3.0": {
+          "licenseType": "GPL-3.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "LGPL-2.0": {
+          "licenseType": "LGPL-2.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "LGPL-2.1": {
+          "licenseType": "LGPL-2.1",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "LGPL-3.0": {
+          "licenseType": "LGPL-3.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "MPL-1.1": {
+          "licenseType": "MPL-1.1",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "MPL-2.0": {
+          "licenseType": "MPL-2.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "MS-RL": {
+          "licenseType": "MS-RL",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "SimPL-2.0": {
+          "licenseType": "SimPL-2.0",
+          "severity": "high",
+          "instructions": ""
+        }
+      }
+    },
+    "packageManager": "nuget",
+    "ignoreSettings": {
+      "adminOnly": false,
+      "reasonRequired": false,
+      "disregardFilesystemIgnores": false
+    },
+    "summary": "No known vulnerabilities",
+    "filesystemPolicy": false,
+    "uniqueCount": 0,
+    "targetFile": "SomeProject.RandomProject.API/obj/project.assets.json",
+    "projectName": "DotNetMultiProject",
+    "foundProjectCount": 8,
+    "displayTargetFile": "SomeProject.RandomProject.API/obj/project.assets.json",
+    "hasUnknownVersions": false,
+    "path": "/root/nugetMultiProjectRepo/DotNetMultiProject"
+  },
+  {
+    "vulnerabilities": [
+      {
+        "id": "SNYK-DOTNET-AZUREIDENTITY-6009155",
+        "title": "Remote Code Execution (RCE)",
+        "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+        "credit": [
+          "Martin Wrona"
+        ],
+        "semver": {
+          "vulnerable": [
+            "[,1.10.2)"
+          ]
+        },
+        "exploit": "Not Defined",
+        "fixedIn": [
+          "1.10.2"
+        ],
+        "patches": [],
+        "insights": {
+          "triageAdvice": null
+        },
+        "language": "dotnet",
+        "severity": "high",
+        "cvssScore": 8.8,
+        "functions": [],
+        "malicious": false,
+        "isDisputed": false,
+        "moduleName": "azure.identity",
+        "references": [
+          {
+            "url": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-36414",
+            "title": "Advisory"
+          },
+          {
+            "url": "https://github.com/Azure/azure-sdk-for-net/commit/63303f99134cbb16a6283663ad7b5339a62e3713",
+            "title": "GitHub Commit"
+          }
+        ],
+        "cvssDetails": [
+          {
+            "assigner": "NVD",
+            "severity": "high",
+            "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+            "cvssV3BaseScore": 8.8,
+            "modificationTime": "2023-10-11T01:11:07.412403Z"
+          }
+        ],
+        "description": "## Overview\n\nAffected versions of this package are vulnerable to Remote Code Execution (RCE) by passing a specially crafted OS-level command to a specific SDK property which is passed to the underlying CLI.\r\n\r\nBy exploiting this vulnerability an attacker could gain high privileges, which include read, write, and delete functionality. The attacker needs to be authenticated as a normal user.\r\n\r\n**Note**\r\n\r\nThe following credential types provided by the Azure Identity client library are affected:\r\n\r\n1) DefaultAzureCredential\r\n\r\n2) AzureCliCredential\r\n\r\n3) AzureDeveloperCliCredential\r\n\r\n4) AzurePowerShellCredential\n## Remediation\nUpgrade `Azure.Identity` to version 1.10.2 or higher.\n## References\n- [Advisory](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-36414)\n- [GitHub Commit](https://github.com/Azure/azure-sdk-for-net/commit/63303f99134cbb16a6283663ad7b5339a62e3713)\n",
+        "epssDetails": {
+          "percentile": "0.56157",
+          "probability": "0.00189",
+          "modelVersion": "v2023.03.01"
+        },
+        "identifiers": {
+          "CVE": [
+            "CVE-2023-36414"
+          ],
+          "CWE": [
+            "CWE-94"
+          ],
+          "GHSA": [
+            "GHSA-5mfx-4wcx-rv27"
+          ]
+        },
+        "packageName": "Azure.Identity",
+        "proprietary": false,
+        "creationTime": "2023-10-19T11:35:11.133623Z",
+        "functions_new": [],
+        "alternativeIds": [],
+        "disclosureTime": "2023-10-10T18:31:33Z",
+        "packageManager": "nuget",
+        "publicationTime": "2023-10-19T11:55:35.830834Z",
+        "modificationTime": "2023-10-19T11:55:35.836359Z",
+        "socialTrendAlert": false,
+        "severityWithCritical": "high",
+        "from": [
+          "DotNetMultiProject@1.0.0",
+          "Microsoft.EntityFrameworkCore.SqlServer@7.0.11",
+          "Microsoft.Data.SqlClient@5.1.1",
+          "Azure.Identity@1.7.0"
+        ],
+        "upgradePath": [],
+        "isUpgradable": false,
+        "isPatchable": false,
+        "name": "Azure.Identity",
+        "version": "1.7.0"
+      }
+    ],
+    "ok": false,
+    "dependencyCount": 55,
+    "org": "test-organization",
+    "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.25.1\nignore: {}\npatch: {}\n",
+    "isPrivate": true,
+    "licensesPolicy": {
+      "severities": {},
+      "orgLicenseRules": {
+        "AGPL-1.0": {
+          "licenseType": "AGPL-1.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "AGPL-3.0": {
+          "licenseType": "AGPL-3.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "Artistic-1.0": {
+          "licenseType": "Artistic-1.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "Artistic-2.0": {
+          "licenseType": "Artistic-2.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "CDDL-1.0": {
+          "licenseType": "CDDL-1.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "CPOL-1.02": {
+          "licenseType": "CPOL-1.02",
+          "severity": "high",
+          "instructions": ""
+        },
+        "EPL-1.0": {
+          "licenseType": "EPL-1.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "GPL-2.0": {
+          "licenseType": "GPL-2.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "GPL-3.0": {
+          "licenseType": "GPL-3.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "LGPL-2.0": {
+          "licenseType": "LGPL-2.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "LGPL-2.1": {
+          "licenseType": "LGPL-2.1",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "LGPL-3.0": {
+          "licenseType": "LGPL-3.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "MPL-1.1": {
+          "licenseType": "MPL-1.1",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "MPL-2.0": {
+          "licenseType": "MPL-2.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "MS-RL": {
+          "licenseType": "MS-RL",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "SimPL-2.0": {
+          "licenseType": "SimPL-2.0",
+          "severity": "high",
+          "instructions": ""
+        }
+      }
+    },
+    "packageManager": "nuget",
+    "ignoreSettings": {
+      "adminOnly": false,
+      "reasonRequired": false,
+      "disregardFilesystemIgnores": false
+    },
+    "summary": "1 vulnerable dependency path",
+    "remediation": {
+      "unresolved": [
+        {
+          "id": "SNYK-DOTNET-AZUREIDENTITY-6009155",
+          "title": "Remote Code Execution (RCE)",
+          "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "credit": [
+            "Martin Wrona"
+          ],
+          "semver": {
+            "vulnerable": [
+              "[,1.10.2)"
+            ]
+          },
+          "exploit": "Not Defined",
+          "fixedIn": [
+            "1.10.2"
+          ],
+          "patches": [],
+          "insights": {
+            "triageAdvice": null
+          },
+          "language": "dotnet",
+          "severity": "high",
+          "cvssScore": 8.8,
+          "functions": [],
+          "malicious": false,
+          "isDisputed": false,
+          "moduleName": "azure.identity",
+          "references": [
+            {
+              "url": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-36414",
+              "title": "Advisory"
+            },
+            {
+              "url": "https://github.com/Azure/azure-sdk-for-net/commit/63303f99134cbb16a6283663ad7b5339a62e3713",
+              "title": "GitHub Commit"
+            }
+          ],
+          "cvssDetails": [
+            {
+              "assigner": "NVD",
+              "severity": "high",
+              "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "cvssV3BaseScore": 8.8,
+              "modificationTime": "2023-10-11T01:11:07.412403Z"
+            }
+          ],
+          "description": "## Overview\n\nAffected versions of this package are vulnerable to Remote Code Execution (RCE) by passing a specially crafted OS-level command to a specific SDK property which is passed to the underlying CLI.\r\n\r\nBy exploiting this vulnerability an attacker could gain high privileges, which include read, write, and delete functionality. The attacker needs to be authenticated as a normal user.\r\n\r\n**Note**\r\n\r\nThe following credential types provided by the Azure Identity client library are affected:\r\n\r\n1) DefaultAzureCredential\r\n\r\n2) AzureCliCredential\r\n\r\n3) AzureDeveloperCliCredential\r\n\r\n4) AzurePowerShellCredential\n## Remediation\nUpgrade `Azure.Identity` to version 1.10.2 or higher.\n## References\n- [Advisory](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-36414)\n- [GitHub Commit](https://github.com/Azure/azure-sdk-for-net/commit/63303f99134cbb16a6283663ad7b5339a62e3713)\n",
+          "epssDetails": {
+            "percentile": "0.56157",
+            "probability": "0.00189",
+            "modelVersion": "v2023.03.01"
+          },
+          "identifiers": {
+            "CVE": [
+              "CVE-2023-36414"
+            ],
+            "CWE": [
+              "CWE-94"
+            ],
+            "GHSA": [
+              "GHSA-5mfx-4wcx-rv27"
+            ]
+          },
+          "packageName": "Azure.Identity",
+          "proprietary": false,
+          "creationTime": "2023-10-19T11:35:11.133623Z",
+          "functions_new": [],
+          "alternativeIds": [],
+          "disclosureTime": "2023-10-10T18:31:33Z",
+          "packageManager": "nuget",
+          "publicationTime": "2023-10-19T11:55:35.830834Z",
+          "modificationTime": "2023-10-19T11:55:35.836359Z",
+          "socialTrendAlert": false,
+          "packagePopularityRank": 99,
+          "from": [
+            "DotNetMultiProject@1.0.0",
+            "Microsoft.EntityFrameworkCore.SqlServer@7.0.11",
+            "Microsoft.Data.SqlClient@5.1.1",
+            "Azure.Identity@1.7.0"
+          ],
+          "upgradePath": [],
+          "isUpgradable": false,
+          "isPatchable": false,
+          "isPinnable": false,
+          "isRuntime": false,
+          "name": "Azure.Identity",
+          "version": "1.7.0",
+          "severityWithCritical": "high"
+        }
+      ],
+      "upgrade": {},
+      "patch": {},
+      "ignore": {},
+      "pin": {}
+    },
+    "filesystemPolicy": false,
+    "filtered": {
+      "ignore": [],
+      "patch": []
+    },
+    "uniqueCount": 1,
+    "targetFile": "SomeProject.RandomProject.BankAccounts.Database/obj/project.assets.json",
+    "projectName": "DotNetMultiProject",
+    "foundProjectCount": 8,
+    "displayTargetFile": "SomeProject.RandomProject.BankAccounts.Database/obj/project.assets.json",
+    "hasUnknownVersions": false,
+    "path": "/root/nugetMultiProjectRepo/DotNetMultiProject"
+  },
+  {
+    "vulnerabilities": [],
+    "ok": true,
+    "dependencyCount": 0,
+    "org": "test-organization",
+    "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.25.1\nignore: {}\npatch: {}\n",
+    "isPrivate": true,
+    "licensesPolicy": {
+      "severities": {},
+      "orgLicenseRules": {
+        "AGPL-1.0": {
+          "licenseType": "AGPL-1.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "AGPL-3.0": {
+          "licenseType": "AGPL-3.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "Artistic-1.0": {
+          "licenseType": "Artistic-1.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "Artistic-2.0": {
+          "licenseType": "Artistic-2.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "CDDL-1.0": {
+          "licenseType": "CDDL-1.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "CPOL-1.02": {
+          "licenseType": "CPOL-1.02",
+          "severity": "high",
+          "instructions": ""
+        },
+        "EPL-1.0": {
+          "licenseType": "EPL-1.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "GPL-2.0": {
+          "licenseType": "GPL-2.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "GPL-3.0": {
+          "licenseType": "GPL-3.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "LGPL-2.0": {
+          "licenseType": "LGPL-2.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "LGPL-2.1": {
+          "licenseType": "LGPL-2.1",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "LGPL-3.0": {
+          "licenseType": "LGPL-3.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "MPL-1.1": {
+          "licenseType": "MPL-1.1",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "MPL-2.0": {
+          "licenseType": "MPL-2.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "MS-RL": {
+          "licenseType": "MS-RL",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "SimPL-2.0": {
+          "licenseType": "SimPL-2.0",
+          "severity": "high",
+          "instructions": ""
+        }
+      }
+    },
+    "packageManager": "nuget",
+    "ignoreSettings": {
+      "adminOnly": false,
+      "reasonRequired": false,
+      "disregardFilesystemIgnores": false
+    },
+    "summary": "No known vulnerabilities",
+    "filesystemPolicy": false,
+    "uniqueCount": 0,
+    "targetFile": "SomeProject.RandomProject.BusinessLogic/obj/project.assets.json",
+    "projectName": "DotNetMultiProject",
+    "foundProjectCount": 8,
+    "displayTargetFile": "SomeProject.RandomProject.BusinessLogic/obj/project.assets.json",
+    "hasUnknownVersions": false,
+    "path": "/root/nugetMultiProjectRepo/DotNetMultiProject"
+  },
+  {
+    "vulnerabilities": [],
+    "ok": true,
+    "dependencyCount": 17,
+    "org": "test-organization",
+    "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.25.1\nignore: {}\npatch: {}\n",
+    "isPrivate": true,
+    "licensesPolicy": {
+      "severities": {},
+      "orgLicenseRules": {
+        "AGPL-1.0": {
+          "licenseType": "AGPL-1.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "AGPL-3.0": {
+          "licenseType": "AGPL-3.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "Artistic-1.0": {
+          "licenseType": "Artistic-1.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "Artistic-2.0": {
+          "licenseType": "Artistic-2.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "CDDL-1.0": {
+          "licenseType": "CDDL-1.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "CPOL-1.02": {
+          "licenseType": "CPOL-1.02",
+          "severity": "high",
+          "instructions": ""
+        },
+        "EPL-1.0": {
+          "licenseType": "EPL-1.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "GPL-2.0": {
+          "licenseType": "GPL-2.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "GPL-3.0": {
+          "licenseType": "GPL-3.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "LGPL-2.0": {
+          "licenseType": "LGPL-2.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "LGPL-2.1": {
+          "licenseType": "LGPL-2.1",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "LGPL-3.0": {
+          "licenseType": "LGPL-3.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "MPL-1.1": {
+          "licenseType": "MPL-1.1",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "MPL-2.0": {
+          "licenseType": "MPL-2.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "MS-RL": {
+          "licenseType": "MS-RL",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "SimPL-2.0": {
+          "licenseType": "SimPL-2.0",
+          "severity": "high",
+          "instructions": ""
+        }
+      }
+    },
+    "packageManager": "nuget",
+    "ignoreSettings": {
+      "adminOnly": false,
+      "reasonRequired": false,
+      "disregardFilesystemIgnores": false
+    },
+    "summary": "No known vulnerabilities",
+    "filesystemPolicy": false,
+    "uniqueCount": 0,
+    "targetFile": "SomeProject.RandomProject.Comparison/obj/project.assets.json",
+    "projectName": "DotNetMultiProject",
+    "foundProjectCount": 8,
+    "displayTargetFile": "SomeProject.RandomProject.Comparison/obj/project.assets.json",
+    "hasUnknownVersions": false,
+    "path": "/root/nugetMultiProjectRepo/DotNetMultiProject"
+  },
+  {
+    "vulnerabilities": [
+      {
+        "id": "SNYK-DOTNET-MICROSOFTRESTCLIENTRUNTIME-5768475",
+        "title": "Insertion of Sensitive Information into Log File",
+        "CVSSv3": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:N/A:N/E:P",
+        "credit": [
+          "Unknown"
+        ],
+        "semver": {
+          "vulnerable": [
+            "[,2.3.24)"
+          ]
+        },
+        "exploit": "Proof of Concept",
+        "fixedIn": [
+          "2.3.24"
+        ],
+        "patches": [],
+        "insights": {
+          "triageAdvice": null
+        },
+        "language": "dotnet",
+        "severity": "medium",
+        "cvssScore": 5.3,
+        "functions": [],
+        "malicious": false,
+        "isDisputed": false,
+        "moduleName": "microsoft.rest.clientruntime",
+        "references": [
+          {
+            "url": "https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2022-26907",
+            "title": "Microsoft Security Advisory"
+          },
+          {
+            "url": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2022-26907",
+            "title": "Update Guide"
+          },
+          {
+            "url": "https://github.com/Azure/azure-sdk-for-net/blob/a919c48ae294fed084a9679b6f53ac6af3fb4c3a/sdk/mgmtcommon/ClientRuntime/ClientRuntime/Microsoft.Rest.ClientRuntime.csproj%23L11",
+            "title": "Vulnerable Code"
+          }
+        ],
+        "cvssDetails": [
+          {
+            "assigner": "NVD",
+            "severity": "medium",
+            "cvssV3Vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:N/A:N",
+            "cvssV3BaseScore": 5.3,
+            "modificationTime": "2023-06-29T13:12:25.837591Z"
+          }
+        ],
+        "description": "## Overview\n\nAffected versions of this package are vulnerable to Insertion of Sensitive Information into Log File due to a lack of sanitization of exception messages.\n## Remediation\nUpgrade `Microsoft.Rest.ClientRuntime` to version 2.3.24 or higher.\n## References\n- [Microsoft Security Advisory](https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2022-26907)\n- [Update Guide](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2022-26907)\n- [Vulnerable Code](https://github.com/Azure/azure-sdk-for-net/blob/a919c48ae294fed084a9679b6f53ac6af3fb4c3a/sdk/mgmtcommon/ClientRuntime/ClientRuntime/Microsoft.Rest.ClientRuntime.csproj#L11)\n",
+        "epssDetails": {
+          "percentile": "0.66282",
+          "probability": "0.00317",
+          "modelVersion": "v2023.03.01"
+        },
+        "identifiers": {
+          "CVE": [
+            "CVE-2022-26907"
+          ],
+          "CWE": [
+            "CWE-532"
+          ],
+          "GHSA": [
+            "GHSA-whph-446h-6m9v"
+          ]
+        },
+        "packageName": "Microsoft.Rest.ClientRuntime",
+        "proprietary": false,
+        "creationTime": "2023-07-09T09:24:50.857772Z",
+        "functions_new": [],
+        "alternativeIds": [],
+        "disclosureTime": "2022-04-16T00:00:28Z",
+        "packageManager": "nuget",
+        "publicationTime": "2023-07-09T09:24:51.079451Z",
+        "modificationTime": "2023-07-09T09:24:51.154259Z",
+        "socialTrendAlert": false,
+        "severityWithCritical": "medium",
+        "from": [
+          "DotNetMultiProject@1.0.0",
+          "Microsoft.Rest.ClientRuntime@2.3.18"
+        ],
+        "upgradePath": [
+          false,
+          "Microsoft.Rest.ClientRuntime@2.3.24"
+        ],
+        "isUpgradable": true,
+        "isPatchable": false,
+        "name": "Microsoft.Rest.ClientRuntime",
+        "version": "2.3.18"
+      }
+    ],
+    "ok": false,
+    "dependencyCount": 54,
+    "org": "test-organization",
+    "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.25.1\nignore: {}\npatch: {}\n",
+    "isPrivate": true,
+    "licensesPolicy": {
+      "severities": {},
+      "orgLicenseRules": {
+        "AGPL-1.0": {
+          "licenseType": "AGPL-1.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "AGPL-3.0": {
+          "licenseType": "AGPL-3.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "Artistic-1.0": {
+          "licenseType": "Artistic-1.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "Artistic-2.0": {
+          "licenseType": "Artistic-2.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "CDDL-1.0": {
+          "licenseType": "CDDL-1.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "CPOL-1.02": {
+          "licenseType": "CPOL-1.02",
+          "severity": "high",
+          "instructions": ""
+        },
+        "EPL-1.0": {
+          "licenseType": "EPL-1.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "GPL-2.0": {
+          "licenseType": "GPL-2.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "GPL-3.0": {
+          "licenseType": "GPL-3.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "LGPL-2.0": {
+          "licenseType": "LGPL-2.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "LGPL-2.1": {
+          "licenseType": "LGPL-2.1",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "LGPL-3.0": {
+          "licenseType": "LGPL-3.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "MPL-1.1": {
+          "licenseType": "MPL-1.1",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "MPL-2.0": {
+          "licenseType": "MPL-2.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "MS-RL": {
+          "licenseType": "MS-RL",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "SimPL-2.0": {
+          "licenseType": "SimPL-2.0",
+          "severity": "high",
+          "instructions": ""
+        }
+      }
+    },
+    "packageManager": "nuget",
+    "ignoreSettings": {
+      "adminOnly": false,
+      "reasonRequired": false,
+      "disregardFilesystemIgnores": false
+    },
+    "summary": "1 vulnerable dependency path",
+    "remediation": {
+      "unresolved": [],
+      "upgrade": {
+        "Microsoft.Rest.ClientRuntime@2.3.18": {
+          "upgradeTo": "Microsoft.Rest.ClientRuntime@2.3.24",
+          "upgrades": [
+            "Microsoft.Rest.ClientRuntime@2.3.18"
+          ],
+          "vulns": [
+            "SNYK-DOTNET-MICROSOFTRESTCLIENTRUNTIME-5768475"
+          ]
+        }
+      },
+      "patch": {},
+      "ignore": {},
+      "pin": {}
+    },
+    "filesystemPolicy": false,
+    "filtered": {
+      "ignore": [],
+      "patch": []
+    },
+    "uniqueCount": 1,
+    "targetFile": "SomeProject.RandomProject.Proxy/obj/project.assets.json",
+    "projectName": "DotNetMultiProject",
+    "foundProjectCount": 8,
+    "displayTargetFile": "SomeProject.RandomProject.Proxy/obj/project.assets.json",
+    "hasUnknownVersions": false,
+    "path": "/root/nugetMultiProjectRepo/DotNetMultiProject"
+  },
+  {
+    "vulnerabilities": [
+      {
+        "id": "SNYK-DOTNET-AZUREIDENTITY-6009155",
+        "title": "Remote Code Execution (RCE)",
+        "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+        "credit": [
+          "Martin Wrona"
+        ],
+        "semver": {
+          "vulnerable": [
+            "[,1.10.2)"
+          ]
+        },
+        "exploit": "Not Defined",
+        "fixedIn": [
+          "1.10.2"
+        ],
+        "patches": [],
+        "insights": {
+          "triageAdvice": null
+        },
+        "language": "dotnet",
+        "severity": "high",
+        "cvssScore": 8.8,
+        "functions": [],
+        "malicious": false,
+        "isDisputed": false,
+        "moduleName": "azure.identity",
+        "references": [
+          {
+            "url": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-36414",
+            "title": "Advisory"
+          },
+          {
+            "url": "https://github.com/Azure/azure-sdk-for-net/commit/63303f99134cbb16a6283663ad7b5339a62e3713",
+            "title": "GitHub Commit"
+          }
+        ],
+        "cvssDetails": [
+          {
+            "assigner": "NVD",
+            "severity": "high",
+            "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+            "cvssV3BaseScore": 8.8,
+            "modificationTime": "2023-10-11T01:11:07.412403Z"
+          }
+        ],
+        "description": "## Overview\n\nAffected versions of this package are vulnerable to Remote Code Execution (RCE) by passing a specially crafted OS-level command to a specific SDK property which is passed to the underlying CLI.\r\n\r\nBy exploiting this vulnerability an attacker could gain high privileges, which include read, write, and delete functionality. The attacker needs to be authenticated as a normal user.\r\n\r\n**Note**\r\n\r\nThe following credential types provided by the Azure Identity client library are affected:\r\n\r\n1) DefaultAzureCredential\r\n\r\n2) AzureCliCredential\r\n\r\n3) AzureDeveloperCliCredential\r\n\r\n4) AzurePowerShellCredential\n## Remediation\nUpgrade `Azure.Identity` to version 1.10.2 or higher.\n## References\n- [Advisory](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-36414)\n- [GitHub Commit](https://github.com/Azure/azure-sdk-for-net/commit/63303f99134cbb16a6283663ad7b5339a62e3713)\n",
+        "epssDetails": {
+          "percentile": "0.56157",
+          "probability": "0.00189",
+          "modelVersion": "v2023.03.01"
+        },
+        "identifiers": {
+          "CVE": [
+            "CVE-2023-36414"
+          ],
+          "CWE": [
+            "CWE-94"
+          ],
+          "GHSA": [
+            "GHSA-5mfx-4wcx-rv27"
+          ]
+        },
+        "packageName": "Azure.Identity",
+        "proprietary": false,
+        "creationTime": "2023-10-19T11:35:11.133623Z",
+        "functions_new": [],
+        "alternativeIds": [],
+        "disclosureTime": "2023-10-10T18:31:33Z",
+        "packageManager": "nuget",
+        "publicationTime": "2023-10-19T11:55:35.830834Z",
+        "modificationTime": "2023-10-19T11:55:35.836359Z",
+        "socialTrendAlert": false,
+        "severityWithCritical": "high",
+        "from": [
+          "DotNetMultiProject@1.0.0",
+          "Microsoft.EntityFrameworkCore.SqlServer@7.0.11",
+          "Microsoft.Data.SqlClient@5.1.1",
+          "Azure.Identity@1.7.0"
+        ],
+        "upgradePath": [],
+        "isUpgradable": false,
+        "isPatchable": false,
+        "name": "Azure.Identity",
+        "version": "1.7.0"
+      }
+    ],
+    "ok": false,
+    "dependencyCount": 56,
+    "org": "test-organization",
+    "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.25.1\nignore: {}\npatch: {}\n",
+    "isPrivate": true,
+    "licensesPolicy": {
+      "severities": {},
+      "orgLicenseRules": {
+        "AGPL-1.0": {
+          "licenseType": "AGPL-1.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "AGPL-3.0": {
+          "licenseType": "AGPL-3.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "Artistic-1.0": {
+          "licenseType": "Artistic-1.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "Artistic-2.0": {
+          "licenseType": "Artistic-2.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "CDDL-1.0": {
+          "licenseType": "CDDL-1.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "CPOL-1.02": {
+          "licenseType": "CPOL-1.02",
+          "severity": "high",
+          "instructions": ""
+        },
+        "EPL-1.0": {
+          "licenseType": "EPL-1.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "GPL-2.0": {
+          "licenseType": "GPL-2.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "GPL-3.0": {
+          "licenseType": "GPL-3.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "LGPL-2.0": {
+          "licenseType": "LGPL-2.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "LGPL-2.1": {
+          "licenseType": "LGPL-2.1",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "LGPL-3.0": {
+          "licenseType": "LGPL-3.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "MPL-1.1": {
+          "licenseType": "MPL-1.1",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "MPL-2.0": {
+          "licenseType": "MPL-2.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "MS-RL": {
+          "licenseType": "MS-RL",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "SimPL-2.0": {
+          "licenseType": "SimPL-2.0",
+          "severity": "high",
+          "instructions": ""
+        }
+      }
+    },
+    "packageManager": "nuget",
+    "ignoreSettings": {
+      "adminOnly": false,
+      "reasonRequired": false,
+      "disregardFilesystemIgnores": false
+    },
+    "summary": "1 vulnerable dependency path",
+    "remediation": {
+      "unresolved": [
+        {
+          "id": "SNYK-DOTNET-AZUREIDENTITY-6009155",
+          "title": "Remote Code Execution (RCE)",
+          "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "credit": [
+            "Martin Wrona"
+          ],
+          "semver": {
+            "vulnerable": [
+              "[,1.10.2)"
+            ]
+          },
+          "exploit": "Not Defined",
+          "fixedIn": [
+            "1.10.2"
+          ],
+          "patches": [],
+          "insights": {
+            "triageAdvice": null
+          },
+          "language": "dotnet",
+          "severity": "high",
+          "cvssScore": 8.8,
+          "functions": [],
+          "malicious": false,
+          "isDisputed": false,
+          "moduleName": "azure.identity",
+          "references": [
+            {
+              "url": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-36414",
+              "title": "Advisory"
+            },
+            {
+              "url": "https://github.com/Azure/azure-sdk-for-net/commit/63303f99134cbb16a6283663ad7b5339a62e3713",
+              "title": "GitHub Commit"
+            }
+          ],
+          "cvssDetails": [
+            {
+              "assigner": "NVD",
+              "severity": "high",
+              "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "cvssV3BaseScore": 8.8,
+              "modificationTime": "2023-10-11T01:11:07.412403Z"
+            }
+          ],
+          "description": "## Overview\n\nAffected versions of this package are vulnerable to Remote Code Execution (RCE) by passing a specially crafted OS-level command to a specific SDK property which is passed to the underlying CLI.\r\n\r\nBy exploiting this vulnerability an attacker could gain high privileges, which include read, write, and delete functionality. The attacker needs to be authenticated as a normal user.\r\n\r\n**Note**\r\n\r\nThe following credential types provided by the Azure Identity client library are affected:\r\n\r\n1) DefaultAzureCredential\r\n\r\n2) AzureCliCredential\r\n\r\n3) AzureDeveloperCliCredential\r\n\r\n4) AzurePowerShellCredential\n## Remediation\nUpgrade `Azure.Identity` to version 1.10.2 or higher.\n## References\n- [Advisory](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-36414)\n- [GitHub Commit](https://github.com/Azure/azure-sdk-for-net/commit/63303f99134cbb16a6283663ad7b5339a62e3713)\n",
+          "epssDetails": {
+            "percentile": "0.56157",
+            "probability": "0.00189",
+            "modelVersion": "v2023.03.01"
+          },
+          "identifiers": {
+            "CVE": [
+              "CVE-2023-36414"
+            ],
+            "CWE": [
+              "CWE-94"
+            ],
+            "GHSA": [
+              "GHSA-5mfx-4wcx-rv27"
+            ]
+          },
+          "packageName": "Azure.Identity",
+          "proprietary": false,
+          "creationTime": "2023-10-19T11:35:11.133623Z",
+          "functions_new": [],
+          "alternativeIds": [],
+          "disclosureTime": "2023-10-10T18:31:33Z",
+          "packageManager": "nuget",
+          "publicationTime": "2023-10-19T11:55:35.830834Z",
+          "modificationTime": "2023-10-19T11:55:35.836359Z",
+          "socialTrendAlert": false,
+          "packagePopularityRank": 99,
+          "from": [
+            "DotNetMultiProject@1.0.0",
+            "Microsoft.EntityFrameworkCore.SqlServer@7.0.11",
+            "Microsoft.Data.SqlClient@5.1.1",
+            "Azure.Identity@1.7.0"
+          ],
+          "upgradePath": [],
+          "isUpgradable": false,
+          "isPatchable": false,
+          "isPinnable": false,
+          "isRuntime": false,
+          "name": "Azure.Identity",
+          "version": "1.7.0",
+          "severityWithCritical": "high"
+        }
+      ],
+      "upgrade": {},
+      "patch": {},
+      "ignore": {},
+      "pin": {}
+    },
+    "filesystemPolicy": false,
+    "filtered": {
+      "ignore": [],
+      "patch": []
+    },
+    "uniqueCount": 1,
+    "targetFile": "SomeProject.RandomProject.Rules.Database/obj/project.assets.json",
+    "projectName": "DotNetMultiProject",
+    "foundProjectCount": 8,
+    "displayTargetFile": "SomeProject.RandomProject.Rules.Database/obj/project.assets.json",
+    "hasUnknownVersions": false,
+    "path": "/root/nugetMultiProjectRepo/DotNetMultiProject"
+  },
+  {
+    "vulnerabilities": [],
+    "ok": true,
+    "dependencyCount": 92,
+    "org": "test-organization",
+    "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.25.1\nignore: {}\npatch: {}\n",
+    "isPrivate": true,
+    "licensesPolicy": {
+      "severities": {},
+      "orgLicenseRules": {
+        "AGPL-1.0": {
+          "licenseType": "AGPL-1.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "AGPL-3.0": {
+          "licenseType": "AGPL-3.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "Artistic-1.0": {
+          "licenseType": "Artistic-1.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "Artistic-2.0": {
+          "licenseType": "Artistic-2.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "CDDL-1.0": {
+          "licenseType": "CDDL-1.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "CPOL-1.02": {
+          "licenseType": "CPOL-1.02",
+          "severity": "high",
+          "instructions": ""
+        },
+        "EPL-1.0": {
+          "licenseType": "EPL-1.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "GPL-2.0": {
+          "licenseType": "GPL-2.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "GPL-3.0": {
+          "licenseType": "GPL-3.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "LGPL-2.0": {
+          "licenseType": "LGPL-2.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "LGPL-2.1": {
+          "licenseType": "LGPL-2.1",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "LGPL-3.0": {
+          "licenseType": "LGPL-3.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "MPL-1.1": {
+          "licenseType": "MPL-1.1",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "MPL-2.0": {
+          "licenseType": "MPL-2.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "MS-RL": {
+          "licenseType": "MS-RL",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "SimPL-2.0": {
+          "licenseType": "SimPL-2.0",
+          "severity": "high",
+          "instructions": ""
+        }
+      }
+    },
+    "packageManager": "nuget",
+    "ignoreSettings": {
+      "adminOnly": false,
+      "reasonRequired": false,
+      "disregardFilesystemIgnores": false
+    },
+    "summary": "No known vulnerabilities",
+    "filesystemPolicy": false,
+    "uniqueCount": 0,
+    "targetFile": "Tests/Categorisation.Client.Tests/obj/project.assets.json",
+    "projectName": "DotNetMultiProject",
+    "foundProjectCount": 8,
+    "displayTargetFile": "Tests/Categorisation.Client.Tests/obj/project.assets.json",
+    "hasUnknownVersions": false,
+    "path": "/root/nugetMultiProjectRepo/DotNetMultiProject"
+  },
+  {
+    "vulnerabilities": [],
+    "ok": true,
+    "dependencyCount": 23,
+    "org": "test-organization",
+    "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.25.1\nignore: {}\npatch: {}\n",
+    "isPrivate": true,
+    "licensesPolicy": {
+      "severities": {},
+      "orgLicenseRules": {
+        "AGPL-1.0": {
+          "licenseType": "AGPL-1.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "AGPL-3.0": {
+          "licenseType": "AGPL-3.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "Artistic-1.0": {
+          "licenseType": "Artistic-1.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "Artistic-2.0": {
+          "licenseType": "Artistic-2.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "CDDL-1.0": {
+          "licenseType": "CDDL-1.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "CPOL-1.02": {
+          "licenseType": "CPOL-1.02",
+          "severity": "high",
+          "instructions": ""
+        },
+        "EPL-1.0": {
+          "licenseType": "EPL-1.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "GPL-2.0": {
+          "licenseType": "GPL-2.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "GPL-3.0": {
+          "licenseType": "GPL-3.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "LGPL-2.0": {
+          "licenseType": "LGPL-2.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "LGPL-2.1": {
+          "licenseType": "LGPL-2.1",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "LGPL-3.0": {
+          "licenseType": "LGPL-3.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "MPL-1.1": {
+          "licenseType": "MPL-1.1",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "MPL-2.0": {
+          "licenseType": "MPL-2.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "MS-RL": {
+          "licenseType": "MS-RL",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "SimPL-2.0": {
+          "licenseType": "SimPL-2.0",
+          "severity": "high",
+          "instructions": ""
+        }
+      }
+    },
+    "packageManager": "nuget",
+    "ignoreSettings": {
+      "adminOnly": false,
+      "reasonRequired": false,
+      "disregardFilesystemIgnores": false
+    },
+    "summary": "No known vulnerabilities",
+    "filesystemPolicy": false,
+    "uniqueCount": 0,
+    "targetFile": "Tests/Categorisation.Client/obj/project.assets.json",
+    "projectName": "DotNetMultiProject",
+    "foundProjectCount": 8,
+    "displayTargetFile": "Tests/Categorisation.Client/obj/project.assets.json",
+    "hasUnknownVersions": false,
+    "path": "/root/nugetMultiProjectRepo/DotNetMultiProject"
+  },
+  {
+    "vulnerabilities": [],
+    "ok": true,
+    "dependencyCount": 95,
+    "org": "test-organization",
+    "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.25.1\nignore: {}\npatch: {}\n",
+    "isPrivate": true,
+    "licensesPolicy": {
+      "severities": {},
+      "orgLicenseRules": {
+        "AGPL-1.0": {
+          "licenseType": "AGPL-1.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "AGPL-3.0": {
+          "licenseType": "AGPL-3.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "Artistic-1.0": {
+          "licenseType": "Artistic-1.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "Artistic-2.0": {
+          "licenseType": "Artistic-2.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "CDDL-1.0": {
+          "licenseType": "CDDL-1.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "CPOL-1.02": {
+          "licenseType": "CPOL-1.02",
+          "severity": "high",
+          "instructions": ""
+        },
+        "EPL-1.0": {
+          "licenseType": "EPL-1.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "GPL-2.0": {
+          "licenseType": "GPL-2.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "GPL-3.0": {
+          "licenseType": "GPL-3.0",
+          "severity": "high",
+          "instructions": ""
+        },
+        "LGPL-2.0": {
+          "licenseType": "LGPL-2.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "LGPL-2.1": {
+          "licenseType": "LGPL-2.1",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "LGPL-3.0": {
+          "licenseType": "LGPL-3.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "MPL-1.1": {
+          "licenseType": "MPL-1.1",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "MPL-2.0": {
+          "licenseType": "MPL-2.0",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "MS-RL": {
+          "licenseType": "MS-RL",
+          "severity": "medium",
+          "instructions": ""
+        },
+        "SimPL-2.0": {
+          "licenseType": "SimPL-2.0",
+          "severity": "high",
+          "instructions": ""
+        }
+      }
+    },
+    "packageManager": "nuget",
+    "ignoreSettings": {
+      "adminOnly": false,
+      "reasonRequired": false,
+      "disregardFilesystemIgnores": false
+    },
+    "summary": "No known vulnerabilities",
+    "filesystemPolicy": false,
+    "uniqueCount": 0,
+    "targetFile": "Tests/RandomProject.BusinessLogic.Tests/obj/project.assets.json",
+    "projectName": "DotNetMultiProject",
+    "foundProjectCount": 8,
+    "displayTargetFile": "Tests/RandomProject.BusinessLogic.Tests/obj/project.assets.json",
+    "hasUnknownVersions": false,
+    "path": "/root/nugetMultiProjectRepo/DotNetMultiProject"
+  }
+]
