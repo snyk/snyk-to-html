@@ -9,6 +9,11 @@
         <hr/>
 
         <ul class="card__meta">
+            {{#if list.[0].displayTargetFile }}
+            <li class="card__meta__item">
+                Manifest file: {{list.[0].path}} <span class="list-paths__item__arrow">›</span> {{list.[0].displayTargetFile}}
+            </li>
+            {{/if}}
             <li class="card__meta__item">
                 Package Manager: {{metadata.packageManager}}
             </li>

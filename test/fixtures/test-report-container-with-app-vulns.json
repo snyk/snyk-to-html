@@ -1276,7 +1276,6 @@
       "uniqueCount": 1,
       "targetFile": "/bin/gobin",
       "projectName": "mymod",
-      "displayTargetFile": "/bin/gobin",
       "path": "vulnerable:latest"
     }
   ]

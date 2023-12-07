@@ -24,7 +24,9 @@
           <div class="source-panel">
             <span>Scanned the following paths:</span>
             <ul>
-              {{#each paths}}<li class="paths">{{path}} ({{packageManager}})</li>{{/each}}
+            {{#each paths}}
+              <li class="paths">{{path}}{{#if displayTargetFile}}/{{displayTargetFile}}{{/if}} ({{packageManager}})</li>
+            {{/each}}
             </ul>
           </div>
           {{/if}}
@@ -32,7 +34,7 @@
           <div class="source-panel">
             <span>Scanned the following path:</span>
             <ul>
-              <li class="paths">{{path}} ({{packageManager}})</li>
+              <li class="paths">{{path}}{{#if displayTargetFile}}/{{displayTargetFile}}{{/if}} ({{packageManager}})</li>
             </ul>
           </div>
           {{/if}}
