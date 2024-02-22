@@ -3,6 +3,13 @@ version: 2.1
 orbs:
   prodsec: snyk/prodsec-orb@1
   
+commands:
+  install:
+    steps:
+      - run:
+          name: Install
+          command: npm install
+
 jobs:
   security-scans:
     resource_class: small
@@ -10,6 +17,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
+      - install
       - prodsec/security_scans:
           mode: auto
 
