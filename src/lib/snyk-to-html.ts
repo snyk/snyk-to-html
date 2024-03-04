@@ -256,7 +256,22 @@ async function generateCodeTemplate(
 }
 
 function mergeData(dataArray: any[]): any {
-  const vulnsArrays = dataArray.map(project => project.vulnerabilities || []);
+  const vulnsArrays = dataArray.map((project) => {
+    if (!project.vulnerabilities) {
+      return [];
+    }
+
+    // Add project data to each of the vulnerabilities to display more
+    // details on each vulnerability card, in order to properly distinguish
+    // from which project a vuln is connected, in case of displaying multiple
+    // projects.
+    const vulns = project.vulnerabilities.map((vuln) => ({
+      ...vuln,
+      displayTargetFile: project.displayTargetFile,
+      path: project.path
+    }));
+    return vulns;
+  });
   const aggregateVulnerabilities = [].concat(...vulnsArrays);
 
   const totalUniqueCount =
@@ -264,7 +279,11 @@ function mergeData(dataArray: any[]): any {
   const totalDepCount =
     dataArray.reduce((acc, item) => acc + item.dependencyCount || 0, 0);
 
-  const paths = dataArray.map(project => ({ path: project.path, packageManager: project.packageManager }));
+  const paths = dataArray.map(project => ({
+    path: project.path,
+    packageManager: project.packageManager,
+    displayTargetFile: project.displayTargetFile,
+  }));
 
   return {
     vulnerabilities: aggregateVulnerabilities,
@@ -325,7 +344,7 @@ async function processCodeData(
   const dataArray = Array.isArray(data) ? data : [data];
 
   const OrderedIssuesArray = await processSourceCode(dataArray);
-  
+
   const totalIssues = dataArray[0].runs[0].results.length;
   const processedData = {
     projects: OrderedIssuesArray,

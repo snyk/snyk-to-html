@@ -4,8 +4,8 @@ metadata:
   name: snyk-to-html
   annotations:
     github.com/project-slug: snyk/snyk-to-html
-    github.com/team-slug: snyk/hammerhead
+    github.com/team-slug: snyk/cli
 spec:
   type: external-tooling
   lifecycle: "-"
-  owner: hammerhead
+  owner: cli

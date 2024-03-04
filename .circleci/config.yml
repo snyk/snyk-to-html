@@ -1,14 +1,34 @@
 version: 2.1
 
 orbs:
-  prodsec: snyk/prodsec-orb@1.0
+  prodsec: snyk/prodsec-orb@1
   
+commands:
+  install:
+    steps:
+      - run:
+          name: Install
+          command: npm install
+
+jobs:
+  security-scans:
+    resource_class: small
+    docker:
+      - image: cimg/node:lts
+    steps:
+      - checkout
+      - install
+      - prodsec/security_scans:
+          mode: auto
+
 workflows:
-  version: 2
   CICD:
     jobs:
       - prodsec/secrets-scan:
-          name: Scan repository for secrets
+          name: scan repository for secrets
           context:
             - snyk-bot-slack
-          channel: hammerhead-alerts
+          channel: cli-alerts
+
+      - security-scans:
+          context: devex_cli
