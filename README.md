@@ -28,7 +28,7 @@ node ./dist/index.js
 | ----- | -------------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | `-t`  | `--template`               | Template location for generating the html. Defaults to template/test-report.hbs                                  |
 | `-i`  | `--input`                  | Input path from where to read the json. Defaults to stdin                                                        |
-| `-o`  | `--output`                 | Output of the resulting HTML. Example: -o snyk.html. Defaults to stdout                                          |
+| `-o`  | `--output`                 | Output of the resulting HTML. Example: `-o snyk.html`. Defaults to stdout                                        |
 | `-s`  | `--summary`                | Generates an HTML with only the summary, instead of the details report. Defaults to details vulnerability report |
 | `-d`  | `--debug`                  | Runs the CLI in debug mode                                                                                       |
 | `-a`  | `--actionable-remediation` | Display actionable remediation info if available                                                                 |
