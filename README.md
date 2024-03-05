@@ -110,6 +110,11 @@ Snyk JSON to HTML Mapper mapper works with the different Snyk Products.  Change 
 
 Simply open your new file (`results-[type].html` as above) in a browser, and rejoice.
 
+
+## Getting support for snyk-to-html
+
+[Submit a ticket](https://support.snyk.io/hc/en-us/requests/new) to Snyk support when you need help with `snyk-to-html` or Snyk in general. Note that Snyk support does not actively monitor GitHub Issues on any [Snyk development project](https://github.com/snyk).
+
 ### License
 
 [License: Apache License, Version 2.0](LICENSE)
