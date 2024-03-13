@@ -49,7 +49,7 @@ jobs:
       - run: npm run tap
 
   release:
-    if: github.ref == 'refs/heads/master'  # only run on master
+    if: github.ref == 'refs/heads/main'  # only run on main
     needs: test
     name: Release snyk-to-html
     runs-on: ubuntu-latest
