@@ -28,7 +28,7 @@ node ./dist/index.js
 | ----- | -------------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | `-t`  | `--template`               | Template location for generating the html. Defaults to template/test-report.hbs                                  |
 | `-i`  | `--input`                  | Input path from where to read the json. Defaults to stdin                                                        |
-| `-o`  | `--output`                 | Output of the resulting HTML. Example: -o snyk.html. Defaults to stdout                                          |
+| `-o`  | `--output`                 | Output of the resulting HTML. Example: `-o snyk.html`. Defaults to stdout                                        |
 | `-s`  | `--summary`                | Generates an HTML with only the summary, instead of the details report. Defaults to details vulnerability report |
 | `-d`  | `--debug`                  | Runs the CLI in debug mode                                                                                       |
 | `-a`  | `--actionable-remediation` | Display actionable remediation info if available                                                                 |
@@ -109,6 +109,11 @@ Snyk JSON to HTML Mapper mapper works with the different Snyk Products.  Change 
 ## View the HTML report
 
 Simply open your new file (`results-[type].html` as above) in a browser, and rejoice.
+
+
+## Getting support for snyk-to-html
+
+[Submit a ticket](https://support.snyk.io/hc/en-us/requests/new) to Snyk support when you need help with `snyk-to-html` or Snyk in general. Note that Snyk support does not actively monitor GitHub Issues on any [Snyk development project](https://github.com/snyk).
 
 ### License
 
