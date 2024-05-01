@@ -118,3 +118,8 @@ Simply open your new file (`results-[type].html` as above) in a browser, and rej
 ### License
 
 [License: Apache License, Version 2.0](LICENSE)
+
+
+## Making a new release
+
+After merging the PR, you can make a new release manually by triggering the `Test and release snyk-to-html ` workflow in the [Actions](https://github.com/snyk/snyk-to-html/actions/workflows/test-and-release.yml) tab.
