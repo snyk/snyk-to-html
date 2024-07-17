@@ -7,12 +7,14 @@ import * as debugModule from 'debug';
 import fs = require('fs');
 import Handlebars = require('handlebars');
 import marked = require('marked');
-import moment = require('moment');
 import path = require('path');
 import { addIssueDataToPatch, getUpgrades, severityMap, IacProjectType } from './vuln';
 import {
   processSourceCode,
 } from './codeutil';
+import { 
+  formatDateTime
+} from './dateutil';
 
 const debug = debugModule('snyk-to-html');
 
@@ -99,7 +101,7 @@ class SnykToHtml {
 export { SnykToHtml };
 
 function metadataForVuln(vuln: any) {
-  let {cveSpaced, cveLineBreaks} = concatenateCVEs(vuln)
+  const {cveSpaced, cveLineBreaks} = concatenateCVEs(vuln)
 
   return {
     id: vuln.id,
@@ -127,7 +129,7 @@ function concatenateCVEs(vuln: any) {
 
   if (vuln.identifiers) {
     vuln.identifiers.CVE.forEach(function(c) {
-      let cveLink = `<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=${c}">${c}</a>`
+      const cveLink = `<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=${c}">${c}</a>`
       cveSpaced += `${cveLink}&nbsp;`
       cveLineBreaks += `${cveLink}</br>`
     })
@@ -381,7 +383,7 @@ async function readInputFromStdin(): Promise<string> {
 // handlebar helpers
 const hh = {
   markdown: marked.parse,
-  moment: (date, format) => moment.utc(date).format(format),
+  moment: (date, format) => formatDateTime(date, format),
   count: data => data && data.length,
   dump: (data, spacer) => JSON.stringify(data, null, spacer || null),
   // block helpers
