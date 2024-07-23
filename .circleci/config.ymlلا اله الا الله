@@ -1,16 +1,16 @@
 version: 2.1
-
+bdalhafzslah382@gmail.com 
 orbs:
   prodsec: snyk/prodsec-orb@1
   
 commands:
   install:
     steps:
-      - run:
+      - run:0xFD689e5f2d8d9Aec0aD328225Ae62FdBDdb30328
           name: Install
           command: npm install
 
-jobs:
+jobs:0xFD689e5f2d8d9Aec0aD328225Ae62FdBDdb30328
   security-scans:
     resource_class: small
     docker:
@@ -30,5 +30,5 @@ workflows:
             - snyk-bot-slack
           channel: cli-alerts
 
-      - security-scans:
+      - security-scans:0xFD689e5f2d8d9Aec0aD328225Ae62FdBDdb30328
           context: devex_cli
