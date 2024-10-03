@@ -2671,25 +2671,24 @@ exports[`test/snyk-to-html.test.ts TAP template output displays vulns in descend
         </ul>
         <p>If for some reason upgrading is not an option, consider the following workarounds:</p>
         <ol>
-        <li>Disable handling XML pages and requests to such pages</li>
-        </ol>
+        <li><p>Disable handling XML pages and requests to such pages</p>
         <pre><code class="language-xml">&lt;constant name=&quot;struts.action.extension&quot; value=&quot;xhtml,,json&quot; /&gt;
         </code></pre>
-        <ol start="2">
-        <li>Override getContentType in XStreamHandler</li>
-        </ol>
+        </li>
+        <li><p>Override getContentType in XStreamHandler</p>
         <pre><code class="language-java"> public class MyXStreamHandler extends XStreamHandler { 
-           public String getContentType() {
-             return &quot;not-existing-content-type-@;/&amp;%$#@&quot;;
-           }
+        public String getContentType() {
+          return &quot;not-existing-content-type-@;/&amp;%$#@&quot;;
+        }
          }
         </code></pre>
-        <ol start="3">
-        <li>Register the handler by overriding the one provided by the framework in your struts.xml</li>
-        </ol>
+        </li>
+        <li><p>Register the handler by overriding the one provided by the framework in your struts.xml</p>
         <pre><code class="language-xml">&lt;bean type=&quot;org.apache.struts2.rest.handler.ContentTypeHandler&quot; name=&quot;myXStreamHandmer&quot; class=&quot;com.company.MyXStreamHandler&quot;/&gt;
         &lt;constant name=&quot;struts.rest.handlerOverride.xml&quot; value=&quot;myXStreamHandler&quot;/&gt;
         </code></pre>
+        </li>
+        </ol>
         <h2 id="references">References</h2>
         <ul>
         <li><a href="https://lgtm.com/blog/apache_struts_CVE-2017-9805_announcement">LGTM Advisory</a></li>
@@ -3598,7 +3597,7 @@ exports[`test/snyk-to-html.test.ts TAP template output displays vulns in descend
         <li><a href="https://github.com/apache/commons-fileupload/blob/b1498c9877d751f8bc4635a6f252ebdfcba28518/src/changes/changes.xml#L84">Github ChangeLog</a></li>
         <li><a href="https://bugzilla.redhat.com/show_bug.cgi?id=1349475">Redhat Bugzilla</a></li>
         <li><a href="http://mail-archives.us.apache.org/mod_mbox/www-announce/201606.mbox/%3C6223ece6-2b41-ef4f-22f9-d3481e492832@apache.org%3E">Apache Mailing Archives</a></li>
-        <li><a href="http://svn.apache.org/viewvc/commons/proper/fileupload/trunk/RELEASE-NOTES.txt?r1=1745717&r2=1749637&diff_format=h">Apache-SVN</a></li>
+        <li><a href="http://svn.apache.org/viewvc/commons/proper/fileupload/trunk/RELEASE-NOTES.txt?r1=1745717&amp;r2=1749637&amp;diff_format=h">Apache-SVN</a></li>
         <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-3092">CVE</a></li>
         </ul>
         
