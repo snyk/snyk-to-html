@@ -937,6 +937,30 @@ test('test snyk-to-html container app vulnerabilities', (t) => {
   );
 });
 
+test('test snyk-to-html consistent ignores suppressions', (t) => {
+  t.plan(2);
+  // report generated with "snyk code test --json" against snyk cli
+  // with issues suppressed
+  SnykToHtml.run(
+    path.join(__dirname, 'fixtures', 'test-code-consistent-ignores.json'),
+    noRemediation,
+    path.join(__dirname, '..', 'template', 'test-report.hbs'),
+    noSummary,
+    (report) => {
+      t.contains(
+        report,
+        '<div class="suppression-card">',
+        'should contain a supression card',
+      );
+      t.contains(
+        report,
+        '<span><strong>9</strong> medium issues</span>',
+        'should contain a count of 9 medium issues (2 are suppressed)',
+      );
+    },
+  );
+});
+
 test('test snyk-to-html with custom path descriptors', (t) => {
   t.plan(1);
   // report generated with "snyk container test --all-projects --json" on a nuget multi-project with more than one path

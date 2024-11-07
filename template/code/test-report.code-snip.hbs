@@ -1,4 +1,4 @@
-<div class="card card--vuln  disclosure--not-new severity--{{severitytext}}" data-snyk-test="{{severitytext}}">
+<div class="card card--vuln  disclosure--not-new severity--{{severitytext}} {{#if suppression}}suppressed{{/if}}" data-snyk-test="{{severitytext}}">
     <header class="card__header">
         <div class="card__header__main">
             <div class="severity-icon severity-icon--{{severitytext}}"></div>
@@ -36,6 +36,43 @@
             <h2 class="card__panel__heading"><span class="heading-char">✓</span> Fix Analysis</h2>
             <div class="card__panel__markdown">{{{markdown ruleiddesc.help.markdown}}}</div>
         </div>
+        {{#if suppression}}
+        <div class="suppression-card">
+            <div class="suppression-card__container">
+                <ul class="suppression-card__items">
+                    <li class="suppression-card__item">
+                        <div class="suppression-card__item__key">Ignored at {{formatDate suppression.ignoredOn}} by</div>
+                        <div class="suppression-card__item__value">
+                            <span class="supression-card__user-initial">{{firstInitial suppression.ignoredBy.name}}</span>
+                            {{#if suppression.ignoredBy.name}} {{ suppression.ignoredBy.name }} {{/if}} {{#if suppression.ignoredBy.email}} &lt;{{suppression.ignoredBy.email}}&gt;{{/if}}
+                        </div>
+                    </li>
+                    <li class="suppression-card__item">
+                        <div class="suppression-card__item__key">Type</div>
+                        <div class="suppression-card__item__value">
+                            {{suppression.category}}
+                        </div>
+                    </li>
+                    <li class="suppression-card__item">
+                        <div class="suppression-card__item__key">Reason</div>
+                        <div class="suppression-card__item__value">
+                            {{suppression.justification}}
+                        </div>
+                    </li>
+                </ul>
+                <ul class="suppression-card__items">
+                    <li class="suppression-card__item">
+                    </li>
+                    <li class="suppression-card__item">
+                        <div class="suppression-card__item__key">Expires</div>
+                        <div class="suppression-card__item__value">
+                            {{#if suppression.expiration}}{{formatDate suppression.expiration}}{{else}}Never{{/if}}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        {{/if}}
     {{/unless}}
     </div>
 </div>

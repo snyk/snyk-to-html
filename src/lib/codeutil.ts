@@ -109,10 +109,17 @@ export async function processSourceCode(dataArray){
   const rulesArray = dataArray[0].runs[0].tool.driver.rules;
   for (const issue of dataArray[0].runs[0].results){
     issue.severitytext = codeSeverityMap[issue.level];
-    findSeverityIndex = codeSeverityCounter.findIndex(
-      (f) => f.severity === issue.severitytext,
-    );
-    codeSeverityCounter[findSeverityIndex].counter++;
+    
+    // Only count non-suppressed issues
+    if (!issue.suppressions || issue.suppressions.length === 0) {
+      findSeverityIndex = codeSeverityCounter.findIndex(
+        (f) => f.severity === issue.severitytext,
+      );
+      if (findSeverityIndex !== -1) {
+        codeSeverityCounter[findSeverityIndex].counter++;
+      }
+    }
+    
     //add the code snippet here...
     issue.locations[0].physicalLocation.codeString = await readCodeSnippet(
       issue.locations[0],
@@ -149,4 +156,36 @@ export async function processSourceCode(dataArray){
     };
   });
   return OrderedIssuesArray;
+}
+
+export function processSuppression(suppression: any) {
+  if (!suppression) return null;
+
+  return {
+    justification: suppression.justification,
+    category: suppression.properties?.category || 'unknown',
+    expiration: suppression.properties?.expiration,
+    ignoredOn: suppression.properties?.ignoredOn || {
+      date: 'unknown',
+      reason: 'unknown',
+    },
+    ignoredBy: suppression.properties?.ignoredBy || {
+      name: 'unknown',
+      email: '?'
+    },
+  };
+}
+
+export function firstInitial(email: string | null | undefined): string {
+  if (!email || typeof email !== 'string') {
+    return '?'; // Return a placeholder if email is null, undefined, or not a string
+  }
+  return email.charAt(0).toUpperCase();
+}
+
+export function formatDate(date: string | null | undefined): string {
+  if (!date) {
+    return 'Unknown date';
+  }
+  return new Date(date).toISOString().slice(0, 19).replace('T', ' ') + ' GMT';
 }

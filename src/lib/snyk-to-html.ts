@@ -11,7 +11,11 @@ import path = require('path');
 import { addIssueDataToPatch, getUpgrades, severityMap, IacProjectType } from './vuln';
 import {
   processSourceCode,
+  processSuppression,
 } from './codeutil';
+import { registerHandlebarsHelpers } from '../handlebars-config';
+
+registerHandlebarsHelpers();
 import { 
   formatDateTime
 } from './dateutil';
@@ -347,6 +351,32 @@ async function processCodeData(
 
   const OrderedIssuesArray = await processSourceCode(dataArray);
 
+  // Process suppressions
+  OrderedIssuesArray.forEach(project => {
+    let hasSuppressedVulns = false;
+    const projectVulns = project.vulnerabilities.map(vuln => {
+      if (vuln.suppressions && vuln.suppressions.length > 0) {
+        hasSuppressedVulns = true;
+        vuln.suppression = processSuppression(vuln.suppressions[0]);
+      }
+      return vuln;
+    });
+  
+    if (!hasSuppressedVulns) {
+      project.vulnerabilities = projectVulns;
+      return; // Early return if no suppressions
+    }
+  
+    // Sort only if necessary
+    projectVulns.sort((a, b) => {
+      if (a.suppression && !b.suppression) return 1;
+      if (!a.suppression && b.suppression) return -1;
+      return 0;
+    });
+  
+    project.vulnerabilities = projectVulns;
+  });
+
   const totalIssues = dataArray[0].runs[0].results.length;
   const processedData = {
     projects: OrderedIssuesArray,
@@ -443,3 +473,12 @@ const hh = {
 };
 
 Object.keys(hh).forEach(k => Handlebars.registerHelper(k, hh[k]));
+
+function getIssueCountsBySeverity(issuesGroupedBySeverity: any) {
+  const counts: { [key: string]: number } = {};
+  Object.keys(issuesGroupedBySeverity).forEach((severity) => {
+    counts[severity] = issuesGroupedBySeverity[severity].filter((issue: any) => !issue.suppression).length;
+  });
+  return counts;
+}
+
