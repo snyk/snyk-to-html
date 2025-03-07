@@ -5,6 +5,7 @@ import debugModule = require('debug');
 import fs = require('fs');
 import path = require('path');
 import { SnykToHtml } from './lib/snyk-to-html';
+import { formatDateTime } from './lib/dateutil';
 
 program
   .option(
@@ -28,11 +29,21 @@ program
     '-a, --actionable-remediation',
     'Display actionable remediation info if available',
   )
+  .option(
+    '-z, --timezone <timezone>',
+    'Specify timezone for dates (e.g., "UTC+02:00"). Defaults to UTC+00:00',
+  )
   .parse(process.argv);
 
 let template;
 let source;
 let output;
+// let timezone = 'UTC+00:00'; // Default timezone
+let timezone = program.timezone;
+if (!timezone) {
+  timezone = 'UTC'; // default to EST if no timezone is provided
+}
+
 
 if (program.template) {
   // template
@@ -65,6 +76,13 @@ if (program.output) {
     output = undefined;
   }
 }
+if (program.timezone) {
+  // timezone
+  timezone = program.timezone;
+  if (typeof timezone === 'boolean') {
+    timezone = 'UTC+00:00'; // Default if -z is used without a value
+  }
+}
 
 if (program.debug) {
   const nameSpace = 'snyk-to-html';
@@ -79,6 +97,7 @@ SnykToHtml.run(
   template,
   !!program.summary,
   onReportOutput,
+  timezone,
 );
 
 function onReportOutput(report: string): void {

@@ -58,7 +58,8 @@ class SnykToHtml {
                     remediation: boolean,
                     hbsTemplate: string,
                     summary: boolean,
-                    reportCallback: (value: string) => void): void {
+                    reportCallback: (value: string) => void,
+                    timezone: string = 'UTC+00:00',): void {
     SnykToHtml
       .runAsync(dataSource, remediation, hbsTemplate, summary)
       .then(reportCallback)
@@ -381,9 +382,12 @@ async function readInputFromStdin(): Promise<string> {
 }
 
 // handlebar helpers
+const timezone = this.timezone;
 const hh = {
   markdown: marked.parse,
-  moment: (date, format) => formatDateTime(date, format),
+  moment: function(date, format) {
+    return formatDateTime(date, format, timezone);
+  },
   count: data => data && data.length,
   dump: (data, spacer) => JSON.stringify(data, null, spacer || null),
   // block helpers
