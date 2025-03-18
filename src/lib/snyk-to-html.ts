@@ -7,6 +7,7 @@ import * as debugModule from 'debug';
 import fs = require('fs');
 import Handlebars = require('handlebars');
 import marked = require('marked');
+import * as moment from 'moment-timezone';
 import path = require('path');
 import { addIssueDataToPatch, getUpgrades, severityMap, IacProjectType } from './vuln';
 import {
@@ -59,9 +60,9 @@ class SnykToHtml {
                     hbsTemplate: string,
                     summary: boolean,
                     reportCallback: (value: string) => void,
-    timezone: string = 'UTC+00:00',): void {
+    timezone: string = 'UTC',): void {
     SnykToHtml
-      .runAsync(dataSource, remediation, hbsTemplate, summary)
+      .runAsync(dataSource, remediation, hbsTemplate, summary, timezone)
       .then(reportCallback)
       .catch(handleInvalidJson);
   }
@@ -69,7 +70,7 @@ class SnykToHtml {
   public static async runAsync(source: string,
                                remediation: boolean,
                                template: string,
-                               summary: boolean): Promise<string> {
+    summary: boolean, timezone: string = 'UTC'): Promise<string> {
     const promisedString = source ? readFile(source, 'utf8') : readInputFromStdin();
     return promisedString
       .then(promisedParseJSON).then((data: any) => {
@@ -223,6 +224,7 @@ async function generateTemplate(data: any,
   await registerPeerPartial(template, 'actionable-remediations');
 
   const htmlTemplate = await compileTemplate(template);
+  data.timezone = timezone;  // Add timezone to data context
   return htmlTemplate(data);
 }
 
@@ -385,8 +387,18 @@ async function readInputFromStdin(): Promise<string> {
 const timezone = this.timezone;
 const hh = {
   markdown: marked.parse,
-  moment: function(date, format) {
-    return formatDateTime(date, format, timezone);
+  moment: function(date, format, timezone) {
+    if (!timezone) {
+      console.error("Timezone is not provided, defaulting to UTC.");
+      timezone = 'UTC';  // Fallback to UTC if no timezone is provided.
+    }
+    const momentDate = moment.tz(date, timezone);
+    const timezoneString = timezone.toString();
+    console.log('Timezone variable:', timezone);
+    const formattedDate = momentDate.format(format);
+    console.log('Snyk-to-html: Formatted date:', formattedDate); // Log the formatted date
+    return formattedDate;
+    //return formatDateTime(date, format, timezone);
   },
   count: data => data && data.length,
   dump: (data, spacer) => JSON.stringify(data, null, spacer || null),
