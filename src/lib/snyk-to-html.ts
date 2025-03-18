@@ -385,6 +385,7 @@ async function readInputFromStdin(): Promise<string> {
 
 // handlebar helpers
 const timezone = this.timezone;
+
 const hh = {
   markdown: marked.parse,
   moment: function(date, format, timezone) {

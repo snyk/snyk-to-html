@@ -45,9 +45,8 @@ let timezone = program.timezone;
 if (!timezone || typeof timezone === 'boolean') {
   timezone = 'UTC+00:00'; // Default timezone if not provided or if flag is used without value
 }
-console.log(`Timezone argument received from index.ts: ${timezone}`);
 const formattedDate = formatDateTime(date, format, timezone);
-console.log(formattedDate);
+console.log(`Timezone from index.ts ${formattedDate}`);
 
 if (program.template) {
   // template
