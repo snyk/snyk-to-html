@@ -59,7 +59,7 @@ class SnykToHtml {
                     hbsTemplate: string,
                     summary: boolean,
                     reportCallback: (value: string) => void,
-                    timezone: string = 'UTC+00:00',): void {
+    timezone: string = 'UTC+00:00',): void {
     SnykToHtml
       .runAsync(dataSource, remediation, hbsTemplate, summary)
       .then(reportCallback)

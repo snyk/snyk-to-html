@@ -6,6 +6,8 @@ import fs = require('fs');
 import path = require('path');
 import { SnykToHtml } from './lib/snyk-to-html';
 import { formatDateTime } from './lib/dateutil';
+const date = new Date(); // Use the current date, or any date you want to format
+const format = 'MMMM Do YYYY, h:mm:ss a'; // Example format: March 18th 2025, 4:35:56 pm
 
 program
   .option(
@@ -43,7 +45,9 @@ let timezone = program.timezone;
 if (!timezone || typeof timezone === 'boolean') {
   timezone = 'UTC+00:00'; // Default timezone if not provided or if flag is used without value
 }
-
+console.log(`Timezone argument received from index.ts: ${timezone}`);
+const formattedDate = formatDateTime(date, format, timezone);
+console.log(formattedDate);
 
 if (program.template) {
   // template
