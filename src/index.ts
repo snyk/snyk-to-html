@@ -38,10 +38,10 @@ program
 let template;
 let source;
 let output;
-// let timezone = 'UTC+00:00'; // Default timezone
 let timezone = program.timezone;
-if (!timezone) {
-  timezone = 'UTC'; // default to EST if no timezone is provided
+
+if (!timezone || typeof timezone === 'boolean') {
+  timezone = 'UTC+00:00'; // Default timezone if not provided or if flag is used without value
 }
 
 
@@ -76,13 +76,7 @@ if (program.output) {
     output = undefined;
   }
 }
-if (program.timezone) {
-  // timezone
-  timezone = program.timezone;
-  if (typeof timezone === 'boolean') {
-    timezone = 'UTC+00:00'; // Default if -z is used without a value
-  }
-}
+
 
 if (program.debug) {
   const nameSpace = 'snyk-to-html';
