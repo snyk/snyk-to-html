@@ -1,8 +1,6 @@
 import * as moment from 'moment-timezone';
 
 export function formatDateTime(date: Date | string | undefined, format: string, timezone: string = 'UTC'): string {
-    console.log(`Timezone received from CLI in dateutil: ${timezone}`);
-
     if (!date) {
         date = new Date(); // Use current date if none provided
     }
@@ -34,9 +32,6 @@ export function formatDateTime(date: Date | string | undefined, format: string, 
         zonedDate = moment.tz(date, 'UTC');
     }
 
-    console.log(`Formatting date in dateutil: ${zonedDate.format('YYYY-MM-DD HH:mm:ss')}, Timezone: ${timezone}, Output: ${zonedDate.format(format)}`);
-
-    // Construct replacements, ensuring timezone context
     const replacements = {
         'MMMM': zonedDate.format('MMMM'),
         'Do': zonedDate.format('Do'),
@@ -49,7 +44,6 @@ export function formatDateTime(date: Date | string | undefined, format: string, 
         'Z': zonedDate.format('Z')
     };
 
-    // Replace within the formatted string
     let formattedString = format.replace(/MMMM|Do|YYYY|h|mm|ss|a|z|Z/g, (match) => replacements[match]);
 
     return formattedString;

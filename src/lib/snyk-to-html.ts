@@ -124,10 +124,7 @@ class SnykToHtml {
   }
 
   private generateReport(report: string): string {
-    const currentDate = new Date();
-    const formattedDate = formatDateTime(currentDate, 'YYYY-MM-DD HH:mm:ss', this.timezone);
-    console.log(`Final report generated at ${formattedDate} with timezone: ${this.timezone}`);
-    return `Generated Report at ${formattedDate} with Timezone: ${this.timezone}\n${report}`;
+    return report;
   }
 }
 
