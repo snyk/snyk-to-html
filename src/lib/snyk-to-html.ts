@@ -16,6 +16,9 @@ const debug = debugModule('snyk-to-html');
 
 const defaultRemediationText = '## Remediation\nThere is no remediation at the moment';
 
+// Create a global variable to store the timezone
+let currentTimezone = 'UTC';
+
 function readFile(filePath: string, encoding: string): Promise<string> {
   return new Promise<string>((resolve, reject) => {
     fs.readFile(filePath, encoding, (err, data) => {
@@ -59,6 +62,8 @@ class SnykToHtml {
 
   constructor(timezone: string = 'UTC') {
     this.timezone = timezone;
+    // Update the global timezone variable when a new instance is created
+    currentTimezone = timezone;
   }
 
   public static run(
@@ -69,7 +74,7 @@ class SnykToHtml {
     reportCallback: (value: string) => void,
     timezone: string = 'UTC' // Default timezone
   ): void {
-    const instance = new SnykToHtml(timezone); // ✅ Create an instance with timezone
+    const instance = new SnykToHtml(timezone); // Create an instance with timezone
     SnykToHtml
       .runAsync(instance, dataSource, remediation, hbsTemplate, summary)
       .then(reportCallback)
@@ -119,8 +124,10 @@ class SnykToHtml {
   }
 
   private generateReport(report: string): string {
-    console.log('Final report generated with timezone:', this.timezone);
-    return `Generated Report with Timezone: ${this.timezone}\n${report}`;
+    const currentDate = new Date();
+    const formattedDate = formatDateTime(currentDate, 'YYYY-MM-DD HH:mm:ss', this.timezone);
+    console.log(`Final report generated at ${formattedDate} with timezone: ${this.timezone}`);
+    return `Generated Report at ${formattedDate} with Timezone: ${this.timezone}\n${report}`;
   }
 }
 
@@ -221,6 +228,7 @@ async function generateTemplate(data: any,
     data.patches = addIssueDataToPatch(
       patch,
       data.vulnerabilities,
+
     );
   }
   const vulnMetadata = groupVulns(data.vulnerabilities);
@@ -409,7 +417,7 @@ async function readInputFromStdin(): Promise<string> {
 // handlebar helpers
 const hh = {
   markdown: marked.parse,
-  moment: (date, format) => formatDateTime(date, format),
+  moment: (date, format) => formatDateTime(date, format, currentTimezone),
   count: data => data && data.length,
   dump: (data, spacer) => JSON.stringify(data, null, spacer || null),
   // block helpers
