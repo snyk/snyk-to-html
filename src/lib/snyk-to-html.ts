@@ -7,15 +7,10 @@ import * as debugModule from 'debug';
 import fs = require('fs');
 import Handlebars = require('handlebars');
 import marked = require('marked');
-import * as moment from 'moment-timezone';
 import path = require('path');
 import { addIssueDataToPatch, getUpgrades, severityMap, IacProjectType } from './vuln';
-import {
-  processSourceCode,
-} from './codeutil';
-import { 
-  formatDateTime
-} from './dateutil';
+import { processSourceCode } from './codeutil';
+import { formatDateTime } from './dateutil';
 
 const debug = debugModule('snyk-to-html');
 
@@ -34,8 +29,10 @@ function readFile(filePath: string, encoding: string): Promise<string> {
 
 function handleInvalidJson(reason: any) {
   if (reason.isInvalidJson) {
-    reason.message = reason.message +  'Error running `snyk-to-html`. Please check you are providing the correct parameters. ' +
-        'Is the issue persists contact support@snyk.io';
+    reason.message =
+      reason.message +
+      'Error running `snyk-to-html`. Please check you are providing the correct parameters. ' +
+      'If the issue persists, contact support@snyk.io';
   }
   console.log(reason.message);
 }
@@ -45,8 +42,11 @@ function promisedParseJSON(json) {
     try {
       resolve(JSON.parse(json));
     } catch (error) {
-      error.message = chalk.red.bold('The source provided is not a valid json! Please validate that the input provided to the CLI is an actual JSON\n\n' +
-          'Tip: To find more information, try running `snyk-to-html` in debug mode by appending to the CLI the `-d` parameter\n\n');
+      error.message =
+        chalk.red.bold(
+          'The source provided is not a valid json! Please validate that the input provided to the CLI is an actual JSON\n\n' +
+          'Tip: To find more information, try running `snyk-to-html` in debug mode by appending to the CLI the `-d` parameter\n\n'
+        );
       debug(`Input provided to the CLI: \n${json}\n\n`);
       error.isInvalidJson = true;
       reject(error);
@@ -55,31 +55,46 @@ function promisedParseJSON(json) {
 }
 
 class SnykToHtml {
-  public static run(dataSource: string,
-                    remediation: boolean,
-                    hbsTemplate: string,
-                    summary: boolean,
-                    reportCallback: (value: string) => void,
-    timezone: string = 'UTC',): void {
+  private timezone: string; // Declare timezone as a class property
+
+  constructor(timezone: string = 'UTC') {
+    this.timezone = timezone;
+  }
+
+  public static run(
+    dataSource: string,
+    remediation: boolean,
+    hbsTemplate: string,
+    summary: boolean,
+    reportCallback: (value: string) => void,
+    timezone: string = 'UTC' // Default timezone
+  ): void {
+    const instance = new SnykToHtml(timezone); // ✅ Create an instance with timezone
     SnykToHtml
-      .runAsync(dataSource, remediation, hbsTemplate, summary, timezone)
+      .runAsync(instance, dataSource, remediation, hbsTemplate, summary)
       .then(reportCallback)
       .catch(handleInvalidJson);
   }
 
-  public static async runAsync(source: string,
-                               remediation: boolean,
-                               template: string,
-    summary: boolean, timezone: string = 'UTC'): Promise<string> {
+  public static async runAsync(
+    instance: SnykToHtml,
+    source: string,
+    remediation: boolean,
+    template: string,
+    summary: boolean
+  ): Promise<string> {
     const promisedString = source ? readFile(source, 'utf8') : readInputFromStdin();
     return promisedString
-      .then(promisedParseJSON).then((data: any) => {
+      .then(promisedParseJSON)
+      .then((data: any) => {
+        // Add timezone to the data
+        data.timezone = instance.timezone; // Ensure timezone is added to data
+
+        // Now we process data based on its type
         if (
           data?.infrastructureAsCodeIssues ||
           data[0]?.infrastructureAsCodeIssues
         ) {
-          // for IaC input we need to change the default template to an IaC specific template
-          // at the same time we also want to support the -t / --template flag
           template =
             template === path.join(__dirname, '../../template/test-report.hbs')
               ? path.join(__dirname, '../../template/iac/test-report.hbs')
@@ -96,14 +111,23 @@ class SnykToHtml {
         } else {
           return processData(data, remediation, template, summary);
         }
+      })
+      .then((report: string) => {
+        // Generate and return the final report after processing
+        return instance.generateReport(report);
       });
+  }
+
+  private generateReport(report: string): string {
+    console.log('Final report generated with timezone:', this.timezone);
+    return `Generated Report with Timezone: ${this.timezone}\n${report}`;
   }
 }
 
 export { SnykToHtml };
 
 function metadataForVuln(vuln: any) {
-  const {cveSpaced, cveLineBreaks} = concatenateCVEs(vuln)
+  const { cveSpaced, cveLineBreaks } = concatenateCVEs(vuln)
 
   return {
     id: vuln.id,
@@ -130,18 +154,18 @@ function concatenateCVEs(vuln: any) {
   let cveLineBreaks = ''
 
   if (vuln.identifiers) {
-    vuln.identifiers.CVE.forEach(function(c) {
+    vuln.identifiers.CVE.forEach(function (c) {
       const cveLink = `<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=${c}">${c}</a>`
       cveSpaced += `${cveLink}&nbsp;`
       cveLineBreaks += `${cveLink}</br>`
     })
   }
 
-  return {cveSpaced, cveLineBreaks}
+  return { cveSpaced, cveLineBreaks }
 }
 
 function dateFromDateTimeString(dateTimeString: string) {
-  return dateTimeString.substr(0,10);
+  return dateTimeString.substr(0, 10);
 }
 
 function groupVulns(vulns) {
@@ -152,7 +176,7 @@ function groupVulns(vulns) {
   if (vulns && Array.isArray(vulns)) {
     vulns.map(vuln => {
       if (!result[vuln.id]) {
-        result[vuln.id] = {list: [vuln], metadata: metadataForVuln(vuln)};
+        result[vuln.id] = { list: [vuln], metadata: metadataForVuln(vuln) };
         pathsCount++;
         uniqueCount++;
       } else {
@@ -181,15 +205,15 @@ async function registerPeerPartial(templatePath: string, name: string): Promise<
 }
 
 async function generateTemplate(data: any,
-                                template: string,
-                                showRemediation: boolean,
-                                summary: boolean):
-                              Promise<string> {
+  template: string,
+  showRemediation: boolean,
+  summary: boolean):
+  Promise<string> {
   if (showRemediation && data.remediation) {
     data.showRemediations = showRemediation;
-    const {upgrade, pin, unresolved, patch} = data.remediation;
+    const { upgrade, pin, unresolved, patch } = data.remediation;
     data.anyRemediations = !isEmpty(upgrade) ||
-    !isEmpty(patch) || !isEmpty(pin);
+      !isEmpty(patch) || !isEmpty(pin);
     data.anyUnresolved = !!unresolved?.vulnerabilities;
     data.unresolved = groupVulns(unresolved);
     data.upgrades = getUpgrades(upgrade, data.vulnerabilities);
@@ -210,7 +234,7 @@ async function generateTemplate(data: any,
   data.uniqueCount = vulnMetadata.vulnerabilitiesUniqueCount;
   data.summary = vulnMetadata.vulnerabilitiesPathsCount + ' vulnerable dependency paths';
   data.showSummaryOnly = summary;
-  if(data.paths?.length === 1){
+  if (data.paths?.length === 1) {
     data.packageManager = data.paths[0].packageManager;
   }
 
@@ -224,7 +248,6 @@ async function generateTemplate(data: any,
   await registerPeerPartial(template, 'actionable-remediations');
 
   const htmlTemplate = await compileTemplate(template);
-  data.timezone = timezone;  // Add timezone to data context
   return htmlTemplate(data);
 }
 
@@ -309,7 +332,7 @@ async function processIacData(data: any, template: string, summary: boolean): Pr
     return generateIacTemplate(data, template);
   }
 
-  const dataArray = Array.isArray(data)? data : [data];
+  const dataArray = Array.isArray(data) ? data : [data];
   dataArray.forEach(project => {
     project.infrastructureAsCodeIssues.forEach(issue => {
       issue.severityValue = severityMap[issue.severity];
@@ -384,44 +407,30 @@ async function readInputFromStdin(): Promise<string> {
 }
 
 // handlebar helpers
-const timezone = this.timezone;
-
 const hh = {
   markdown: marked.parse,
-  moment: function(date, format, timezone) {
-    if (!timezone) {
-      console.error("Timezone is not provided, defaulting to UTC.");
-      timezone = 'UTC';  // Fallback to UTC if no timezone is provided.
-    }
-    const momentDate = moment.tz(date, timezone);
-    const timezoneString = timezone.toString();
-    console.log('Timezone variable:', timezone);
-    const formattedDate = momentDate.format(format);
-    console.log('Snyk-to-html: Formatted date:', formattedDate); // Log the formatted date
-    return formattedDate;
-    //return formatDateTime(date, format, timezone);
-  },
+  moment: (date, format) => formatDateTime(date, format),
   count: data => data && data.length,
   dump: (data, spacer) => JSON.stringify(data, null, spacer || null),
   // block helpers
   /* tslint:disable:only-arrow-functions */
   /* tslint:disable:object-literal-shorthand */
-  isDoubleArray: function(data, options) {
+  isDoubleArray: function (data, options) {
     return Array.isArray(data[0]) ? options.fn(data) : options.inverse(data);
   },
-  if_eq: function(this: void, a, b, opts) {
+  if_eq: function (this: void, a, b, opts) {
     return (a === b) ? opts.fn(this) : opts.inverse(this);
   },
-  if_gt: function(this: void, a, b, opts) {
+  if_gt: function (this: void, a, b, opts) {
     return (a > b) ? opts.fn(this) : opts.inverse(this);
   },
-  if_not_eq: function(this: void, a, b, opts) {
+  if_not_eq: function (this: void, a, b, opts) {
     return (a !== b) ? opts.fn(this) : opts.inverse(this);
   },
-  if_any: function(this: void, opts, ...args) {
+  if_any: function (this: void, opts, ...args) {
     return args.some(v => !!v) ? opts.fn(this) : opts.inverse(this);
   },
-  ifCond: function(this: void, v1, operator, v2, options) {
+  ifCond: function (this: void, v1, operator, v2, options) {
     const choose = (pred: boolean) => pred ? options.fn(this) : options.inverse(this);
     switch (operator) {
       // tslint:disable-next-line:triple-equals
@@ -454,7 +463,7 @@ const hh = {
   severityLabel: (severity: string) => {
     return severity[0].toUpperCase();
   },
-  startsWith: function(str, start, options) {
+  startsWith: function (str, start, options) {
     return str.startsWith(start) ? options.fn(this) : options.inverse(this);
   },
 };
