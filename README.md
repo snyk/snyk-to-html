@@ -32,7 +32,7 @@ node ./dist/index.js
 | `-s`  | `--summary`                | Generates an HTML with only the summary, instead of the details report. Defaults to details vulnerability report |
 | `-d`  | `--debug`                  | Runs the CLI in debug mode                                                                                       |
 | `-a`  | `--actionable-remediation` | Display actionable remediation info if available                                                                 |
-
+| `-z`  | `--timezone`               | Set the timezone explicitely (i.e. Europe/Rome). Defaults to UTC                                                 |
 When in doubt, use `snyk-to-html --help` or `snyk-to-html -h`.
 
 ## Generate the HTML report
