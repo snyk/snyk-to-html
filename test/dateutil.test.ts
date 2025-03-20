@@ -47,7 +47,7 @@ tap.test('formatDateTime', async (t) => {
 
   t.test('uses current date when no date is provided', async (t) => {
     const now = new Date();
-    const formatted = formatDateTime(null, 'YYYY');
+    const formatted = formatDateTime(undefined, 'YYYY');
     t.equal(formatted, now.getUTCFullYear().toString());
     t.end();
   });
