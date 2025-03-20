@@ -8,13 +8,19 @@ import fs = require('fs');
 import Handlebars = require('handlebars');
 import marked = require('marked');
 import path = require('path');
-import { addIssueDataToPatch, getUpgrades, severityMap, IacProjectType } from './vuln';
+import {
+  addIssueDataToPatch,
+  getUpgrades,
+  severityMap,
+  IacProjectType,
+} from './vuln';
 import { processSourceCode } from './codeutil';
 import { formatDateTime } from './dateutil';
 
 const debug = debugModule('snyk-to-html');
 
-const defaultRemediationText = '## Remediation\nThere is no remediation at the moment';
+const defaultRemediationText =
+  '## Remediation\nThere is no remediation at the moment';
 
 // Create a global variable to store the timezone
 let currentTimezone = 'UTC';
@@ -45,11 +51,10 @@ function promisedParseJSON(json) {
     try {
       resolve(JSON.parse(json));
     } catch (error) {
-      error.message =
-        chalk.red.bold(
-          'The source provided is not a valid json! Please validate that the input provided to the CLI is an actual JSON\n\n' +
-          'Tip: To find more information, try running `snyk-to-html` in debug mode by appending to the CLI the `-d` parameter\n\n'
-        );
+      error.message = chalk.red.bold(
+        'The source provided is not a valid json! Please validate that the input provided to the CLI is an actual JSON\n\n' +
+          'Tip: To find more information, try running `snyk-to-html` in debug mode by appending to the CLI the `-d` parameter\n\n',
+      );
       debug(`Input provided to the CLI: \n${json}\n\n`);
       error.isInvalidJson = true;
       reject(error);
@@ -72,11 +77,10 @@ class SnykToHtml {
     hbsTemplate: string,
     summary: boolean,
     reportCallback: (value: string) => void,
-    timezone: string = 'UTC' // Default timezone
+    timezone: string = 'UTC', // Default timezone
   ): void {
     const instance = new SnykToHtml(timezone); // Create an instance with timezone
-    SnykToHtml
-      .runAsync(instance, dataSource, remediation, hbsTemplate, summary)
+    SnykToHtml.runAsync(instance, dataSource, remediation, hbsTemplate, summary)
       .then(reportCallback)
       .catch(handleInvalidJson);
   }
@@ -86,9 +90,11 @@ class SnykToHtml {
     source: string,
     remediation: boolean,
     template: string,
-    summary: boolean
+    summary: boolean,
   ): Promise<string> {
-    const promisedString = source ? readFile(source, 'utf8') : readInputFromStdin();
+    const promisedString = source
+      ? readFile(source, 'utf8')
+      : readInputFromStdin();
     return promisedString
       .then(promisedParseJSON)
       .then((data: any) => {
@@ -105,7 +111,10 @@ class SnykToHtml {
               ? path.join(__dirname, '../../template/iac/test-report.hbs')
               : template;
           return processIacData(data, template, summary);
-        } else if (data?.runs && data?.runs[0].tool.driver.name === 'SnykCode') {
+        } else if (
+          data?.runs &&
+          data?.runs[0].tool.driver.name === 'SnykCode'
+        ) {
           template =
             template === path.join(__dirname, '../../template/test-report.hbs')
               ? path.join(__dirname, '../../template/code/test-report.hbs')
@@ -131,7 +140,7 @@ class SnykToHtml {
 export { SnykToHtml };
 
 function metadataForVuln(vuln: any) {
-  const { cveSpaced, cveLineBreaks } = concatenateCVEs(vuln)
+  const { cveSpaced, cveLineBreaks } = concatenateCVEs(vuln);
 
   return {
     id: vuln.id,
@@ -149,23 +158,23 @@ function metadataForVuln(vuln: any) {
     cveLineBreaks: cveLineBreaks || 'No CVE found.',
     disclosureTime: dateFromDateTimeString(vuln.disclosureTime || ''),
     publicationTime: dateFromDateTimeString(vuln.publicationTime || ''),
-    license: vuln.license || undefined
+    license: vuln.license || undefined,
   };
 }
 
 function concatenateCVEs(vuln: any) {
-  let cveSpaced = ''
-  let cveLineBreaks = ''
+  let cveSpaced = '';
+  let cveLineBreaks = '';
 
   if (vuln.identifiers) {
-    vuln.identifiers.CVE.forEach(function (c) {
-      const cveLink = `<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=${c}">${c}</a>`
-      cveSpaced += `${cveLink}&nbsp;`
-      cveLineBreaks += `${cveLink}</br>`
-    })
+    vuln.identifiers.CVE.forEach(function(c) {
+      const cveLink = `<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=${c}">${c}</a>`;
+      cveSpaced += `${cveLink}&nbsp;`;
+      cveLineBreaks += `${cveLink}</br>`;
+    });
   }
 
-  return { cveSpaced, cveLineBreaks }
+  return { cveSpaced, cveLineBreaks };
 }
 
 function dateFromDateTimeString(dateTimeString: string) {
@@ -178,7 +187,7 @@ function groupVulns(vulns) {
   let pathsCount = 0;
 
   if (vulns && Array.isArray(vulns)) {
-    vulns.map(vuln => {
+    vulns.map((vuln) => {
       if (!result[vuln.id]) {
         result[vuln.id] = { list: [vuln], metadata: metadataForVuln(vuln) };
         pathsCount++;
@@ -197,36 +206,38 @@ function groupVulns(vulns) {
   };
 }
 
-async function compileTemplate(fileName: string): Promise<HandlebarsTemplateDelegate> {
+async function compileTemplate(
+  fileName: string,
+): Promise<HandlebarsTemplateDelegate> {
   return readFile(fileName, 'utf8').then(Handlebars.compile);
 }
 
-async function registerPeerPartial(templatePath: string, name: string): Promise<void> {
+async function registerPeerPartial(
+  templatePath: string,
+  name: string,
+): Promise<void> {
   const dir = path.dirname(templatePath);
   const file = path.join(dir, `test-report.${name}.hbs`);
   const template = await compileTemplate(file);
   Handlebars.registerPartial(name, template);
 }
 
-async function generateTemplate(data: any,
+async function generateTemplate(
+  data: any,
   template: string,
   showRemediation: boolean,
-  summary: boolean):
-  Promise<string> {
+  summary: boolean,
+): Promise<string> {
   if (showRemediation && data.remediation) {
     data.showRemediations = showRemediation;
     const { upgrade, pin, unresolved, patch } = data.remediation;
-    data.anyRemediations = !isEmpty(upgrade) ||
-      !isEmpty(patch) || !isEmpty(pin);
+    data.anyRemediations =
+      !isEmpty(upgrade) || !isEmpty(patch) || !isEmpty(pin);
     data.anyUnresolved = !!unresolved?.vulnerabilities;
     data.unresolved = groupVulns(unresolved);
     data.upgrades = getUpgrades(upgrade, data.vulnerabilities);
     data.pins = getUpgrades(pin, data.vulnerabilities);
-    data.patches = addIssueDataToPatch(
-      patch,
-      data.vulnerabilities,
-
-    );
+    data.patches = addIssueDataToPatch(patch, data.vulnerabilities);
   }
   const vulnMetadata = groupVulns(data.vulnerabilities);
   const sortedVulns = orderBy(
@@ -234,10 +245,12 @@ async function generateTemplate(data: any,
     ['metadata.severityValue', 'metadata.name'],
     ['desc', 'desc'],
   );
-  data.hasMetatableData = !!data.projectName || !!data.path || !!data.displayTargetFile;
+  data.hasMetatableData =
+    !!data.projectName || !!data.path || !!data.displayTargetFile;
   data.vulnerabilities = sortedVulns;
   data.uniqueCount = vulnMetadata.vulnerabilitiesUniqueCount;
-  data.summary = vulnMetadata.vulnerabilitiesPathsCount + ' vulnerable dependency paths';
+  data.summary =
+    vulnMetadata.vulnerabilitiesPathsCount + ' vulnerable dependency paths';
   data.showSummaryOnly = summary;
   if (data.paths?.length === 1) {
     data.packageManager = data.paths[0].packageManager;
@@ -301,18 +314,22 @@ function mergeData(dataArray: any[]): any {
     const vulns = project.vulnerabilities.map((vuln) => ({
       ...vuln,
       displayTargetFile: project.displayTargetFile,
-      path: project.path
+      path: project.path,
     }));
     return vulns;
   });
   const aggregateVulnerabilities = [].concat(...vulnsArrays);
 
-  const totalUniqueCount =
-    dataArray.reduce((acc, item) => acc + item.vulnerabilities.length || 0, 0);
-  const totalDepCount =
-    dataArray.reduce((acc, item) => acc + item.dependencyCount || 0, 0);
+  const totalUniqueCount = dataArray.reduce(
+    (acc, item) => acc + item.vulnerabilities.length || 0,
+    0,
+  );
+  const totalDepCount = dataArray.reduce(
+    (acc, item) => acc + item.dependencyCount || 0,
+    0,
+  );
 
-  const paths = dataArray.map(project => ({
+  const paths = dataArray.map((project) => ({
     path: project.path,
     packageManager: project.packageManager,
     displayTargetFile: project.displayTargetFile,
@@ -327,19 +344,28 @@ function mergeData(dataArray: any[]): any {
   };
 }
 
-async function processData(data: any, remediation: boolean, template: string, summary: boolean): Promise<string> {
+async function processData(
+  data: any,
+  remediation: boolean,
+  template: string,
+  summary: boolean,
+): Promise<string> {
   const mergedData = Array.isArray(data) ? mergeData(data) : data;
   return generateTemplate(mergedData, template, remediation, summary);
 }
 
-async function processIacData(data: any, template: string, summary: boolean): Promise<string> {
+async function processIacData(
+  data: any,
+  template: string,
+  summary: boolean,
+): Promise<string> {
   if (data.error) {
     return generateIacTemplate(data, template);
   }
 
   const dataArray = Array.isArray(data) ? data : [data];
-  dataArray.forEach(project => {
-    project.infrastructureAsCodeIssues.forEach(issue => {
+  dataArray.forEach((project) => {
+    project.infrastructureAsCodeIssues.forEach((issue) => {
       issue.severityValue = severityMap[issue.severity];
     });
   });
@@ -355,13 +381,16 @@ async function processIacData(data: any, template: string, summary: boolean): Pr
       ),
     };
   });
-  const totalIssues = projectsArrays.reduce((acc, item) => acc + item.infrastructureAsCodeIssues.length || 0, 0);
+  const totalIssues = projectsArrays.reduce(
+    (acc, item) => acc + item.infrastructureAsCodeIssues.length || 0,
+    0,
+  );
 
   const processedData = {
     projects: projectsArrays,
     showSummaryOnly: summary,
     totalIssues,
-  }
+  };
 
   return generateIacTemplate(processedData, template);
 }
@@ -387,8 +416,17 @@ async function processCodeData(
   return generateCodeTemplate(processedData, template);
 }
 
-async function processContainerData(data: any, remediation: boolean, template: string, summary: boolean): Promise<string> {
-  if (!Array.isArray(data) && data.applications && Array.isArray(data.applications)) {
+async function processContainerData(
+  data: any,
+  remediation: boolean,
+  template: string,
+  summary: boolean,
+): Promise<string> {
+  if (
+    !Array.isArray(data) &&
+    data.applications &&
+    Array.isArray(data.applications)
+  ) {
     const AppData = data.applications;
     delete data.applications;
     data = [data, ...AppData];
@@ -415,39 +453,49 @@ async function readInputFromStdin(): Promise<string> {
 const hh = {
   markdown: marked.parse,
   moment: (date, format) => formatDateTime(date, format, currentTimezone),
-  count: data => data && data.length,
+  count: (data) => data && data.length,
   dump: (data, spacer) => JSON.stringify(data, null, spacer || null),
   // block helpers
   /* tslint:disable:only-arrow-functions */
   /* tslint:disable:object-literal-shorthand */
-  isDoubleArray: function (data, options) {
+  isDoubleArray: function(data, options) {
     return Array.isArray(data[0]) ? options.fn(data) : options.inverse(data);
   },
-  if_eq: function (this: void, a, b, opts) {
-    return (a === b) ? opts.fn(this) : opts.inverse(this);
+  if_eq: function(this: void, a, b, opts) {
+    return a === b ? opts.fn(this) : opts.inverse(this);
   },
-  if_gt: function (this: void, a, b, opts) {
-    return (a > b) ? opts.fn(this) : opts.inverse(this);
+  if_gt: function(this: void, a, b, opts) {
+    return a > b ? opts.fn(this) : opts.inverse(this);
   },
-  if_not_eq: function (this: void, a, b, opts) {
-    return (a !== b) ? opts.fn(this) : opts.inverse(this);
+  if_not_eq: function(this: void, a, b, opts) {
+    return a !== b ? opts.fn(this) : opts.inverse(this);
   },
-  if_any: function (this: void, opts, ...args) {
-    return args.some(v => !!v) ? opts.fn(this) : opts.inverse(this);
+  if_any: function(this: void, opts, ...args) {
+    return args.some((v) => !!v) ? opts.fn(this) : opts.inverse(this);
   },
-  ifCond: function (this: void, v1, operator, v2, options) {
-    const choose = (pred: boolean) => pred ? options.fn(this) : options.inverse(this);
+  ifCond: function(this: void, v1, operator, v2, options) {
+    const choose = (pred: boolean) =>
+      pred ? options.fn(this) : options.inverse(this);
     switch (operator) {
       // tslint:disable-next-line:triple-equals
-      case '==': return choose(v1 == v2);
-      case '===': return choose(v1 === v2);
-      case '<': return choose(v1 < v2);
-      case '<=': return choose(v1 <= v2);
-      case '>': return choose(v1 > v2);
-      case '>=': return choose(v1 >= v2);
-      case '&&': return choose(v1 && v2);
-      case '||': return choose(v1 || v2);
-      default: return choose(false);
+      case '==':
+        return choose(v1 == v2);
+      case '===':
+        return choose(v1 === v2);
+      case '<':
+        return choose(v1 < v2);
+      case '<=':
+        return choose(v1 <= v2);
+      case '>':
+        return choose(v1 > v2);
+      case '>=':
+        return choose(v1 >= v2);
+      case '&&':
+        return choose(v1 && v2);
+      case '||':
+        return choose(v1 || v2);
+      default:
+        return choose(false);
     }
   },
   getRemediation: (description, fixedIn) => {
@@ -468,9 +516,9 @@ const hh = {
   severityLabel: (severity: string) => {
     return severity[0].toUpperCase();
   },
-  startsWith: function (str, start, options) {
+  startsWith: function(str, start, options) {
     return str.startsWith(start) ? options.fn(this) : options.inverse(this);
   },
 };
 
-Object.keys(hh).forEach(k => Handlebars.registerHelper(k, hh[k]));
+Object.keys(hh).forEach((k) => Handlebars.registerHelper(k, hh[k]));

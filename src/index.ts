@@ -75,7 +75,6 @@ if (program.output) {
   }
 }
 
-
 if (program.debug) {
   const nameSpace = 'snyk-to-html';
   process.env.DEBUG = nameSpace;
