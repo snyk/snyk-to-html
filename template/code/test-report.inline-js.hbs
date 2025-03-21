@@ -50,30 +50,4 @@
       targetPanes[0].classList.add('shown');
     }
   }
-
-// https://gomakethings.com/how-to-get-the-closest-parent-element-with-a-matching-selector-using-vanilla-javascript/
-  function getClosest(element, selector) {
-    for ( ; element && element !== document; element = element.parentNode ) {
-      if ( element.matches( selector ) ) return element;
-    }
-    return null;
-  }
-
-  function toggleCardView(event) {
-    var clickedButton = event.target;
-    var card = this.getClosest(clickedButton, '.card');
-    if (clickedButton.classList.contains('card-fix')){
-      if (clickedButton.classList.contains('is-selected')) 
-        return;
-      clickedButton.classList.add('is-selected');
-      clickedButton.previousElementSibling.classList.remove('is-selected');
-      card.classList.add('show-fix');
-    } else {
-      if (clickedButton.classList.contains('is-selected')) 
-        return;
-      clickedButton.classList.add('is-selected');
-      clickedButton.nextElementSibling.classList.remove('is-selected');
-      card.classList.remove('show-fix');
-    }
-  }
 </script>
