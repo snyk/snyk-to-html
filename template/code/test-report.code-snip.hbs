@@ -1,11 +1,14 @@
 <div class="card card--vuln  disclosure--not-new severity--{{severitytext}}" data-snyk-test="{{severitytext}}">
+    <input type="radio" name="tab-view-{{@index}}" id="tab-dataflow-{{@index}}" value="dataflow" class="card__tab__radio" checked>
+    <input type="radio" name="tab-view-{{@index}}" id="tab-fix-{{@index}}" value="fix" class="card__tab__radio" >
+
     <header class="card__header">
         <div class="card__header__main">
             <div class="severity-icon severity-icon--{{severitytext}}"></div>
             <h2 class="card__title">{{ruleiddesc.shortDescription.text}}</h2>
             <div class="card__actions">
-                <span class="card__action card-dataflow is-selected" onclick="toggleCardView(event)">Data Flow</span>
-                <span class="card__action card-fix" onclick="toggleCardView(event)">Fix Analysis</span>
+                <label for="tab-dataflow-{{@index}}" class="card__action">Data Flow</label>
+                <label for="tab-fix-{{@index}}" class="card__action">Fix Analysis</label>
             </div>
         </div>
         <ul class="card__meta">
