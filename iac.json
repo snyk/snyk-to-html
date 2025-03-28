@@ -1,0 +1,31 @@
+{
+  "meta": {
+    "isPrivate": true,
+    "isLicensesEnabled": false,
+    "ignoreSettings": {
+      "adminOnly": false,
+      "reasonRequired": false,
+      "disregardFilesystemIgnores": false,
+      "autoApproveIgnores": false
+    },
+    "org": "java-goof-bitbucket-fix",
+    "orgPublicId": "6a7fd579-90a8-4293-a0ce-cf44e9b0c0fb",
+    "policy": ""
+  },
+  "filesystemPolicy": false,
+  "vulnerabilities": [],
+  "dependencyCount": 0,
+  "licensesPolicy": null,
+  "ignoreSettings": null,
+  "targetFile": "catalog-info.yaml",
+  "projectName": "snyk-to-html-timezone",
+  "org": "java-goof-bitbucket-fix",
+  "policy": "",
+  "isPrivate": true,
+  "targetFilePath": "/Users/stephen/Documents/snyk-to-html-timezone/catalog-info.yaml",
+  "packageManager": "k8sconfig",
+  "path": "/Users/stephen/Documents/snyk-to-html-timezone",
+  "projectType": "k8sconfig",
+  "ok": true,
+  "infrastructureAsCodeIssues": []
+}

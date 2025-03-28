@@ -40,7 +40,7 @@ let output;
 let timezone = program.timezone;
 
 if (!timezone || typeof timezone === 'boolean') {
-  timezone = 'UTC+00:00'; // Default timezone if not provided or if flag is used without value
+  timezone = 'UTC'; // Default timezone if not provided or if flag is used without value
 }
 
 if (program.template) {

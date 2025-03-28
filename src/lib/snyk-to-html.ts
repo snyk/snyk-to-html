@@ -79,6 +79,7 @@ class SnykToHtml {
     reportCallback: (value: string) => void,
     timezone: string = 'UTC', // Default timezone
   ): void {
+    console.log(`Received timezone: ${timezone}`);
     const instance = new SnykToHtml(timezone); // Create an instance with timezone
     SnykToHtml.runAsync(instance, dataSource, remediation, hbsTemplate, summary)
       .then(reportCallback)
@@ -452,7 +453,8 @@ async function readInputFromStdin(): Promise<string> {
 // handlebar helpers
 const hh = {
   markdown: marked.parse,
-  moment: (date, format) => formatDateTime(date, format, currentTimezone),
+  // Replace the existing moment helper with:
+  formatDate: (date, format, timezone = 'UTC') => formatDateTime(date, format, timezone),
   count: (data) => data && data.length,
   dump: (data, spacer) => JSON.stringify(data, null, spacer || null),
   // block helpers
