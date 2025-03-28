@@ -28,11 +28,20 @@ program
     '-a, --actionable-remediation',
     'Display actionable remediation info if available',
   )
+  .option(
+    '-z, --timezone <timezone>',
+    'Specify timezone for dates (e.g., "UTC+02:00"). Defaults to UTC+00:00',
+  )
   .parse(process.argv);
 
 let template;
 let source;
 let output;
+let timezone = program.timezone;
+
+if (!timezone || typeof timezone === 'boolean') {
+  timezone = 'UTC+00:00'; // Default timezone if not provided or if flag is used without value
+}
 
 if (program.template) {
   // template
@@ -79,6 +88,7 @@ SnykToHtml.run(
   template,
   !!program.summary,
   onReportOutput,
+  timezone,
 );
 
 function onReportOutput(report: string): void {

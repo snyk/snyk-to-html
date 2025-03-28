@@ -1,50 +1,57 @@
-export function formatDateTime(date, format): string {
-    if (!date) {
-        date = new Date();
+import * as moment from 'moment-timezone';
+
+export function formatDateTime(
+  date: Date | string | undefined,
+  format: string,
+  timezone: string = 'UTC',
+): string {
+  if (!date) {
+    date = new Date(); // Use current date if none provided
+  }
+
+  let zonedDate;
+  try {
+    let dateString: string;
+    if (date instanceof Date) {
+      // 1. Get the UTC parts of the date
+      const year = date.getUTCFullYear();
+      const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+      const day = String(date.getUTCDate()).padStart(2, '0');
+      const hours = String(date.getUTCHours()).padStart(2, '0');
+      const minutes = String(date.getUTCMinutes()).padStart(2, '0');
+      const seconds = String(date.getUTCSeconds()).padStart(2, '0');
+
+      // 2. Construct a UTC date string
+      dateString = `${year}-${month}-${day} ${hours}:${minutes}:${seconds} UTC`; // Explicit UTC
+    } else {
+      dateString = date; // Assume it's a string we can parse
     }
-    const day = date.getUTCDate();
-    const ordinalSuffix = getOrdinalSuffix(day);
-    const dayWithSuffix = `${day}${ordinalSuffix}`;
 
-    const hours = date.getUTCHours();
-    const minutes = date.getUTCMinutes();
-    const seconds = date.getUTCSeconds();
-    const ampm = hours >= 12 ? 'pm' : 'am';
-    const formattedHours = hours % 12 || 12;
+    // Ensure we parse the date in UTC and then convert to the desired timezone
+    zonedDate = moment
+      .tz(dateString, 'YYYY-MM-DD HH:mm:ss UTC', 'UTC')
+      .tz(timezone);
+  } catch (error) {
+    console.warn(`Invalid timezone: ${timezone}, defaulting to UTC`);
+    zonedDate = moment.tz(date, 'UTC');
+  }
 
-    const monthNames = [
-        "January", "February", "March", "April",
-        "May", "June", "July", "August",
-        "September", "October", "November", "December"
-    ];
+  const replacements = {
+    MMMM: zonedDate.format('MMMM'),
+    Do: zonedDate.format('Do'),
+    YYYY: zonedDate.format('YYYY'),
+    h: zonedDate.format('h'),
+    mm: zonedDate.format('mm'),
+    ss: zonedDate.format('ss'),
+    a: zonedDate.format('a'),
+    z: zonedDate.format('z'),
+    Z: zonedDate.format('Z'),
+  };
 
-    const replacements = {
-        'MMMM': monthNames[date.getUTCMonth()],
-        'Do': dayWithSuffix,
-        'YYYY': date.getUTCFullYear(),
-        'h': formattedHours,
-        'mm': minutes.toString().padStart(2, '0'),
-        'ss': seconds.toString().padStart(2, '0'),
-        'a': ampm,
-        'z': 'UTC',
-        'Z': '+00:00'
-    };
+  let formattedString = format.replace(
+    /MMMM|Do|YYYY|h|mm|ss|a|z|Z/g,
+    (match) => replacements[match],
+  );
 
-    return format.replace(/MMMM|Do|YYYY|h|mm|ss|a|z|Z/g, (match) => replacements[match]);
-}
-
-function getOrdinalSuffix(day) {
-    if (day > 3 && day < 21) {
-        return 'th';
-    }
-    switch (day % 10) {
-        case 1:
-            return 'st';
-        case 2:
-            return 'nd';
-        case 3:
-            return 'rd';
-        default:
-            return 'th';
-    }
+  return formattedString;
 }
