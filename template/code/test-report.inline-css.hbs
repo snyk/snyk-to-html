@@ -284,15 +284,37 @@
 .scan-coverage { max-width: 400px; padding:0; margin:12px 0 0; font-size:14px; }
 .scan-coverage .type { display:inline-block; list-style-type: none; padding:3px; margin:0 0 0 10px; }
 
-.card { padding:0; border-width:4px 1px 1px; border-color:#d3d3d9; border-radius: 4px 4px 0 0 }
-.card.severity--low { border-top-color: #88879E; }
-.card.severity--medium { border-top-color: #D68000; }
-.card.severity--high { border-top-color: #CE5019; }
-.card.severity--critical { border-top-color: #AB1A1A; }
+.card.severity--low { --severity-color: #88879E; }
+.card.severity--medium { --severity-color: #D68000; }
+.card.severity--high { --severity-color: #CE5019; }
+.card.severity--critical { --severity-color: #AB1A1A; }
+.card {
+  padding:0;
+  border-width:4px 1px 1px;
+  border-color:#d3d3d9;
+  border-top-color: var(--severity-color);
+  border-radius: 4px 4px 0 0;
+}
 
-.card .fix-analysis { display:none }
-.card.show-fix .fix-analysis { display:block }
-.card.show-fix .dataflow { display:none }
+.card__tab__radio { display: none; pointer-events: none; }
+.dataflow, .fix-analysis { display: none; }
+
+.card input[id^="tab-dataflow"]:checked ~ .card__header .card__action[for^="tab-dataflow"] {
+  background-color: var(--severity-color);
+  color: #fff;
+  border-radius: 20px;
+}
+
+.card input[id^="tab-fix"]:checked ~ .card__header .card__action[for^="tab-fix"] {
+  background-color: #4b45a1;
+  color: #fff;
+  border-radius: 20px;
+}
+
+.card input[id^="tab-dataflow"]:checked ~ .card__section .dataflow,
+.card input[id^="tab-fix"]:checked ~ .card__section .fix-analysis {
+  display: block;
+}
 
 .card__header { padding:24px }
 .card__header__main { display:flex; }
@@ -305,10 +327,6 @@
 .card__actions { display:flex; padding:2px; border:1px solid #d3d3d9; border-radius:20px; background-color:#fff;  margin-left: auto; }
 .card__action { align-self: center; padding:5px 15px; font-size:14px; cursor: pointer; transition: all .2s; }
 .card__action:hover { color: #4b45a1; }
-.card__action.is-selected { background-color:#4b45a1; color:#fff; border-radius:20px; }
-.severity--high .card-dataflow.is-selected { background-color:#CE5019 ; }
-.severity--medium .card-dataflow.is-selected { background-color:#D68000 ; }
-.severity--low .card-dataflow.is-selected { background-color:#88879E ; }
 
 .card__section {padding:24px; border-top: 1px solid #d3d3d9}
 
