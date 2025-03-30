@@ -79,9 +79,8 @@ class SnykToHtml {
     reportCallback: (value: string) => void,
     timezone: string = 'UTC', // Default timezone
   ): void {
-    console.log(`Received timezone: ${timezone}`);
     const instance = new SnykToHtml(timezone); // Create an instance with timezone
-    SnykToHtml.runAsync(instance, dataSource, remediation, hbsTemplate, summary)
+    SnykToHtml.runAsync(instance, dataSource, remediation, hbsTemplate, summary, timezone)
       .then(reportCallback)
       .catch(handleInvalidJson);
   }
@@ -92,6 +91,7 @@ class SnykToHtml {
     remediation: boolean,
     template: string,
     summary: boolean,
+    timezone: string, // Add timezone parameter
   ): Promise<string> {
     const promisedString = source
       ? readFile(source, 'utf8')
@@ -111,7 +111,7 @@ class SnykToHtml {
             template === path.join(__dirname, '../../template/test-report.hbs')
               ? path.join(__dirname, '../../template/iac/test-report.hbs')
               : template;
-          return processIacData(data, template, summary);
+          return processIacData(data, template, summary, timezone);
         } else if (
           data?.runs &&
           data?.runs[0].tool.driver.name === 'SnykCode'
@@ -120,11 +120,11 @@ class SnykToHtml {
             template === path.join(__dirname, '../../template/test-report.hbs')
               ? path.join(__dirname, '../../template/code/test-report.hbs')
               : template;
-          return processCodeData(data, template, summary);
+          return processCodeData(data, template, summary, timezone);
         } else if (data.docker) {
-          return processContainerData(data, remediation, template, summary);
+          return processContainerData(data, remediation, template, summary, timezone);
         } else {
-          return processData(data, remediation, template, summary);
+          return processData(data, remediation, template, summary, timezone);
         }
       })
       .then((report: string) => {
@@ -273,6 +273,7 @@ async function generateTemplate(
 async function generateIacTemplate(
   data: any,
   template: string,
+  timezone: string, // Add timezone parameter
 ): Promise<string> {
   await registerPeerPartial(template, 'inline-css');
   await registerPeerPartial(template, 'header');
@@ -282,13 +283,14 @@ async function generateIacTemplate(
   await registerPeerPartial(template, 'vuln-card');
 
   const htmlTemplate = await compileTemplate(template);
-
+  data.timezone = timezone; // Ensure timezone is added to data
   return htmlTemplate(data);
 }
 
 async function generateCodeTemplate(
   data: any,
   template: string,
+  timezone: string, // Add timezone parameter
 ): Promise<string> {
   await registerPeerPartial(template, 'inline-css');
   await registerPeerPartial(template, 'inline-js');
@@ -298,7 +300,24 @@ async function generateCodeTemplate(
   await registerPeerPartial(template, 'code-snip');
 
   const htmlTemplate = await compileTemplate(template);
+  data.timezone = timezone; // Ensure timezone is added to data
+  return htmlTemplate(data);
+}
 
+async function generateContainerTemplate(
+  data: any,
+  template: string,
+  timezone: string, // Add timezone parameter
+): Promise<string> {
+  await registerPeerPartial(template, 'inline-css');
+  await registerPeerPartial(template, 'header');
+  await registerPeerPartial(template, 'metatable-css');
+  await registerPeerPartial(template, 'metatable');
+  await registerPeerPartial(template, 'inline-js');
+  await registerPeerPartial(template, 'vuln-card');
+
+  const htmlTemplate = await compileTemplate(template);
+  data.timezone = timezone; // Ensure timezone is added to data
   return htmlTemplate(data);
 }
 
@@ -350,8 +369,10 @@ async function processData(
   remediation: boolean,
   template: string,
   summary: boolean,
+  timezone: string, // Add timezone parameter
 ): Promise<string> {
   const mergedData = Array.isArray(data) ? mergeData(data) : data;
+  mergedData.timezone = timezone; // Ensure timezone is added to mergedData
   return generateTemplate(mergedData, template, remediation, summary);
 }
 
@@ -359,9 +380,11 @@ async function processIacData(
   data: any,
   template: string,
   summary: boolean,
+  timezone: string, // Add timezone parameter
 ): Promise<string> {
   if (data.error) {
-    return generateIacTemplate(data, template);
+    data.timezone = currentTimezone;
+    return generateIacTemplate(data, template, timezone); // Pass timezone to generateIacTemplate
   }
 
   const dataArray = Array.isArray(data) ? data : [data];
@@ -391,18 +414,21 @@ async function processIacData(
     projects: projectsArrays,
     showSummaryOnly: summary,
     totalIssues,
+    timezone, // Add timezone to processedData
   };
 
-  return generateIacTemplate(processedData, template);
+  return generateIacTemplate(processedData, template, timezone); // Pass timezone to generateIacTemplate
 }
 
 async function processCodeData(
   data: any,
   template: string,
   summary: boolean,
+  timezone: string, // Add timezone parameter
 ): Promise<string> {
   if (data.error) {
-    return generateCodeTemplate(data, template);
+    data.timezone = currentTimezone;
+    return generateCodeTemplate(data, template, timezone); // Pass timezone to generateCodeTemplate
   }
   const dataArray = Array.isArray(data) ? data : [data];
 
@@ -413,8 +439,9 @@ async function processCodeData(
     projects: OrderedIssuesArray,
     showSummaryOnly: summary,
     totalIssues,
+    timezone, // Add timezone to processedData
   };
-  return generateCodeTemplate(processedData, template);
+  return generateCodeTemplate(processedData, template, timezone); // Pass timezone to generateCodeTemplate
 }
 
 async function processContainerData(
@@ -422,6 +449,7 @@ async function processContainerData(
   remediation: boolean,
   template: string,
   summary: boolean,
+  timezone: string, // Add timezone parameter
 ): Promise<string> {
   if (
     !Array.isArray(data) &&
@@ -432,7 +460,7 @@ async function processContainerData(
     delete data.applications;
     data = [data, ...AppData];
   }
-  return processData(data, remediation, template, summary);
+  return processData(data, remediation, template, summary, timezone); // Pass timezone to processData
 }
 
 async function readInputFromStdin(): Promise<string> {
@@ -500,7 +528,7 @@ const hh = {
         return choose(false);
     }
   },
-  getRemediation: (description, fixedIn) => {
+getRemediation: (description, fixedIn) => {
     // check remediation in the description
     const index = description.indexOf('## Remediation');
     if (index > -1) {
