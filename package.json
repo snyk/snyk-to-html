@@ -6,10 +6,10 @@
     "build": "tsc",
     "build-watch": "tsc -w",
     "format": "prettier --write 'src/*.{js,ts}' 'test/*.{js,ts}'",
+    "format:check": "prettier --check 'src/*.{js,ts}' 'test/*.{js,ts}'",
     "tap": "tap -Rspec",
     "test": "npm run build && npm run lint && npm run tap",
     "lint": "eslint --color --cache 'src/*.?s' 'test/*.?s' && npm run format:check",
-    "format:check": "prettier --check 'src/*.{js,ts}' 'test/*.{js,ts}'",
     "report": "mkdir -p output && cat sample-data/test-report.json | node dist/. > output/test-report.html && open output/test-report.html",
     "report:cve": "mkdir -p output && cat sample-data/test-report.json | node dist/. -t template/test-cve-report.hbs > output/test-report.html && open output/test-report.html",
     "multi-report": "mkdir -p output && cat sample-data/multi-test-report.json | node dist/. > output/multi-test-report.html && open output/multi-test-report.html",
@@ -37,7 +37,7 @@
     "snyk-to-html": "dist/index.js"
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=20"
   },
   "devDependencies": {
     "@types/chalk": "^2.2.0",
@@ -47,11 +47,12 @@
     "@typescript-eslint/parser": "2.31.0",
     "eslint": "6.8.0",
     "eslint-config-prettier": "6.11.0",
+    "jest": "^29.7.0",
     "prettier": "1.19.1",
     "tap": "^14.10.7",
-    "ts-node": "^8.4.1",
+    "ts-node": "^10.9.2",
     "tslint": "^5.20.0",
-    "typescript": "^3.7.3"
+    "typescript": "^5.8.2"
   },
   "repository": {
     "type": "git",

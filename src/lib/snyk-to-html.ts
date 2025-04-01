@@ -12,7 +12,7 @@ import { addIssueDataToPatch, getUpgrades, severityMap, IacProjectType } from '.
 import {
   processSourceCode,
 } from './codeutil';
-import { 
+import {
   formatDateTime
 } from './dateutil';
 
@@ -43,7 +43,7 @@ function promisedParseJSON(json) {
   return new Promise((resolve, reject) => {
     try {
       resolve(JSON.parse(json));
-    } catch (error) {
+    } catch (error: any) {
       error.message = chalk.red.bold('The source provided is not a valid json! Please validate that the input provided to the CLI is an actual JSON\n\n' +
           'Tip: To find more information, try running `snyk-to-html` in debug mode by appending to the CLI the `-d` parameter\n\n');
       debug(`Input provided to the CLI: \n${json}\n\n`);
