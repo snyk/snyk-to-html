@@ -7,7 +7,7 @@
     "build-watch": "tsc -w",
     "format": "prettier --write 'src/*.{js,ts}' 'test/*.{js,ts}'",
     "format:check": "prettier --check 'src/*.{js,ts}' 'test/*.{js,ts}'",
-    "tap": "tap -Rspec --test-ignore=\"test/vrt\"",
+    "test": "jest --coverage --runInBand --detectOpenHandles",
     "test": "npm run build && npm run lint && npm run tap",
     "test:vrt": "playwright test",
     "test:vrt:update": "playwright test --update-snapshots",
