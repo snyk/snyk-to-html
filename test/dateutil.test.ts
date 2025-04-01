@@ -18,12 +18,30 @@ tap.test('formatDateTime', async (t) => {
   });
 
   t.test('handles ordinal suffixes correctly', async (t) => {
-    t.equal(formatDateTime(new Date('2023-05-01T00:00:00Z'), 'Do', 'UTC'), '1st');
-    t.equal(formatDateTime(new Date('2023-05-02T00:00:00Z'), 'Do', 'UTC'), '2nd');
-    t.equal(formatDateTime(new Date('2023-05-03T00:00:00Z'), 'Do', 'UTC'), '3rd');
-    t.equal(formatDateTime(new Date('2023-05-04T00:00:00Z'), 'Do', 'UTC'), '4th');
-    t.equal(formatDateTime(new Date('2023-05-11T00:00:00Z'), 'Do', 'UTC'), '11th');
-    t.equal(formatDateTime(new Date('2023-05-21T00:00:00Z'), 'Do', 'UTC'), '21st');
+    t.equal(
+      formatDateTime(new Date('2023-05-01T00:00:00Z'), 'Do', 'UTC'),
+      '1st',
+    );
+    t.equal(
+      formatDateTime(new Date('2023-05-02T00:00:00Z'), 'Do', 'UTC'),
+      '2nd',
+    );
+    t.equal(
+      formatDateTime(new Date('2023-05-03T00:00:00Z'), 'Do', 'UTC'),
+      '3rd',
+    );
+    t.equal(
+      formatDateTime(new Date('2023-05-04T00:00:00Z'), 'Do', 'UTC'),
+      '4th',
+    );
+    t.equal(
+      formatDateTime(new Date('2023-05-11T00:00:00Z'), 'Do', 'UTC'),
+      '11th',
+    );
+    t.equal(
+      formatDateTime(new Date('2023-05-21T00:00:00Z'), 'Do', 'UTC'),
+      '21st',
+    );
     t.end();
   });
 
