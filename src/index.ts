@@ -86,8 +86,8 @@ function onReportOutput(report: string): void {
     try {
       fs.writeFileSync(output, report);
       console.log('Vulnerability snapshot saved at ' + output);
-    } catch (err) {
-      return console.log(err);
+    } catch (error) {
+      return console.log(error);
     }
   } else {
     console.log(report);
