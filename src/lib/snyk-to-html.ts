@@ -106,8 +106,6 @@ class SnykToHtml {
   }
 }
 
-export { SnykToHtml };
-
 function metadataForVuln(vuln: any) {
   const { cveSpaced, cveLineBreaks } = concatenateCVEs(vuln);
 
@@ -490,3 +488,5 @@ const hh = {
 };
 
 Object.keys(hh).forEach((k) => Handlebars.registerHelper(k, hh[k]));
+
+export { SnykToHtml };
