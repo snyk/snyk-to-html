@@ -8,3 +8,10 @@ npm-debug.log
 *.orig
 .eslintcache
 .idea/
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

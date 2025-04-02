@@ -10,9 +10,9 @@
     "tap": "tap -Rspec",
     "test": "npm run build && npm run lint && npm run tap",
     "lint": "eslint --color --cache 'src/*.?s' 'test/*.?s' && npm run format:check",
-    "report": "mkdir -p output && cat sample-data/test-report.json | node dist/. > output/test-report.html && open output/test-report.html",
-    "report:cve": "mkdir -p output && cat sample-data/test-report.json | node dist/. -t template/test-cve-report.hbs > output/test-report.html && open output/test-report.html",
-    "multi-report": "mkdir -p output && cat sample-data/multi-test-report.json | node dist/. > output/multi-test-report.html && open output/multi-test-report.html",
+    "report": "mkdir -p output && cat test/e2e/sample-data/test-report.json | node dist/. > output/test-report.html && open output/test-report.html",
+    "report:cve": "mkdir -p output && cat test/e2e/sample-data/test-report.json | node dist/. -t template/test-cve-report.hbs > output/test-report.html && open output/test-report.html",
+    "multi-report": "mkdir -p output && cat test/e2e/sample-data/multi-test-report.json | node dist/. > output/multi-test-report.html && open output/multi-test-report.html",
     "prepare": "npm run build"
   },
   "types": "./dist/index.d.ts",
@@ -40,6 +40,7 @@
     "node": ">=20"
   },
   "devDependencies": {
+    "@playwright/test": "^1.51.1",
     "@types/chalk": "^2.2.0",
     "@types/marked": "^0.6.5",
     "@types/node": "^22.13.16",
