@@ -10,6 +10,17 @@ const exec = util.promisify(childProcess.exec);
 
 const main = '.'.replace(/\//g, path.sep);
 
+const replacements = [
+  {
+    regex: /<p class="timestamp">.*<\/p>/g,
+    replace: '<p class="timestamp">TIMESTAMP</p>',
+  },
+  {
+    regex: /<div class="filepath[\s\S]*?<\/div>/g,
+    replace: '<div class="filepath">FILEPATH</div>',
+  },
+];
+
 // Our CI/CD pipelines runs on Linux. If you are running this on another operating system, these tests will create
 // new snapshots on the first run, as Playwright postfixes the names with the platform they're executed on.
 // With right, as the visual representation of a website in a browser on Linux might look different from on a Mac.
@@ -31,12 +42,15 @@ test.describe('Visual Regression Tests (VRTs)', () => {
     );
     expect(stderr).toBe('');
 
-    const reportWithoutTimestamps = stdout.replace(
-      /<p class="timestamp">.*<\/p>/g,
-      '<p class="timestamp">TIMESTAMP</p>',
-    );
+    let reportWithoutDynamicContent = stdout;
+    replacements.forEach(({ regex, replace }) => {
+      reportWithoutDynamicContent = reportWithoutDynamicContent.replace(
+        regex,
+        replace,
+      );
+    });
 
-    fs.writeFileSync(tempFilePath, reportWithoutTimestamps, 'utf8');
+    fs.writeFileSync(tempFilePath, reportWithoutDynamicContent, 'utf8');
 
     await page.goto(`file://${tempFilePath}`);
     await expect(page).toHaveScreenshot();
@@ -53,12 +67,15 @@ test.describe('Visual Regression Tests (VRTs)', () => {
     );
     expect(stderr).toBe('');
 
-    const reportWithoutTimestamps = stdout.replace(
-      /<p class="timestamp">.*<\/p>/g,
-      '<p class="timestamp">TIMESTAMP</p>',
-    );
+    let reportWithoutDynamicContent = stdout;
+    replacements.forEach(({ regex, replace }) => {
+      reportWithoutDynamicContent = reportWithoutDynamicContent.replace(
+        regex,
+        replace,
+      );
+    });
 
-    fs.writeFileSync(tempFilePath, reportWithoutTimestamps, 'utf8');
+    fs.writeFileSync(tempFilePath, reportWithoutDynamicContent, 'utf8');
 
     await page.goto(`file://${tempFilePath}`);
     await page
