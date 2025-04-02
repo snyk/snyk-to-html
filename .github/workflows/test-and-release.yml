@@ -83,6 +83,7 @@ jobs:
           key: playwright-${{ runner.os }}-${{ env.PLAYWRIGHT_VERSION }}
       - name: Install Playwright dependencies
         shell: bash
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install chromium --with-deps --only-shell
       - name: Run Playwright tests
         run: npm run test:vrt
