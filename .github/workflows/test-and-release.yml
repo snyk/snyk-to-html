@@ -50,8 +50,9 @@ jobs:
 
   test-visual-regression:
     name: test-visual-regression
-    needs: test
+    needs: lint
     runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:v1.50.1-jammy
     strategy:
       matrix:
         node-version: [ 20, 22 ]
@@ -73,7 +74,7 @@ jobs:
       - name: Extract Playwright version
         id: playwright-version
         shell: bash
-        run: echo "PLAYWRIGHT_VERSION=$(jq -r '.devDependencies.playwright' package.json)" >> $GITHUB_ENV
+        run: echo "PLAYWRIGHT_VERSION=$(jq -r '.devDependencies."@playwright/test"' ../../package.json)" >> $GITHUB_ENV
       - name: Cache Playwright
         id: playwright-cache
         uses: actions/cache@v3
@@ -84,7 +85,7 @@ jobs:
         shell: bash
         run: npx playwright install chromium --with-deps --only-shell
       - name: Run Playwright tests
-        run: npx playwright test
+        run: npm run test:vrt
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
