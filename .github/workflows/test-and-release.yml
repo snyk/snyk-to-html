@@ -15,10 +15,10 @@ jobs:
           node-version: 20
       - name: npm config get cache
         id: npm-cache-dir
-        run: echo "::set-output name=dir::$(npm config get cache)"
+        run: echo "NPM_CACHE_DIR=$(npm config get cache)" >> $GITHUB_ENV
       - uses: actions/cache@v4
         with:
-          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          path: ${{ env.NPM_CACHE_DIR }}
           key: ${{ runner.os }}-node-20-${{ hashFiles('**/package.json') }}
           restore-keys: ${{ runner.os }}-node-20-
       - run: npm install
@@ -39,10 +39,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: npm config get cache
         id: npm-cache-dir
-        run: echo "::set-output name=dir::$(npm config get cache)"
+        run: echo "NPM_CACHE_DIR=$(npm config get cache)" >> $GITHUB_ENV
       - uses: actions/cache@v4
         with:
-          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          path: ${{ env.NPM_CACHE_DIR }}
           key: ${{ runner.os }}-node-${{ matrix.node-version }}-${{ hashFiles('**/package.json') }}
           restore-keys: ${{ runner.os }}-node-${{ matrix.node-version }}-
       - run: npm install
@@ -63,10 +63,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: npm config get cache
         id: npm-cache-dir
-        run: echo "::set-output name=dir::$(npm config get cache)"
+        run: echo "NPM_CACHE_DIR=$(npm config get cache)" >> $GITHUB_ENV
       - uses: actions/cache@v4
         with:
-          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          path: ${{ env.NPM_CACHE_DIR }}
           key: ${{ runner.os }}-node-${{ matrix.node-version }}-${{ hashFiles('**/package.json') }}
           restore-keys: ${{ runner.os }}-node-${{ matrix.node-version }}-
       - run: npm install
@@ -94,7 +94,7 @@ jobs:
 
   release:
     if: github.ref == 'refs/heads/main'  # only run on main
-    needs: test
+    needs: [test, test-visual-regression]
     name: Release snyk-to-html
     runs-on: ubuntu-latest
     steps:
@@ -104,10 +104,10 @@ jobs:
           node-version: 20
       - name: npm config get cache
         id: npm-cache-dir
-        run: echo "::set-output name=dir::$(npm config get cache)"
+        run: echo "NPM_CACHE_DIR=$(npm config get cache)" >> $GITHUB_ENV
       - uses: actions/cache@v4
         with:
-          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          path: ${{ env.NPM_CACHE_DIR }}
           key: ${{ runner.os }}-node-20-${{ hashFiles('**/package.json') }}
           restore-keys: ${{ runner.os }}-node-20-
       - run: npm install
