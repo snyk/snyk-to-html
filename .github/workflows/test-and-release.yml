@@ -53,34 +53,34 @@ jobs:
     needs: lint
     runs-on: ubuntu-latest
     container: mcr.microsoft.com/playwright:v1.50.1-jammy
-    strategy:
-      matrix:
-        node-version: [ 20, 22 ]
     steps:
       - uses: actions/checkout@v4
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 22
       - name: npm config get cache
         id: npm-cache-dir
         run: echo "NPM_CACHE_DIR=$(npm config get cache)" >> $GITHUB_ENV
       - uses: actions/cache@v4
         with:
           path: ${{ env.NPM_CACHE_DIR }}
-          key: ${{ runner.os }}-node-${{ matrix.node-version }}-${{ hashFiles('**/package.json') }}
-          restore-keys: ${{ runner.os }}-node-${{ matrix.node-version }}-
+          key: ${{ runner.os }}-node-22-${{ hashFiles('**/package.json') }}
+          restore-keys: ${{ runner.os }}-node-22-
       - run: npm install
       - name: Extract Playwright version
         id: playwright-version
         shell: bash
-        run: echo "PLAYWRIGHT_VERSION=$(jq -r '.devDependencies."@playwright/test"' ../../package.json)" >> $GITHUB_ENV
+        run: |
+          apt-get update && apt-get install -y jq
+          echo "PLAYWRIGHT_VERSION=$(jq -r '.devDependencies."@playwright/test"' package.json)" >> $GITHUB_ENV
       - name: Cache Playwright
         id: playwright-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-${{ env.PLAYWRIGHT_VERSION }}
+          restore-keys: playwright-${{ runner.os }}-
       - name: Install Playwright dependencies
         shell: bash
         if: steps.playwright-cache.outputs.cache-hit != 'true'
