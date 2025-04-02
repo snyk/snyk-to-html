@@ -48,6 +48,50 @@ jobs:
       - run: npm install
       - run: npm run tap
 
+  test-visual-regression:
+    name: test-visual-regression
+    needs: test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 20, 22 ]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm config get cache
+        id: npm-cache-dir
+        run: echo "::set-output name=dir::$(npm config get cache)"
+      - uses: actions/cache@v4
+        with:
+          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ matrix.node-version }}-${{ hashFiles('**/package.json') }}
+          restore-keys: ${{ runner.os }}-node-${{ matrix.node-version }}-
+      - run: npm install
+      - name: Extract Playwright version
+        id: playwright-version
+        shell: bash
+        run: echo "PLAYWRIGHT_VERSION=$(jq -r '.devDependencies.playwright' package.json)" >> $GITHUB_ENV
+      - name: Cache Playwright
+        id: playwright-cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ env.PLAYWRIGHT_VERSION }}
+      - name: Install Playwright dependencies
+        shell: bash
+        run: npx playwright install chromium --with-deps --only-shell
+      - name: Run Playwright tests
+        run: npx playwright test
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 1
+
   release:
     if: github.ref == 'refs/heads/main'  # only run on main
     needs: test
