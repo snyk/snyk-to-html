@@ -1,9 +1,15 @@
 import { describe, expect, it } from '@jest/globals';
-import * as childProcess from 'child_process';
+
 import * as path from 'node:path';
 import * as util from 'node:util';
+import * as childProcess from 'child_process';
 
 const exec = util.promisify(childProcess.exec);
+
+const cleanTimestamp = (rep: string): string => {
+  const regex = /<p class="timestamp">.*<\/p>/g;
+  return rep.replace(regex, '<p class="timestamp">TIMESTAMP</p>');
+};
 
 describe('test calling snyk-to-html from command line', () => {
   const main = '.'.replace(/\//g, path.sep);
@@ -15,8 +21,8 @@ describe('test calling snyk-to-html from command line', () => {
         maxBuffer: 1024 * 1024,
       },
     );
-
     expect(stderr).toEqual('');
+
     expect(stdout).toContain('<html lang="en">');
   });
 
@@ -27,14 +33,9 @@ describe('test calling snyk-to-html from command line', () => {
         maxBuffer: 1024 * 1024,
       },
     );
-
     expect(stderr).toEqual('');
 
-    const regex = /<p class="timestamp">.*<\/p>/g;
-    const cleanTimestamp = (rep) =>
-      rep.replace(regex, '<p class="timestamp">TIMESTAMP</p>');
     const cleanedReport = cleanTimestamp(stdout);
-
     expect(cleanedReport).not.toContain('<h2 id="overview">Overview</h2>');
     expect(cleanedReport).toMatchSnapshot();
   });
@@ -46,63 +47,33 @@ describe('test calling snyk-to-html from command line', () => {
         maxBuffer: 1024 * 1024,
       },
     );
-
     expect(stderr).toEqual('');
 
-    const regex = /<p class="timestamp">.*<\/p>/g;
-    const cleanTimestamp = (rep) =>
-      rep.replace(regex, '<p class="timestamp">TIMESTAMP</p>');
     const cleanedReport = cleanTimestamp(stdout);
-
     expect(cleanedReport).toContain(
       '<body class="test-remediation-section-projects">',
     );
     expect(cleanedReport).toMatchSnapshot();
   });
 
-  it('shows remediation with pins', async () => {
+  it.each([
+    {
+      args: '--actionable-remediation',
+    },
+    {
+      args: '--actionable-remediation --summary',
+    },
+  ])(`shows remediation when running: $args`, async ({ args }) => {
     const { stdout, stderr } = await exec(
-      `node ${main} -i ./test/fixtures/test-report-with-pins-remediation.json --actionable-remediation`,
+      `node ${main} -i ./test/fixtures/test-report-with-pins-remediation.json ${args}`,
       {
         maxBuffer: 1024 * 1024,
       },
     );
-
     expect(stderr).toEqual('');
 
-    const regex = /<p class="timestamp">.*<\/p>/g;
-    const cleanTimestamp = (rep) =>
-      rep.replace(regex, '<p class="timestamp">TIMESTAMP</p>');
     const cleanedReport = cleanTimestamp(stdout);
-
     expect(cleanedReport).not.toContain('<h2 id="overview">Overview</h2>');
-
-    expect(cleanedReport).toContain(
-      '<body class="test-remediation-section-projects">',
-    );
-    expect(cleanedReport).toContain(
-      "<div class='remediation-card__pane shown test-remediation-pins'",
-    );
-    expect(cleanedReport).toMatchSnapshot();
-  });
-
-  it('shows remediation and a summary', async () => {
-    const { stdout, stderr } = await exec(
-      `node ${main} -i ./test/fixtures/test-report-with-pins-remediation.json --actionable-remediation --summary`,
-      {
-        maxBuffer: 1024 * 1024,
-      },
-    );
-
-    expect(stderr).toEqual('');
-
-    const regex = /<p class="timestamp">.*<\/p>/g;
-    const cleanTimestamp = (rep) =>
-      rep.replace(regex, '<p class="timestamp">TIMESTAMP</p>');
-    const cleanedReport = cleanTimestamp(stdout);
-
-    expect(cleanedReport).not.toContain('<h2 id="overview">Overview</h2>');
-
     expect(cleanedReport).toContain(
       '<body class="test-remediation-section-projects">',
     );
@@ -119,8 +90,8 @@ describe('test calling snyk-to-html from command line', () => {
         maxBuffer: 1024 * 1024,
       },
     );
-
     expect(stderr).toEqual('');
+
     expect(stdout).toContain('<html lang="en">');
   });
 
@@ -131,14 +102,9 @@ describe('test calling snyk-to-html from command line', () => {
         maxBuffer: 1024 * 1024,
       },
     );
-
     expect(stderr).toEqual('');
 
-    const regex = /<p class="timestamp">.*<\/p>/g;
-    const cleanTimestamp = (rep) =>
-      rep.replace(regex, '<p class="timestamp">TIMESTAMP</p>');
     const cleanedReport = cleanTimestamp(stdout);
-
     expect(cleanedReport).not.toContain('<h2>Impact</h2>');
     expect(cleanedReport).not.toContain('<h2>Remediation</h2>');
     expect(cleanedReport).not.toContain('<h2>References</h2>');
@@ -152,14 +118,9 @@ describe('test calling snyk-to-html from command line', () => {
         maxBuffer: 1024 * 1024,
       },
     );
-
     expect(stderr).toEqual('');
 
-    const regex = /<p class="timestamp">.*<\/p>/g;
-    const cleanTimestamp = (rep) =>
-      rep.replace(regex, '<p class="timestamp">TIMESTAMP</p>');
     const cleanedReport = cleanTimestamp(stdout);
-
     expect(cleanedReport).toContain('<strong>12</strong> high issues');
     expect(cleanedReport).toContain('<strong>14</strong> medium issues');
     expect(cleanedReport).toContain('<li class="card__meta__item">CWE-23</li>');
@@ -176,14 +137,9 @@ describe('test calling snyk-to-html from command line', () => {
         maxBuffer: 1024 * 1024,
       },
     );
-
     expect(stderr).toEqual('');
 
-    const regex = /<p class="timestamp">.*<\/p>/g;
-    const cleanTimestamp = (rep) =>
-      rep.replace(regex, '<p class="timestamp">TIMESTAMP</p>');
     const cleanedReport = cleanTimestamp(stdout);
-
     expect(cleanedReport).not.toContain('<h2 id="overview">Overview</h2>');
     expect(cleanedReport).toContain('<strong>14</strong> high issues');
     expect(cleanedReport).toContain('<strong>5</strong> medium issues');
@@ -201,14 +157,9 @@ describe('test calling snyk-to-html from command line', () => {
         maxBuffer: 1024 * 1024,
       },
     );
-
     expect(stderr).toEqual('');
 
-    const regex = /<p class="timestamp">.*<\/p>/g;
-    const cleanTimestamp = (rep) =>
-      rep.replace(regex, '<p class="timestamp">TIMESTAMP</p>');
     const cleanedReport = cleanTimestamp(stdout);
-
     expect(cleanedReport).toContain(
       '<li class="paths">/Users/dagrest/Documents/Snyk/git/temp/cpp-goof (Unmanaged (C/C++))</li>',
     );

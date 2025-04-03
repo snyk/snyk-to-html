@@ -266,10 +266,10 @@ describe('test running SnykToHtml.run', () => {
       path.join(__dirname, '..', 'template', 'test-report.hbs'),
       true,
       (report) => {
-        const regex = /<p class="timestamp">.*<\/p>/g;
-        const cleanTimestamp = (rep) =>
-          rep.replace(regex, '<p class="timestamp">TIMESTAMP</p>');
-        const cleanedReport = cleanTimestamp(report);
+        const cleanedReport = report.replace(
+          /<p class="timestamp">.*<\/p>/g,
+          '<p class="timestamp">TIMESTAMP</p>',
+        );
 
         // Asserting presence using CSS classname :grimace:
         // check each severity combination

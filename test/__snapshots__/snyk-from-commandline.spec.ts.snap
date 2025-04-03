@@ -3300,7 +3300,7 @@ exports[`test calling snyk-to-html from command line handles the -s argument cor
 "
 `;
 
-exports[`test calling snyk-to-html from command line shows remediation and a summary 1`] = `
+exports[`test calling snyk-to-html from command line shows remediation when running: --actionable-remediation --summary 1`] = `
 "<!DOCTYPE html>
 <html lang="en">
 
@@ -4101,7 +4101,7 @@ exports[`test calling snyk-to-html from command line shows remediation and a sum
 "
 `;
 
-exports[`test calling snyk-to-html from command line shows remediation with pins 1`] = `
+exports[`test calling snyk-to-html from command line shows remediation when running: --actionable-remediation 1`] = `
 "<!DOCTYPE html>
 <html lang="en">
 
