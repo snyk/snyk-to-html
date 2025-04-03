@@ -1,0 +1,20 @@
+{
+  "testEnvironment": "node",
+  "transform": {
+    "^.+\\.(ts)?$": "ts-jest"
+  },
+  "testMatch": [
+    "<rootDir>/test/**/*.spec.ts"
+  ],
+  "testPathIgnorePatterns": [
+    "<rootDir>/node_modules/",
+    "<rootDir>/dist/",
+    "<rootDir>/test/vrt"
+  ],
+  "collectCoverage": false,
+  "moduleFileExtensions": [
+    "ts",
+    "js",
+    "json"
+  ]
+}

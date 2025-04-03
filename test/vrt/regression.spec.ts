@@ -31,6 +31,7 @@ const replacements = [
 // And to update snapshots:
 // * ./test/vrt/run-test-on-linux.sh npm run test:vrt:update
 test.describe('Visual Regression Tests (VRTs)', () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   test('A sample test report', async ({ page }, testInfo) => {
     const tempFilePath = path.join(os.tmpdir(), `temp-${Date.now()}.html`);
 

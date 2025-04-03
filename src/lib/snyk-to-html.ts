@@ -43,18 +43,22 @@ function handleInvalidJson(reason: any) {
   console.log(reason.message);
 }
 
-function promisedParseJSON(json) {
+function promisedParseJSON(json: string): Promise<any> {
   return new Promise((resolve, reject) => {
     try {
       resolve(JSON.parse(json));
-    } catch (error: any) {
-      error.message = chalk.red.bold(
-        'The source provided is not a valid json! Please validate that the input provided to the CLI is an actual JSON\n\n' +
-          'Tip: To find more information, try running `snyk-to-html` in debug mode by appending to the CLI the `-d` parameter\n\n',
-      );
-      debug(`Input provided to the CLI: \n${json}\n\n`);
-      error.isInvalidJson = true;
-      reject(error);
+    } catch (error) {
+      if (error instanceof Error) {
+        error.message = chalk.red.bold(
+          'The source provided is not a valid json! Please validate that the input provided to the CLI is an actual JSON\n\n' +
+            'Tip: To find more information, try running `snyk-to-html` in debug mode by appending to the CLI the `-d` parameter\n\n',
+        );
+        debug(`Input provided to the CLI: \n${json}\n\n`);
+        (error as any).isInvalidJson = true;
+        reject(error);
+      } else {
+        reject(new Error('An unknown error occurred'));
+      }
     }
   });
 }
@@ -105,8 +109,6 @@ class SnykToHtml {
     });
   }
 }
-
-export { SnykToHtml };
 
 function metadataForVuln(vuln: any) {
   const { cveSpaced, cveLineBreaks } = concatenateCVEs(vuln);
@@ -429,15 +431,19 @@ const hh = {
   isDoubleArray: function(data, options) {
     return Array.isArray(data[0]) ? options.fn(data) : options.inverse(data);
   },
+  // eslint-disable-next-line @typescript-eslint/camelcase
   if_eq: function(this: void, a, b, opts) {
     return a === b ? opts.fn(this) : opts.inverse(this);
   },
+  // eslint-disable-next-line @typescript-eslint/camelcase
   if_gt: function(this: void, a, b, opts) {
     return a > b ? opts.fn(this) : opts.inverse(this);
   },
+  // eslint-disable-next-line @typescript-eslint/camelcase
   if_not_eq: function(this: void, a, b, opts) {
     return a !== b ? opts.fn(this) : opts.inverse(this);
   },
+  // eslint-disable-next-line @typescript-eslint/camelcase
   if_any: function(this: void, opts, ...args) {
     return args.some((v) => !!v) ? opts.fn(this) : opts.inverse(this);
   },
@@ -490,3 +496,5 @@ const hh = {
 };
 
 Object.keys(hh).forEach((k) => Handlebars.registerHelper(k, hh[k]));
+
+export { SnykToHtml };
