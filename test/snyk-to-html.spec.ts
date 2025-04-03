@@ -3,13 +3,18 @@ import { describe, expect, it } from '@jest/globals';
 import * as path from 'node:path';
 import { SnykToHtml } from '../src/lib/snyk-to-html';
 
+const WITH_SUMMARY = true;
+const WITHOUT_SUMMARY = false;
+const WITH_REMEDIATION = true;
+const WITHOUT_REMEDIATION = false;
+
 describe('test running SnykToHtml.run', () => {
   it('creates a valid report', async () => {
     SnykToHtml.run(
       path.join(__dirname, 'fixtures', 'test-report.json'),
-      false,
+      WITHOUT_REMEDIATION,
       path.join(__dirname, '..', 'template', 'test-report.hbs'),
-      false,
+      WITHOUT_SUMMARY,
       (report) => {
         expect(report).toContain(
           '<h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>',
@@ -29,9 +34,9 @@ describe('test running SnykToHtml.run', () => {
   it('creates a multi-report', async () => {
     SnykToHtml.run(
       path.join(__dirname, 'fixtures', 'multi-test-report.json'),
-      false,
+      WITHOUT_REMEDIATION,
       path.join(__dirname, '..', 'template', 'test-report.hbs'),
-      false,
+      WITHOUT_SUMMARY,
       (report) => {
         expect(report).toContain(
           '<div class="meta-count"><span>139 vulnerable dependency paths</span></div>',
@@ -57,9 +62,9 @@ describe('test running SnykToHtml.run', () => {
   it('creates a multi-report test with summary only', () => {
     SnykToHtml.run(
       path.join(__dirname, 'fixtures', 'multi-test-report.json'),
-      false,
+      WITHOUT_REMEDIATION,
       path.join(__dirname, '..', 'template', 'test-report.hbs'),
-      true,
+      WITH_SUMMARY,
       (report) => {
         expect(report).toContain(
           '<div class="meta-count"><span>139 vulnerable dependency paths</span></div>',
@@ -85,9 +90,9 @@ describe('test running SnykToHtml.run', () => {
   it('creates a report when called with remediations arg and data containing remediations object', () => {
     SnykToHtml.run(
       path.join(__dirname, 'fixtures', 'test-report-with-remediation.json'),
-      true,
+      WITH_REMEDIATION,
       path.join(__dirname, '..', 'template', 'remediation-report.hbs'),
-      true,
+      WITH_SUMMARY,
       (report) => {
         // can see actionable remediation
         expect(report).toContain(
@@ -103,9 +108,9 @@ describe('test running SnykToHtml.run', () => {
   it('creates a report when called with remediation arg, some remediations and some vulns does not display vulns', () => {
     SnykToHtml.run(
       path.join(__dirname, 'fixtures', 'test-report-with-remediation.json'),
-      true,
+      WITH_REMEDIATION,
       path.join(__dirname, '..', 'template', 'remediation-report.hbs'),
-      true,
+      WITH_SUMMARY,
       (report) => {
         // no actionable remediations displayed
         expect(report).toContain('remediation-card');
@@ -121,9 +126,9 @@ describe('test running SnykToHtml.run', () => {
   it('creates a report when called with remediation arg, no remediations and some vulns displays vulns', () => {
     SnykToHtml.run(
       path.join(__dirname, 'fixtures', 'multi-test-report.json'),
-      true,
+      WITH_REMEDIATION,
       path.join(__dirname, '..', 'template', 'remediation-report.hbs'),
-      true,
+      WITH_SUMMARY,
       (report) => {
         // no actionable remediations displayed
         expect(report).not.toMatch('<div class="remediation-card">');
@@ -135,9 +140,9 @@ describe('test running SnykToHtml.run', () => {
   it('creates a report when called with remediation arg, no remediations or vulns displays "no vulns" message', () => {
     SnykToHtml.run(
       path.join(__dirname, 'fixtures', 'no-vulns.json'),
-      true,
+      WITH_REMEDIATION,
       path.join(__dirname, '..', 'template', 'remediation-report.hbs'),
-      true,
+      WITH_SUMMARY,
       (report) => {
         // no actionable remediations displayed
         expect(report).not.toMatch('<div class="remediation-card">');
@@ -150,9 +155,9 @@ describe('test running SnykToHtml.run', () => {
   it('creates a report with summary only', () => {
     SnykToHtml.run(
       path.join(__dirname, 'fixtures', 'test-report.json'),
-      false,
+      WITHOUT_REMEDIATION,
       path.join(__dirname, '..', 'template', 'test-report.hbs'),
-      true,
+      WITH_SUMMARY,
       (report) => {
         expect(report).toContain(
           '<h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>',
@@ -176,9 +181,9 @@ describe('test running SnykToHtml.run', () => {
         'fixtures',
         'test-report-with-no-remediation-with-one-fixed-in.json',
       ),
-      false,
+      WITHOUT_REMEDIATION,
       path.join(__dirname, '..', 'template', 'test-report.hbs'),
-      true,
+      WITH_SUMMARY,
       (report) => {
         expect(report).toContain(
           '<h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>',
@@ -197,9 +202,9 @@ describe('test running SnykToHtml.run', () => {
         'fixtures',
         'test-report-with-no-remediation-with-multiple-fixed-in.json',
       ),
-      false,
+      WITHOUT_REMEDIATION,
       path.join(__dirname, '..', 'template', 'test-report.hbs'),
-      true,
+      WITH_SUMMARY,
       (report) => {
         expect(report).toContain(
           '<h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>',
@@ -218,9 +223,9 @@ describe('test running SnykToHtml.run', () => {
         'fixtures',
         'test-report-with-no-remediation-and-no-fixed-in.json',
       ),
-      false,
+      WITHOUT_REMEDIATION,
       path.join(__dirname, '..', 'template', 'test-report.hbs'),
-      true,
+      WITH_SUMMARY,
       (report) => {
         expect(report).toContain(
           '<h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>',
@@ -235,9 +240,9 @@ describe('test running SnykToHtml.run', () => {
   it('handles empty values (description and info)', () => {
     SnykToHtml.run(
       path.join(__dirname, 'fixtures', 'test-report-empty-descr.json'),
-      false,
+      WITHOUT_REMEDIATION,
       path.join(__dirname, '..', 'template', 'test-report.hbs'),
-      false,
+      WITHOUT_SUMMARY,
       (report) => {
         expect(report).toContain('<p>No description available.</p>');
       },
@@ -248,9 +253,9 @@ describe('test running SnykToHtml.run', () => {
     await expect(
       SnykToHtml.runAsync(
         path.join(__dirname, 'fixtures', 'invalid-input.json'),
-        false,
+        WITHOUT_REMEDIATION,
         path.join(__dirname, '..', 'template', 'test-report.hbs'),
-        false,
+        WITHOUT_SUMMARY,
       ),
     ).rejects.toThrowError('The source provided is not a valid json!');
   });
@@ -262,9 +267,9 @@ describe('test running SnykToHtml.run', () => {
         'fixtures',
         'test-report-with-critical-severity-vuln.json',
       ),
-      false,
+      WITHOUT_REMEDIATION,
       path.join(__dirname, '..', 'template', 'test-report.hbs'),
-      true,
+      WITH_SUMMARY,
       (report) => {
         const cleanedReport = report.replace(
           /<p class="timestamp">.*<\/p>/g,
@@ -294,9 +299,9 @@ describe('test running SnykToHtml.run', () => {
   it('generates a report with no vulnerabilities and no remediation', () => {
     SnykToHtml.run(
       path.join(__dirname, 'fixtures', 'no-vulns.json'),
-      false,
+      WITHOUT_REMEDIATION,
       path.join(__dirname, '..', 'template', 'test-report.hbs'),
-      false,
+      WITHOUT_SUMMARY,
       (report) => {
         expect(report).toContain('No known vulnerabilities detected.');
       },
@@ -306,9 +311,9 @@ describe('test running SnykToHtml.run', () => {
   it('generates a report with no vulnerabilities but with remediation', () => {
     SnykToHtml.run(
       path.join(__dirname, 'fixtures', 'no-vulns.json'),
-      true,
+      WITH_REMEDIATION,
       path.join(__dirname, '..', 'template', 'remediation-report.hbs'),
-      false,
+      WITHOUT_SUMMARY,
       (report) => {
         expect(report).toContain('No known vulnerabilities detected.');
       },
@@ -318,9 +323,9 @@ describe('test running SnykToHtml.run', () => {
   it('displays a metatable when metatable data is present', () => {
     SnykToHtml.run(
       path.join(__dirname, 'fixtures', 'test-report-with-remediation.json'),
-      false,
+      WITHOUT_REMEDIATION,
       path.join(__dirname, '..', 'template', 'test-report.hbs'),
-      false,
+      WITHOUT_SUMMARY,
       (report) => {
         expect(report).toContain('<table class="metatable">');
       },
@@ -330,9 +335,9 @@ describe('test running SnykToHtml.run', () => {
   it('does not display metatable when no metatable data is present', () => {
     SnykToHtml.run(
       path.join(__dirname, 'fixtures', 'test-report.json'),
-      false,
+      WITHOUT_REMEDIATION,
       path.join(__dirname, '..', 'template', 'test-report.hbs'),
-      false,
+      WITHOUT_SUMMARY,
       (report) => {
         expect(report).not.toContain('<table class="metatable">');
       },
@@ -342,9 +347,9 @@ describe('test running SnykToHtml.run', () => {
   it('does not display license issues on a cve report summary', () => {
     SnykToHtml.run(
       path.join(__dirname, 'fixtures', 'multi-test-report.json'),
-      false,
+      WITHOUT_REMEDIATION,
       path.join(__dirname, '..', 'template', 'test-cve-report.hbs'),
-      false,
+      WITHOUT_SUMMARY,
       (report) => {
         expect(report).not.toContain(
           '<div class="divTableCell"><a href="https://snyk.io/vuln/snyk:lic',
@@ -356,9 +361,9 @@ describe('test running SnykToHtml.run', () => {
   it('generates a report when called with IaC input', () => {
     SnykToHtml.run(
       path.join(__dirname, 'fixtures/iac-test-report.json'),
-      false,
+      WITHOUT_REMEDIATION,
       path.join(__dirname, '../template/iac/test-report.hbs'),
-      false,
+      WITHOUT_SUMMARY,
       (report) => {
         expect(report).toContain(
           '<h2 class="card__title">App Service allows FTP deployments</h2>',
@@ -385,9 +390,9 @@ describe('test running SnykToHtml.run', () => {
         'fixtures',
         'test-report-container-with-app-vulns.json',
       ),
-      false,
+      WITHOUT_REMEDIATION,
       path.join(__dirname, '..', 'template', 'test-report.hbs'),
-      false,
+      WITHOUT_SUMMARY,
       (report) => {
         expect(report).toContain(
           '<li class="paths">vulnerable:latest (deb)</li>',
@@ -409,9 +414,9 @@ describe('test running SnykToHtml.run', () => {
     // report generated with "snyk container test --all-projects --json" on a nuget multi-project with more than one path
     SnykToHtml.run(
       path.join(__dirname, 'fixtures', 'test-report-nuget-multi-project.json'),
-      false,
+      WITHOUT_REMEDIATION,
       path.join(__dirname, '..', 'template', 'test-report.hbs'),
-      false,
+      WITHOUT_SUMMARY,
       (report) => {
         expect(report).toContain(
           '<li class="paths">/root/nugetMultiProjectRepo/DotNetMultiProject/SomeProject.RandomProject.API/obj/project.assets.json (nuget)</li>',
