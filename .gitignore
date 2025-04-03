@@ -8,3 +8,15 @@ npm-debug.log
 *.orig
 .eslintcache
 .idea/
+
+# Playwright
+node_modules/
+/test-results/
+playwright-output/
+playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# Don't accidentally add non-linux snapshots to the VRTs
+test/vrt/**/*.png
+!test/vrt/**/*-linux.png

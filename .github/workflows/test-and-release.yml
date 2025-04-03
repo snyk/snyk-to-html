@@ -15,10 +15,10 @@ jobs:
           node-version: 20
       - name: npm config get cache
         id: npm-cache-dir
-        run: echo "::set-output name=dir::$(npm config get cache)"
+        run: echo "NPM_CACHE_DIR=$(npm config get cache)" >> $GITHUB_ENV
       - uses: actions/cache@v4
         with:
-          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          path: ${{ env.NPM_CACHE_DIR }}
           key: ${{ runner.os }}-node-20-${{ hashFiles('**/package.json') }}
           restore-keys: ${{ runner.os }}-node-20-
       - run: npm install
@@ -39,18 +39,64 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: npm config get cache
         id: npm-cache-dir
-        run: echo "::set-output name=dir::$(npm config get cache)"
+        run: echo "NPM_CACHE_DIR=$(npm config get cache)" >> $GITHUB_ENV
       - uses: actions/cache@v4
         with:
-          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          path: ${{ env.NPM_CACHE_DIR }}
           key: ${{ runner.os }}-node-${{ matrix.node-version }}-${{ hashFiles('**/package.json') }}
           restore-keys: ${{ runner.os }}-node-${{ matrix.node-version }}-
       - run: npm install
       - run: npm run tap
 
+  test-visual-regression:
+    name: test-visual-regression
+    needs: lint
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:v1.50.1-jammy
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: npm config get cache
+        id: npm-cache-dir
+        run: echo "NPM_CACHE_DIR=$(npm config get cache)" >> $GITHUB_ENV
+      - uses: actions/cache@v4
+        with:
+          path: ${{ env.NPM_CACHE_DIR }}
+          key: ${{ runner.os }}-node-22-${{ hashFiles('**/package.json') }}
+          restore-keys: ${{ runner.os }}-node-22-
+      - run: npm install
+      - name: Extract Playwright version
+        id: playwright-version
+        shell: bash
+        run: |
+          apt-get update && apt-get install -y jq
+          echo "PLAYWRIGHT_VERSION=$(jq -r '.devDependencies."@playwright/test"' package.json)" >> $GITHUB_ENV
+      - name: Cache Playwright
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ env.PLAYWRIGHT_VERSION }}
+          restore-keys: playwright-${{ runner.os }}-
+      - name: Install Playwright dependencies
+        shell: bash
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install chromium --with-deps --only-shell
+      - name: Run Playwright tests
+        run: npm run test:vrt
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report-${{ strategy.job-index }}
+          path: playwright-report/
+          retention-days: 1
+
   release:
     if: github.ref == 'refs/heads/main'  # only run on main
-    needs: test
+    needs: [test, test-visual-regression]
     name: Release snyk-to-html
     runs-on: ubuntu-latest
     steps:
@@ -60,10 +106,10 @@ jobs:
           node-version: 20
       - name: npm config get cache
         id: npm-cache-dir
-        run: echo "::set-output name=dir::$(npm config get cache)"
+        run: echo "NPM_CACHE_DIR=$(npm config get cache)" >> $GITHUB_ENV
       - uses: actions/cache@v4
         with:
-          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          path: ${{ env.NPM_CACHE_DIR }}
           key: ${{ runner.os }}-node-20-${{ hashFiles('**/package.json') }}
           restore-keys: ${{ runner.os }}-node-20-
       - run: npm install
