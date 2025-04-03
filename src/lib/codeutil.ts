@@ -1,4 +1,3 @@
-import { RSA_X931_PADDING } from 'constants';
 import * as orderBy from 'lodash.orderby';
 
 const path = require('path');

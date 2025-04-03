@@ -10,7 +10,7 @@
     "test": "jest --coverage --runInBand --detectOpenHandles",
     "test:vrt": "playwright test",
     "test:vrt:update": "playwright test --update-snapshots",
-    "lint": "eslint --color --cache 'src/*.?s' 'test/*.?s' && npm run format:check",
+    "lint": "eslint --color --cache 'src/**/*.?s' 'test/**/*.?s' && npm run format:check",
     "report": "mkdir -p output && cat test/fixtures/test-report.json | node dist/. > output/test-report.html && open output/test-report.html",
     "report:cve": "mkdir -p output && cat test/fixtures/test-report.json | node dist/. -t template/test-cve-report.hbs > output/test-report.html && open output/test-report.html",
     "multi-report": "mkdir -p output && cat test/fixtures/multi-test-report.json | node dist/. > output/multi-test-report.html && open output/multi-test-report.html",
