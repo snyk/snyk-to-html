@@ -47,7 +47,7 @@ function promisedParseJSON(json) {
   return new Promise((resolve, reject) => {
     try {
       resolve(JSON.parse(json));
-    } catch (error: any) {
+    } catch (error) {
       error.message = chalk.red.bold(
         'The source provided is not a valid json! Please validate that the input provided to the CLI is an actual JSON\n\n' +
           'Tip: To find more information, try running `snyk-to-html` in debug mode by appending to the CLI the `-d` parameter\n\n',

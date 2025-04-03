@@ -4,7 +4,12 @@
     "^.+\\.(ts)?$": "ts-jest"
   },
   "testMatch": [
-    "**/*.spec.ts"
+    "<rootDir>/test/**/*.spec.ts"
+  ],
+  "testPathIgnorePatterns": [
+    "<rootDir>/node_modules/",
+    "<rootDir>/dist/",
+    "<rootDir>/test/vrt"
   ],
   "collectCoverage": false,
   "moduleFileExtensions": [
