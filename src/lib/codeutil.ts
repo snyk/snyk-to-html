@@ -75,8 +75,8 @@ async function processCodeLine(filePath, region) {
     await events.once(rl, 'close');
     sourceFs.close();
     return codeString;
-  } catch (err) {
-    console.error(err);
+  } catch (error: any) {
+    console.error(error);
   }
 };
 

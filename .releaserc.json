@@ -5,10 +5,16 @@
       {
         "preset": "angular",
         "releaseRules": [
-          { "type": "chore", "release": "patch" }
+          {
+            "type": "chore",
+            "release": "patch"
+          }
         ],
         "parserOpts": {
-          "noteKeywords": ["BREAKING CHANGE", "BREAKING CHANGES"]
+          "noteKeywords": [
+            "BREAKING CHANGE",
+            "BREAKING CHANGES"
+          ]
         }
       }
     ]
