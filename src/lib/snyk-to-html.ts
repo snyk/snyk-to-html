@@ -25,9 +25,9 @@ const defaultRemediationText =
 // Create a global variable to store the timezone
 let currentTimezone = 'UTC';
 
-function readFile(filePath: string, encoding: string): Promise<string> {
+function readFile(filePath: fs.PathOrFileDescriptor): Promise<string> {
   return new Promise<string>((resolve, reject) => {
-    fs.readFile(filePath, 'utf-8', (err, data) => {
+    fs.readFile(filePath, { encoding: 'utf-8' }, (err, data) => {
       if (err) {
         reject(err);
       }
@@ -54,7 +54,7 @@ function promisedParseJSON(json: string): Promise<any> {
       if (error instanceof Error) {
         error.message = chalk.red.bold(
           'The source provided is not a valid json! Please validate that the input provided to the CLI is an actual JSON\n\n' +
-          'Tip: To find more information, try running `snyk-to-html` in debug mode by appending to the CLI the `-d` parameter\n\n',
+            'Tip: To find more information, try running `snyk-to-html` in debug mode by appending to the CLI the `-d` parameter\n\n',
         );
         debug(`Input provided to the CLI: \n${json}\n\n`);
         (error as any).isInvalidJson = true;
@@ -69,7 +69,7 @@ function promisedParseJSON(json: string): Promise<any> {
 class SnykToHtml {
   private timezone: string; // Declare timezone as a class property
 
-  constructor(timezone: string = 'UTC') {
+  constructor(timezone = 'UTC') {
     this.timezone = timezone;
     // Update the global timezone variable when a new instance is created
     currentTimezone = timezone;
@@ -81,10 +81,17 @@ class SnykToHtml {
     hbsTemplate: string,
     summary: boolean,
     reportCallback: (value: string) => void,
-    timezone: string = 'UTC', // Default timezone
+    timezone = 'UTC', // Default timezone
   ): void {
     const instance = new SnykToHtml(timezone); // Create an instance with timezone
-    SnykToHtml.runAsync(instance, dataSource, remediation, hbsTemplate, summary, timezone)
+    SnykToHtml.runAsync(
+      instance,
+      dataSource,
+      remediation,
+      hbsTemplate,
+      summary,
+      timezone,
+    )
       .then(reportCallback)
       .catch(handleInvalidJson);
   }
@@ -98,7 +105,7 @@ class SnykToHtml {
     timezone: string, // Add timezone parameter
   ): Promise<string> {
     const promisedString = source
-      ? readFile(source, 'utf8')
+      ? readFile(source)
       : readInputFromStdin();
     return promisedString
       .then(promisedParseJSON)
@@ -126,7 +133,13 @@ class SnykToHtml {
               : template;
           return processCodeData(data, template, summary, timezone);
         } else if (data.docker) {
-          return processContainerData(data, remediation, template, summary, timezone);
+          return processContainerData(
+            data,
+            remediation,
+            template,
+            summary,
+            timezone,
+          );
         } else {
           return processData(data, remediation, template, summary, timezone);
         }
@@ -172,7 +185,7 @@ function concatenateCVEs(vuln: any) {
   let cveLineBreaks = '';
 
   if (vuln.identifiers) {
-    vuln.identifiers.CVE.forEach(function (c) {
+    vuln.identifiers.CVE.forEach(function(c) {
       const cveLink = `<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=${c}">${c}</a>`;
       cveSpaced += `${cveLink}&nbsp;`;
       cveLineBreaks += `${cveLink}</br>`;
@@ -212,9 +225,10 @@ function groupVulns(vulns) {
 }
 
 async function compileTemplate(
-  fileName: string,
+  fileName: fs.PathLike,
 ): Promise<HandlebarsTemplateDelegate> {
-  return readFile(fileName, 'utf8').then(Handlebars.compile);
+  const fileContent = fs.readFileSync(fileName, { encoding: 'utf8' });
+  return Handlebars.compile(fileContent);
 }
 
 async function registerPeerPartial(
@@ -302,23 +316,6 @@ async function generateCodeTemplate(
   await registerPeerPartial(template, 'metatable-css');
   await registerPeerPartial(template, 'metatable');
   await registerPeerPartial(template, 'code-snip');
-
-  const htmlTemplate = await compileTemplate(template);
-  data.timezone = timezone; // Ensure timezone is added to data
-  return htmlTemplate(data);
-}
-
-async function generateContainerTemplate(
-  data: any,
-  template: string,
-  timezone: string, // Add timezone parameter
-): Promise<string> {
-  await registerPeerPartial(template, 'inline-css');
-  await registerPeerPartial(template, 'header');
-  await registerPeerPartial(template, 'metatable-css');
-  await registerPeerPartial(template, 'metatable');
-  await registerPeerPartial(template, 'inline-js');
-  await registerPeerPartial(template, 'vuln-card');
 
   const htmlTemplate = await compileTemplate(template);
   data.timezone = timezone; // Ensure timezone is added to data
@@ -486,26 +483,27 @@ async function readInputFromStdin(): Promise<string> {
 const hh = {
   markdown: marked.parse,
   // Replace the existing moment helper with:
-  formatDate: (date, format, timezone = 'UTC') => formatDateTime(date, format, timezone),
+  formatDate: (date, format, timezone = 'UTC') =>
+    formatDateTime(date, format, timezone),
   count: (data) => data && data.length,
   dump: (data, spacer) => JSON.stringify(data, null, spacer || null),
   // block helpers
-  isDoubleArray: function (data, options) {
+  isDoubleArray: function(data, options) {
     return Array.isArray(data[0]) ? options.fn(data) : options.inverse(data);
   },
-  if_eq: function (this: void, a, b, opts) {
+  if_eq: function(this: void, a, b, opts) {
     return a === b ? opts.fn(this) : opts.inverse(this);
   },
-  if_gt: function (this: void, a, b, opts) {
+  if_gt: function(this: void, a, b, opts) {
     return a > b ? opts.fn(this) : opts.inverse(this);
   },
-  if_not_eq: function (this: void, a, b, opts) {
+  if_not_eq: function(this: void, a, b, opts) {
     return a !== b ? opts.fn(this) : opts.inverse(this);
   },
-  if_any: function (this: void, opts, ...args) {
+  if_any: function(this: void, opts, ...args) {
     return args.some((v) => !!v) ? opts.fn(this) : opts.inverse(this);
   },
-  ifCond: function (this: void, v1, operator, v2, options) {
+  ifCond: function(this: void, v1, operator, v2, options) {
     const choose = (pred: boolean) =>
       pred ? options.fn(this) : options.inverse(this);
     switch (operator) {
@@ -548,7 +546,7 @@ const hh = {
   severityLabel: (severity: string) => {
     return severity[0].toUpperCase();
   },
-  startsWith: function (str, start, options) {
+  startsWith: function(str, start, options) {
     return str.startsWith(start) ? options.fn(this) : options.inverse(this);
   },
 };
