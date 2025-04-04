@@ -250,12 +250,15 @@ describe('test running SnykToHtml.run', () => {
   });
 
   it('does not generate a report for invalid json', async () => {
+    const instance = new SnykToHtml();
     await expect(
       SnykToHtml.runAsync(
+        instance,
         path.join(__dirname, 'fixtures', 'invalid-input.json'),
         WITHOUT_REMEDIATION,
         path.join(__dirname, '..', 'template', 'test-report.hbs'),
         WITHOUT_SUMMARY,
+        'UTC'
       ),
     ).rejects.toThrowError('The source provided is not a valid json!');
   });

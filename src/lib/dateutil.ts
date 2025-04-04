@@ -20,7 +20,7 @@ export function formatDateTime(
   );
 
   // Custom formatting to match the original moment.js style
-  return format.replace(/MMMM|MMM|MM|Do|DD|YYYY|YY|hh|mm|ss|a/g, (match) => {
+  return format.replace(/MMMM|MMM|MM|Do|DD|YYYY|YY|hh|h|mm|ss|a/g, (match) => {
     const hours12 = zonedDate.getHours() % 12 || 12;
     const ampm = zonedDate.getHours() >= 12 ? 'pm' : 'am';
 
@@ -57,6 +57,8 @@ export function formatDateTime(
           .slice(-2);
       case 'hh':
         return String(hours12).padStart(2, '0');
+      case 'h':
+        return String(hours12);
       case 'mm':
         return String(zonedDate.getMinutes()).padStart(2, '0');
       case 'ss':

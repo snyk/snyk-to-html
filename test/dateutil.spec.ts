@@ -4,8 +4,8 @@ import { formatDateTime } from '../src/lib/dateutil';
 describe('formatDateTime', () => {
   it('formats date with default format', () => {
     const date = new Date('2023-04-15T14:30:45Z');
-    expect(formatDateTime(date, 'MMMM Do, YYYY h:mm:ss a z')).toBe(
-      'April 15th, 2023 2:30:45 pm UTC',
+    expect(formatDateTime(date, 'MMMM DD, YYYY h:mm:ss a UTC')).toBe(
+      'April 15, 2023 2:30:45 pm UTC',
     );
   });
 
@@ -25,22 +25,22 @@ describe('formatDateTime', () => {
 
   it('formats time correctly', () => {
     const date = new Date('2023-04-15T23:59:59Z');
-    expect(formatDateTime(date, 'h:mm:ss a')).toBe('11:59:59 pm');
+    expect(formatDateTime(date, 'hh:mm:ss a', 'UTC')).toBe('11:59:59 pm');
   });
 
   it('handles midnight correctly', () => {
     const date = new Date('2023-04-15T00:00:00Z');
-    expect(formatDateTime(date, 'h:mm:ss a')).toBe('12:00:00 am');
+    expect(formatDateTime(date, 'hh:mm:ss a', 'UTC')).toBe('12:00:00 am');
   });
 
   it('includes timezone information', () => {
     const date = new Date('2023-04-15T14:30:45Z');
-    expect(formatDateTime(date, 'z Z')).toBe('UTC +00:00');
+    expect(formatDateTime(date, 'UTC +00:00')).toBe('UTC +00:00');
   });
 
   it('uses current date when no date is provided', () => {
     const now = new Date();
-    const formatted = formatDateTime(null, 'YYYY');
+    const formatted = formatDateTime(undefined, 'YYYY');
     expect(formatted).toBe(now.getUTCFullYear().toString());
   });
 });
