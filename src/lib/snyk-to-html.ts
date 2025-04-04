@@ -22,9 +22,12 @@ const debug = debugModule('snyk-to-html');
 const defaultRemediationText =
   '## Remediation\nThere is no remediation at the moment';
 
-function readFile(filePath: fs.PathOrFileDescriptor): Promise<string> {
+// Create a global variable to store the timezone
+let currentTimezone = 'UTC';
+
+function readFile(filePath: string, encoding: string): Promise<string> {
   return new Promise<string>((resolve, reject) => {
-    fs.readFile(filePath, { encoding: 'utf-8' }, (err, data) => {
+    fs.readFile(filePath, 'utf-8', (err, data) => {
       if (err) {
         reject(err);
       }
@@ -38,7 +41,7 @@ function handleInvalidJson(reason: any) {
     reason.message =
       reason.message +
       'Error running `snyk-to-html`. Please check you are providing the correct parameters. ' +
-      'Is the issue persists contact support@snyk.io';
+      'If the issue persists, contact support@snyk.io';
   }
   console.log(reason.message);
 }
@@ -51,7 +54,7 @@ function promisedParseJSON(json: string): Promise<any> {
       if (error instanceof Error) {
         error.message = chalk.red.bold(
           'The source provided is not a valid json! Please validate that the input provided to the CLI is an actual JSON\n\n' +
-            'Tip: To find more information, try running `snyk-to-html` in debug mode by appending to the CLI the `-d` parameter\n\n',
+          'Tip: To find more information, try running `snyk-to-html` in debug mode by appending to the CLI the `-d` parameter\n\n',
         );
         debug(`Input provided to the CLI: \n${json}\n\n`);
         (error as any).isInvalidJson = true;
@@ -64,51 +67,82 @@ function promisedParseJSON(json: string): Promise<any> {
 }
 
 class SnykToHtml {
+  private timezone: string; // Declare timezone as a class property
+
+  constructor(timezone: string = 'UTC') {
+    this.timezone = timezone;
+    // Update the global timezone variable when a new instance is created
+    currentTimezone = timezone;
+  }
+
   public static run(
     dataSource: string,
     remediation: boolean,
     hbsTemplate: string,
     summary: boolean,
     reportCallback: (value: string) => void,
+    timezone: string = 'UTC', // Default timezone
   ): void {
-    SnykToHtml.runAsync(dataSource, remediation, hbsTemplate, summary)
+    const instance = new SnykToHtml(timezone); // Create an instance with timezone
+    SnykToHtml.runAsync(instance, dataSource, remediation, hbsTemplate, summary, timezone)
       .then(reportCallback)
       .catch(handleInvalidJson);
   }
 
   public static async runAsync(
+    instance: SnykToHtml,
     source: string,
     remediation: boolean,
     template: string,
     summary: boolean,
+    timezone: string, // Add timezone parameter
   ): Promise<string> {
-    const promisedString = source ? readFile(source) : readInputFromStdin();
-    return promisedString.then(promisedParseJSON).then((data: any) => {
-      if (
-        data?.infrastructureAsCodeIssues ||
-        data[0]?.infrastructureAsCodeIssues
-      ) {
-        // for IaC input we need to change the default template to an IaC specific template
-        // at the same time we also want to support the -t / --template flag
-        template =
-          template === path.join(__dirname, '../../template/test-report.hbs')
-            ? path.join(__dirname, '../../template/iac/test-report.hbs')
-            : template;
-        return processIacData(data, template, summary);
-      } else if (data?.runs && data?.runs[0].tool.driver.name === 'SnykCode') {
-        template =
-          template === path.join(__dirname, '../../template/test-report.hbs')
-            ? path.join(__dirname, '../../template/code/test-report.hbs')
-            : template;
-        return processCodeData(data, template, summary);
-      } else if (data.docker) {
-        return processContainerData(data, remediation, template, summary);
-      } else {
-        return processData(data, remediation, template, summary);
-      }
-    });
+    const promisedString = source
+      ? readFile(source, 'utf8')
+      : readInputFromStdin();
+    return promisedString
+      .then(promisedParseJSON)
+      .then((data: any) => {
+        // Add timezone to the data
+        data.timezone = instance.timezone; // Ensure timezone is added to data
+
+        // Now we process data based on its type
+        if (
+          data?.infrastructureAsCodeIssues ||
+          data[0]?.infrastructureAsCodeIssues
+        ) {
+          template =
+            template === path.join(__dirname, '../../template/test-report.hbs')
+              ? path.join(__dirname, '../../template/iac/test-report.hbs')
+              : template;
+          return processIacData(data, template, summary, timezone);
+        } else if (
+          data?.runs &&
+          data?.runs[0].tool.driver.name === 'SnykCode'
+        ) {
+          template =
+            template === path.join(__dirname, '../../template/test-report.hbs')
+              ? path.join(__dirname, '../../template/code/test-report.hbs')
+              : template;
+          return processCodeData(data, template, summary, timezone);
+        } else if (data.docker) {
+          return processContainerData(data, remediation, template, summary, timezone);
+        } else {
+          return processData(data, remediation, template, summary, timezone);
+        }
+      })
+      .then((report: string) => {
+        // Generate and return the final report after processing
+        return instance.generateReport(report);
+      });
+  }
+
+  private generateReport(report: string): string {
+    return report;
   }
 }
+
+export { SnykToHtml };
 
 function metadataForVuln(vuln: any) {
   const { cveSpaced, cveLineBreaks } = concatenateCVEs(vuln);
@@ -138,7 +172,7 @@ function concatenateCVEs(vuln: any) {
   let cveLineBreaks = '';
 
   if (vuln.identifiers) {
-    vuln.identifiers.CVE.forEach(function(c) {
+    vuln.identifiers.CVE.forEach(function (c) {
       const cveLink = `<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=${c}">${c}</a>`;
       cveSpaced += `${cveLink}&nbsp;`;
       cveLineBreaks += `${cveLink}</br>`;
@@ -178,10 +212,9 @@ function groupVulns(vulns) {
 }
 
 async function compileTemplate(
-  fileName: fs.PathLike,
+  fileName: string,
 ): Promise<HandlebarsTemplateDelegate> {
-  const fileContent = fs.readFileSync(fileName, { encoding: 'utf8' });
-  return Handlebars.compile(fileContent);
+  return readFile(fileName, 'utf8').then(Handlebars.compile);
 }
 
 async function registerPeerPartial(
@@ -244,6 +277,7 @@ async function generateTemplate(
 async function generateIacTemplate(
   data: any,
   template: string,
+  timezone: string, // Add timezone parameter
 ): Promise<string> {
   await registerPeerPartial(template, 'inline-css');
   await registerPeerPartial(template, 'header');
@@ -253,13 +287,14 @@ async function generateIacTemplate(
   await registerPeerPartial(template, 'vuln-card');
 
   const htmlTemplate = await compileTemplate(template);
-
+  data.timezone = timezone; // Ensure timezone is added to data
   return htmlTemplate(data);
 }
 
 async function generateCodeTemplate(
   data: any,
   template: string,
+  timezone: string, // Add timezone parameter
 ): Promise<string> {
   await registerPeerPartial(template, 'inline-css');
   await registerPeerPartial(template, 'inline-js');
@@ -269,7 +304,24 @@ async function generateCodeTemplate(
   await registerPeerPartial(template, 'code-snip');
 
   const htmlTemplate = await compileTemplate(template);
+  data.timezone = timezone; // Ensure timezone is added to data
+  return htmlTemplate(data);
+}
 
+async function generateContainerTemplate(
+  data: any,
+  template: string,
+  timezone: string, // Add timezone parameter
+): Promise<string> {
+  await registerPeerPartial(template, 'inline-css');
+  await registerPeerPartial(template, 'header');
+  await registerPeerPartial(template, 'metatable-css');
+  await registerPeerPartial(template, 'metatable');
+  await registerPeerPartial(template, 'inline-js');
+  await registerPeerPartial(template, 'vuln-card');
+
+  const htmlTemplate = await compileTemplate(template);
+  data.timezone = timezone; // Ensure timezone is added to data
   return htmlTemplate(data);
 }
 
@@ -321,8 +373,10 @@ async function processData(
   remediation: boolean,
   template: string,
   summary: boolean,
+  timezone: string, // Add timezone parameter
 ): Promise<string> {
   const mergedData = Array.isArray(data) ? mergeData(data) : data;
+  mergedData.timezone = timezone; // Ensure timezone is added to mergedData
   return generateTemplate(mergedData, template, remediation, summary);
 }
 
@@ -330,9 +384,11 @@ async function processIacData(
   data: any,
   template: string,
   summary: boolean,
+  timezone: string, // Add timezone parameter
 ): Promise<string> {
   if (data.error) {
-    return generateIacTemplate(data, template);
+    data.timezone = currentTimezone;
+    return generateIacTemplate(data, template, timezone); // Pass timezone to generateIacTemplate
   }
 
   const dataArray = Array.isArray(data) ? data : [data];
@@ -362,18 +418,21 @@ async function processIacData(
     projects: projectsArrays,
     showSummaryOnly: summary,
     totalIssues,
+    timezone, // Add timezone to processedData
   };
 
-  return generateIacTemplate(processedData, template);
+  return generateIacTemplate(processedData, template, timezone); // Pass timezone to generateIacTemplate
 }
 
 async function processCodeData(
   data: any,
   template: string,
   summary: boolean,
+  timezone: string, // Add timezone parameter
 ): Promise<string> {
   if (data.error) {
-    return generateCodeTemplate(data, template);
+    data.timezone = currentTimezone;
+    return generateCodeTemplate(data, template, timezone); // Pass timezone to generateCodeTemplate
   }
   const dataArray = Array.isArray(data) ? data : [data];
 
@@ -384,8 +443,9 @@ async function processCodeData(
     projects: OrderedIssuesArray,
     showSummaryOnly: summary,
     totalIssues,
+    timezone, // Add timezone to processedData
   };
-  return generateCodeTemplate(processedData, template);
+  return generateCodeTemplate(processedData, template, timezone); // Pass timezone to generateCodeTemplate
 }
 
 async function processContainerData(
@@ -393,6 +453,7 @@ async function processContainerData(
   remediation: boolean,
   template: string,
   summary: boolean,
+  timezone: string, // Add timezone parameter
 ): Promise<string> {
   if (
     !Array.isArray(data) &&
@@ -403,7 +464,7 @@ async function processContainerData(
     delete data.applications;
     data = [data, ...AppData];
   }
-  return processData(data, remediation, template, summary);
+  return processData(data, remediation, template, summary, timezone); // Pass timezone to processData
 }
 
 async function readInputFromStdin(): Promise<string> {
@@ -424,30 +485,27 @@ async function readInputFromStdin(): Promise<string> {
 // handlebar helpers
 const hh = {
   markdown: marked.parse,
-  moment: (date, format) => formatDateTime(date, format),
+  // Replace the existing moment helper with:
+  formatDate: (date, format, timezone = 'UTC') => formatDateTime(date, format, timezone),
   count: (data) => data && data.length,
   dump: (data, spacer) => JSON.stringify(data, null, spacer || null),
   // block helpers
-  isDoubleArray: function(data, options) {
+  isDoubleArray: function (data, options) {
     return Array.isArray(data[0]) ? options.fn(data) : options.inverse(data);
   },
-  // eslint-disable-next-line @typescript-eslint/camelcase
-  if_eq: function(this: void, a, b, opts) {
+  if_eq: function (this: void, a, b, opts) {
     return a === b ? opts.fn(this) : opts.inverse(this);
   },
-  // eslint-disable-next-line @typescript-eslint/camelcase
-  if_gt: function(this: void, a, b, opts) {
+  if_gt: function (this: void, a, b, opts) {
     return a > b ? opts.fn(this) : opts.inverse(this);
   },
-  // eslint-disable-next-line @typescript-eslint/camelcase
-  if_not_eq: function(this: void, a, b, opts) {
+  if_not_eq: function (this: void, a, b, opts) {
     return a !== b ? opts.fn(this) : opts.inverse(this);
   },
-  // eslint-disable-next-line @typescript-eslint/camelcase
-  if_any: function(this: void, opts, ...args) {
+  if_any: function (this: void, opts, ...args) {
     return args.some((v) => !!v) ? opts.fn(this) : opts.inverse(this);
   },
-  ifCond: function(this: void, v1, operator, v2, options) {
+  ifCond: function (this: void, v1, operator, v2, options) {
     const choose = (pred: boolean) =>
       pred ? options.fn(this) : options.inverse(this);
     switch (operator) {
@@ -490,11 +548,9 @@ const hh = {
   severityLabel: (severity: string) => {
     return severity[0].toUpperCase();
   },
-  startsWith: function(str, start, options) {
+  startsWith: function (str, start, options) {
     return str.startsWith(start) ? options.fn(this) : options.inverse(this);
   },
 };
 
 Object.keys(hh).forEach((k) => Handlebars.registerHelper(k, hh[k]));
-
-export { SnykToHtml };

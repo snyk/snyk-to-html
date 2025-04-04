@@ -28,11 +28,20 @@ program
     '-a, --actionable-remediation',
     'Display actionable remediation info if available',
   )
+  .option(
+    '-z, --timezone <timezone>',
+    'Specify timezone for dates (e.g., "UTC+02:00"). Defaults to UTC+00:00',
+  )
   .parse(process.argv);
 
 let template;
 let source;
 let output;
+let timezone = program.timezone;
+
+if (!timezone || typeof timezone === 'boolean') {
+  timezone = 'UTC'; // Default timezone if not provided or if flag is used without value
+}
 
 if (program.template) {
   // template
@@ -79,6 +88,7 @@ SnykToHtml.run(
   template,
   !!program.summary,
   onReportOutput,
+  timezone,
 );
 
 function onReportOutput(report: string): void {
@@ -86,8 +96,8 @@ function onReportOutput(report: string): void {
     try {
       fs.writeFileSync(output, report);
       console.log('Vulnerability snapshot saved at ' + output);
-    } catch (error) {
-      return console.log(error);
+    } catch (err) {
+      return console.log(err);
     }
   } else {
     console.log(report);
