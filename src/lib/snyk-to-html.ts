@@ -104,9 +104,7 @@ class SnykToHtml {
     summary: boolean,
     timezone: string, // Add timezone parameter
   ): Promise<string> {
-    const promisedString = source
-      ? readFile(source)
-      : readInputFromStdin();
+    const promisedString = source ? readFile(source) : readInputFromStdin();
     return promisedString
       .then(promisedParseJSON)
       .then((data: any) => {
