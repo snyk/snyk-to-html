@@ -87,7 +87,7 @@ describe('test running SnykToHtml.run', () => {
     );
   });
 
-  it('creates a report when called with remediations arg and data containing remediations object', () => {
+  it('creates a report when called with remediations arg and data containing remediations and vulnerabilities object', () => {
     SnykToHtml.run(
       path.join(__dirname, 'fixtures', 'test-report-with-remediation.json'),
       WITH_REMEDIATION,
@@ -101,6 +101,13 @@ describe('test running SnykToHtml.run', () => {
         expect(report).toContain('.remediation-card');
         expect(report).toContain('.remediation-card__layout-container');
         expect(report).toContain('.remediation-card__pane');
+
+        // can see the vulnerabilities
+        expect(report).toContain('cards--vuln');
+        // can see at least one vulnerability
+        expect(report).toContain('card--vuln');
+        // check for a specific vulnerability
+        expect(report).toContain('class="card__title">Prototype Pollution');
       },
     );
   });
