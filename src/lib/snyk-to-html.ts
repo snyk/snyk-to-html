@@ -491,15 +491,19 @@ const hh = {
   isDoubleArray: function(data, options) {
     return Array.isArray(data[0]) ? options.fn(data) : options.inverse(data);
   },
+  // eslint-disable-next-line @typescript-eslint/camelcase
   if_eq: function(this: void, a, b, opts) {
     return a === b ? opts.fn(this) : opts.inverse(this);
   },
+  // eslint-disable-next-line @typescript-eslint/camelcase
   if_gt: function(this: void, a, b, opts) {
     return a > b ? opts.fn(this) : opts.inverse(this);
   },
+  // eslint-disable-next-line @typescript-eslint/camelcase
   if_not_eq: function(this: void, a, b, opts) {
     return a !== b ? opts.fn(this) : opts.inverse(this);
   },
+  // eslint-disable-next-line @typescript-eslint/camelcase
   if_any: function(this: void, opts, ...args) {
     return args.some((v) => !!v) ? opts.fn(this) : opts.inverse(this);
   },
