@@ -258,7 +258,7 @@ describe('test running SnykToHtml.run', () => {
         WITHOUT_REMEDIATION,
         path.join(__dirname, '..', 'template', 'test-report.hbs'),
         WITHOUT_SUMMARY,
-        'UTC'
+        'UTC',
       ),
     ).rejects.toThrowError('The source provided is not a valid json!');
   });
