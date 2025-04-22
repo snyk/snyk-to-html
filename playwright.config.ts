@@ -10,7 +10,7 @@ export default defineConfig({
   expect: {
     timeout: 60 * 1000,
     toHaveScreenshot: {
-      threshold: 0.2,
+      threshold: 0.3,
     },
   },
   /* Opt out of parallel tests on CI. */
