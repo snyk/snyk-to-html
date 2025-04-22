@@ -50,6 +50,17 @@
         {{/if}}<!-- .vulnerabilities -->
       </section>
     {{/unless}}
+      <div class="layout-container" style="padding-top: 35px;">
+        {{#if vulnerabilities}}
+          <div class="cards--vuln filter--patch filter--ignore">
+            {{#each vulnerabilities}}
+              {{> vuln-card showSummaryOnly=../showSummaryOnly}}
+            {{/each}}
+          </div><!-- cards -->
+        {{else}}
+          No known vulnerabilities detected.
+        {{/if}}
+      </div>
   </main><!-- .layout-stacked__content -->
 </body>
 {{> inline-js }}

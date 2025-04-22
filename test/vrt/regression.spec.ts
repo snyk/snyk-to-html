@@ -26,42 +26,56 @@ const replacements = [
 // With right, as the visual representation of a website in a browser on Linux might look different from on a Mac.
 // We've supplied a convenience script to test and update these screenshots locally, that runs Playwright through
 // an interactive Docker container.
-// Run the tests by (from the root of this project):
+// Run the tests by executing the command (from the root of this project):
 // * ./test/vrt/run-test-on-linux.sh npm run test:vrt
 // And to update snapshots:
 // * ./test/vrt/run-test-on-linux.sh npm run test:vrt:update
 test.describe('Visual Regression Tests (VRTs)', () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  test('A sample test report', async ({ page }, testInfo) => {
-    const tempFilePath = path.join(os.tmpdir(), `temp-${Date.now()}.html`);
+  [
+    {
+      description: 'no extra arguments',
+      command: '-i ./test/fixtures/test-report.json',
+    },
+    {
+      description: 'with actionable remediation',
+      command: '-i ./test/fixtures/test-report.json -a',
+    },
+    {
+      description: 'with summary',
+      command: '-i ./test/fixtures/test-report.json -s',
+    },
+  ].forEach(({ description, command }) => {
+    test(`A sample test report generated with ${description}`, async ({
+      page,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    }, testInfo) => {
+      const tempFilePath = path.join(os.tmpdir(), `temp-${Date.now()}.html`);
 
-    const { stdout, stderr } = await exec(
-      `node ${main} -i ./test/fixtures/test-report.json`,
-      {
+      const { stdout, stderr } = await exec(`node ${main} ${command}`, {
         maxBuffer: 1024 * 1024,
-      },
-    );
-    expect(stderr).toBe('');
+      });
+      expect(stderr).toBe('');
 
-    let reportWithoutDynamicContent = stdout;
-    replacements.forEach(({ regex, replace }) => {
-      reportWithoutDynamicContent = reportWithoutDynamicContent.replace(
-        regex,
-        replace,
-      );
+      let reportWithoutDynamicContent = stdout;
+      replacements.forEach(({ regex, replace }) => {
+        reportWithoutDynamicContent = reportWithoutDynamicContent.replace(
+          regex,
+          replace,
+        );
+      });
+
+      fs.writeFileSync(tempFilePath, reportWithoutDynamicContent, 'utf8');
+
+      await page.goto(`file://${tempFilePath}`);
+      await expect(page).toHaveScreenshot();
     });
-
-    fs.writeFileSync(tempFilePath, reportWithoutDynamicContent, 'utf8');
-
-    await page.goto(`file://${tempFilePath}`);
-    await expect(page).toHaveScreenshot();
   });
 
   test('A sample snyk code (interactive) report', async ({ page }) => {
     const tempFilePath = path.join(os.tmpdir(), `temp-${Date.now()}.html`);
 
     const { stdout, stderr } = await exec(
-      `node ${main} -i ./test/fixtures/test-code-openrefine.json `,
+      `node ${main} -i ./test/fixtures/test-code-openrefine.json`,
       {
         maxBuffer: 1024 * 1024,
       },

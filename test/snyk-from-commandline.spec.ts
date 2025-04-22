@@ -63,25 +63,33 @@ describe('test calling snyk-to-html from command line', () => {
     {
       args: '--actionable-remediation --summary',
     },
-  ])(`shows remediation when running: $args`, async ({ args }) => {
-    const { stdout, stderr } = await exec(
-      `node ${main} -i ./test/fixtures/test-report-with-pins-remediation.json ${args}`,
-      {
-        maxBuffer: 1024 * 1024,
-      },
-    );
-    expect(stderr).toEqual('');
+  ])(
+    `shows remediation with vulnerabilities when running: $args`,
+    async ({ args }) => {
+      const { stdout, stderr } = await exec(
+        `node ${main} -i ./test/fixtures/test-report-with-pins-remediation.json ${args}`,
+        {
+          maxBuffer: 1024 * 1024,
+        },
+      );
+      expect(stderr).toEqual('');
 
-    const cleanedReport = cleanTimestamp(stdout);
-    expect(cleanedReport).not.toContain('<h2 id="overview">Overview</h2>');
-    expect(cleanedReport).toContain(
-      '<body class="test-remediation-section-projects">',
-    );
-    expect(cleanedReport).toContain(
-      "<div class='remediation-card__pane shown test-remediation-pins'",
-    );
-    expect(cleanedReport).toMatchSnapshot();
-  });
+      const cleanedReport = cleanTimestamp(stdout);
+      if (args.includes('--summary')) {
+        expect(cleanedReport).not.toContain('<h2 id="overview">Overview</h2>');
+      } else {
+        expect(cleanedReport).toContain('<h2 id="overview">Overview</h2>');
+      }
+
+      expect(cleanedReport).toContain(
+        '<body class="test-remediation-section-projects">',
+      );
+      expect(cleanedReport).toContain(
+        "<div class='remediation-card__pane shown test-remediation-pins'",
+      );
+      expect(cleanedReport).toMatchSnapshot();
+    },
+  );
 
   it('does not fail when called with IaC specific JSON', async () => {
     const { stdout, stderr } = await exec(
