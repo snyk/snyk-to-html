@@ -3,6 +3,9 @@ name: 'Test and release snyk-to-html'
 on:
   pull_request:
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   lint:
