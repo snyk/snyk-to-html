@@ -1,9 +1,8 @@
 import * as orderBy from 'lodash.orderby';
-
-const path = require('path');
-const events = require('events');
-const fs = require('fs');
-const readline = require('readline');
+import * as path from 'node:path';
+import * as events from 'node:events';
+import * as fs from 'node:fs';
+import * as readline from 'node:readline';
 
 const codeSeverityMap = {
   error: 'high',
@@ -42,7 +41,7 @@ async function processCodeLine(filePath, region) {
       input: sourceFs,
     });
     rl.on('line', (line) => {
-      parseline = line.toString('ascii');
+      parseline = line.toString();
       if (lineNumber == startLine) {
         if (multiLine) {
           columnEndOfLine = parseline.length;
@@ -129,9 +128,8 @@ export async function processSourceCode(dataArray) {
     //code stack
     for (const codeFlowLocations of issue.codeFlows[0].threadFlows[0]
       .locations) {
-      codeFlowLocations.location.physicalLocation.codeString = await readCodeSnippet(
-        codeFlowLocations.location,
-      );
+      codeFlowLocations.location.physicalLocation.codeString =
+        await readCodeSnippet(codeFlowLocations.location);
       newLocation =
         codeFlowLocations.location.physicalLocation.artifactLocation.uri;
       if (newLocation === oldLocation) {
