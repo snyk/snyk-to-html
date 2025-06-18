@@ -1625,7 +1625,7 @@
               "id": 0,
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "cliv2/internal/cliv2/cliv2.go",
+                  "uri": "test/fixtures/test-code-src/GetRowsCommand.java",
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
@@ -1652,7 +1652,7 @@
                         "id": 0,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "cliv2/internal/cliv2/cliv2.go",
+                            "uri": "test/fixtures/test-code-src/GetRowsCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -1669,7 +1669,7 @@
                         "id": 1,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "cliv2/internal/cliv2/cliv2.go",
+                            "uri": "test/fixtures/test-code-src/GetRowsCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -1686,7 +1686,7 @@
                         "id": 2,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "cliv2/internal/cliv2/cliv2.go",
+                            "uri": "test/fixtures/test-code-src/GetRowsCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -1703,7 +1703,7 @@
                         "id": 3,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "cliv2/internal/cliv2/cliv2.go",
+                            "uri": "test/fixtures/test-code-src/GetRowsCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -1720,7 +1720,7 @@
                         "id": 4,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "cliv2/internal/cliv2/cliv2.go",
+                            "uri": "test/fixtures/test-code-src/GetRowsCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -1737,7 +1737,7 @@
                         "id": 5,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "cliv2/internal/cliv2/cliv2.go",
+                            "uri": "test/fixtures/test-code-src/GetRowsCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -1754,7 +1754,7 @@
                         "id": 6,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "cliv2/internal/cliv2/cliv2.go",
+                            "uri": "test/fixtures/test-code-src/GetRowsCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -1771,7 +1771,7 @@
                         "id": 7,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "cliv2/internal/cliv2/cliv2.go",
+                            "uri": "test/fixtures/test-code-src/GetRowsCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -1822,7 +1822,7 @@
               "id": 0,
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "src/lib/find-files.ts",
+                  "uri": "test/fixtures/test-code-src/LoginCommand.java",
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
@@ -1849,7 +1849,7 @@
                         "id": 0,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -1866,7 +1866,7 @@
                         "id": 1,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -1883,7 +1883,7 @@
                         "id": 2,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -1900,7 +1900,7 @@
                         "id": 3,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -1917,7 +1917,7 @@
                         "id": 4,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -1934,7 +1934,7 @@
                         "id": 5,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -1951,7 +1951,7 @@
                         "id": 6,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -1968,7 +1968,7 @@
                         "id": 7,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -1985,7 +1985,7 @@
                         "id": 8,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2002,7 +2002,7 @@
                         "id": 9,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2019,7 +2019,7 @@
                         "id": 10,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2036,7 +2036,7 @@
                         "id": 11,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2053,7 +2053,7 @@
                         "id": 12,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2070,7 +2070,7 @@
                         "id": 13,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2087,7 +2087,7 @@
                         "id": 14,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2104,7 +2104,7 @@
                         "id": 15,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2121,7 +2121,7 @@
                         "id": 16,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2138,7 +2138,7 @@
                         "id": 17,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2155,7 +2155,7 @@
                         "id": 18,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2172,7 +2172,7 @@
                         "id": 19,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2189,7 +2189,7 @@
                         "id": 20,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2206,7 +2206,7 @@
                         "id": 21,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2223,7 +2223,7 @@
                         "id": 22,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2240,7 +2240,7 @@
                         "id": 23,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2257,7 +2257,7 @@
                         "id": 24,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2274,7 +2274,7 @@
                         "id": 25,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2291,7 +2291,7 @@
                         "id": 26,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2308,7 +2308,7 @@
                         "id": 27,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2325,7 +2325,7 @@
                         "id": 28,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2342,7 +2342,7 @@
                         "id": 29,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2359,7 +2359,7 @@
                         "id": 30,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2376,7 +2376,7 @@
                         "id": 31,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2393,7 +2393,7 @@
                         "id": 32,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2448,7 +2448,7 @@
               "id": 0,
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "src/lib/find-files.ts",
+                  "uri": "test/fixtures/test-code-src/LoginCommand.java",
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
@@ -2475,7 +2475,7 @@
                         "id": 0,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2492,7 +2492,7 @@
                         "id": 1,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2509,7 +2509,7 @@
                         "id": 2,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2526,7 +2526,7 @@
                         "id": 3,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2543,7 +2543,7 @@
                         "id": 4,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2560,7 +2560,7 @@
                         "id": 5,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2577,7 +2577,7 @@
                         "id": 6,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2594,7 +2594,7 @@
                         "id": 7,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2611,7 +2611,7 @@
                         "id": 8,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2628,7 +2628,7 @@
                         "id": 9,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2645,7 +2645,7 @@
                         "id": 10,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2662,7 +2662,7 @@
                         "id": 11,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2679,7 +2679,7 @@
                         "id": 12,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2696,7 +2696,7 @@
                         "id": 13,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2713,7 +2713,7 @@
                         "id": 14,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2730,7 +2730,7 @@
                         "id": 15,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2747,7 +2747,7 @@
                         "id": 16,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2764,7 +2764,7 @@
                         "id": 17,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2781,7 +2781,7 @@
                         "id": 18,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2798,7 +2798,7 @@
                         "id": 19,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2815,7 +2815,7 @@
                         "id": 20,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2832,7 +2832,7 @@
                         "id": 21,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2849,7 +2849,7 @@
                         "id": 22,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2866,7 +2866,7 @@
                         "id": 23,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2883,7 +2883,7 @@
                         "id": 24,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2900,7 +2900,7 @@
                         "id": 25,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2917,7 +2917,7 @@
                         "id": 26,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/find-files.ts",
+                            "uri": "test/fixtures/test-code-src/LoginCommand.java",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -2972,7 +2972,7 @@
               "id": 0,
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "scripts/install-snyk.py",
+                  "uri": "test/fixtures/test-code-src/big5.html",
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
@@ -2999,7 +2999,7 @@
                         "id": 0,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3016,7 +3016,7 @@
                         "id": 1,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3033,7 +3033,7 @@
                         "id": 2,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3050,7 +3050,7 @@
                         "id": 3,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3067,7 +3067,7 @@
                         "id": 4,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3084,7 +3084,7 @@
                         "id": 5,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3101,7 +3101,7 @@
                         "id": 6,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3118,7 +3118,7 @@
                         "id": 7,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3135,7 +3135,7 @@
                         "id": 8,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3152,7 +3152,7 @@
                         "id": 9,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3169,7 +3169,7 @@
                         "id": 10,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3186,7 +3186,7 @@
                         "id": 11,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3203,7 +3203,7 @@
                         "id": 12,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3220,7 +3220,7 @@
                         "id": 13,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3237,7 +3237,7 @@
                         "id": 14,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3254,7 +3254,7 @@
                         "id": 15,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3271,7 +3271,7 @@
                         "id": 16,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3288,7 +3288,7 @@
                         "id": 17,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3305,7 +3305,7 @@
                         "id": 18,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3322,7 +3322,7 @@
                         "id": 19,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3377,7 +3377,7 @@
               "id": 0,
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "scripts/install-snyk.py",
+                  "uri": "test/fixtures/test-code-src/big5.html",
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
@@ -3404,7 +3404,7 @@
                         "id": 0,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3421,7 +3421,7 @@
                         "id": 1,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3438,7 +3438,7 @@
                         "id": 2,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3455,7 +3455,7 @@
                         "id": 3,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3472,7 +3472,7 @@
                         "id": 4,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3489,7 +3489,7 @@
                         "id": 5,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3506,7 +3506,7 @@
                         "id": 6,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3523,7 +3523,7 @@
                         "id": 7,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3540,7 +3540,7 @@
                         "id": 8,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3557,7 +3557,7 @@
                         "id": 9,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3574,7 +3574,7 @@
                         "id": 10,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3591,7 +3591,7 @@
                         "id": 11,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3608,7 +3608,7 @@
                         "id": 12,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3625,7 +3625,7 @@
                         "id": 13,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3642,7 +3642,7 @@
                         "id": 14,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3659,7 +3659,7 @@
                         "id": 15,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3676,7 +3676,7 @@
                         "id": 16,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3693,7 +3693,7 @@
                         "id": 17,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3710,7 +3710,7 @@
                         "id": 18,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3727,7 +3727,7 @@
                         "id": 19,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3744,7 +3744,7 @@
                         "id": 20,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3761,7 +3761,7 @@
                         "id": 21,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3816,7 +3816,7 @@
               "id": 0,
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "scripts/install-snyk.py",
+                  "uri": "test/fixtures/test-code-src/big5.html",
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
@@ -3843,7 +3843,7 @@
                         "id": 0,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3860,7 +3860,7 @@
                         "id": 1,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3877,7 +3877,7 @@
                         "id": 2,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3894,7 +3894,7 @@
                         "id": 3,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3911,7 +3911,7 @@
                         "id": 4,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3928,7 +3928,7 @@
                         "id": 5,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3945,7 +3945,7 @@
                         "id": 6,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3962,7 +3962,7 @@
                         "id": 7,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3979,7 +3979,7 @@
                         "id": 8,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -3996,7 +3996,7 @@
                         "id": 9,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4013,7 +4013,7 @@
                         "id": 10,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4030,7 +4030,7 @@
                         "id": 11,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4047,7 +4047,7 @@
                         "id": 12,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4064,7 +4064,7 @@
                         "id": 13,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4081,7 +4081,7 @@
                         "id": 14,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4098,7 +4098,7 @@
                         "id": 15,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/install-snyk.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4165,7 +4165,7 @@
               "id": 0,
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "src/cli/commands/log4shell.ts",
+                  "uri": "test/fixtures/test-code-src/big5.html",
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
@@ -4192,7 +4192,7 @@
                         "id": 0,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/cli/commands/log4shell.ts",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4209,7 +4209,7 @@
                         "id": 1,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/cli/commands/log4shell.ts",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4263,7 +4263,7 @@
               "id": 0,
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "src/lib/analytics/getStandardData.ts",
+                  "uri": "test/fixtures/test-code-src/big5.html",
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
@@ -4290,7 +4290,7 @@
                         "id": 0,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/analytics/getStandardData.ts",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4307,7 +4307,7 @@
                         "id": 1,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "src/lib/analytics/getStandardData.ts",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4362,7 +4362,7 @@
               "id": 0,
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "scripts/download_go.py",
+                  "uri": "test/fixtures/test-code-src/big5.html",
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
@@ -4389,7 +4389,7 @@
                         "id": 0,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4406,7 +4406,7 @@
                         "id": 1,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4423,7 +4423,7 @@
                         "id": 2,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4440,7 +4440,7 @@
                         "id": 3,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4457,7 +4457,7 @@
                         "id": 4,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4474,7 +4474,7 @@
                         "id": 5,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4491,7 +4491,7 @@
                         "id": 6,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4508,7 +4508,7 @@
                         "id": 7,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4525,7 +4525,7 @@
                         "id": 8,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4542,7 +4542,7 @@
                         "id": 9,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4559,7 +4559,7 @@
                         "id": 10,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4576,7 +4576,7 @@
                         "id": 11,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4593,7 +4593,7 @@
                         "id": 12,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4610,7 +4610,7 @@
                         "id": 13,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4627,7 +4627,7 @@
                         "id": 14,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4644,7 +4644,7 @@
                         "id": 15,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4661,7 +4661,7 @@
                         "id": 16,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4678,7 +4678,7 @@
                         "id": 17,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4695,7 +4695,7 @@
                         "id": 18,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4712,7 +4712,7 @@
                         "id": 19,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4729,7 +4729,7 @@
                         "id": 20,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4746,7 +4746,7 @@
                         "id": 21,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4763,7 +4763,7 @@
                         "id": 22,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4780,7 +4780,7 @@
                         "id": 23,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4797,7 +4797,7 @@
                         "id": 24,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4814,7 +4814,7 @@
                         "id": 25,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4831,7 +4831,7 @@
                         "id": 26,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4848,7 +4848,7 @@
                         "id": 27,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4865,7 +4865,7 @@
                         "id": 28,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4882,7 +4882,7 @@
                         "id": 29,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4899,7 +4899,7 @@
                         "id": 30,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4916,7 +4916,7 @@
                         "id": 31,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4933,7 +4933,7 @@
                         "id": 32,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4950,7 +4950,7 @@
                         "id": 33,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -4967,7 +4967,7 @@
                         "id": 34,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5022,7 +5022,7 @@
               "id": 0,
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "scripts/download_go.py",
+                  "uri": "test/fixtures/test-code-src/big5.html",
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
@@ -5049,7 +5049,7 @@
                         "id": 0,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5066,7 +5066,7 @@
                         "id": 1,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5083,7 +5083,7 @@
                         "id": 2,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5100,7 +5100,7 @@
                         "id": 3,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5117,7 +5117,7 @@
                         "id": 4,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5134,7 +5134,7 @@
                         "id": 5,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5151,7 +5151,7 @@
                         "id": 6,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5168,7 +5168,7 @@
                         "id": 7,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5185,7 +5185,7 @@
                         "id": 8,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5202,7 +5202,7 @@
                         "id": 9,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5219,7 +5219,7 @@
                         "id": 10,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5236,7 +5236,7 @@
                         "id": 11,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5253,7 +5253,7 @@
                         "id": 12,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5270,7 +5270,7 @@
                         "id": 13,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5287,7 +5287,7 @@
                         "id": 14,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5304,7 +5304,7 @@
                         "id": 15,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5321,7 +5321,7 @@
                         "id": 16,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5338,7 +5338,7 @@
                         "id": 17,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5355,7 +5355,7 @@
                         "id": 18,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5372,7 +5372,7 @@
                         "id": 19,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5389,7 +5389,7 @@
                         "id": 20,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5406,7 +5406,7 @@
                         "id": 21,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5423,7 +5423,7 @@
                         "id": 22,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5440,7 +5440,7 @@
                         "id": 23,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5457,7 +5457,7 @@
                         "id": 24,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5474,7 +5474,7 @@
                         "id": 25,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5491,7 +5491,7 @@
                         "id": 26,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5508,7 +5508,7 @@
                         "id": 27,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5525,7 +5525,7 @@
                         "id": 28,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5542,7 +5542,7 @@
                         "id": 29,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5559,7 +5559,7 @@
                         "id": 30,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5576,7 +5576,7 @@
                         "id": 31,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5593,7 +5593,7 @@
                         "id": 32,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5610,7 +5610,7 @@
                         "id": 33,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5627,7 +5627,7 @@
                         "id": 34,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5644,7 +5644,7 @@
                         "id": 35,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5661,7 +5661,7 @@
                         "id": 36,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5716,7 +5716,7 @@
               "id": 0,
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "scripts/download_go.py",
+                  "uri": "test/fixtures/test-code-src/big5.html",
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
@@ -5743,7 +5743,7 @@
                         "id": 0,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5760,7 +5760,7 @@
                         "id": 1,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5777,7 +5777,7 @@
                         "id": 2,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5794,7 +5794,7 @@
                         "id": 3,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5811,7 +5811,7 @@
                         "id": 4,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5828,7 +5828,7 @@
                         "id": 5,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5845,7 +5845,7 @@
                         "id": 6,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5862,7 +5862,7 @@
                         "id": 7,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5879,7 +5879,7 @@
                         "id": 8,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5896,7 +5896,7 @@
                         "id": 9,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5913,7 +5913,7 @@
                         "id": 10,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5930,7 +5930,7 @@
                         "id": 11,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5947,7 +5947,7 @@
                         "id": 12,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5964,7 +5964,7 @@
                         "id": 13,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5981,7 +5981,7 @@
                         "id": 14,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -5998,7 +5998,7 @@
                         "id": 15,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -6015,7 +6015,7 @@
                         "id": 16,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -6032,7 +6032,7 @@
                         "id": 17,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -6049,7 +6049,7 @@
                         "id": 18,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -6066,7 +6066,7 @@
                         "id": 19,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -6083,7 +6083,7 @@
                         "id": 20,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -6100,7 +6100,7 @@
                         "id": 21,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -6117,7 +6117,7 @@
                         "id": 22,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -6134,7 +6134,7 @@
                         "id": 23,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -6151,7 +6151,7 @@
                         "id": 24,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -6168,7 +6168,7 @@
                         "id": 25,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -6185,7 +6185,7 @@
                         "id": 26,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -6202,7 +6202,7 @@
                         "id": 27,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -6219,7 +6219,7 @@
                         "id": 28,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -6274,7 +6274,7 @@
               "id": 0,
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "scripts/download_go.py",
+                  "uri": "test/fixtures/test-code-src/big5.html",
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
@@ -6301,7 +6301,7 @@
                         "id": 0,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -6318,7 +6318,7 @@
                         "id": 1,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -6335,7 +6335,7 @@
                         "id": 2,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -6352,7 +6352,7 @@
                         "id": 3,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -6369,7 +6369,7 @@
                         "id": 4,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -6386,7 +6386,7 @@
                         "id": 5,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -6403,7 +6403,7 @@
                         "id": 6,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -6420,7 +6420,7 @@
                         "id": 7,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -6437,7 +6437,7 @@
                         "id": 8,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -6454,7 +6454,7 @@
                         "id": 9,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -6471,7 +6471,7 @@
                         "id": 10,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -6488,7 +6488,7 @@
                         "id": 11,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -6505,7 +6505,7 @@
                         "id": 12,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -6522,7 +6522,7 @@
                         "id": 13,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -6539,7 +6539,7 @@
                         "id": 14,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -6556,7 +6556,7 @@
                         "id": 15,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -6573,7 +6573,7 @@
                         "id": 16,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
@@ -6639,7 +6639,7 @@
               "id": 0,
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "scripts/download_go.py",
+                  "uri": "test/fixtures/test-code-src/big5.html",
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
@@ -6666,7 +6666,7 @@
                         "id": 0,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "scripts/download_go.py",
+                            "uri": "test/fixtures/test-code-src/big5.html",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {

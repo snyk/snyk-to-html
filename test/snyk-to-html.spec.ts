@@ -28,6 +28,7 @@ describe('test running SnykToHtml.run', () => {
           );
           expect(report).toContain('<h2 id="overview">Overview</h2>');
           expect(report).toContain('<h2 id="details">Details</h2>');
+          expect(report).not.toContain('<div class="suppression-card">');
           done();
         } catch (error: any) {
           done(error);
@@ -308,6 +309,23 @@ describe('test running SnykToHtml.run', () => {
       (report) => {
         try {
           expect(report).toContain('<p>No description available.</p>');
+          done();
+        } catch (error: any) {
+          done(error);
+        }
+      },
+    );
+  });
+
+  it('creates a valid report with suppressed vulnerabilities with code test', (done) => {
+    SnykToHtml.run(
+      path.join(__dirname, 'fixtures', 'test-code-consistent-ignores.json'),
+      WITHOUT_REMEDIATION,
+      path.join(__dirname, '..', 'template', 'test-report.hbs'),
+      WITHOUT_SUMMARY,
+      (report) => {
+        try {
+          expect(report).toContain('<div class="suppression-card">');
           done();
         } catch (error: any) {
           done(error);
