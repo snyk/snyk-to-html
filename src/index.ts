@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-import program = require('commander');
-import debugModule = require('debug');
-import fs = require('fs');
-import path = require('path');
+import * as program from 'commander';
+import * as debugModule from 'debug';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
 import { SnykToHtml } from './lib/snyk-to-html';
 
 program

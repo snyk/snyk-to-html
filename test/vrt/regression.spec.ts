@@ -93,16 +93,10 @@ test.describe('Visual Regression Tests (VRTs)', () => {
     fs.writeFileSync(tempFilePath, reportWithoutDynamicContent, 'utf8');
 
     await page.goto(`file://${tempFilePath}`);
-    await page
-      .getByText('Data Flow')
-      .first()
-      .check();
+    await page.getByText('Data Flow').first().check();
     await expect(page).toHaveScreenshot();
 
-    await page
-      .getByText('Fix Analysis')
-      .first()
-      .check();
+    await page.getByText('Fix Analysis').first().check();
     await expect(page).toHaveScreenshot();
   });
 });

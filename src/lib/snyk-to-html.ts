@@ -138,7 +138,7 @@ function concatenateCVEs(vuln: any) {
   let cveLineBreaks = '';
 
   if (vuln.identifiers) {
-    vuln.identifiers.CVE.forEach(function(c) {
+    vuln.identifiers.CVE.forEach(function (c) {
       const cveLink = `<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=${c}">${c}</a>`;
       cveSpaced += `${cveLink}&nbsp;`;
       cveLineBreaks += `${cveLink}</br>`;
@@ -428,26 +428,22 @@ const hh = {
   count: (data) => data && data.length,
   dump: (data, spacer) => JSON.stringify(data, null, spacer || null),
   // block helpers
-  isDoubleArray: function(data, options) {
+  isDoubleArray: function (data, options) {
     return Array.isArray(data[0]) ? options.fn(data) : options.inverse(data);
   },
-  // eslint-disable-next-line @typescript-eslint/camelcase
-  if_eq: function(this: void, a, b, opts) {
+  if_eq: function (this: void, a, b, opts) {
     return a === b ? opts.fn(this) : opts.inverse(this);
   },
-  // eslint-disable-next-line @typescript-eslint/camelcase
-  if_gt: function(this: void, a, b, opts) {
+  if_gt: function (this: void, a, b, opts) {
     return a > b ? opts.fn(this) : opts.inverse(this);
   },
-  // eslint-disable-next-line @typescript-eslint/camelcase
-  if_not_eq: function(this: void, a, b, opts) {
+  if_not_eq: function (this: void, a, b, opts) {
     return a !== b ? opts.fn(this) : opts.inverse(this);
   },
-  // eslint-disable-next-line @typescript-eslint/camelcase
-  if_any: function(this: void, opts, ...args) {
+  if_any: function (this: void, opts, ...args) {
     return args.some((v) => !!v) ? opts.fn(this) : opts.inverse(this);
   },
-  ifCond: function(this: void, v1, operator, v2, options) {
+  ifCond: function (this: void, v1, operator, v2, options) {
     const choose = (pred: boolean) =>
       pred ? options.fn(this) : options.inverse(this);
     switch (operator) {
@@ -490,7 +486,7 @@ const hh = {
   severityLabel: (severity: string) => {
     return severity[0].toUpperCase();
   },
-  startsWith: function(str, start, options) {
+  startsWith: function (str, start, options) {
     return str.startsWith(start) ? options.fn(this) : options.inverse(this);
   },
 };
