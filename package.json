@@ -26,7 +26,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "chalk": "^2.4.2",
-    "commander": "^4.1.1",
+    "commander": "^14.0.0",
     "debug": "^4.4.1",
     "handlebars": "^4.7.8",
     "lodash.isempty": "^4.4.0",
@@ -43,6 +43,7 @@
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.29.0",
     "@playwright/test": "^1.53.1",
+    "@types/commander": "^2.12.5",
     "@types/node": "^24.0.3",
     "@typescript-eslint/eslint-plugin": "8.34.1",
     "@typescript-eslint/parser": "8.34.1",

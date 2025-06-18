@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 
-import * as program from 'commander';
+import { Command } from 'commander';
 import * as debugModule from 'debug';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { SnykToHtml } from './lib/snyk-to-html';
+
+const program = new Command();
 
 program
   .option(
@@ -27,46 +29,46 @@ program
   .option(
     '-a, --actionable-remediation',
     'Display actionable remediation info if available',
-  )
-  .parse(process.argv);
+  );
+
+program.parse(process.argv);
+
+const options = program.opts();
 
 let template;
 let source;
 let output;
 
-if (program.template) {
-  // template
-  template = program.template; // grab the next item
+if (options.template) {
+  template = options.template;
   if (typeof template === 'boolean') {
-    if (program.actionableRemediation) {
+    if (options.actionableRemediation) {
       template = path.join(__dirname, '../template/remediation-report.hbs');
     } else {
       template = path.join(__dirname, '../template/test-report.hbs');
     }
   }
 } else {
-  if (program.actionableRemediation) {
+  if (options.actionableRemediation) {
     template = path.join(__dirname, '../template/remediation-report.hbs');
   } else {
     template = path.join(__dirname, '../template/test-report.hbs');
   }
 }
-if (program.input) {
-  // input source
-  source = program.input; // grab the next item
+if (options.input) {
+  source = options.input;
   if (typeof source === 'boolean') {
     source = undefined;
   }
 }
-if (program.output) {
-  // output destination
-  output = program.output; // grab the next item
+if (options.output) {
+  output = options.output;
   if (typeof output === 'boolean') {
     output = undefined;
   }
 }
 
-if (program.debug) {
+if (options.debug) {
   const nameSpace = 'snyk-to-html';
   process.env.DEBUG = nameSpace;
 
@@ -75,9 +77,9 @@ if (program.debug) {
 
 SnykToHtml.run(
   source,
-  !!program.actionableRemediation,
+  !!options.actionableRemediation,
   template,
-  !!program.summary,
+  !!options.summary,
   onReportOutput,
 );
 
