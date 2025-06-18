@@ -2,7 +2,7 @@
 
 import * as isEmpty from 'lodash.isempty';
 import * as orderBy from 'lodash.orderby';
-import chalk from 'chalk';
+import * as chalk from 'chalk';
 import * as debugModule from 'debug';
 import * as fs from 'node:fs';
 import * as Handlebars from 'handlebars';
