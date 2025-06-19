@@ -14,8 +14,11 @@ import {
   IacProjectType,
   severityMap,
 } from './vuln';
-import { processSourceCode } from './codeutil';
+import { processSourceCode, processSuppression } from './codeutil';
 import { formatDateTime } from './dateutil';
+import { registerHandlebarsHelpers } from './handlebarsutil';
+
+registerHandlebarsHelpers();
 
 const debug = debugModule('snyk-to-html');
 
@@ -378,6 +381,33 @@ async function processCodeData(
   const dataArray = Array.isArray(data) ? data : [data];
 
   const OrderedIssuesArray = await processSourceCode(dataArray);
+
+  // Sort issues by suppressed and non-suppressed vulnerabilities
+  OrderedIssuesArray.forEach((project) => {
+    let hasSuppressedVulns = false;
+    const projectVulns = project.vulnerabilities.map((vuln) => {
+      if (vuln.suppressions && vuln.suppressions.length > 0) {
+        hasSuppressedVulns = true;
+        vuln.suppression = processSuppression(vuln.suppressions[0]);
+      }
+      return vuln;
+    });
+
+    // Early return if no suppressions
+    if (!hasSuppressedVulns) {
+      project.vulnerabilities = projectVulns;
+      return;
+    }
+
+    // If not, sort the suppressed vulnerabilities to the end
+    projectVulns.sort((a, b) => {
+      if (a.suppression && !b.suppression) return 1;
+      if (!a.suppression && b.suppression) return -1;
+      return 0;
+    });
+
+    project.vulnerabilities = projectVulns;
+  });
 
   const totalIssues = dataArray[0].runs[0].results.length;
   const processedData = {

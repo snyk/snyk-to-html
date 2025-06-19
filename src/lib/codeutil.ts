@@ -90,17 +90,13 @@ async function readCodeSnippet(codeInfomation) {
   const decodedpath = decodeURI(
     codeInfomation.physicalLocation.artifactLocation.uri,
   );
-  const filePath = path.resolve(
-    //codeInfomation.physicalLocation.artifactLocation.uri,
-    decodedpath,
-  );
+  const filePath = path.resolve(decodedpath);
   const codeRegion = codeInfomation.physicalLocation.region;
   const result = await processCodeLine(filePath, codeRegion);
   return result;
 }
 
 function getCurrentDirectory() {
-  //return path.dirname(__dirname);
   return process.cwd();
 }
 
@@ -157,4 +153,38 @@ export async function processSourceCode(dataArray) {
     };
   });
   return OrderedIssuesArray;
+}
+
+export function processSuppression(suppression: any) {
+  if (!suppression) {
+    return null;
+  }
+
+  return {
+    justification: suppression.justification || 'No justification provided',
+    category: suppression.properties?.category || 'unknown',
+    expiration: suppression.properties?.expiration,
+    ignoredOn: suppression.properties?.ignoredOn || {
+      date: 'unknown',
+      reason: 'unknown',
+    },
+    ignoredBy: suppression.properties?.ignoredBy || {
+      name: 'unknown',
+      email: '?',
+    },
+  };
+}
+
+export function firstInitial(name: string | null | undefined): string {
+  if (!name) {
+    return '?';
+  }
+  return name.charAt(0).toUpperCase();
+}
+
+export function formatDate(date: string | null | undefined): string {
+  if (!date) {
+    return 'Unknown date';
+  }
+  return new Date(date).toISOString().slice(0, 19).replace('T', ' ') + ' GMT';
 }

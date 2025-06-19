@@ -1,4 +1,4 @@
-<div class="card card--vuln  disclosure--not-new severity--{{severitytext}}" data-snyk-test="{{severitytext}}">
+<div class="card card--vuln disclosure--not-new severity--{{severitytext}}" {{#if suppression}}suppressed{{/if}} data-snyk-test="{{severitytext}}">
     <input type="radio" name="tab-view-{{@index}}" id="tab-dataflow-{{@index}}" value="dataflow" class="card__tab__radio" checked>
     <input type="radio" name="tab-view-{{@index}}" id="tab-fix-{{@index}}" value="fix" class="card__tab__radio" >
 
@@ -21,7 +21,7 @@
     {{#unless @root.showSummaryOnly}}
         <div class="card__summary severity--{{severitytext}}">
             <p>{{message.text}}</p>
-            <div class="file-location">Found in: <strong>{{locations.[0].physicalLocation.artifactLocation.uri}} (line : {{locations.[0].physicalLocation.region.startLine}})</strong></div>    
+            <div class="file-location">Found in: <strong>{{locations.[0].physicalLocation.artifactLocation.uri}} (line : {{locations.[0].physicalLocation.region.startLine}})</strong></div>
         </div>
         <div class="card__panel dataflow">
             <h2 class="card__panel__heading"><span class="heading-char">⇣</span> Data Flow</h2>
@@ -39,6 +39,36 @@
             <h2 class="card__panel__heading"><span class="heading-char">✓</span> Fix Analysis</h2>
             <div class="card__panel__markdown">{{{markdown ruleiddesc.help.markdown}}}</div>
         </div>
+        {{#if suppression}}
+          <div class="suppression-card">
+            <div class="suppression-card__container">
+              <ul class="suppression-card__items">
+                <li class="suppression-card__item">
+                  <div class="suppression-card__item__key">Ignored at {{formatDate suppression.ignoredOn}} by</div>
+                  <div class="suppression-card__item__value">
+                    <span class="suppression-card__user-initial">{{firstInitial suppression.ignoredBy.name}}</span>
+                    {{#if suppression.ignoredBy.name}}{{suppression.ignoredBy.name}}{{/if}}
+                    {{#if suppression.ignoredBy.email}} &lt;{{suppression.ignoredBy.email}}&gt;{{/if}}
+                  </div>
+                </li>
+                <li class="suppression-card__item">
+                  <div class="suppression-card__item__key">Type</div>
+                  <div class="suppression-card__item__value">{{suppression.category}}</div>
+                </li>
+                <li class="suppression-card__item">
+                  <div class="suppression-card__item__key">Reason</div>
+                  <div class="suppression-card__item__value">{{suppression.justification}}</div>
+                </li>
+                <li class="suppression-card__item">
+                  <div class="suppression-card__item__key">Expires</div>
+                  <div class="suppression-card__item__value">
+                    {{#if suppression.expiration}}{{formatDate suppression.expiration}}{{else}}Never{{/if}}
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        {{/if}}
     {{/unless}}
     </div>
 </div>
