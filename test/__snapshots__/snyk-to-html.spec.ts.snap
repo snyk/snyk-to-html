@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`test running SnykToHtml.run displays vulns in descending order of severity  1`] = `
 "<!DOCTYPE html>
@@ -144,7 +144,7 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
       padding-top: 2em;
     }
     .project__header {
-      background-color: #4b45a9;
+      background-color: #030328;
       color: #fff;
       margin-bottom: -1px;
       padding-top: 1em;

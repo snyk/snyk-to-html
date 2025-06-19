@@ -144,7 +144,7 @@ exports[`test calling snyk-to-html from command line handles the -a argument cor
       padding-top: 2em;
     }
     .project__header {
-      background-color: #4b45a9;
+      background-color: #030328;
       color: #fff;
       margin-bottom: -1px;
       padding-top: 1em;
@@ -1792,7 +1792,7 @@ exports[`test calling snyk-to-html from command line handles the -s argument cor
       padding-top: 2em;
     }
     .project__header {
-      background-color: #4b45a9;
+      background-color: #030328;
       color: #fff;
       margin-bottom: -1px;
       padding-top: 1em;
@@ -2536,7 +2536,7 @@ exports[`test calling snyk-to-html from command line handles the -s argument cor
       padding-top: 2em;
     }
     .project__header {
-      background-color: #4b45a9;
+      background-color: #030328;
       color: #fff;
       margin-bottom: -1px;
       padding-top: 1em;
@@ -4243,7 +4243,7 @@ exports[`test calling snyk-to-html from command line shows remediation with vuln
       padding-top: 2em;
     }
     .project__header {
-      background-color: #4b45a9;
+      background-color: #030328;
       color: #fff;
       margin-bottom: -1px;
       padding-top: 1em;
@@ -5095,7 +5095,7 @@ exports[`test calling snyk-to-html from command line shows remediation with vuln
       padding-top: 2em;
     }
     .project__header {
-      background-color: #4b45a9;
+      background-color: #030328;
       color: #fff;
       margin-bottom: -1px;
       padding-top: 1em;
