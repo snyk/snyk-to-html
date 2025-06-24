@@ -554,4 +554,81 @@ describe('test running SnykToHtml.run', () => {
       },
     );
   });
+
+  it('creates a report with risk scores displayed correctly', (done) => {
+    SnykToHtml.run(
+      path.join(__dirname, 'fixtures', 'test-report-with-risk-scores.json'),
+      WITHOUT_REMEDIATION,
+      path.join(__dirname, '..', 'template', 'test-report.hbs'),
+      WITHOUT_SUMMARY,
+      (report) => {
+        try {
+          // Vulnerability with high riskScore (975)
+          expect(report).toContain('brace-expansion-very-high-risk');
+          expect(report).toContain(
+            '<div class="risk-score-display__label">RISK SCORE</div>',
+          );
+          expect(report).toContain(
+            '<div class="risk-score-display__value">975</div>',
+          );
+
+          // Vulnerability with riskScore 0
+          expect(report).toContain('brace-expansion-zero-risk');
+          expect(report).toContain(
+            '<div class="risk-score-display__label">RISK SCORE</div>',
+          );
+          expect(report).toContain(
+            '<div class="risk-score-display__value">0</div>',
+          );
+
+          // Vulnerability with medium riskScore (50)
+          expect(report).toContain('ejs-medium-risk');
+          expect(report).toContain(
+            '<div class="risk-score-display__label">RISK SCORE</div>',
+          );
+          expect(report).toContain(
+            '<div class="risk-score-display__value">50</div>',
+          );
+
+          // Vulnerability with invalid riskScore ("Not Applicable") - should not display risk score
+          expect(report).toContain('brace-expansion-invalid-risk');
+          const invalidRiskVulnCard = report.substring(
+            report.indexOf('brace-expansion-invalid-risk'),
+          );
+          const nextCardStart = invalidRiskVulnCard.indexOf(
+            '<div class="card card--vuln',
+            1,
+          );
+          const invalidRiskCardContent =
+            nextCardStart > -1
+              ? invalidRiskVulnCard.substring(0, nextCardStart)
+              : invalidRiskVulnCard;
+          expect(invalidRiskCardContent).not.toContain(
+            '<div class="risk-score-display__label">RISK SCORE</div>',
+          );
+
+          // Vulnerability with no riskScore property - should not display risk score
+          expect(report).toContain('brace-expansion-no-risk');
+          const noRiskVulnCard = report.substring(
+            report.indexOf('brace-expansion-no-risk'),
+          );
+          const nextCardStartNoRisk = noRiskVulnCard.indexOf(
+            '<div class="card card--vuln',
+            1,
+          );
+          const noRiskCardContent =
+            nextCardStartNoRisk > -1
+              ? noRiskVulnCard.substring(0, nextCardStartNoRisk)
+              : noRiskVulnCard;
+          expect(noRiskCardContent).not.toContain(
+            '<div class="risk-score-display__label">RISK SCORE</div>',
+          );
+
+          done();
+        } catch (error: any) {
+          done(error);
+        }
+      },
+    );
+  });
 });
