@@ -1,17 +1,9 @@
 <div class="card card--vuln  disclosure--not-new severity--{{metadata.severity}}" data-snyk-test="{{metadata.severity}}">
-    {{#ifCond metadata.riskScore '>=' 0}}
-    <div class="risk-score-display">
-        <div class="risk-score-display__label">RISK SCORE</div>
-        <div class="risk-score-display__value">{{metadata.riskScore}}</div>
-    </div>
-    {{/ifCond}}
     <h2 class="card__title">{{metadata.title}}</h2>
     <div class="card__section">
 
-        <div class="card__labels">
-            <div class="label label--{{metadata.severity}}">
-                <span class="label__text">{{metadata.severity}} severity</span>
-            </div>
+        <div class="label label--{{metadata.severity}}">
+            <span class="label__text">{{metadata.severity}} severity</span>
         </div>
 
         <hr/>

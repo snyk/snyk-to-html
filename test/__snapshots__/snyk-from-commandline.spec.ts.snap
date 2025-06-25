@@ -204,15 +204,6 @@ exports[`test calling snyk-to-html from command line handles the -a argument cor
       padding: 1.5em;
     }
   
-    .card__labels {
-      position: absolute;
-      top: 1.1em;
-      left: 0;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-  
     .card .label {
       background-color: #767676;
       border: 2px solid #767676;
@@ -270,7 +261,10 @@ exports[`test calling snyk-to-html from command line handles the -a argument cor
       padding-top: 4em;
     }
   
-    .card--vuln .card__labels > .label:first-child {
+    .card--vuln .label {
+      left: 0;
+      position: absolute;
+      top: 1.1em;
       padding-left: 1.9em;
       padding-right: 1.9em;
       border-radius: 0 0.25rem 0.25rem 0;
@@ -298,36 +292,11 @@ exports[`test calling snyk-to-html from command line handles the -a argument cor
     .card--vuln .card__title {
       font-size: 28px;
       margin-top: 0;
-      margin-right: 100px; /* Ensure space for the risk score */
     }
   
     .card--vuln .card__cta p {
       margin: 0;
       text-align: right;
-    }
-  
-    .risk-score-display {
-      position: absolute;
-      top: 1.5em;
-      right: 1.5em;
-      text-align: right;
-      z-index: 10;
-    }
-  
-    .risk-score-display__label {
-      font-size: 0.7em;
-      font-weight: bold;
-      color: #586069;
-      text-transform: uppercase;
-      line-height: 1;
-      margin-bottom: 3px;
-    }
-  
-    .risk-score-display__value {
-      font-size: 1.9em;
-      font-weight: 600;
-      color: #24292e;
-      line-height: 1;
     }
   
     .source-panel {
@@ -824,10 +793,8 @@ exports[`test calling snyk-to-html from command line handles the -a argument cor
                   <h2 class="card__title">Uninitialized Memory Exposure</h2>
                   <div class="card__section">
               
-                      <div class="card__labels">
-                          <div class="label label--medium">
-                              <span class="label__text">medium severity</span>
-                          </div>
+                      <div class="label label--medium">
+                          <span class="label__text">medium severity</span>
                       </div>
               
                       <hr/>
@@ -922,10 +889,8 @@ exports[`test calling snyk-to-html from command line handles the -a argument cor
                   <h2 class="card__title">Prototype Pollution</h2>
                   <div class="card__section">
               
-                      <div class="card__labels">
-                          <div class="label label--medium">
-                              <span class="label__text">medium severity</span>
-                          </div>
+                      <div class="label label--medium">
+                          <span class="label__text">medium severity</span>
                       </div>
               
                       <hr/>
@@ -1092,10 +1057,8 @@ exports[`test calling snyk-to-html from command line handles the -a argument cor
                   <h2 class="card__title">Prototype Pollution</h2>
                   <div class="card__section">
               
-                      <div class="card__labels">
-                          <div class="label label--medium">
-                              <span class="label__text">medium severity</span>
-                          </div>
+                      <div class="label label--medium">
+                          <span class="label__text">medium severity</span>
                       </div>
               
                       <hr/>
@@ -1253,10 +1216,8 @@ exports[`test calling snyk-to-html from command line handles the -a argument cor
                   <h2 class="card__title">Prototype Pollution</h2>
                   <div class="card__section">
               
-                      <div class="card__labels">
-                          <div class="label label--medium">
-                              <span class="label__text">medium severity</span>
-                          </div>
+                      <div class="label label--medium">
+                          <span class="label__text">medium severity</span>
                       </div>
               
                       <hr/>
@@ -1480,10 +1441,8 @@ exports[`test calling snyk-to-html from command line handles the -a argument cor
                   <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
                   <div class="card__section">
               
-                      <div class="card__labels">
-                          <div class="label label--low">
-                              <span class="label__text">low severity</span>
-                          </div>
+                      <div class="label label--low">
+                          <span class="label__text">low severity</span>
                       </div>
               
                       <hr/>
@@ -1893,15 +1852,6 @@ exports[`test calling snyk-to-html from command line handles the -s argument cor
       padding: 1.5em;
     }
   
-    .card__labels {
-      position: absolute;
-      top: 1.1em;
-      left: 0;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-  
     .card .label {
       background-color: #767676;
       border: 2px solid #767676;
@@ -1959,7 +1909,10 @@ exports[`test calling snyk-to-html from command line handles the -s argument cor
       padding-top: 4em;
     }
   
-    .card--vuln .card__labels > .label:first-child {
+    .card--vuln .label {
+      left: 0;
+      position: absolute;
+      top: 1.1em;
       padding-left: 1.9em;
       padding-right: 1.9em;
       border-radius: 0 0.25rem 0.25rem 0;
@@ -1987,36 +1940,11 @@ exports[`test calling snyk-to-html from command line handles the -s argument cor
     .card--vuln .card__title {
       font-size: 28px;
       margin-top: 0;
-      margin-right: 100px; /* Ensure space for the risk score */
     }
   
     .card--vuln .card__cta p {
       margin: 0;
       text-align: right;
-    }
-  
-    .risk-score-display {
-      position: absolute;
-      top: 1.5em;
-      right: 1.5em;
-      text-align: right;
-      z-index: 10;
-    }
-  
-    .risk-score-display__label {
-      font-size: 0.7em;
-      font-weight: bold;
-      color: #586069;
-      text-transform: uppercase;
-      line-height: 1;
-      margin-bottom: 3px;
-    }
-  
-    .risk-score-display__value {
-      font-size: 1.9em;
-      font-weight: 600;
-      color: #24292e;
-      line-height: 1;
     }
   
     .source-panel {
@@ -2212,10 +2140,8 @@ exports[`test calling snyk-to-html from command line handles the -s argument cor
             <h2 class="card__title">Uninitialized Memory Exposure</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -2261,10 +2187,8 @@ exports[`test calling snyk-to-html from command line handles the -s argument cor
             <h2 class="card__title">Prototype Pollution</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -2315,10 +2239,8 @@ exports[`test calling snyk-to-html from command line handles the -s argument cor
             <h2 class="card__title">Prototype Pollution</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -2362,10 +2284,8 @@ exports[`test calling snyk-to-html from command line handles the -s argument cor
             <h2 class="card__title">Prototype Pollution</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -2420,10 +2340,8 @@ exports[`test calling snyk-to-html from command line handles the -s argument cor
             <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--low">
-                        <span class="label__text">low severity</span>
-                    </div>
+                <div class="label label--low">
+                    <span class="label__text">low severity</span>
                 </div>
         
                 <hr/>
@@ -4385,15 +4303,6 @@ exports[`test calling snyk-to-html from command line shows remediation with vuln
       padding: 1.5em;
     }
   
-    .card__labels {
-      position: absolute;
-      top: 1.1em;
-      left: 0;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-  
     .card .label {
       background-color: #767676;
       border: 2px solid #767676;
@@ -4451,7 +4360,10 @@ exports[`test calling snyk-to-html from command line shows remediation with vuln
       padding-top: 4em;
     }
   
-    .card--vuln .card__labels > .label:first-child {
+    .card--vuln .label {
+      left: 0;
+      position: absolute;
+      top: 1.1em;
       padding-left: 1.9em;
       padding-right: 1.9em;
       border-radius: 0 0.25rem 0.25rem 0;
@@ -4479,36 +4391,11 @@ exports[`test calling snyk-to-html from command line shows remediation with vuln
     .card--vuln .card__title {
       font-size: 28px;
       margin-top: 0;
-      margin-right: 100px; /* Ensure space for the risk score */
     }
   
     .card--vuln .card__cta p {
       margin: 0;
       text-align: right;
-    }
-  
-    .risk-score-display {
-      position: absolute;
-      top: 1.5em;
-      right: 1.5em;
-      text-align: right;
-      z-index: 10;
-    }
-  
-    .risk-score-display__label {
-      font-size: 0.7em;
-      font-weight: bold;
-      color: #586069;
-      text-transform: uppercase;
-      line-height: 1;
-      margin-bottom: 3px;
-    }
-  
-    .risk-score-display__value {
-      font-size: 1.9em;
-      font-weight: 600;
-      color: #24292e;
-      line-height: 1;
     }
   
     .source-panel {
@@ -4957,10 +4844,8 @@ exports[`test calling snyk-to-html from command line shows remediation with vuln
                   <h2 class="card__title">Arbitrary Code Execution</h2>
                   <div class="card__section">
               
-                      <div class="card__labels">
-                          <div class="label label--medium">
-                              <span class="label__text">medium severity</span>
-                          </div>
+                      <div class="label label--medium">
+                          <span class="label__text">medium severity</span>
                       </div>
               
                       <hr/>
@@ -5270,15 +5155,6 @@ exports[`test calling snyk-to-html from command line shows remediation with vuln
       padding: 1.5em;
     }
   
-    .card__labels {
-      position: absolute;
-      top: 1.1em;
-      left: 0;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-  
     .card .label {
       background-color: #767676;
       border: 2px solid #767676;
@@ -5336,7 +5212,10 @@ exports[`test calling snyk-to-html from command line shows remediation with vuln
       padding-top: 4em;
     }
   
-    .card--vuln .card__labels > .label:first-child {
+    .card--vuln .label {
+      left: 0;
+      position: absolute;
+      top: 1.1em;
       padding-left: 1.9em;
       padding-right: 1.9em;
       border-radius: 0 0.25rem 0.25rem 0;
@@ -5364,36 +5243,11 @@ exports[`test calling snyk-to-html from command line shows remediation with vuln
     .card--vuln .card__title {
       font-size: 28px;
       margin-top: 0;
-      margin-right: 100px; /* Ensure space for the risk score */
     }
   
     .card--vuln .card__cta p {
       margin: 0;
       text-align: right;
-    }
-  
-    .risk-score-display {
-      position: absolute;
-      top: 1.5em;
-      right: 1.5em;
-      text-align: right;
-      z-index: 10;
-    }
-  
-    .risk-score-display__label {
-      font-size: 0.7em;
-      font-weight: bold;
-      color: #586069;
-      text-transform: uppercase;
-      line-height: 1;
-      margin-bottom: 3px;
-    }
-  
-    .risk-score-display__value {
-      font-size: 1.9em;
-      font-weight: 600;
-      color: #24292e;
-      line-height: 1;
     }
   
     .source-panel {
@@ -5842,10 +5696,8 @@ exports[`test calling snyk-to-html from command line shows remediation with vuln
                   <h2 class="card__title">Arbitrary Code Execution</h2>
                   <div class="card__section">
               
-                      <div class="card__labels">
-                          <div class="label label--medium">
-                              <span class="label__text">medium severity</span>
-                          </div>
+                      <div class="label label--medium">
+                          <span class="label__text">medium severity</span>
                       </div>
               
                       <hr/>
