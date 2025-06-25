@@ -204,15 +204,6 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
       padding: 1.5em;
     }
   
-    .card__labels {
-      position: absolute;
-      top: 1.1em;
-      left: 0;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-  
     .card .label {
       background-color: #767676;
       border: 2px solid #767676;
@@ -270,7 +261,10 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
       padding-top: 4em;
     }
   
-    .card--vuln .card__labels > .label:first-child {
+    .card--vuln .label {
+      left: 0;
+      position: absolute;
+      top: 1.1em;
       padding-left: 1.9em;
       padding-right: 1.9em;
       border-radius: 0 0.25rem 0.25rem 0;
@@ -298,36 +292,11 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
     .card--vuln .card__title {
       font-size: 28px;
       margin-top: 0;
-      margin-right: 100px; /* Ensure space for the risk score */
     }
   
     .card--vuln .card__cta p {
       margin: 0;
       text-align: right;
-    }
-  
-    .risk-score-display {
-      position: absolute;
-      top: 1.5em;
-      right: 1.5em;
-      text-align: right;
-      z-index: 10;
-    }
-  
-    .risk-score-display__label {
-      font-size: 0.7em;
-      font-weight: bold;
-      color: #586069;
-      text-transform: uppercase;
-      line-height: 1;
-      margin-bottom: 3px;
-    }
-  
-    .risk-score-display__value {
-      font-size: 1.9em;
-      font-weight: 600;
-      color: #24292e;
-      line-height: 1;
     }
   
     .source-panel {
@@ -515,10 +484,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Arbitrary Code Execution</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--critical">
-                        <span class="label__text">critical severity</span>
-                    </div>
+                <div class="label label--critical">
+                    <span class="label__text">critical severity</span>
                 </div>
         
                 <hr/>
@@ -558,10 +525,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Prototype Override Protection Bypass</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -607,10 +572,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Arbitrary File Write via Archive Extraction (Zip Slip)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -656,10 +619,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">GPL-3.0 license</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -699,10 +660,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Insecure Defaults</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -742,10 +701,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Arbitrary Code Execution</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -796,10 +753,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Command Injection</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -839,10 +794,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Arbitrary Code Execution</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -886,10 +839,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Arbitrary Command Execution</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -929,10 +880,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Directory Traversal</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -972,10 +921,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Arbitrary Command Execution</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -1049,10 +996,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Denial of Service (DoS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -1097,10 +1042,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Remote Code Execution</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -1146,10 +1089,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Arbitrary Code Execution</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -1189,10 +1130,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Parameter Alteration</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -1232,10 +1171,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Improper Input Validation</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -1275,10 +1212,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Arbitrary Code Execution</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -1318,10 +1253,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Uninitialized Memory Exposure</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -1367,10 +1300,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Regular Expression Denial of Service (DoS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -1415,10 +1346,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Regular Expression Denial of Service (DoS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -1463,10 +1392,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Content &amp; Code Injection (XSS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -1511,10 +1438,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Cross-site Scripting (XSS) via Data URIs</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -1558,10 +1483,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Cross-site Scripting (XSS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -1606,10 +1529,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -1654,10 +1575,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -1702,10 +1621,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">XML External Entity (XXE) Injection</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -1750,10 +1667,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">GPL-2.0 license</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -1795,10 +1710,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -1843,10 +1756,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Arbitrary Code Execution</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -1892,10 +1803,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Code Injection</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -1942,10 +1851,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Denial of Service (DoS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -1993,10 +1900,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Arbitrary Code Execution</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -2043,10 +1948,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Arbitrary Code Execution</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -2086,10 +1989,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Arbitrary File Write via Archive Extraction (Zip Slip)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--high">
-                        <span class="label__text">high severity</span>
-                    </div>
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
                 </div>
         
                 <hr/>
@@ -2137,10 +2038,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Uninitialized Memory Exposure</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -2186,10 +2085,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">MPL-2.0 license</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -2229,10 +2126,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Directory Traversal</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -2277,10 +2172,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Open Redirect</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -2320,10 +2213,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -2367,10 +2258,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Remote Memory Exposure</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -2416,10 +2305,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Denial of Service (DoS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -2463,10 +2350,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Reflected File Download</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -2512,10 +2397,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Cross-site Request Forgery (CSRF)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -2555,10 +2438,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Authentication Bypass</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -2602,10 +2483,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Directory Traversal</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -2654,10 +2533,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">JSM bypass via ReflectionHelper</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -2697,10 +2574,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Dual license: EPL-1.0, EPL-1.0</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -2740,10 +2615,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">EPL-1.0 license</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -2783,10 +2656,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Cross-site Scripting (XSS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -2826,10 +2697,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Cross-site Request Forgery (CSRF)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -2869,10 +2738,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Access Restriction Bypass</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -2912,10 +2779,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Access Restriction Bypass</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -2955,10 +2820,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Denial of Service (DoS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -2998,10 +2861,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Denial of Service (DoS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -3045,10 +2906,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Denial of Service (DoS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -3092,10 +2951,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Arbitrary Code Execution</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -3139,10 +2996,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Cross-site Scripting (XSS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -3182,10 +3037,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Improper Input Validation</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -3225,10 +3078,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Improper Input Validation</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -3268,10 +3119,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Improper Input Validation</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -3311,10 +3160,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Denial of Service (DoS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -3359,10 +3206,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Regular Expression Denial of Service (DoS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -3406,10 +3251,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Remote Memory Exposure</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -3455,10 +3298,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -3498,10 +3339,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Cross-site Scripting (XSS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -3546,10 +3385,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Cross-site Scripting (XSS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -3596,10 +3433,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Timing Attack</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -3644,10 +3479,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Cross-site Scripting (XSS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -3693,10 +3526,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Denial of Service (DoS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -3742,10 +3573,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Insecure Randomness</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -3790,10 +3619,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Information Disclosure</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -3838,10 +3665,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--medium">
-                        <span class="label__text">medium severity</span>
-                    </div>
+                <div class="label label--medium">
+                    <span class="label__text">medium severity</span>
                 </div>
         
                 <hr/>
@@ -3887,10 +3712,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">XML External Entity (XXE) Injection</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--low">
-                        <span class="label__text">low severity</span>
-                    </div>
+                <div class="label label--low">
+                    <span class="label__text">low severity</span>
                 </div>
         
                 <hr/>
@@ -3935,10 +3758,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Manipulation of Struts&#x27; internals</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--low">
-                        <span class="label__text">low severity</span>
-                    </div>
+                <div class="label label--low">
+                    <span class="label__text">low severity</span>
                 </div>
         
                 <hr/>
@@ -3978,10 +3799,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--low">
-                        <span class="label__text">low severity</span>
-                    </div>
+                <div class="label label--low">
+                    <span class="label__text">low severity</span>
                 </div>
         
                 <hr/>
@@ -4026,10 +3845,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--low">
-                        <span class="label__text">low severity</span>
-                    </div>
+                <div class="label label--low">
+                    <span class="label__text">low severity</span>
                 </div>
         
                 <hr/>
@@ -4073,10 +3890,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--low">
-                        <span class="label__text">low severity</span>
-                    </div>
+                <div class="label label--low">
+                    <span class="label__text">low severity</span>
                 </div>
         
                 <hr/>
@@ -4122,10 +3937,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Prototype Pollution</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--low">
-                        <span class="label__text">low severity</span>
-                    </div>
+                <div class="label label--low">
+                    <span class="label__text">low severity</span>
                 </div>
         
                 <hr/>
@@ -4173,10 +3986,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Regular Expression Denial of Service (DoS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--low">
-                        <span class="label__text">low severity</span>
-                    </div>
+                <div class="label label--low">
+                    <span class="label__text">low severity</span>
                 </div>
         
                 <hr/>
@@ -4216,10 +4027,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--low">
-                        <span class="label__text">low severity</span>
-                    </div>
+                <div class="label label--low">
+                    <span class="label__text">low severity</span>
                 </div>
         
                 <hr/>
@@ -4264,10 +4073,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--low">
-                        <span class="label__text">low severity</span>
-                    </div>
+                <div class="label label--low">
+                    <span class="label__text">low severity</span>
                 </div>
         
                 <hr/>
@@ -4311,10 +4118,8 @@ exports[`test running SnykToHtml.run displays vulns in descending order of sever
             <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
             <div class="card__section">
         
-                <div class="card__labels">
-                    <div class="label label--low">
-                        <span class="label__text">low severity</span>
-                    </div>
+                <div class="label label--low">
+                    <span class="label__text">low severity</span>
                 </div>
         
                 <hr/>
