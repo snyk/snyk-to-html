@@ -123,6 +123,7 @@ function metadataForVuln(vuln: any) {
     info: vuln.info || 'No information available.',
     severity: vuln.severity,
     severityValue: severityMap[vuln.severity],
+    riskScore: typeof vuln.riskScore === 'number' ? vuln.riskScore : undefined,
     description: vuln.description || 'No description available.',
     fixedIn: vuln.fixedIn,
     packageManager: vuln.packageManager,
