@@ -26,8 +26,8 @@ describe('test running SnykToHtml.run', () => {
           expect(report).toContain(
             '<h2 class="card__title">Regular Expression Denial of Service (DoS)</h2>',
           );
-          expect(report).toContain('<h2>Overview</h2>');
-          expect(report).toContain('<h2>Details</h2>');
+          expect(report).toContain('<h2 id="overview">Overview</h2>');
+          expect(report).toContain('<h2 id="details">Details</h2>');
           expect(report).not.toContain('<div class="suppression-card">');
           done();
         } catch (error: any) {
@@ -60,8 +60,8 @@ describe('test running SnykToHtml.run', () => {
           expect(report).toContain(
             '<h2 class="card__title">Regular Expression Denial of Service (DoS)</h2>',
           );
-          expect(report).toContain('<h2>Overview</h2>');
-          expect(report).toContain('<h2>Details</h2>');
+          expect(report).toContain('<h2 id="overview">Overview</h2>');
+          expect(report).toContain('<h2 id="details">Details</h2>');
           done();
         } catch (error: any) {
           done(error);
@@ -93,8 +93,8 @@ describe('test running SnykToHtml.run', () => {
           expect(report).toContain(
             '<h2 class="card__title">Regular Expression Denial of Service (DoS)</h2>',
           );
-          expect(report).not.toContain('<h2>Overview</h2>');
-          expect(report).not.toContain('<h2>Details</h2>');
+          expect(report).not.toContain('<h2 id="overview">Overview</h2>');
+          expect(report).not.toContain('<h2 id="details">Details</h2>');
           done();
         } catch (error: any) {
           done(error);
@@ -212,8 +212,8 @@ describe('test running SnykToHtml.run', () => {
           expect(report).toContain(
             '<h2 class="card__title">Regular Expression Denial of Service (DoS)</h2>',
           );
-          expect(report).not.toContain('<h2>Overview</h2>');
-          expect(report).not.toContain('<h2>Details</h2>');
+          expect(report).not.toContain('<h2 id="overview">Overview</h2>');
+          expect(report).not.toContain('<h2 id="details">Details</h2>');
           done();
         } catch (error: any) {
           done(error);
@@ -238,8 +238,8 @@ describe('test running SnykToHtml.run', () => {
             '<h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>',
           );
           expect(report).toContain('Fixed in: 2.9.10');
-          expect(report).not.toContain('<h2>Overview</h2>');
-          expect(report).not.toContain('<h2>Details</h2>');
+          expect(report).not.toContain('<h2 id="overview">Overview</h2>');
+          expect(report).not.toContain('<h2 id="details">Details</h2>');
           done();
         } catch (error: any) {
           done(error);
@@ -264,8 +264,8 @@ describe('test running SnykToHtml.run', () => {
             '<h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>',
           );
           expect(report).toContain('Fixed in: 2.9.10, 4.5.6');
-          expect(report).not.toContain('<h2>Overview</h2>');
-          expect(report).not.toContain('<h2>Details</h2>');
+          expect(report).not.toContain('<h2 id="overview">Overview</h2>');
+          expect(report).not.toContain('<h2 id="details">Details</h2>');
           done();
         } catch (error: any) {
           done(error);
@@ -290,8 +290,8 @@ describe('test running SnykToHtml.run', () => {
             '<h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>',
           );
           expect(report).toContain('There is no remediation at the moment');
-          expect(report).not.toContain('<h2>Overview</h2>');
-          expect(report).not.toContain('<h2>Details</h2>');
+          expect(report).not.toContain('<h2 id="overview">Overview</h2>');
+          expect(report).not.toContain('<h2 id="details">Details</h2>');
           done();
         } catch (error: any) {
           done(error);

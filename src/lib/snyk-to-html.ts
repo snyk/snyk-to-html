@@ -6,7 +6,7 @@ import * as chalk from 'chalk';
 import * as debugModule from 'debug';
 import * as fs from 'node:fs';
 import * as Handlebars from 'handlebars';
-import * as marked from 'marked';
+import * as showdown from 'showdown';
 import * as path from 'node:path';
 import {
   addIssueDataToPatch,
@@ -21,6 +21,8 @@ import { registerHandlebarsHelpers } from './handlebarsutil';
 registerHandlebarsHelpers();
 
 const debug = debugModule('snyk-to-html');
+
+const markdownConverter = new showdown.Converter();
 
 const defaultRemediationText =
   '## Remediation\nThere is no remediation at the moment';
@@ -453,7 +455,7 @@ async function readInputFromStdin(): Promise<string> {
 
 // handlebar helpers
 const hh = {
-  markdown: marked.parse,
+  markdown: (md) => markdownConverter.makeHtml(md),
   moment: (date, format) => formatDateTime(date, format),
   count: (data) => data && data.length,
   dump: (data, spacer) => JSON.stringify(data, null, spacer || null),
@@ -502,16 +504,18 @@ const hh = {
     // check remediation in the description
     const index = description.indexOf('## Remediation');
     if (index > -1) {
-      return marked.parse(description.substring(index));
+      return markdownConverter.makeHtml(description.substring(index));
     }
     // if no remediation in description, try to check in `fixedIn` attribute
     if (Array.isArray(fixedIn) && fixedIn.length) {
       const fixedInJoined = fixedIn.join(', ');
-      return marked.parse(`## Remediation\n Fixed in: ${fixedInJoined}`);
+      return markdownConverter.makeHtml(
+        `## Remediation\n Fixed in: ${fixedInJoined}`,
+      );
     }
 
     // otherwise, fallback to default message, i.e. No remediation at the moment
-    return marked.parse(defaultRemediationText);
+    return markdownConverter.makeHtml(defaultRemediationText);
   },
   severityLabel: (severity: string) => {
     return severity[0].toUpperCase();

@@ -841,27 +841,27 @@ exports[`test calling snyk-to-html from command line handles the -a argument cor
               
                     <hr/>
                     <!-- Overview -->
-                    <h2>Overview</h2>
+                    <h2 id="overview">Overview</h2>
               <p><a href="https://www.npmjs.com/package/tunnel-agent"><code>tunnel-agent</code></a> is HTTP proxy tunneling agent. Affected versions of the package are vulnerable to Uninitialized Memory Exposure. </p>
               <p>A possible memory disclosure vulnerability exists when a value of type <code>number</code> is used to set the <em>proxy.auth</em> option of a request <code>request</code> and results in a possible uninitialized memory exposures in the request body.</p>
               <p>This is a result of unobstructed use of the <code>Buffer</code> constructor, whose <a href="https://snyk.io/blog/exploiting-buffer/">insecure default constructor increases the odds of memory leakage</a>.</p>
-              <h2>Details</h2>
-              <p>Constructing a <code>Buffer</code> class with integer <code>N</code> creates a <code>Buffer</code> of length <code>N</code> with raw (not &quot;zero-ed&quot;) memory.</p>
-              <p>In the following example, the first call would allocate 100 bytes of memory, while the second example will allocate the memory needed for the string &quot;100&quot;:</p>
-              <pre><code class="language-js">// uninitialized Buffer of length 100
+              <h2 id="details">Details</h2>
+              <p>Constructing a <code>Buffer</code> class with integer <code>N</code> creates a <code>Buffer</code> of length <code>N</code> with raw (not "zero-ed") memory.</p>
+              <p>In the following example, the first call would allocate 100 bytes of memory, while the second example will allocate the memory needed for the string "100":</p>
+              <pre><code class="js language-js">// uninitialized Buffer of length 100
               x = new Buffer(100);
-              // initialized Buffer with value of &#39;100&#39;
-              x = new Buffer(&#39;100&#39;);
+              // initialized Buffer with value of '100'
+              x = new Buffer('100');
               </code></pre>
-              <p><code>tunnel-agent</code>&#39;s <code>request</code> construction uses the default <code>Buffer</code> constructor as-is, making it easy to append uninitialized memory to an existing list. If the value of the buffer list is exposed to users, it may expose raw server side memory, potentially holding secrets, private data and code. This is a similar vulnerability to the infamous <a href="http://heartbleed.com/"><code>Heartbleed</code></a> flaw in OpenSSL.</p>
-              <h4>Proof of concept by ChALkeR</h4>
-              <pre><code class="language-js">require(&#39;request&#39;)({
-                method: &#39;GET&#39;,
-                uri: &#39;http://www.example.com&#39;,
+              <p><code>tunnel-agent</code>'s <code>request</code> construction uses the default <code>Buffer</code> constructor as-is, making it easy to append uninitialized memory to an existing list. If the value of the buffer list is exposed to users, it may expose raw server side memory, potentially holding secrets, private data and code. This is a similar vulnerability to the infamous <a href="http://heartbleed.com/"><code>Heartbleed</code></a> flaw in OpenSSL.</p>
+              <h4 id="proofofconceptbychalker">Proof of concept by ChALkeR</h4>
+              <pre><code class="js language-js">require('request')({
+                method: 'GET',
+                uri: 'http://www.example.com',
                 tunnel: true,
                 proxy:{
-                    protocol: &#39;http:&#39;,
-                    host:&quot;127.0.0.1&quot;,
+                    protocol: 'http:',
+                    host:"127.0.0.1",
                     port:8080,
                     auth:80
                 }
@@ -869,15 +869,14 @@ exports[`test calling snyk-to-html from command line handles the -a argument cor
               </code></pre>
               <p>You can read more about the insecure <code>Buffer</code> behavior <a href="https://snyk.io/blog/exploiting-buffer/">on our blog</a>.</p>
               <p>Similar vulnerabilities were discovered in <a href="https://snyk.io/vuln/npm:request:20160119">request</a>, <a href="https://snyk.io/vuln/npm:mongoose:20160116">mongoose</a>, <a href="https://snyk.io/vuln/npm:ws:20160104">ws</a> and <a href="https://snyk.io/vuln/npm:sequelize:20160115">sequelize</a>.</p>
-              <h2>Remediation</h2>
+              <h2 id="remediation">Remediation</h2>
               <p>Upgrade <code>tunnel-agent</code> to version 0.6.0 or higher.
               <strong>Note</strong> This is vulnerable only for Node &lt;=4</p>
-              <h2>References</h2>
+              <h2 id="references">References</h2>
               <ul>
               <li><a href="https://github.com/request/tunnel-agent/commit/9ca95ec7219daface8a6fc2674000653de0922c0">GitHub Commit</a></li>
               <li><a href="https://gist.github.com/ChALkeR/fd6b2c445834244e7d440a043f9d2ff4">PoC by ChALkeR</a></li>
               </ul>
-              
                     <hr/>
               
                   <div class="cta card__cta">
@@ -941,27 +940,25 @@ exports[`test calling snyk-to-html from command line handles the -a argument cor
               
                     <hr/>
                     <!-- Overview -->
-                    <h2>Overview</h2>
+                    <h2 id="overview">Overview</h2>
               <p><a href="https://www.npmjs.com/package/minimist">minimist</a> is a parse argument options module.</p>
               <p>Affected versions of this package are vulnerable to Prototype Pollution.
               The library could be tricked into adding or modifying properties of <code>Object.prototype</code> using a <code>constructor</code> or <code>__proto__</code> payload.</p>
-              <h2>PoC by Snyk</h2>
-              <pre><code>require(&#39;minimist&#39;)(&#39;--__proto__.injected0 value0&#39;.split(&#39; &#39;));
-              console.log(({}).injected0 === &#39;value0&#39;); // true
+              <h2 id="pocbysnyk">PoC by Snyk</h2>
+              <pre><code>require('minimist')('--__proto__.injected0 value0'.split(' '));
+              console.log(({}).injected0 === 'value0'); // true
               
-              require(&#39;minimist&#39;)(&#39;--constructor.prototype.injected1 value1&#39;.split(&#39; &#39;));
-              console.log(({}).injected1 === &#39;value1&#39;); // true
+              require('minimist')('--constructor.prototype.injected1 value1'.split(' '));
+              console.log(({}).injected1 === 'value1'); // true
               </code></pre>
-              <h2>Details</h2>
+              <h2 id="details">Details</h2>
               <p>Prototype Pollution is a vulnerability affecting JavaScript. Prototype Pollution refers to the ability to inject properties into existing JavaScript language construct prototypes, such as objects. JavaScript allows all Object attributes to be altered, including their magical attributes such as <code>_proto_</code>, <code>constructor</code> and <code>prototype</code>. An attacker manipulates these attributes to overwrite, or pollute, a JavaScript application object prototype of the base object by injecting other values.  Properties on the <code>Object.prototype</code> are then inherited by all the JavaScript objects through the prototype chain. When that happens, this leads to either denial of service by triggering JavaScript exceptions, or it tampers with the application source code to force the code path that the attacker injects, thereby leading to remote code execution.</p>
               <p>There are two main ways in which the pollution of prototypes occurs:</p>
               <ul>
-              <li><p>Unsafe <code>Object</code> recursive merge</p>
-              </li>
-              <li><p>Property definition by path</p>
-              </li>
+              <li><p>Unsafe <code>Object</code> recursive merge</p></li>
+              <li><p>Property definition by path</p></li>
               </ul>
-              <h3>Unsafe Object recursive merge</h3>
+              <h3 id="unsafeobjectrecursivemerge">Unsafe Object recursive merge</h3>
               <p>The logic of a vulnerable recursive merge function follows the following high-level model:</p>
               <pre><code>merge (target, source)
               
@@ -975,77 +972,45 @@ exports[`test calling snyk-to-html from command line handles the -a argument cor
               
                     target[property] = source[property]
               </code></pre>
-              <br>  
-              
+              <p><br>  </p>
               <p>When the source object contains a property named <code>_proto_</code> defined with <code>Object.defineProperty()</code> , the condition that checks if the property exists and is an object on both the target and the source passes and the merge recurses with the target, being the prototype of <code>Object</code> and the source of <code>Object</code> as defined by the attacker. Properties are then copied on the <code>Object</code> prototype.</p>
               <p>Clone operations are a special sub-class of unsafe recursive merges, which occur when a recursive merge is conducted on an empty object: <code>merge({},source)</code>.</p>
               <p><code>lodash</code> and <code>Hoek</code> are examples of libraries susceptible to recursive merge attacks.</p>
-              <h3>Property definition by path</h3>
+              <h3 id="propertydefinitionbypath">Property definition by path</h3>
               <p>There are a few JavaScript libraries that use an API to define property values on an object based on a given path. The function that is generally affected contains this signature: <code>theFunction(object, path, value)</code></p>
               <p>If the attacker can control the value of “path”, they can set this value to <code>_proto_.myValue</code>. <code>myValue</code> is then assigned to the prototype of the class of the object.</p>
-              <h2>Types of attacks</h2>
+              <h2 id="typesofattacks">Types of attacks</h2>
               <p>There are a few methods by which Prototype Pollution can be manipulated:</p>
-              <table>
-              <thead>
-              <tr>
-              <th>Type</th>
-              <th>Origin</th>
-              <th>Short description</th>
-              </tr>
-              </thead>
-              <tbody><tr>
-              <td><strong>Denial of service (DoS)</strong></td>
-              <td>Client</td>
-              <td>This is the most likely attack. <br>DoS occurs when <code>Object</code> holds generic functions that are implicitly called for various operations (for example, <code>toString</code> and <code>valueOf</code>). <br> The attacker pollutes <code>Object.prototype.someattr</code> and alters its state to an unexpected value such as <code>Int</code> or <code>Object</code>. In this case, the code fails and is likely to cause a denial of service.  <br><strong>For example:</strong> if an attacker pollutes <code>Object.prototype.toString</code> by defining it as an integer, if the codebase at any point was reliant on <code>someobject.toString()</code> it would fail.</td>
-              </tr>
-              <tr>
-              <td><strong>Remote Code Execution</strong></td>
-              <td>Client</td>
-              <td>Remote code execution is generally only possible in cases where the codebase evaluates a specific attribute of an object, and then executes that evaluation.<br><strong>For example:</strong> <code>eval(someobject.someattr)</code>. In this case, if the attacker pollutes <code>Object.prototype.someattr</code> they are likely to be able to leverage this in order to execute code.</td>
-              </tr>
-              <tr>
-              <td><strong>Property Injection</strong></td>
-              <td>Client</td>
-              <td>The attacker pollutes properties that the codebase relies on for their informative value, including security properties such as cookies or tokens.<br>  <strong>For example:</strong> if a codebase checks privileges for <code>someuser.isAdmin</code>, then when the attacker pollutes <code>Object.prototype.isAdmin</code> and sets it to equal <code>true</code>, they can then achieve admin privileges.</td>
-              </tr>
-              </tbody></table>
-              <h2>Affected environments</h2>
+              <p>| Type |Origin  |Short description |
+              |--|--|--|
+              | <strong>Denial of service (DoS)</strong>|Client  |This is the most likely attack. <br>DoS occurs when <code>Object</code> holds generic functions that are implicitly called for various operations (for example, <code>toString</code> and <code>valueOf</code>). <br> The attacker pollutes <code>Object.prototype.someattr</code> and alters its state to an unexpected value such as <code>Int</code> or <code>Object</code>. In this case, the code fails and is likely to cause a denial of service.  <br><strong>For example:</strong> if an attacker pollutes <code>Object.prototype.toString</code> by defining it as an integer, if the codebase at any point was reliant on <code>someobject.toString()</code> it would fail. |
+               |<strong>Remote Code Execution</strong>|Client|Remote code execution is generally only possible in cases where the codebase evaluates a specific attribute of an object, and then executes that evaluation.<br><strong>For example:</strong> <code>eval(someobject.someattr)</code>. In this case, if the attacker pollutes <code>Object.prototype.someattr</code> they are likely to be able to leverage this in order to execute code.|
+              |<strong>Property Injection</strong>|Client|The attacker pollutes properties that the codebase relies on for their informative value, including security properties such as cookies or tokens.<br>  <strong>For example:</strong> if a codebase checks privileges for <code>someuser.isAdmin</code>, then when the attacker pollutes <code>Object.prototype.isAdmin</code> and sets it to equal <code>true</code>, they can then achieve admin privileges.|</p>
+              <h2 id="affectedenvironments">Affected environments</h2>
               <p>The following environments are susceptible to a Prototype Pollution attack:</p>
               <ul>
-              <li><p>Application server</p>
-              </li>
-              <li><p>Web server</p>
-              </li>
+              <li><p>Application server</p></li>
+              <li><p>Web server</p></li>
               </ul>
-              <h2>How to prevent</h2>
+              <h2 id="howtoprevent">How to prevent</h2>
               <ol>
-              <li><p>Freeze the prototype— use <code>Object.freeze (Object.prototype)</code>.</p>
-              </li>
-              <li><p>Require schema validation of JSON input.</p>
-              </li>
-              <li><p>Avoid using unsafe recursive merge functions.</p>
-              </li>
-              <li><p>Consider using objects without prototypes (for example, <code>Object.create(null)</code>), breaking the prototype chain and preventing pollution.</p>
-              </li>
-              <li><p>As a best practice use <code>Map</code> instead of <code>Object</code>.</p>
-              </li>
+              <li><p>Freeze the prototype— use <code>Object.freeze (Object.prototype)</code>.</p></li>
+              <li><p>Require schema validation of JSON input.</p></li>
+              <li><p>Avoid using unsafe recursive merge functions.</p></li>
+              <li><p>Consider using objects without prototypes (for example, <code>Object.create(null)</code>), breaking the prototype chain and preventing pollution.</p></li>
+              <li><p>As a best practice use <code>Map</code> instead of <code>Object</code>.</p></li>
               </ol>
-              <h3>For more information on this vulnerability type:</h3>
+              <h3 id="formoreinformationonthisvulnerabilitytype">For more information on this vulnerability type:</h3>
               <p><a href="https://github.com/HoLyVieR/prototype-pollution-nsec18/blob/master/paper/JavaScript_prototype_pollution_attack_in_NodeJS.pdf">Arteau, Oliver. “JavaScript prototype pollution attack in NodeJS application.” GitHub, 26 May 2018</a></p>
-              <h2>Remediation</h2>
+              <h2 id="remediation">Remediation</h2>
               <p>Upgrade <code>minimist</code> to version 0.2.1, 1.2.3 or higher.</p>
-              <h2>References</h2>
+              <h2 id="references">References</h2>
               <ul>
-              <li><p><a href="https://gist.github.com/Kirill89/47feb345b09bf081317f08dd43403a8a">Command Injection PoC</a></p>
-              </li>
-              <li><p><a href="https://github.com/substack/minimist/commit/63e7ed05aa4b1889ec2f3b196426db4500cbda94">GitHub Fix Commit #1</a></p>
-              </li>
-              <li><p><a href="https://github.com/substack/minimist/commit/38a4d1caead72ef99e824bb420a2528eec03d9ab">GitHub Fix Commit #2</a></p>
-              </li>
-              <li><p><a href="https://snyk.io/blog/prototype-pollution-minimist/">Snyk Research Blog</a></p>
-              </li>
+              <li><p><a href="https://gist.github.com/Kirill89/47feb345b09bf081317f08dd43403a8a">Command Injection PoC</a></p></li>
+              <li><p><a href="https://github.com/substack/minimist/commit/63e7ed05aa4b1889ec2f3b196426db4500cbda94">GitHub Fix Commit #1</a></p></li>
+              <li><p><a href="https://github.com/substack/minimist/commit/38a4d1caead72ef99e824bb420a2528eec03d9ab">GitHub Fix Commit #2</a></p></li>
+              <li><p><a href="https://snyk.io/blog/prototype-pollution-minimist/">Snyk Research Blog</a></p></li>
               </ul>
-              
                     <hr/>
               
                   <div class="cta card__cta">
@@ -1109,25 +1074,23 @@ exports[`test calling snyk-to-html from command line handles the -a argument cor
               
                     <hr/>
                     <!-- Overview -->
-                    <h2>Overview</h2>
+                    <h2 id="overview">Overview</h2>
               <p><a href="https://www.npmjs.com/package/lodash">lodash</a> is a modern JavaScript utility library delivering modularity, performance, &amp; extras.</p>
               <p>Affected versions of this package are vulnerable to Prototype Pollution.
               The function <code>zipObjectDeep</code> can be tricked into adding or modifying properties of the Object prototype. These properties will be present on all objects.</p>
-              <h2>PoC</h2>
-              <pre><code>const _ = require(&#39;lodash&#39;);
-              _.zipObjectDeep([&#39;__proto__.z&#39;],[123])
+              <h2 id="poc">PoC</h2>
+              <pre><code>const _ = require('lodash');
+              _.zipObjectDeep(['__proto__.z'],[123])
               console.log(z) // 123
               </code></pre>
-              <h2>Details</h2>
+              <h2 id="details">Details</h2>
               <p>Prototype Pollution is a vulnerability affecting JavaScript. Prototype Pollution refers to the ability to inject properties into existing JavaScript language construct prototypes, such as objects. JavaScript allows all Object attributes to be altered, including their magical attributes such as <code>_proto_</code>, <code>constructor</code> and <code>prototype</code>. An attacker manipulates these attributes to overwrite, or pollute, a JavaScript application object prototype of the base object by injecting other values.  Properties on the <code>Object.prototype</code> are then inherited by all the JavaScript objects through the prototype chain. When that happens, this leads to either denial of service by triggering JavaScript exceptions, or it tampers with the application source code to force the code path that the attacker injects, thereby leading to remote code execution.</p>
               <p>There are two main ways in which the pollution of prototypes occurs:</p>
               <ul>
-              <li><p>Unsafe <code>Object</code> recursive merge</p>
-              </li>
-              <li><p>Property definition by path</p>
-              </li>
+              <li><p>Unsafe <code>Object</code> recursive merge</p></li>
+              <li><p>Property definition by path</p></li>
               </ul>
-              <h3>Unsafe Object recursive merge</h3>
+              <h3 id="unsafeobjectrecursivemerge">Unsafe Object recursive merge</h3>
               <p>The logic of a vulnerable recursive merge function follows the following high-level model:</p>
               <pre><code>merge (target, source)
               
@@ -1141,70 +1104,42 @@ exports[`test calling snyk-to-html from command line handles the -a argument cor
               
                     target[property] = source[property]
               </code></pre>
-              <br>  
-              
+              <p><br>  </p>
               <p>When the source object contains a property named <code>_proto_</code> defined with <code>Object.defineProperty()</code> , the condition that checks if the property exists and is an object on both the target and the source passes and the merge recurses with the target, being the prototype of <code>Object</code> and the source of <code>Object</code> as defined by the attacker. Properties are then copied on the <code>Object</code> prototype.</p>
               <p>Clone operations are a special sub-class of unsafe recursive merges, which occur when a recursive merge is conducted on an empty object: <code>merge({},source)</code>.</p>
               <p><code>lodash</code> and <code>Hoek</code> are examples of libraries susceptible to recursive merge attacks.</p>
-              <h3>Property definition by path</h3>
+              <h3 id="propertydefinitionbypath">Property definition by path</h3>
               <p>There are a few JavaScript libraries that use an API to define property values on an object based on a given path. The function that is generally affected contains this signature: <code>theFunction(object, path, value)</code></p>
               <p>If the attacker can control the value of “path”, they can set this value to <code>_proto_.myValue</code>. <code>myValue</code> is then assigned to the prototype of the class of the object.</p>
-              <h2>Types of attacks</h2>
+              <h2 id="typesofattacks">Types of attacks</h2>
               <p>There are a few methods by which Prototype Pollution can be manipulated:</p>
-              <table>
-              <thead>
-              <tr>
-              <th>Type</th>
-              <th>Origin</th>
-              <th>Short description</th>
-              </tr>
-              </thead>
-              <tbody><tr>
-              <td><strong>Denial of service (DoS)</strong></td>
-              <td>Client</td>
-              <td>This is the most likely attack. <br>DoS occurs when <code>Object</code> holds generic functions that are implicitly called for various operations (for example, <code>toString</code> and <code>valueOf</code>). <br> The attacker pollutes <code>Object.prototype.someattr</code> and alters its state to an unexpected value such as <code>Int</code> or <code>Object</code>. In this case, the code fails and is likely to cause a denial of service.  <br><strong>For example:</strong> if an attacker pollutes <code>Object.prototype.toString</code> by defining it as an integer, if the codebase at any point was reliant on <code>someobject.toString()</code> it would fail.</td>
-              </tr>
-              <tr>
-              <td><strong>Remote Code Execution</strong></td>
-              <td>Client</td>
-              <td>Remote code execution is generally only possible in cases where the codebase evaluates a specific attribute of an object, and then executes that evaluation.<br><strong>For example:</strong> <code>eval(someobject.someattr)</code>. In this case, if the attacker pollutes <code>Object.prototype.someattr</code> they are likely to be able to leverage this in order to execute code.</td>
-              </tr>
-              <tr>
-              <td><strong>Property Injection</strong></td>
-              <td>Client</td>
-              <td>The attacker pollutes properties that the codebase relies on for their informative value, including security properties such as cookies or tokens.<br>  <strong>For example:</strong> if a codebase checks privileges for <code>someuser.isAdmin</code>, then when the attacker pollutes <code>Object.prototype.isAdmin</code> and sets it to equal <code>true</code>, they can then achieve admin privileges.</td>
-              </tr>
-              </tbody></table>
-              <h2>Affected environments</h2>
+              <p>| Type |Origin  |Short description |
+              |--|--|--|
+              | <strong>Denial of service (DoS)</strong>|Client  |This is the most likely attack. <br>DoS occurs when <code>Object</code> holds generic functions that are implicitly called for various operations (for example, <code>toString</code> and <code>valueOf</code>). <br> The attacker pollutes <code>Object.prototype.someattr</code> and alters its state to an unexpected value such as <code>Int</code> or <code>Object</code>. In this case, the code fails and is likely to cause a denial of service.  <br><strong>For example:</strong> if an attacker pollutes <code>Object.prototype.toString</code> by defining it as an integer, if the codebase at any point was reliant on <code>someobject.toString()</code> it would fail. |
+               |<strong>Remote Code Execution</strong>|Client|Remote code execution is generally only possible in cases where the codebase evaluates a specific attribute of an object, and then executes that evaluation.<br><strong>For example:</strong> <code>eval(someobject.someattr)</code>. In this case, if the attacker pollutes <code>Object.prototype.someattr</code> they are likely to be able to leverage this in order to execute code.|
+              |<strong>Property Injection</strong>|Client|The attacker pollutes properties that the codebase relies on for their informative value, including security properties such as cookies or tokens.<br>  <strong>For example:</strong> if a codebase checks privileges for <code>someuser.isAdmin</code>, then when the attacker pollutes <code>Object.prototype.isAdmin</code> and sets it to equal <code>true</code>, they can then achieve admin privileges.|</p>
+              <h2 id="affectedenvironments">Affected environments</h2>
               <p>The following environments are susceptible to a Prototype Pollution attack:</p>
               <ul>
-              <li><p>Application server</p>
-              </li>
-              <li><p>Web server</p>
-              </li>
+              <li><p>Application server</p></li>
+              <li><p>Web server</p></li>
               </ul>
-              <h2>How to prevent</h2>
+              <h2 id="howtoprevent">How to prevent</h2>
               <ol>
-              <li><p>Freeze the prototype— use <code>Object.freeze (Object.prototype)</code>.</p>
-              </li>
-              <li><p>Require schema validation of JSON input.</p>
-              </li>
-              <li><p>Avoid using unsafe recursive merge functions.</p>
-              </li>
-              <li><p>Consider using objects without prototypes (for example, <code>Object.create(null)</code>), breaking the prototype chain and preventing pollution.</p>
-              </li>
-              <li><p>As a best practice use <code>Map</code> instead of <code>Object</code>.</p>
-              </li>
+              <li><p>Freeze the prototype— use <code>Object.freeze (Object.prototype)</code>.</p></li>
+              <li><p>Require schema validation of JSON input.</p></li>
+              <li><p>Avoid using unsafe recursive merge functions.</p></li>
+              <li><p>Consider using objects without prototypes (for example, <code>Object.create(null)</code>), breaking the prototype chain and preventing pollution.</p></li>
+              <li><p>As a best practice use <code>Map</code> instead of <code>Object</code>.</p></li>
               </ol>
-              <h3>For more information on this vulnerability type:</h3>
+              <h3 id="formoreinformationonthisvulnerabilitytype">For more information on this vulnerability type:</h3>
               <p><a href="https://github.com/HoLyVieR/prototype-pollution-nsec18/blob/master/paper/JavaScript_prototype_pollution_attack_in_NodeJS.pdf">Arteau, Oliver. “JavaScript prototype pollution attack in NodeJS application.” GitHub, 26 May 2018</a></p>
-              <h2>Remediation</h2>
+              <h2 id="remediation">Remediation</h2>
               <p>There is no fixed version for <code>lodash</code>.</p>
-              <h2>References</h2>
+              <h2 id="references">References</h2>
               <ul>
               <li><a href="https://hackerone.com/reports/712065">HackerOne Report</a></li>
               </ul>
-              
                     <hr/>
               
                   <div class="cta card__cta">
@@ -1319,29 +1254,27 @@ exports[`test calling snyk-to-html from command line handles the -a argument cor
               
                     <hr/>
                     <!-- Overview -->
-                    <h2>Overview</h2>
+                    <h2 id="overview">Overview</h2>
               <p><a href="https://github.com/hapijs/hoek">hoek</a> is a Utility methods for the hapi ecosystem.</p>
               <p>Affected versions of this package are vulnerable to Prototype Pollution.
               The utilities function allow modification of the <code>Object</code> prototype. If an attacker can control part of the structure passed to this function, they could add or modify an existing property.  </p>
-              <h2>PoC by Olivier Arteau (HoLyVieR)</h2>
-              <pre><code class="language-js">var Hoek = require(&#39;hoek&#39;);
-              var malicious_payload = &#39;{&quot;__proto__&quot;:{&quot;oops&quot;:&quot;It works !&quot;}}&#39;;
+              <h2 id="pocbyolivierarteauholyvier">PoC by Olivier Arteau (HoLyVieR)</h2>
+              <pre><code class="js language-js">var Hoek = require('hoek');
+              var malicious_payload = '{"__proto__":{"oops":"It works !"}}';
               
               var a = {};
-              console.log(&quot;Before : &quot; + a.oops);
+              console.log("Before : " + a.oops);
               Hoek.merge({}, JSON.parse(malicious_payload));
-              console.log(&quot;After : &quot; + a.oops);
+              console.log("After : " + a.oops);
               </code></pre>
-              <h2>Details</h2>
+              <h2 id="details">Details</h2>
               <p>Prototype Pollution is a vulnerability affecting JavaScript. Prototype Pollution refers to the ability to inject properties into existing JavaScript language construct prototypes, such as objects. JavaScript allows all Object attributes to be altered, including their magical attributes such as <code>_proto_</code>, <code>constructor</code> and <code>prototype</code>. An attacker manipulates these attributes to overwrite, or pollute, a JavaScript application object prototype of the base object by injecting other values.  Properties on the <code>Object.prototype</code> are then inherited by all the JavaScript objects through the prototype chain. When that happens, this leads to either denial of service by triggering JavaScript exceptions, or it tampers with the application source code to force the code path that the attacker injects, thereby leading to remote code execution.</p>
               <p>There are two main ways in which the pollution of prototypes occurs:</p>
               <ul>
-              <li><p>Unsafe <code>Object</code> recursive merge</p>
-              </li>
-              <li><p>Property definition by path</p>
-              </li>
+              <li><p>Unsafe <code>Object</code> recursive merge</p></li>
+              <li><p>Property definition by path</p></li>
               </ul>
-              <h3>Unsafe Object recursive merge</h3>
+              <h3 id="unsafeobjectrecursivemerge">Unsafe Object recursive merge</h3>
               <p>The logic of a vulnerable recursive merge function follows the following high-level model:</p>
               <pre><code>merge (target, source)
               
@@ -1355,81 +1288,47 @@ exports[`test calling snyk-to-html from command line handles the -a argument cor
               
                     target[property] = source[property]
               </code></pre>
-              <br>  
-              
+              <p><br>  </p>
               <p>When the source object contains a property named <code>_proto_</code> defined with <code>Object.defineProperty()</code> , the condition that checks if the property exists and is an object on both the target and the source passes and the merge recurses with the target, being the prototype of <code>Object</code> and the source of <code>Object</code> as defined by the attacker. Properties are then copied on the <code>Object</code> prototype.</p>
               <p>Clone operations are a special sub-class of unsafe recursive merges, which occur when a recursive merge is conducted on an empty object: <code>merge({},source)</code>.</p>
               <p><code>lodash</code> and <code>Hoek</code> are examples of libraries susceptible to recursive merge attacks.</p>
-              <h3>Property definition by path</h3>
+              <h3 id="propertydefinitionbypath">Property definition by path</h3>
               <p>There are a few JavaScript libraries that use an API to define property values on an object based on a given path. The function that is generally affected contains this signature: <code>theFunction(object, path, value)</code></p>
               <p>If the attacker can control the value of “path”, they can set this value to <code>_proto_.myValue</code>. <code>myValue</code> is then assigned to the prototype of the class of the object.</p>
-              <h2>Types of attacks</h2>
+              <h2 id="typesofattacks">Types of attacks</h2>
               <p>There are a few methods by which Prototype Pollution can be manipulated:</p>
-              <table>
-              <thead>
-              <tr>
-              <th>Type</th>
-              <th>Origin</th>
-              <th>Short description</th>
-              </tr>
-              </thead>
-              <tbody><tr>
-              <td><strong>Denial of service (DoS)</strong></td>
-              <td>Client</td>
-              <td>This is the most likely attack. <br>DoS occurs when <code>Object</code> holds generic functions that are implicitly called for various operations (for example, <code>toString</code> and <code>valueOf</code>). <br> The attacker pollutes <code>Object.prototype.someattr</code> and alters its state to an unexpected value such as <code>Int</code> or <code>Object</code>. In this case, the code fails and is likely to cause a denial of service.  <br><strong>For example:</strong> if an attacker pollutes <code>Object.prototype.toString</code> by defining it as an integer, if the codebase at any point was reliant on <code>someobject.toString()</code> it would fail.</td>
-              </tr>
-              <tr>
-              <td><strong>Remote Code Execution</strong></td>
-              <td>Client</td>
-              <td>Remote code execution is generally only possible in cases where the codebase evaluates a specific attribute of an object, and then executes that evaluation.<br><strong>For example:</strong> <code>eval(someobject.someattr)</code>. In this case, if the attacker pollutes <code>Object.prototype.someattr</code> they are likely to be able to leverage this in order to execute code.</td>
-              </tr>
-              <tr>
-              <td><strong>Property Injection</strong></td>
-              <td>Client</td>
-              <td>The attacker pollutes properties that the codebase relies on for their informative value, including security properties such as cookies or tokens.<br>  <strong>For example:</strong> if a codebase checks privileges for <code>someuser.isAdmin</code>, then when the attacker pollutes <code>Object.prototype.isAdmin</code> and sets it to equal <code>true</code>, they can then achieve admin privileges.</td>
-              </tr>
-              </tbody></table>
-              <h2>Affected environments</h2>
+              <p>| Type |Origin  |Short description |
+              |--|--|--|
+              | <strong>Denial of service (DoS)</strong>|Client  |This is the most likely attack. <br>DoS occurs when <code>Object</code> holds generic functions that are implicitly called for various operations (for example, <code>toString</code> and <code>valueOf</code>). <br> The attacker pollutes <code>Object.prototype.someattr</code> and alters its state to an unexpected value such as <code>Int</code> or <code>Object</code>. In this case, the code fails and is likely to cause a denial of service.  <br><strong>For example:</strong> if an attacker pollutes <code>Object.prototype.toString</code> by defining it as an integer, if the codebase at any point was reliant on <code>someobject.toString()</code> it would fail. |
+               |<strong>Remote Code Execution</strong>|Client|Remote code execution is generally only possible in cases where the codebase evaluates a specific attribute of an object, and then executes that evaluation.<br><strong>For example:</strong> <code>eval(someobject.someattr)</code>. In this case, if the attacker pollutes <code>Object.prototype.someattr</code> they are likely to be able to leverage this in order to execute code.|
+              |<strong>Property Injection</strong>|Client|The attacker pollutes properties that the codebase relies on for their informative value, including security properties such as cookies or tokens.<br>  <strong>For example:</strong> if a codebase checks privileges for <code>someuser.isAdmin</code>, then when the attacker pollutes <code>Object.prototype.isAdmin</code> and sets it to equal <code>true</code>, they can then achieve admin privileges.|</p>
+              <h2 id="affectedenvironments">Affected environments</h2>
               <p>The following environments are susceptible to a Prototype Pollution attack:</p>
               <ul>
-              <li><p>Application server</p>
-              </li>
-              <li><p>Web server</p>
-              </li>
+              <li><p>Application server</p></li>
+              <li><p>Web server</p></li>
               </ul>
-              <h2>How to prevent</h2>
+              <h2 id="howtoprevent">How to prevent</h2>
               <ol>
-              <li><p>Freeze the prototype— use <code>Object.freeze (Object.prototype)</code>.</p>
-              </li>
-              <li><p>Require schema validation of JSON input.</p>
-              </li>
-              <li><p>Avoid using unsafe recursive merge functions.</p>
-              </li>
-              <li><p>Consider using objects without prototypes (for example, <code>Object.create(null)</code>), breaking the prototype chain and preventing pollution.</p>
-              </li>
-              <li><p>As a best practice use <code>Map</code> instead of <code>Object</code>.</p>
-              </li>
+              <li><p>Freeze the prototype— use <code>Object.freeze (Object.prototype)</code>.</p></li>
+              <li><p>Require schema validation of JSON input.</p></li>
+              <li><p>Avoid using unsafe recursive merge functions.</p></li>
+              <li><p>Consider using objects without prototypes (for example, <code>Object.create(null)</code>), breaking the prototype chain and preventing pollution.</p></li>
+              <li><p>As a best practice use <code>Map</code> instead of <code>Object</code>.</p></li>
               </ol>
-              <h3>For more information on this vulnerability type:</h3>
+              <h3 id="formoreinformationonthisvulnerabilitytype">For more information on this vulnerability type:</h3>
               <p><a href="https://github.com/HoLyVieR/prototype-pollution-nsec18/blob/master/paper/JavaScript_prototype_pollution_attack_in_NodeJS.pdf">Arteau, Oliver. “JavaScript prototype pollution attack in NodeJS application.” GitHub, 26 May 2018</a></p>
-              <h2>Remediation</h2>
+              <h2 id="remediation">Remediation</h2>
               <p>Upgrade <code>hoek</code> to version 4.2.1, 5.0.3 or higher.</p>
-              <h2>References</h2>
+              <h2 id="references">References</h2>
               <ul>
-              <li><p><a href="https://github.com/hapijs/hoek/commit/32ed5c9413321fbc37da5ca81a7cbab693786dee">GitHub Commit</a></p>
-              </li>
-              <li><p><a href="https://github.com/hapijs/hoek/commit/5aed1a8c4a3d55722d1c799f2368857bf418d6df">GitHub Commit</a></p>
-              </li>
-              <li><p><a href="https://github.com/hapijs/hoek/issues/230">GitHub Issue</a></p>
-              </li>
-              <li><p><a href="https://github.com/hapijs/hoek/pull/227">GitHub PR</a></p>
-              </li>
-              <li><p><a href="https://hackerone.com/reports/310439">HackerOne Report</a></p>
-              </li>
-              <li><p><a href="http://npmjs.com/advisories/566">NPM Security Advisory</a></p>
-              </li>
+              <li><p><a href="https://github.com/hapijs/hoek/commit/32ed5c9413321fbc37da5ca81a7cbab693786dee">GitHub Commit</a></p></li>
+              <li><p><a href="https://github.com/hapijs/hoek/commit/5aed1a8c4a3d55722d1c799f2368857bf418d6df">GitHub Commit</a></p></li>
+              <li><p><a href="https://github.com/hapijs/hoek/issues/230">GitHub Issue</a></p></li>
+              <li><p><a href="https://github.com/hapijs/hoek/pull/227">GitHub PR</a></p></li>
+              <li><p><a href="https://hackerone.com/reports/310439">HackerOne Report</a></p></li>
+              <li><p><a href="http://npmjs.com/advisories/566">NPM Security Advisory</a></p></li>
               </ul>
-              
                     <hr/>
               
                   <div class="cta card__cta">
@@ -1489,17 +1388,17 @@ exports[`test calling snyk-to-html from command line handles the -a argument cor
               
                     <hr/>
                     <!-- Overview -->
-                    <h2>Overview</h2>
+                    <h2 id="overview">Overview</h2>
               <p><a href="https://www.npmjs.com/package/ms"><code>ms</code></a> is a tiny millisecond conversion utility.</p>
               <p>Affected versions of this package are vulnerable to Regular Expression Denial of Service (ReDoS) due to an incomplete fix for previously reported vulnerability <a href="https://snyk.io/vuln/npm:ms:20151024">npm:ms:20151024</a>. The fix limited the length of accepted input string to 10,000 characters, and turned to be insufficient making it possible to block the event loop for 0.3 seconds (on a typical laptop) with a specially crafted string passed to <code>ms()</code> function.</p>
               <p><em>Proof of concept</em></p>
-              <pre><code class="language-js">ms = require(&#39;ms&#39;);
-              ms(&#39;1&#39;.repeat(9998) + &#39;Q&#39;) // Takes about ~0.3s
+              <pre><code class="js language-js">ms = require('ms');
+              ms('1'.repeat(9998) + 'Q') // Takes about ~0.3s
               </code></pre>
-              <p><strong>Note:</strong> Snyk&#39;s patch for this vulnerability limits input length to 100 characters. This new limit was deemed to be a breaking change by the author.
+              <p><strong>Note:</strong> Snyk's patch for this vulnerability limits input length to 100 characters. This new limit was deemed to be a breaking change by the author.
               Based on user feedback, we believe the risk of breakage is <em>very</em> low, while the value to your security is much greater, and therefore opted to still capture this change in a patch for earlier versions as well.  Whenever patching security issues, we always suggest to run tests on your code to validate that nothing has been broken.</p>
               <p>For more information on <code>Regular Expression Denial of Service (ReDoS)</code> attacks, go to our <a href="https://snyk.io/blog/redos-and-catastrophic-backtracking/">blog</a>.</p>
-              <h2>Disclosure Timeline</h2>
+              <h2 id="disclosuretimeline">Disclosure Timeline</h2>
               <ul>
               <li>Feb 9th, 2017 - Reported the issue to package owner.</li>
               <li>Feb 11th, 2017 - Issue acknowledged by package owner.</li>
@@ -1508,75 +1407,51 @@ exports[`test calling snyk-to-html from command line handles the -a argument cor
               <li>May 16th, 2017 - Issue fixed and version <code>2.0.0</code> released.</li>
               <li>May 21th, 2017 - Patches released for versions <code>&gt;=0.7.1, &lt;=1.0.0</code>.</li>
               </ul>
-              <h2>Details</h2>
+              <h2 id="details">Details</h2>
               <p>Denial of Service (DoS) describes a family of attacks, all aimed at making a system inaccessible to its original and legitimate users. There are many types of DoS attacks, ranging from trying to clog the network pipes to the system by generating a large volume of traffic from many machines (a Distributed Denial of Service - DDoS - attack) to sending crafted requests that cause a system to crash or take a disproportional amount of time to process.</p>
-              <p>The Regular expression Denial of Service (ReDoS) is a type of Denial of Service attack. Regular expressions are incredibly powerful, but they aren&#39;t very intuitive and can ultimately end up making it easy for attackers to take your site down.</p>
+              <p>The Regular expression Denial of Service (ReDoS) is a type of Denial of Service attack. Regular expressions are incredibly powerful, but they aren't very intuitive and can ultimately end up making it easy for attackers to take your site down.</p>
               <p>Let’s take the following regular expression as an example:</p>
-              <pre><code class="language-js">regex = /A(B|C+)+D/
+              <pre><code class="js language-js">regex = /A(B|C+)+D/
               </code></pre>
               <p>This regular expression accomplishes the following:</p>
               <ul>
-              <li><code>A</code> The string must start with the letter &#39;A&#39;</li>
-              <li><code>(B|C+)+</code> The string must then follow the letter A with either the letter &#39;B&#39; or some number of occurrences of the letter &#39;C&#39; (the <code>+</code> matches one or more times). The <code>+</code> at the end of this section states that we can look for one or more matches of this section.</li>
-              <li><code>D</code> Finally, we ensure this section of the string ends with a &#39;D&#39;</li>
+              <li><code>A</code> The string must start with the letter 'A'</li>
+              <li><code>(B|C+)+</code> The string must then follow the letter A with either the letter 'B' or some number of occurrences of the letter 'C' (the <code>+</code> matches one or more times). The <code>+</code> at the end of this section states that we can look for one or more matches of this section.</li>
+              <li><code>D</code> Finally, we ensure this section of the string ends with a 'D'</li>
               </ul>
               <p>The expression would match inputs such as <code>ABBD</code>, <code>ABCCCCD</code>, <code>ABCBCCCD</code> and <code>ACCCCCD</code></p>
-              <p>It most cases, it doesn&#39;t take very long for a regex engine to find a match:</p>
-              <pre><code class="language-bash">$ time node -e &#39;/A(B|C+)+D/.test(&quot;ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD&quot;)&#39;
+              <p>It most cases, it doesn't take very long for a regex engine to find a match:</p>
+              <pre><code class="bash language-bash">$ time node -e '/A(B|C+)+D/.test("ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD")'
               0.04s user 0.01s system 95% cpu 0.052 total
               
-              $ time node -e &#39;/A(B|C+)+D/.test(&quot;ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX&quot;)&#39;
+              $ time node -e '/A(B|C+)+D/.test("ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX")'
               1.79s user 0.02s system 99% cpu 1.812 total
               </code></pre>
               <p>The entire process of testing it against a 30 characters long string takes around ~52ms. But when given an invalid string, it takes nearly two seconds to complete the test, over ten times as long as it took to test a valid string. The dramatic difference is due to the way regular expressions get evaluated.</p>
               <p>Most Regex engines will work very similarly (with minor differences). The engine will match the first possible way to accept the current character and proceed to the next one. If it then fails to match the next one, it will backtrack and see if there was another way to digest the previous character. If it goes too far down the rabbit hole only to find out the string doesn’t match in the end, and if many characters have multiple valid regex paths, the number of backtracking steps can become very large, resulting in what is known as <em>catastrophic backtracking</em>.</p>
-              <p>Let&#39;s look at how our expression runs into this problem, using a shorter string: &quot;ACCCX&quot;. While it seems fairly straightforward, there are still four different ways that the engine could match those three C&#39;s:</p>
+              <p>Let's look at how our expression runs into this problem, using a shorter string: "ACCCX". While it seems fairly straightforward, there are still four different ways that the engine could match those three C's:</p>
               <ol>
               <li>CCC</li>
               <li>CC+C</li>
               <li>C+CC</li>
               <li>C+C+C.</li>
               </ol>
-              <p>The engine has to try each of those combinations to see if any of them potentially match against the expression. When you combine that with the other steps the engine must take, we can use <a href="https://regex101.com/debugger">RegEx 101 debugger</a> to see the engine has to take a total of 38 steps before it can determine the string doesn&#39;t match.</p>
+              <p>The engine has to try each of those combinations to see if any of them potentially match against the expression. When you combine that with the other steps the engine must take, we can use <a href="https://regex101.com/debugger">RegEx 101 debugger</a> to see the engine has to take a total of 38 steps before it can determine the string doesn't match.</p>
               <p>From there, the number of steps the engine must use to validate a string just continues to grow.</p>
-              <table>
-              <thead>
-              <tr>
-              <th>String</th>
-              <th align="right">Number of C&#39;s</th>
-              <th align="right">Number of steps</th>
-              </tr>
-              </thead>
-              <tbody><tr>
-              <td>ACCCX</td>
-              <td align="right">3</td>
-              <td align="right">38</td>
-              </tr>
-              <tr>
-              <td>ACCCCX</td>
-              <td align="right">4</td>
-              <td align="right">71</td>
-              </tr>
-              <tr>
-              <td>ACCCCCX</td>
-              <td align="right">5</td>
-              <td align="right">136</td>
-              </tr>
-              <tr>
-              <td>ACCCCCCCCCCCCCCX</td>
-              <td align="right">14</td>
-              <td align="right">65,553</td>
-              </tr>
-              </tbody></table>
-              <p>By the time the string includes 14 C&#39;s, the engine has to take over 65,000 steps just to see if the string is valid. These extreme situations can cause them to work very slowly (exponentially related to input size, as shown above), allowing an attacker to exploit this and can cause the service to excessively consume CPU, resulting in a Denial of Service.</p>
-              <h2>Remediation</h2>
+              <p>| String | Number of C's | Number of steps |
+              | -------|-------------:| -----:|
+              | ACCCX | 3 | 38
+              | ACCCCX | 4 | 71
+              | ACCCCCX | 5 | 136
+              | ACCCCCCCCCCCCCCX | 14 | 65,553</p>
+              <p>By the time the string includes 14 C's, the engine has to take over 65,000 steps just to see if the string is valid. These extreme situations can cause them to work very slowly (exponentially related to input size, as shown above), allowing an attacker to exploit this and can cause the service to excessively consume CPU, resulting in a Denial of Service.</p>
+              <h2 id="remediation">Remediation</h2>
               <p>Upgrade <code>ms</code> to version 2.0.0 or higher.</p>
-              <h2>References</h2>
+              <h2 id="references">References</h2>
               <ul>
               <li><a href="https://github.com/zeit/ms/pull/89">GitHub PR</a></li>
               <li><a href="https://github.com/zeit/ms/pull/89/commits/305f2ddcd4eff7cc7c518aca6bb2b2d2daad8fef">GitHub Commit</a></li>
               </ul>
-              
                     <hr/>
               
                   <div class="cta card__cta">
@@ -2168,15 +2043,14 @@ exports[`test calling snyk-to-html from command line handles the -s argument cor
         
             </div><!-- .card__section -->
         
-                <h2>Remediation</h2>
+                <h2 id="remediation">Remediation</h2>
         <p>Upgrade <code>tunnel-agent</code> to version 0.6.0 or higher.
         <strong>Note</strong> This is vulnerable only for Node &lt;=4</p>
-        <h2>References</h2>
+        <h2 id="references">References</h2>
         <ul>
         <li><a href="https://github.com/request/tunnel-agent/commit/9ca95ec7219daface8a6fc2674000653de0922c0">GitHub Commit</a></li>
         <li><a href="https://gist.github.com/ChALkeR/fd6b2c445834244e7d440a043f9d2ff4">PoC by ChALkeR</a></li>
         </ul>
-        
         
             <div class="cta card__cta">
                 <p><a href="https://snyk.io/vuln/npm:tunnel-agent:20170305">More about this vulnerability</a></p>
@@ -2215,20 +2089,15 @@ exports[`test calling snyk-to-html from command line handles the -s argument cor
         
             </div><!-- .card__section -->
         
-                <h2>Remediation</h2>
+                <h2 id="remediation">Remediation</h2>
         <p>Upgrade <code>minimist</code> to version 0.2.1, 1.2.3 or higher.</p>
-        <h2>References</h2>
+        <h2 id="references">References</h2>
         <ul>
-        <li><p><a href="https://gist.github.com/Kirill89/47feb345b09bf081317f08dd43403a8a">Command Injection PoC</a></p>
-        </li>
-        <li><p><a href="https://github.com/substack/minimist/commit/63e7ed05aa4b1889ec2f3b196426db4500cbda94">GitHub Fix Commit #1</a></p>
-        </li>
-        <li><p><a href="https://github.com/substack/minimist/commit/38a4d1caead72ef99e824bb420a2528eec03d9ab">GitHub Fix Commit #2</a></p>
-        </li>
-        <li><p><a href="https://snyk.io/blog/prototype-pollution-minimist/">Snyk Research Blog</a></p>
-        </li>
+        <li><p><a href="https://gist.github.com/Kirill89/47feb345b09bf081317f08dd43403a8a">Command Injection PoC</a></p></li>
+        <li><p><a href="https://github.com/substack/minimist/commit/63e7ed05aa4b1889ec2f3b196426db4500cbda94">GitHub Fix Commit #1</a></p></li>
+        <li><p><a href="https://github.com/substack/minimist/commit/38a4d1caead72ef99e824bb420a2528eec03d9ab">GitHub Fix Commit #2</a></p></li>
+        <li><p><a href="https://snyk.io/blog/prototype-pollution-minimist/">Snyk Research Blog</a></p></li>
         </ul>
-        
         
             <div class="cta card__cta">
                 <p><a href="https://snyk.io/vuln/SNYK-JS-MINIMIST-559764">More about this vulnerability</a></p>
@@ -2267,13 +2136,12 @@ exports[`test calling snyk-to-html from command line handles the -s argument cor
         
             </div><!-- .card__section -->
         
-                <h2>Remediation</h2>
+                <h2 id="remediation">Remediation</h2>
         <p>There is no fixed version for <code>lodash</code>.</p>
-        <h2>References</h2>
+        <h2 id="references">References</h2>
         <ul>
         <li><a href="https://hackerone.com/reports/712065">HackerOne Report</a></li>
         </ul>
-        
         
             <div class="cta card__cta">
                 <p><a href="https://snyk.io/vuln/SNYK-JS-LODASH-567746">More about this vulnerability</a></p>
@@ -2312,24 +2180,17 @@ exports[`test calling snyk-to-html from command line handles the -s argument cor
         
             </div><!-- .card__section -->
         
-                <h2>Remediation</h2>
+                <h2 id="remediation">Remediation</h2>
         <p>Upgrade <code>hoek</code> to version 4.2.1, 5.0.3 or higher.</p>
-        <h2>References</h2>
+        <h2 id="references">References</h2>
         <ul>
-        <li><p><a href="https://github.com/hapijs/hoek/commit/32ed5c9413321fbc37da5ca81a7cbab693786dee">GitHub Commit</a></p>
-        </li>
-        <li><p><a href="https://github.com/hapijs/hoek/commit/5aed1a8c4a3d55722d1c799f2368857bf418d6df">GitHub Commit</a></p>
-        </li>
-        <li><p><a href="https://github.com/hapijs/hoek/issues/230">GitHub Issue</a></p>
-        </li>
-        <li><p><a href="https://github.com/hapijs/hoek/pull/227">GitHub PR</a></p>
-        </li>
-        <li><p><a href="https://hackerone.com/reports/310439">HackerOne Report</a></p>
-        </li>
-        <li><p><a href="http://npmjs.com/advisories/566">NPM Security Advisory</a></p>
-        </li>
+        <li><p><a href="https://github.com/hapijs/hoek/commit/32ed5c9413321fbc37da5ca81a7cbab693786dee">GitHub Commit</a></p></li>
+        <li><p><a href="https://github.com/hapijs/hoek/commit/5aed1a8c4a3d55722d1c799f2368857bf418d6df">GitHub Commit</a></p></li>
+        <li><p><a href="https://github.com/hapijs/hoek/issues/230">GitHub Issue</a></p></li>
+        <li><p><a href="https://github.com/hapijs/hoek/pull/227">GitHub PR</a></p></li>
+        <li><p><a href="https://hackerone.com/reports/310439">HackerOne Report</a></p></li>
+        <li><p><a href="http://npmjs.com/advisories/566">NPM Security Advisory</a></p></li>
         </ul>
-        
         
             <div class="cta card__cta">
                 <p><a href="https://snyk.io/vuln/npm:hoek:20180212">More about this vulnerability</a></p>
@@ -2368,14 +2229,13 @@ exports[`test calling snyk-to-html from command line handles the -s argument cor
         
             </div><!-- .card__section -->
         
-                <h2>Remediation</h2>
+                <h2 id="remediation">Remediation</h2>
         <p>Upgrade <code>ms</code> to version 2.0.0 or higher.</p>
-        <h2>References</h2>
+        <h2 id="references">References</h2>
         <ul>
         <li><a href="https://github.com/zeit/ms/pull/89">GitHub PR</a></li>
         <li><a href="https://github.com/zeit/ms/pull/89/commits/305f2ddcd4eff7cc7c518aca6bb2b2d2daad8fef">GitHub Commit</a></li>
         </ul>
-        
         
             <div class="cta card__cta">
                 <p><a href="https://snyk.io/vuln/npm:ms:20170412">More about this vulnerability</a></p>
@@ -4872,15 +4732,14 @@ exports[`test calling snyk-to-html from command line shows remediation with vuln
               
                   </div><!-- .card__section -->
               
-                      <h2>Remediation</h2>
+                      <h2 id="remediation">Remediation</h2>
               <p>Upgrade to versions <code>1.7b2</code>, <code>1.6.3</code>, <code>1.5.6</code>, <code>1.4.11</code> or greater.</p>
-              <h2>References</h2>
+              <h2 id="references">References</h2>
               <ul>
               <li><a href="https://www.djangoproject.com/weblog/2014/apr/21/security/">Django Vulnerability Description</a></li>
               <li><a href="https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2014-0472">Redhat Bugzilla</a></li>
               <li><a href="https://rhn.redhat.com/errata/RHSA-2014-0456.html">Redhat Vulnerability Advisory</a></li>
               </ul>
-              
               
                   <div class="cta card__cta">
                       <p><a href="https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40025">More about this vulnerability</a></p>
@@ -5740,18 +5599,17 @@ exports[`test calling snyk-to-html from command line shows remediation with vuln
               
                     <hr/>
                     <!-- Overview -->
-                    <h2>Overview</h2>
+                    <h2 id="overview">Overview</h2>
               <p><a href="https://pypi.python.org/pypi/Django"><code>Django</code></a> is a high-level Python Web framework that encourages rapid development and clean, pragmatic design.</p>
-              <p>Affected versions of this package are vulnerable to Arbitrary Code Execution attacks. The <code>django.core.urlresolvers.reverse</code> function allows remote attackers to import and execute arbitrary Python modules by leveraging a view that constructs URLs using user input and a &quot;dotted Python path.&quot;</p>
-              <h2>Remediation</h2>
+              <p>Affected versions of this package are vulnerable to Arbitrary Code Execution attacks. The <code>django.core.urlresolvers.reverse</code> function allows remote attackers to import and execute arbitrary Python modules by leveraging a view that constructs URLs using user input and a "dotted Python path."</p>
+              <h2 id="remediation">Remediation</h2>
               <p>Upgrade to versions <code>1.7b2</code>, <code>1.6.3</code>, <code>1.5.6</code>, <code>1.4.11</code> or greater.</p>
-              <h2>References</h2>
+              <h2 id="references">References</h2>
               <ul>
               <li><a href="https://www.djangoproject.com/weblog/2014/apr/21/security/">Django Vulnerability Description</a></li>
               <li><a href="https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2014-0472">Redhat Bugzilla</a></li>
               <li><a href="https://rhn.redhat.com/errata/RHSA-2014-0456.html">Redhat Vulnerability Advisory</a></li>
               </ul>
-              
                     <hr/>
               
                   <div class="cta card__cta">
