@@ -76,9 +76,9 @@ describe('test calling snyk-to-html from command line', () => {
 
       const cleanedReport = cleanTimestamp(stdout);
       if (args.includes('--summary')) {
-        expect(cleanedReport).not.toContain('<h2>Overview</h2>');
+        expect(cleanedReport).not.toContain('<h2 id="overview">Overview</h2>');
       } else {
-        expect(cleanedReport).toContain('<h2>Overview</h2>');
+        expect(cleanedReport).toContain('<h2 id="overview">Overview</h2>');
       }
 
       expect(cleanedReport).toContain(
@@ -177,8 +177,8 @@ describe('test calling snyk-to-html from command line', () => {
     expect(cleanedReport).toContain(
       '<div class="meta-count"><span>4</span> <span>dependencies</span></div>',
     );
-    expect(cleanedReport).toContain('<h2>Overview</h2>');
-    expect(cleanedReport).toContain('<h2>Remediation</h2>');
+    expect(cleanedReport).toContain('<h2 id="overview">Overview</h2>');
+    expect(cleanedReport).toContain('<h2 id="remediation">Remediation</h2>');
     expect(cleanedReport).toContain(
       '<p>Upgrade <code>curl</code> to version 7.60.0 or higher.</p>',
     );
