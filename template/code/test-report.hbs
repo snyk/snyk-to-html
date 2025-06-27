@@ -48,7 +48,7 @@
         {{#if projects.[0].details.coverage}}
           <span class="source-panel__heading">Scan Coverage</span>
           <ul class="scan-coverage">
-            {{#each projects.[0].details.coverage}}<li class="type">{{this.lang}} files: <strong>{{this.files}}</strong></li>{{/each}}
+            {{#each projects.[0].details.coverage}}<li class="type">{{this.lang}}{{#unless this.isSupported }}[{{this.type}}]{{/unless}} files: <strong>{{this.files}}</strong></li> {{/each}}
           </ul>            
         {{/if}}
         {{/if}}
