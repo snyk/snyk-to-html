@@ -1,9 +1,8 @@
 import * as orderBy from 'lodash.orderby';
-
-const path = require('path');
-const events = require('events');
-const fs = require('fs');
-const readline = require('readline');
+import * as path from 'node:path';
+import * as events from 'node:events';
+import * as fs from 'node:fs';
+import * as readline from 'node:readline';
 
 const codeSeverityMap = {
   error: 'high',
@@ -42,7 +41,7 @@ async function processCodeLine(filePath, region) {
       input: sourceFs,
     });
     rl.on('line', (line) => {
-      parseline = line.toString('ascii');
+      parseline = line.toString();
       if (lineNumber == startLine) {
         if (multiLine) {
           columnEndOfLine = parseline.length;
@@ -91,17 +90,13 @@ async function readCodeSnippet(codeInfomation) {
   const decodedpath = decodeURI(
     codeInfomation.physicalLocation.artifactLocation.uri,
   );
-  const filePath = path.resolve(
-    //codeInfomation.physicalLocation.artifactLocation.uri,
-    decodedpath,
-  );
+  const filePath = path.resolve(decodedpath);
   const codeRegion = codeInfomation.physicalLocation.region;
   const result = await processCodeLine(filePath, codeRegion);
   return result;
 }
 
 function getCurrentDirectory() {
-  //return path.dirname(__dirname);
   return process.cwd();
 }
 
@@ -129,9 +124,8 @@ export async function processSourceCode(dataArray) {
     //code stack
     for (const codeFlowLocations of issue.codeFlows[0].threadFlows[0]
       .locations) {
-      codeFlowLocations.location.physicalLocation.codeString = await readCodeSnippet(
-        codeFlowLocations.location,
-      );
+      codeFlowLocations.location.physicalLocation.codeString =
+        await readCodeSnippet(codeFlowLocations.location);
       newLocation =
         codeFlowLocations.location.physicalLocation.artifactLocation.uri;
       if (newLocation === oldLocation) {
@@ -159,4 +153,38 @@ export async function processSourceCode(dataArray) {
     };
   });
   return OrderedIssuesArray;
+}
+
+export function processSuppression(suppression: any) {
+  if (!suppression) {
+    return null;
+  }
+
+  return {
+    justification: suppression.justification || 'No justification provided',
+    category: suppression.properties?.category || 'unknown',
+    expiration: suppression.properties?.expiration,
+    ignoredOn: suppression.properties?.ignoredOn || {
+      date: 'unknown',
+      reason: 'unknown',
+    },
+    ignoredBy: suppression.properties?.ignoredBy || {
+      name: 'unknown',
+      email: '?',
+    },
+  };
+}
+
+export function firstInitial(name: string | null | undefined): string {
+  if (!name) {
+    return '?';
+  }
+  return name.charAt(0).toUpperCase();
+}
+
+export function formatDate(date: string | null | undefined): string {
+  if (!date) {
+    return 'Unknown date';
+  }
+  return new Date(date).toISOString().slice(0, 19).replace('T', ' ') + ' GMT';
 }

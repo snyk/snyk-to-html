@@ -2,7 +2,7 @@
 
 import * as isEmpty from 'lodash.isempty';
 import * as orderBy from 'lodash.orderby';
-import chalk from 'chalk';
+import * as chalk from 'chalk';
 import * as debugModule from 'debug';
 import * as fs from 'node:fs';
 import * as Handlebars from 'handlebars';
@@ -14,8 +14,11 @@ import {
   IacProjectType,
   severityMap,
 } from './vuln';
-import { processSourceCode } from './codeutil';
+import { processSourceCode, processSuppression } from './codeutil';
 import { formatDateTime } from './dateutil';
+import { registerHandlebarsHelpers } from './handlebarsutil';
+
+registerHandlebarsHelpers();
 
 const debug = debugModule('snyk-to-html');
 
@@ -120,6 +123,7 @@ function metadataForVuln(vuln: any) {
     info: vuln.info || 'No information available.',
     severity: vuln.severity,
     severityValue: severityMap[vuln.severity],
+    riskScore: typeof vuln.riskScore === 'number' ? vuln.riskScore : undefined,
     description: vuln.description || 'No description available.',
     fixedIn: vuln.fixedIn,
     packageManager: vuln.packageManager,
@@ -138,7 +142,7 @@ function concatenateCVEs(vuln: any) {
   let cveLineBreaks = '';
 
   if (vuln.identifiers) {
-    vuln.identifiers.CVE.forEach(function(c) {
+    vuln.identifiers.CVE.forEach(function (c) {
       const cveLink = `<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=${c}">${c}</a>`;
       cveSpaced += `${cveLink}&nbsp;`;
       cveLineBreaks += `${cveLink}</br>`;
@@ -379,6 +383,33 @@ async function processCodeData(
 
   const OrderedIssuesArray = await processSourceCode(dataArray);
 
+  // Sort issues by suppressed and non-suppressed vulnerabilities
+  OrderedIssuesArray.forEach((project) => {
+    let hasSuppressedVulns = false;
+    const projectVulns = project.vulnerabilities.map((vuln) => {
+      if (vuln.suppressions && vuln.suppressions.length > 0) {
+        hasSuppressedVulns = true;
+        vuln.suppression = processSuppression(vuln.suppressions[0]);
+      }
+      return vuln;
+    });
+
+    // Early return if no suppressions
+    if (!hasSuppressedVulns) {
+      project.vulnerabilities = projectVulns;
+      return;
+    }
+
+    // If not, sort the suppressed vulnerabilities to the end
+    projectVulns.sort((a, b) => {
+      if (a.suppression && !b.suppression) return 1;
+      if (!a.suppression && b.suppression) return -1;
+      return 0;
+    });
+
+    project.vulnerabilities = projectVulns;
+  });
+
   const totalIssues = dataArray[0].runs[0].results.length;
   const processedData = {
     projects: OrderedIssuesArray,
@@ -428,26 +459,22 @@ const hh = {
   count: (data) => data && data.length,
   dump: (data, spacer) => JSON.stringify(data, null, spacer || null),
   // block helpers
-  isDoubleArray: function(data, options) {
+  isDoubleArray: function (data, options) {
     return Array.isArray(data[0]) ? options.fn(data) : options.inverse(data);
   },
-  // eslint-disable-next-line @typescript-eslint/camelcase
-  if_eq: function(this: void, a, b, opts) {
+  if_eq: function (this: void, a, b, opts) {
     return a === b ? opts.fn(this) : opts.inverse(this);
   },
-  // eslint-disable-next-line @typescript-eslint/camelcase
-  if_gt: function(this: void, a, b, opts) {
+  if_gt: function (this: void, a, b, opts) {
     return a > b ? opts.fn(this) : opts.inverse(this);
   },
-  // eslint-disable-next-line @typescript-eslint/camelcase
-  if_not_eq: function(this: void, a, b, opts) {
+  if_not_eq: function (this: void, a, b, opts) {
     return a !== b ? opts.fn(this) : opts.inverse(this);
   },
-  // eslint-disable-next-line @typescript-eslint/camelcase
-  if_any: function(this: void, opts, ...args) {
+  if_any: function (this: void, opts, ...args) {
     return args.some((v) => !!v) ? opts.fn(this) : opts.inverse(this);
   },
-  ifCond: function(this: void, v1, operator, v2, options) {
+  ifCond: function (this: void, v1, operator, v2, options) {
     const choose = (pred: boolean) =>
       pred ? options.fn(this) : options.inverse(this);
     switch (operator) {
@@ -490,7 +517,7 @@ const hh = {
   severityLabel: (severity: string) => {
     return severity[0].toUpperCase();
   },
-  startsWith: function(str, start, options) {
+  startsWith: function (str, start, options) {
     return str.startsWith(start) ? options.fn(this) : options.inverse(this);
   },
 };

@@ -93,6 +93,71 @@
     width: .75rem;
   }
 
+  .suppressed {
+    border-left: 5px solid #888;
+  }
+
+  .suppression-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 10px;
+    background-color: #fff7e6;
+  }
+
+  .suppression-card__container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .suppression-card__items {
+    flex: 1 1 50%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .suppression-card__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+  }
+
+  .suppression-card__item__key {
+    flex: 0 0 40%;
+    color: #a55c09;
+    font-weight: 500;
+    margin-bottom: 2px;
+    flex-shrink: 0;
+    padding-right: 32px;
+    white-space: nowrap;
+    width: 180px;
+  }
+
+  .suppression-card__item__value {
+    flex: 1 1 60%;
+    text-align: left;
+    color: #a55c09;
+    padding-right: 32px;
+    word-break: break-all;
+  }
+
+  .suppression-card__user-initial {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #6666cc;
+    color: white;
+    text-align: center;
+    line-height: 24px;
+    margin-right: 5px;
+    font-weight: bold;
+  }
+
+  .suppression-card strong {
+    color: #b35900;
+  }
 
 /* Layout */
 
@@ -126,8 +191,7 @@
   }
 
   .project__header {
-    background-color: #4b45a9;
-    background-image: linear-gradient(to right, #7530a6 0%, #461d9f 50%);
+    background-color: #030328;
     color: #fff;
     }
 
@@ -349,14 +413,14 @@
 .dataflow__code { display:flex; align-self: flex-start; align-content: flex-start; flex-grow: 1; margin-right:40px; line-height:1; overflow:auto; }
 .dataflow__code h1, .dataflow__code h2, .dataflow__code h3, .dataflow__code h4, .dataflow__code h5, .dataflow__code h6, .dataflow__code strong, .dataflow__code b, .dataflow__code em, .dataflow__code i, .dataflow__code p  { padding:0; margin:0; font-family: monospace; color:#393842; font-size:14px; font-weight:400; font-style: normal;  } /* overriding html default styling within the code */
 .dataflow__code br { display:none  } /* overriding html default styling within the code */
-.dataflow__code .dataflow__codeprefix, .dataflow__code .dataflow__codesuffix { display:inline-block; margin:0; white-space:nowrap } 
-.dataflow__badge { align-self:flex-start; padding:2px 3px; border:1px solid #d3d3d9; border-radius:2px; margin-top:2px; background-color:#f4f4f6; font-size:11px; line-height:1; font-family: sans-serif; text-transform: uppercase; color:#646374 } 
+.dataflow__code .dataflow__codeprefix, .dataflow__code .dataflow__codesuffix { display:inline-block; margin:0; white-space:nowrap }
+.dataflow__badge { align-self:flex-start; padding:2px 3px; border:1px solid #d3d3d9; border-radius:2px; margin-top:2px; background-color:#f4f4f6; font-size:11px; line-height:1; font-family: sans-serif; text-transform: uppercase; color:#646374 }
 .dataflow__filename { padding:6px 12px; border:1px solid #eee; border-radius: 4px; margin:20px 0 10px; font-size:13px; color:#393842; background-color: #fff; }
 
 .marker { padding:2px 6px; border-radius:4px; background-color: rgba(0,0,0,.1); word-break: break-all; white-space: nowrap; }
 .marker.block { white-space: pre; line-height: 1.5; }
 
-.card .card__section h2, .card .card__section h3 { font-size:18px; } 
+.card .card__section h2, .card .card__section h3 { font-size:18px; }
 .card__panel__heading { padding:5px 0; font-size:22px; font-weight: 600; }
 .heading-char { display: inline-block; width:22px; height:22px; border:1px solid #d3d3d9; border-radius:15px; margin-right:5px; color:#727184; font-size:14px; background-color:#fff; text-align: center; }
 
@@ -368,7 +432,7 @@
 
 .is-hidden { display:none; }
 
-@media print { 
+@media print {
   /* All your print styles go here */
    .card .fix-analysis { display:block; }
    .card__section { background-color: none; }

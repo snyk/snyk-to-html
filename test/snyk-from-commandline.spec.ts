@@ -36,7 +36,7 @@ describe('test calling snyk-to-html from command line', () => {
     expect(stderr).toEqual('');
 
     const cleanedReport = cleanTimestamp(stdout);
-    expect(cleanedReport).not.toContain('<h2 id="overview">Overview</h2>');
+    expect(cleanedReport).not.toContain('<h2>Overview</h2>');
     expect(cleanedReport).toMatchSnapshot();
   });
 
@@ -148,7 +148,7 @@ describe('test calling snyk-to-html from command line', () => {
     expect(stderr).toEqual('');
 
     const cleanedReport = cleanTimestamp(stdout);
-    expect(cleanedReport).not.toContain('<h2 id="overview">Overview</h2>');
+    expect(cleanedReport).not.toContain('<h2>Overview</h2>');
     expect(cleanedReport).toContain('<strong>14</strong> high issues');
     expect(cleanedReport).toContain('<strong>5</strong> medium issues');
     expect(cleanedReport).toContain('<li class="card__meta__item">CWE-79</li>');

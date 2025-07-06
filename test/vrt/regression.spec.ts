@@ -44,6 +44,10 @@ test.describe('Visual Regression Tests (VRTs)', () => {
       description: 'with summary',
       command: '-i ./test/fixtures/test-report.json -s',
     },
+    {
+      description: 'with risk scores',
+      command: '-i ./test/fixtures/test-report-with-risk-scores.json',
+    },
   ].forEach(({ description, command }) => {
     test(`A sample test report generated with ${description}`, async ({
       page,
@@ -71,38 +75,46 @@ test.describe('Visual Regression Tests (VRTs)', () => {
     });
   });
 
-  test('A sample snyk code (interactive) report', async ({ page }) => {
-    const tempFilePath = path.join(os.tmpdir(), `temp-${Date.now()}.html`);
+  [
+    {
+      description: 'no extra arguments',
+      command: '-i ./test/fixtures/test-code-openrefine.json',
+      viewPortSize: { width: 1920, height: 1024 },
+    },
+    {
+      description: 'suppressed issues',
+      command: '-i ./test/fixtures/test-code-consistent-ignores.json',
+      // Ignored issues are sorted at the bottom
+      viewPortSize: { width: 1920, height: 1024 * 3 },
+    },
+  ].forEach(({ description, command, viewPortSize }) => {
+    test(`A sample snyk code test with: ${description}`, async ({ page }) => {
+      // Ignored issues are sorted at the bottom
+      await page.setViewportSize(viewPortSize);
 
-    const { stdout, stderr } = await exec(
-      `node ${main} -i ./test/fixtures/test-code-openrefine.json`,
-      {
+      const tempFilePath = path.join(os.tmpdir(), `temp-${Date.now()}.html`);
+
+      const { stdout, stderr } = await exec(`node ${main} ${command}`, {
         maxBuffer: 1024 * 1024,
-      },
-    );
-    expect(stderr).toBe('');
+      });
+      expect(stderr).toBe('');
 
-    let reportWithoutDynamicContent = stdout;
-    replacements.forEach(({ regex, replace }) => {
-      reportWithoutDynamicContent = reportWithoutDynamicContent.replace(
-        regex,
-        replace,
-      );
+      let reportWithoutDynamicContent = stdout;
+      replacements.forEach(({ regex, replace }) => {
+        reportWithoutDynamicContent = reportWithoutDynamicContent.replace(
+          regex,
+          replace,
+        );
+      });
+
+      fs.writeFileSync(tempFilePath, reportWithoutDynamicContent, 'utf8');
+
+      await page.goto(`file://${tempFilePath}`);
+      await page.getByText('Data Flow').first().check();
+      await expect(page).toHaveScreenshot();
+
+      await page.getByText('Fix Analysis').first().check();
+      await expect(page).toHaveScreenshot();
     });
-
-    fs.writeFileSync(tempFilePath, reportWithoutDynamicContent, 'utf8');
-
-    await page.goto(`file://${tempFilePath}`);
-    await page
-      .getByText('Data Flow')
-      .first()
-      .check();
-    await expect(page).toHaveScreenshot();
-
-    await page
-      .getByText('Fix Analysis')
-      .first()
-      .check();
-    await expect(page).toHaveScreenshot();
   });
 });
