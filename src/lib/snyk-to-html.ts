@@ -135,9 +135,13 @@ function dateFromDateTimeString(dateTimeString: string) {
 function getExploitMaturity(vuln: any): string {
   if (vuln.exploitDetails && vuln.exploitDetails.maturityLevels) {
     // Find the primary maturity level first, fallback to secondary if not found
-    const primaryLevel = vuln.exploitDetails.maturityLevels.find(level => level.type === 'primary');
-    const secondaryLevel = vuln.exploitDetails.maturityLevels.find(level => level.type === 'secondary');
-    
+    const primaryLevel = vuln.exploitDetails.maturityLevels.find(
+      (level) => level.type === 'primary',
+    );
+    const secondaryLevel = vuln.exploitDetails.maturityLevels.find(
+      (level) => level.type === 'secondary',
+    );
+
     if (primaryLevel && primaryLevel.level) {
       return primaryLevel.level;
     } else if (secondaryLevel && secondaryLevel.level) {
@@ -147,7 +151,7 @@ function getExploitMaturity(vuln: any): string {
     // Fallback to the old exploit field if present
     return vuln.exploit;
   }
-  
+
   return 'Not Defined';
 }
 
