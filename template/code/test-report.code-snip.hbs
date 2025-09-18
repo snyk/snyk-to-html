@@ -44,6 +44,10 @@
             <div class="suppression-card__container">
               <ul class="suppression-card__items">
                 <li class="suppression-card__item">
+                  <div class="suppression-card__item__key">Findings ID</div>
+                  <div class="suppression-card__item__value">{{suppression.findingsId}}</div>
+                </li>
+                <li class="suppression-card__item">
                   <div class="suppression-card__item__key">Ignored at {{formatDate suppression.ignoredOn}} by</div>
                   <div class="suppression-card__item__value">
                     <span class="suppression-card__user-initial">{{firstInitial suppression.ignoredBy.name}}</span>

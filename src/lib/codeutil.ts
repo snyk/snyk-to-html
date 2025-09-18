@@ -155,12 +155,13 @@ export async function processSourceCode(dataArray) {
   return OrderedIssuesArray;
 }
 
-export function processSuppression(suppression: any) {
+export function processSuppression(suppression: any, findingsId: string) {
   if (!suppression) {
     return null;
   }
 
   return {
+    findingsId: findingsId ?? 'unknown',
     justification: suppression.justification || 'No justification provided',
     category: suppression.properties?.category || 'unknown',
     expiration: suppression.properties?.expiration,
