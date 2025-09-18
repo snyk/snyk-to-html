@@ -389,7 +389,9 @@ async function processCodeData(
     const projectVulns = project.vulnerabilities.map((vuln) => {
       if (vuln.suppressions && vuln.suppressions.length > 0) {
         hasSuppressedVulns = true;
-        vuln.suppression = processSuppression(vuln.suppressions[0]);
+        const findingsId =
+          vuln.fingerprints['snyk/asset/finding/v1'] ?? undefined;
+        vuln.suppression = processSuppression(vuln.suppressions[0], findingsId);
       }
       return vuln;
     });
