@@ -183,8 +183,16 @@ export function firstInitial(name: string | null | undefined): string {
 }
 
 export function formatDate(date: string | null | undefined): string {
+  let formattedDate = 'Unknown date';
   if (!date) {
-    return 'Unknown date';
+    return formattedDate;
   }
-  return new Date(date).toISOString().slice(0, 19).replace('T', ' ') + ' GMT';
+
+  try {
+    formattedDate =
+      new Date(date).toISOString().slice(0, 19).replace('T', ' ') + ' GMT';
+  } catch (error) {
+    console.debug(`Warning: Failed to parse date string: ${error}`);
+  }
+  return formattedDate;
 }
