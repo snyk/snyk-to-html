@@ -12,6 +12,13 @@
             <div class="label label--{{metadata.severity}}">
                 <span class="label__text">{{metadata.severity}} severity</span>
             </div>
+            {{#if metadata.exploitMaturity}}
+            {{#if_not_eq metadata.exploitMaturity "Not Defined"}}
+            <div class="label label--exploit">
+                <span class="label__text">Exploit: {{metadata.exploitMaturity}}</span>
+            </div>
+            {{/if_not_eq}}
+            {{/if}}
         </div>
 
         <hr/>
