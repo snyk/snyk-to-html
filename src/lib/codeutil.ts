@@ -3,6 +3,7 @@ import * as path from 'node:path';
 import * as events from 'node:events';
 import * as fs from 'node:fs';
 import * as readline from 'node:readline';
+import { Suppression } from './types';
 
 const codeSeverityMap = {
   error: 'high',
@@ -106,9 +107,9 @@ export async function processSourceCode(dataArray) {
   let newLocation = '';
   let findSeverityIndex;
   const codeSeverityCounter = [
-    { severity: 'high', counter: 0 },
-    { severity: 'medium', counter: 0 },
-    { severity: 'low', counter: 0 },
+    { severity: 'high', counter: 0, ignored: 0 },
+    { severity: 'medium', counter: 0, ignored: 0 },
+    { severity: 'low', counter: 0, ignored: 0 },
   ];
   const rulesArray = dataArray[0].runs[0].tool.driver.rules;
   for (const issue of dataArray[0].runs[0].results) {
@@ -117,6 +118,9 @@ export async function processSourceCode(dataArray) {
       (f) => f.severity === issue.severitytext,
     );
     codeSeverityCounter[findSeverityIndex].counter++;
+    if (isIssueIgnored(issue.suppressions)) {
+      codeSeverityCounter[findSeverityIndex].ignored++;
+    }
     //add the code snippet here...
     issue.locations[0].physicalLocation.codeString = await readCodeSnippet(
       issue.locations[0],
@@ -155,6 +159,53 @@ export async function processSourceCode(dataArray) {
   return OrderedIssuesArray;
 }
 
+/**
+ * Get the highest suppression status from the suppressions list.
+ * If the status is not provided, it is considered accepted.
+ * The order of precedence is accepted, underReview, rejected.
+ * @param suppressions list of suppressions
+ * @returns the highest suppression status
+ */
+export function getHighestSuppression(
+  suppressions: Suppression[],
+): Suppression | null {
+  const acceptedSuppression = suppressions.find(
+    (s) => s.status === 'accepted' || !s.status,
+  );
+  if (acceptedSuppression) {
+    return acceptedSuppression;
+  }
+
+  const underReviewSuppression = suppressions.find(
+    (s) => s.status === 'underReview',
+  );
+  if (underReviewSuppression) {
+    return underReviewSuppression;
+  }
+
+  const rejectedSuppression = suppressions.find((s) => s.status === 'rejected');
+  if (rejectedSuppression) {
+    return rejectedSuppression;
+  }
+
+  return null;
+}
+
+/**
+ * Check if the issue is ignored from the suppressions list.
+ * If the issue is ignored, the highest suppression status is accepted or not provided.
+ * @param suppressions list of suppressions
+ * @returns true if the issue is ignored, false otherwise
+ */
+export function isIssueIgnored(suppressions: Suppression[]): boolean {
+  if (!suppressions || suppressions.length === 0) {
+    return false;
+  }
+
+  const suppression = getHighestSuppression(suppressions);
+  return suppression?.status === 'accepted' || !suppression?.status;
+}
+
 export function processSuppression(suppression: any) {
   if (!suppression) {
     return null;
@@ -164,6 +215,7 @@ export function processSuppression(suppression: any) {
     justification: suppression.justification || 'No justification provided',
     category: suppression.properties?.category || 'unknown',
     expiration: suppression.properties?.expiration,
+    status: suppression.status,
     ignoredOn: suppression.properties?.ignoredOn || {
       date: 'unknown',
       reason: 'unknown',
@@ -195,4 +247,19 @@ export function formatDate(date: string | null | undefined): string {
     console.debug(`Warning: Failed to parse date string: ${error}`);
   }
   return formattedDate;
+}
+
+export function generateCodeReportDescription(
+  issueCount: number,
+  ignoredCount: number,
+): string {
+  if (issueCount === 0) {
+    return 'No issues found';
+  }
+
+  if (ignoredCount > 0) {
+    return `Found ${issueCount} issues (${ignoredCount} ignored)`;
+  }
+
+  return `Found ${issueCount} issues`;
 }
