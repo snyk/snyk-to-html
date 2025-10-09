@@ -14,7 +14,12 @@ import {
   IacProjectType,
   severityMap,
 } from './vuln';
-import { processSourceCode, processSuppression } from './codeutil';
+import {
+  countIgnoredIssues,
+  generateCodeReportDescription,
+  processSourceCode,
+  processSuppression,
+} from './codeutil';
 import { formatDateTime } from './dateutil';
 import { registerHandlebarsHelpers } from './handlebarsutil';
 
@@ -423,10 +428,15 @@ async function processCodeData(
   });
 
   const totalIssues = dataArray[0].runs[0].results.length;
+  const totalIgnoredIssues = countIgnoredIssues(OrderedIssuesArray);
   const processedData = {
     projects: OrderedIssuesArray,
     showSummaryOnly: summary,
     totalIssues,
+    reportDescription: generateCodeReportDescription(
+      totalIssues,
+      totalIgnoredIssues,
+    ),
   };
   return generateCodeTemplate(processedData, template);
 }

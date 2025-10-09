@@ -49,6 +49,14 @@
                     {{#if suppression.ignoredOn}}{{formatDate suppression.ignoredOn}}{{else}}Unknown{{/if}}
                   </div>
                 </li>
+                {{#if suppression.status}}
+                <li class="suppression-card__item">
+                  <div class="suppression-card__item__key">Ignored status</div>
+                  <div class="suppression-card__item__value">
+                    {{suppression.status}}
+                  </div>
+                </li>
+                {{/if}}
                 <li class="suppression-card__item">
                   <div class="suppression-card__item__key">Ignored by</div>
                   <div class="suppression-card__item__value">
