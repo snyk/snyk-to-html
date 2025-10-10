@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Snyk test report</title>
-  <meta name="description" content="{{uniqueCount}} known vulnerabilities found in {{summary}}.">
+  <meta name="description" content="{{reportDescription}}">
   <base target="_blank">
   <link rel="icon" type="image/png" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.png"
     sizes="194x194">
@@ -33,12 +33,15 @@
           <div class="meta-counts">
             <div class="meta-count">
               <span class="severity-icon severity-icon--high"></span> <span><strong>{{projects.[0].vulnsummarycounter.[0].counter}}</strong> high issues</span>
+              {{#if projects.[0].vulnsummarycounter.[0].ignored}} ({{projects.[0].vulnsummarycounter.[0].ignored}} ignored){{/if}}
             </div>
             <div class="meta-count">
               <span class="severity-icon severity-icon--medium"></span> <span><strong>{{projects.[0].vulnsummarycounter.[1].counter}}</strong> medium issues</span>
+              {{#if projects.[0].vulnsummarycounter.[1].ignored}} ({{projects.[0].vulnsummarycounter.[1].ignored}} ignored){{/if}}
             </div>
             <div class="meta-count">
               <span class="severity-icon severity-icon--low"></span> <span><strong>{{projects.[0].vulnsummarycounter.[2].counter}}</strong> low issues</span>
+              {{#if projects.[0].vulnsummarycounter.[2].ignored}} ({{projects.[0].vulnsummarycounter.[2].ignored}} ignored){{/if}}
             </div>
           </div>
           {{/if}}

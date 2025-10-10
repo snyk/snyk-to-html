@@ -19,3 +19,21 @@ export interface Vuln {
   title: string;
   severity: string;
 }
+
+export type SuppressionStatus = 'accepted' | 'rejected' | 'underReview';
+
+export interface Suppression {
+  guid?: string;
+  kind: string;
+  status?: SuppressionStatus;
+  justification?: string;
+  properties?: {
+    category: string;
+    expiration?: string;
+    ignoredOn: string;
+    ignoredBy: {
+      name: string;
+      email: string;
+    };
+  };
+}
