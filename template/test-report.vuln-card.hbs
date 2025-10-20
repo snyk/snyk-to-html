@@ -12,6 +12,11 @@
             <div class="label label--{{metadata.severity}}">
                 <span class="label__text">{{metadata.severity}} severity</span>
             </div>
+            {{#if metadata.reachability}}
+            <div class="label label--{{#if_eq metadata.reachability "Reachable"}}critical{{else}}low{{/if_eq}}">
+                <span class="label__text">{{metadata.reachability}}</span>
+            </div>
+            {{/if}}
         </div>
 
         <hr/>

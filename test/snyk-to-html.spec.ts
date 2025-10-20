@@ -631,4 +631,54 @@ describe('test running SnykToHtml.run', () => {
       },
     );
   });
+
+  it('creates a report with reachability signals displayed correctly', (done) => {
+    SnykToHtml.run(
+      path.join(__dirname, 'fixtures', 'test-report-with-reachability.json'),
+      WITHOUT_REMEDIATION,
+      path.join(__dirname, '..', 'template', 'test-report.hbs'),
+      WITHOUT_SUMMARY,
+      (report) => {
+        try {
+          const reachableVulnIdx = report.indexOf('Cross-site Scripting (XSS)');
+          // To get the card info we look from the vuln title
+          // up until the html comment indicating the end of the card
+          const reachableVuln = report.substring(
+            reachableVulnIdx,
+            report.indexOf('<!-- .card -->', reachableVulnIdx),
+          );
+          // We expect the reachable vuln's card to have the REACHABLE signal in the template
+          expect(reachableVuln).toMatch(
+            /<div class="label label--critical">\s*<span class="label__text">Reachable<\/span>/,
+          );
+
+          const nonReachableVulnIdx = report.indexOf('Directory Traversal');
+          const nonReachableVuln = report.substring(
+            nonReachableVulnIdx,
+            report.indexOf('<!-- .card -->', nonReachableVulnIdx),
+          );
+          // We expect the non reachable vuln's card to have the NOT_REACHABLE signal in the template
+          expect(nonReachableVuln).toMatch(
+            /<div class="label label--low">\s*<span class="label__text">No Reachable Path Found<\/span>/,
+          );
+
+          const licenseIssueIdx = report.indexOf('GPL-2.0 license');
+          const licenseIssue = report.substring(
+            licenseIssueIdx,
+            report.indexOf('<!-- .card -->', licenseIssueIdx),
+          );
+
+          // We expect the license issues' card to not have the reachability signal in the labels section
+          // only the severity
+          expect(licenseIssue).toMatch(
+            /<div class="card__labels">\s*<div class="label label--high">\s*<span class="label__text">high severity<\/span>\s*<\/div>\s*<\/div>/,
+          );
+
+          done();
+        } catch (error: any) {
+          done(error);
+        }
+      },
+    );
+  });
 });

@@ -48,6 +48,10 @@ test.describe('Visual Regression Tests (VRTs)', () => {
       description: 'with risk scores',
       command: '-i ./test/fixtures/test-report-with-risk-scores.json',
     },
+    {
+      description: 'with reachability signals',
+      command: '-i ./test/fixtures/test-report-with-reachability.json',
+    },
   ].forEach(({ description, command }) => {
     test(`A sample test report generated with ${description}`, async ({
       page,

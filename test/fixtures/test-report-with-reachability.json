@@ -1,0 +1,202 @@
+{
+  "ok": false,
+  "dependencyCount": 5,
+  "vulnerabilities": [
+    {
+      "creationTime": "2015-11-06T02:09:36.000000Z",
+      "credit": ["Unknown"],
+      "cvssDetails": [],
+      "cvssScore": 4.3,
+      "cvssSources": [
+        {
+          "assigner": "Snyk",
+          "baseScore": 4.3,
+          "cvssVersion": "CVSSv31",
+          "modificationTime": "0001-01-01T00:00:00.000000Z",
+          "severity": "medium",
+          "type": "primary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:N/A:N"
+        },
+        {
+          "assigner": "NVD",
+          "baseScore": 6.1,
+          "cvssVersion": "CVSSv31",
+          "modificationTime": "0001-01-01T00:00:00.000000Z",
+          "severity": "medium",
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N"
+        }
+      ],
+      "description": "## Overview\r\n\r\nSince the sanitize-html module trusts 'text' coming from htmlparser2, and outputs it without further escaping (because htmlparser2 does not decode entities in text before delivering it), this results in an XSS attack vector if sanitize-html ignores the img tag (according to user-configured filter rules) but passes the text intact, as it must do to keep any text in documents.\r\n\r\n\r\n## References\r\n- https://github.com/punkave/sanitize-html/issues/29",
+      "disclosureTime": "2015-11-06T02:09:36.000000Z",
+      "epssDetails": {
+        "modelVersion": "v2025.03.14",
+        "percentile": "0.55188",
+        "probability": "0.00328"
+      },
+      "exploitDetails": {
+        "maturityLevels": [
+          {
+            "format": "CVSSv3",
+            "level": "unproven",
+            "type": "secondary"
+          },
+          {
+            "format": "CVSSv4",
+            "level": "unreported",
+            "type": "primary"
+          }
+        ],
+        "sources": []
+      },
+      "fixedIn": ["1.4.3"],
+      "from": ["juice-shop@12.3.0", "sanitize-html@1.4.2"],
+      "id": "npm:sanitize-html:20141024",
+      "identifiers": {
+        "CVE": ["CVE-2016-1000237"],
+        "CWE": ["CWE-79"],
+        "GHSA": ["GHSA-3j7m-hmh3-9jmp"]
+      },
+      "isPatchable": false,
+      "isUpgradable": false,
+      "language": "js",
+      "malicious": false,
+      "modificationTime": "2024-03-11T07:51:59.000000Z",
+      "name": "sanitize-html",
+      "packageManager": "npm",
+      "packageName": "sanitize-html",
+      "publicationTime": "2015-11-06T02:09:36.000000Z",
+      "reachability": "reachable",
+      "references": [
+        {
+          "title": "CVE",
+          "url": "https://raw.githubusercontent.com/distributedweaknessfiling/cvelist/master/2016/1000xxx/CVE-2016-1000237.json"
+        },
+        {
+          "title": "GitHub Issue",
+          "url": "https://github.com/punkave/sanitize-html/issues/29"
+        },
+        {
+          "title": "Node Security Advisories",
+          "url": "https://nodesecurity.io/advisories/135"
+        }
+      ],
+      "riskScore": 58,
+      "semver": {
+        "vulnerable": ["<1.4.3"]
+      },
+      "severity": "medium",
+      "socialTrendAlert": false,
+      "title": "Cross-site Scripting (XSS)",
+      "upgradePath": null,
+      "version": "1.4.2"
+    },
+    {
+      "creationTime": "2022-04-13T12:47:39.000000Z",
+      "credit": ["haxatron"],
+      "cvssDetails": [],
+      "cvssScore": 6.3,
+      "cvssSources": [
+        {
+          "assigner": "Snyk",
+          "baseScore": 6.3,
+          "cvssVersion": "CVSSv31",
+          "modificationTime": "0001-01-01T00:00:00.000000Z",
+          "severity": "medium",
+          "type": "primary",
+          "vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:N/E:P"
+        },
+        {
+          "assigner": "NVD",
+          "baseScore": 5.5,
+          "cvssVersion": "CVSSv31",
+          "modificationTime": "0001-01-01T00:00:00.000000Z",
+          "severity": "medium",
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N"
+        }
+      ],
+      "description": "## Overview\n[grunt](https://www.npmjs.com/package/grunt) is a JavaScript task runner.\n\nAffected versions of this package are vulnerable to Directory Traversal via creation of a symlink to a restricted file, if a local attacker has `write` access to the source directory of `file.copy`\n\n## Details\n\nA Directory Traversal attack (also known as path traversal) aims to access files and directories that are stored outside the intended folder. By manipulating files with \"dot-dot-slash (../)\" sequences and its variations, or by using absolute file paths, it may be possible to access arbitrary files and directories stored on file system, including application source code, configuration, and other critical system files.\n\nDirectory Traversal vulnerabilities can be generally divided into two types:\n\n- **Information Disclosure**: Allows the attacker to gain information about the folder structure or read the contents of sensitive files on the system.\n\n`st` is a module for serving static files on web pages, and contains a [vulnerability of this type](https://snyk.io/vuln/npm:st:20140206). In our example, we will serve files from the `public` route.\n\nIf an attacker requests the following URL from our server, it will in turn leak the sensitive private key of the root user.\n\n```\ncurl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa\n```\n**Note** `%2e` is the URL encoded version of `.` (dot).\n\n- **Writing arbitrary files**: Allows the attacker to create or replace existing files. This type of vulnerability is also known as `Zip-Slip`. \n\nOne way to achieve this is by using a malicious `zip` archive that holds path traversal filenames. When each filename in the zip archive gets concatenated to the target extraction folder, without validation, the final path ends up outside of the target folder. If an executable or a configuration file is overwritten with a file containing malicious code, the problem can turn into an arbitrary code execution issue quite easily.\n\nThe following is an example of a `zip` archive with one benign file and one malicious file. Extracting the malicious file will result in traversing out of the target folder, ending up in `/root/.ssh/` overwriting the `authorized_keys` file:\n\n```\n2018-04-15 22:04:29 .....           19           19  good.txt\n2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys\n```\n\n## Remediation\nUpgrade `grunt` to version 1.5.0 or higher.\n## References\n- [GitHub Commit](https://github.com/gruntjs/grunt/commit/aad3d4521c3098fb255fb2db8f2e1d691a033665)\n- [GitHub PR](https://github.com/gruntjs/grunt/pull/1740)\n",
+      "disclosureTime": "2022-04-13T12:40:04.000000Z",
+      "epssDetails": {
+        "modelVersion": "v2025.03.14",
+        "percentile": "0.30100",
+        "probability": "0.00109"
+      },
+      "exploitDetails": {
+        "maturityLevels": [
+          {
+            "format": "CVSSv3",
+            "level": "proof of concept",
+            "type": "secondary"
+          },
+          {
+            "format": "CVSSv4",
+            "level": "proof of concept",
+            "type": "primary"
+          }
+        ],
+        "sources": ["Snyk"]
+      },
+      "fixedIn": ["1.5.0"],
+      "from": ["juice-shop@12.3.0", "grunt@1.4.1"],
+      "id": "SNYK-JS-GRUNT-2635969",
+      "identifiers": {
+        "CVE": ["CVE-2022-0436"],
+        "CWE": ["CWE-22"]
+      },
+      "isPatchable": false,
+      "isUpgradable": false,
+      "language": "js",
+      "malicious": false,
+      "modificationTime": "2024-03-11T07:54:26.000000Z",
+      "name": "grunt",
+      "packageManager": "npm",
+      "packageName": "grunt",
+      "publicationTime": "2022-04-13T12:57:58.000000Z",
+      "reachability": "no-path-found",
+      "references": [
+        {
+          "title": "GitHub Commit",
+          "url": "https://github.com/gruntjs/grunt/commit/aad3d4521c3098fb255fb2db8f2e1d691a033665"
+        },
+        {
+          "title": "GitHub PR",
+          "url": "https://github.com/gruntjs/grunt/pull/1740"
+        }
+      ],
+      "riskScore": 205,
+      "semver": {
+        "vulnerable": ["<1.5.0"]
+      },
+      "severity": "medium",
+      "socialTrendAlert": false,
+      "title": "Directory Traversal",
+      "upgradePath": null,
+      "version": "1.4.1"
+    },
+    {
+      "creationTime": "2025-03-10T18:04:40.954000Z",
+      "description": "GPL-2.0 license",
+      "epssDetails": null,
+      "from": ["juice-shop@12.3.0", "fuzzball@1.4.0"],
+      "id": "snyk:lic:npm:fuzzball:GPL-2.0",
+      "isPatchable": false,
+      "isUpgradable": false,
+      "language": "js",
+      "license": "GPL-2.0",
+      "name": "fuzzball",
+      "packageManager": "npm",
+      "packageName": "fuzzball",
+      "publicationTime": "2025-03-10T18:04:40.954000Z",
+      "semver": {
+        "vulnerable": [">=0.1.4 <2.1.3"]
+      },
+      "severity": "high",
+      "title": "GPL-2.0 license",
+      "type": "license",
+      "upgradePath": null,
+      "version": "1.4.0"
+    }
+  ]
+}

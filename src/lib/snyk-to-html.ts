@@ -113,6 +113,17 @@ class SnykToHtml {
   }
 }
 
+function processReachability(reachability: any) {
+  switch (reachability) {
+    case 'reachable':
+      return 'Reachable';
+    case 'no-path-found':
+      return 'No Reachable Path Found';
+    default:
+      return null;
+  }
+}
+
 function metadataForVuln(vuln: any) {
   const { cveSpaced, cveLineBreaks } = concatenateCVEs(vuln);
 
@@ -124,6 +135,7 @@ function metadataForVuln(vuln: any) {
     severity: vuln.severity,
     severityValue: severityMap[vuln.severity],
     riskScore: typeof vuln.riskScore === 'number' ? vuln.riskScore : undefined,
+    reachability: processReachability(vuln.reachability),
     description: vuln.description || 'No description available.',
     fixedIn: vuln.fixedIn,
     packageManager: vuln.packageManager,
