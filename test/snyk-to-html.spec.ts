@@ -740,7 +740,7 @@ describe('test running SnykToHtml.run', () => {
       );
     });
 
-    it('renders exploit maturity label when old exploit field exists', (done) => {
+    it('does not render exploit maturity label when old exploit field is "Not Defined"', (done) => {
       SnykToHtml.run(
         path.join(__dirname, 'fixtures', 'test-exploit-maturity.json'),
         WITHOUT_REMEDIATION,
@@ -748,9 +748,14 @@ describe('test running SnykToHtml.run', () => {
         WITHOUT_SUMMARY,
         (report) => {
           try {
-            // Should contain exploit label from old exploit field
-            expect(report).toContain(
-              '<span class="label__text">Exploit: Not Defined</span>',
+            // Should NOT contain exploit label when exploit field is "Not Defined"
+            const cardSection = getCardContent(
+              report,
+              'test-vuln-old-exploit-field',
+            );
+            expect(cardSection).toBeTruthy();
+            expect(cardSection).not.toContain(
+              '<div class="label label--exploit">',
             );
             done();
           } catch (error: any) {

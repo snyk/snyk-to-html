@@ -166,8 +166,8 @@ function getExploitMaturity(vuln: any): string | undefined {
     if (secondaryLevel && secondaryLevel.level) {
       return secondaryLevel.level;
     }
-  } else if (vuln.exploit) {
-    // Fallback to the old exploit field if present
+  } else if (vuln.exploit && vuln.exploit !== 'Not Defined') {
+    // Fallback to the old exploit field if present and not "Not Defined"
     return vuln.exploit;
   }
 
