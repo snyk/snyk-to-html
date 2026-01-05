@@ -681,4 +681,157 @@ describe('test running SnykToHtml.run', () => {
       },
     );
   });
+
+  describe('exploit maturity handling', () => {
+    // Helper function to extract card content for a specific vulnerability
+    const getCardContent = (report: string, vulnId: string): string => {
+      const cardStart = report.indexOf(vulnId);
+      if (cardStart === -1) {
+        return '';
+      }
+      const cardContent = report.substring(cardStart);
+      const nextCardStart = cardContent.indexOf(
+        '<div class="card card--vuln',
+        1,
+      );
+      return nextCardStart > -1
+        ? cardContent.substring(0, nextCardStart)
+        : cardContent;
+    };
+
+    it('renders exploit maturity label when primary level exists', (done) => {
+      SnykToHtml.run(
+        path.join(__dirname, 'fixtures', 'test-exploit-maturity.json'),
+        WITHOUT_REMEDIATION,
+        path.join(__dirname, '..', 'template', 'test-report.hbs'),
+        WITHOUT_SUMMARY,
+        (report) => {
+          try {
+            // Should contain exploit label for primary exploit
+            expect(report).toContain('<div class="label label--exploit">');
+            expect(report).toContain(
+              '<span class="label__text">Exploit: Proof of Concept</span>',
+            );
+            done();
+          } catch (error: any) {
+            done(error);
+          }
+        },
+      );
+    });
+
+    it('renders exploit maturity label when only secondary level exists', (done) => {
+      SnykToHtml.run(
+        path.join(__dirname, 'fixtures', 'test-exploit-maturity.json'),
+        WITHOUT_REMEDIATION,
+        path.join(__dirname, '..', 'template', 'test-report.hbs'),
+        WITHOUT_SUMMARY,
+        (report) => {
+          try {
+            // Should contain exploit label for secondary exploit
+            expect(report).toContain(
+              '<span class="label__text">Exploit: High</span>',
+            );
+            done();
+          } catch (error: any) {
+            done(error);
+          }
+        },
+      );
+    });
+
+    it('does not render exploit maturity label when old exploit field is "Not Defined"', (done) => {
+      SnykToHtml.run(
+        path.join(__dirname, 'fixtures', 'test-exploit-maturity.json'),
+        WITHOUT_REMEDIATION,
+        path.join(__dirname, '..', 'template', 'test-report.hbs'),
+        WITHOUT_SUMMARY,
+        (report) => {
+          try {
+            // Should NOT contain exploit label when exploit field is "Not Defined"
+            const cardSection = getCardContent(
+              report,
+              'test-vuln-old-exploit-field',
+            );
+            expect(cardSection).toBeTruthy();
+            expect(cardSection).not.toContain(
+              '<div class="label label--exploit">',
+            );
+            done();
+          } catch (error: any) {
+            done(error);
+          }
+        },
+      );
+    });
+
+    it('does not render exploit maturity label when no exploit data exists', (done) => {
+      SnykToHtml.run(
+        path.join(__dirname, 'fixtures', 'test-exploit-maturity.json'),
+        WITHOUT_REMEDIATION,
+        path.join(__dirname, '..', 'template', 'test-report.hbs'),
+        WITHOUT_SUMMARY,
+        (report) => {
+          try {
+            const cardSection = getCardContent(report, 'test-vuln-no-exploit');
+            expect(cardSection).toBeTruthy();
+            expect(cardSection).not.toContain(
+              '<div class="label label--exploit">',
+            );
+            done();
+          } catch (error: any) {
+            done(error);
+          }
+        },
+      );
+    });
+
+    it('does not render exploit maturity label when exploitDetails has empty maturityLevels', (done) => {
+      SnykToHtml.run(
+        path.join(__dirname, 'fixtures', 'test-exploit-maturity.json'),
+        WITHOUT_REMEDIATION,
+        path.join(__dirname, '..', 'template', 'test-report.hbs'),
+        WITHOUT_SUMMARY,
+        (report) => {
+          try {
+            const cardSection = getCardContent(
+              report,
+              'test-vuln-empty-maturity-levels',
+            );
+            expect(cardSection).toBeTruthy();
+            expect(cardSection).not.toContain(
+              '<div class="label label--exploit">',
+            );
+            done();
+          } catch (error: any) {
+            done(error);
+          }
+        },
+      );
+    });
+
+    it('does not render exploit maturity label when maturityLevels exist but have no level value', (done) => {
+      SnykToHtml.run(
+        path.join(__dirname, 'fixtures', 'test-exploit-maturity.json'),
+        WITHOUT_REMEDIATION,
+        path.join(__dirname, '..', 'template', 'test-report.hbs'),
+        WITHOUT_SUMMARY,
+        (report) => {
+          try {
+            const cardSection = getCardContent(
+              report,
+              'test-vuln-maturity-levels-no-level',
+            );
+            expect(cardSection).toBeTruthy();
+            expect(cardSection).not.toContain(
+              '<div class="label label--exploit">',
+            );
+            done();
+          } catch (error: any) {
+            done(error);
+          }
+        },
+      );
+    });
+  });
 });

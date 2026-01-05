@@ -250,6 +250,11 @@ exports[`test calling snyk-to-html from command line handles the -a argument cor
       border-color: #88879E;
     }
   
+    .card .label--exploit {
+      background-color: #8B5A96;
+      border-color: #8B5A96;
+    }
+  
     .severity--low {
       border-color: #88879E;
     }
@@ -828,6 +833,9 @@ exports[`test calling snyk-to-html from command line handles the -a argument cor
                           <div class="label label--medium">
                               <span class="label__text">medium severity</span>
                           </div>
+                          <div class="label label--exploit">
+                              <span class="label__text">Exploit: Proof of Concept</span>
+                          </div>
                       </div>
               
                       <hr/>
@@ -925,6 +933,9 @@ exports[`test calling snyk-to-html from command line handles the -a argument cor
                       <div class="card__labels">
                           <div class="label label--medium">
                               <span class="label__text">medium severity</span>
+                          </div>
+                          <div class="label label--exploit">
+                              <span class="label__text">Exploit: Proof of Concept</span>
                           </div>
                       </div>
               
@@ -1095,6 +1106,9 @@ exports[`test calling snyk-to-html from command line handles the -a argument cor
                       <div class="card__labels">
                           <div class="label label--medium">
                               <span class="label__text">medium severity</span>
+                          </div>
+                          <div class="label label--exploit">
+                              <span class="label__text">Exploit: Proof of Concept</span>
                           </div>
                       </div>
               
@@ -1939,6 +1953,11 @@ exports[`test calling snyk-to-html from command line handles the -s argument cor
       border-color: #88879E;
     }
   
+    .card .label--exploit {
+      background-color: #8B5A96;
+      border-color: #8B5A96;
+    }
+  
     .severity--low {
       border-color: #88879E;
     }
@@ -2216,6 +2235,9 @@ exports[`test calling snyk-to-html from command line handles the -s argument cor
                     <div class="label label--medium">
                         <span class="label__text">medium severity</span>
                     </div>
+                    <div class="label label--exploit">
+                        <span class="label__text">Exploit: Proof of Concept</span>
+                    </div>
                 </div>
         
                 <hr/>
@@ -2264,6 +2286,9 @@ exports[`test calling snyk-to-html from command line handles the -s argument cor
                 <div class="card__labels">
                     <div class="label label--medium">
                         <span class="label__text">medium severity</span>
+                    </div>
+                    <div class="label label--exploit">
+                        <span class="label__text">Exploit: Proof of Concept</span>
                     </div>
                 </div>
         
@@ -2318,6 +2343,9 @@ exports[`test calling snyk-to-html from command line handles the -s argument cor
                 <div class="card__labels">
                     <div class="label label--medium">
                         <span class="label__text">medium severity</span>
+                    </div>
+                    <div class="label label--exploit">
+                        <span class="label__text">Exploit: Proof of Concept</span>
                     </div>
                 </div>
         
@@ -4431,6 +4459,11 @@ exports[`test calling snyk-to-html from command line shows remediation with vuln
       border-color: #88879E;
     }
   
+    .card .label--exploit {
+      background-color: #8B5A96;
+      border-color: #8B5A96;
+    }
+  
     .severity--low {
       border-color: #88879E;
     }
@@ -5314,6 +5347,11 @@ exports[`test calling snyk-to-html from command line shows remediation with vuln
     .card .label--low {
       background-color: #88879E;
       border-color: #88879E;
+    }
+  
+    .card .label--exploit {
+      background-color: #8B5A96;
+      border-color: #8B5A96;
     }
   
     .severity--low {

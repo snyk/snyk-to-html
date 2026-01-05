@@ -17,6 +17,11 @@
                 <span class="label__text">{{metadata.reachability}}</span>
             </div>
             {{/if}}
+            {{#if metadata.exploitMaturity}}
+            <div class="label label--exploit">
+                <span class="label__text">Exploit: {{metadata.exploitMaturity}}</span>
+            </div>
+            {{/if}}
         </div>
 
         <hr/>

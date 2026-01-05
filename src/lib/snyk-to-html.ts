@@ -129,6 +129,51 @@ function processReachability(reachability: any) {
   }
 }
 
+function concatenateCVEs(vuln: any) {
+  let cveSpaced = '';
+  let cveLineBreaks = '';
+
+  if (vuln.identifiers) {
+    vuln.identifiers.CVE.forEach(function (c) {
+      const cveLink = `<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=${c}">${c}</a>`;
+      cveSpaced += `${cveLink}&nbsp;`;
+      cveLineBreaks += `${cveLink}</br>`;
+    });
+  }
+
+  return { cveSpaced, cveLineBreaks };
+}
+
+function dateFromDateTimeString(dateTimeString: string) {
+  return dateTimeString.substr(0, 10);
+}
+
+function getExploitMaturity(vuln: any): string | undefined {
+  if (vuln.exploitDetails && vuln.exploitDetails.maturityLevels) {
+    // Find the primary maturity level first, fallback to secondary if not found
+    const primaryLevel = vuln.exploitDetails.maturityLevels.find(
+      (level) => level.type === 'primary',
+    );
+
+    if (primaryLevel && primaryLevel.level) {
+      return primaryLevel.level;
+    }
+
+    const secondaryLevel = vuln.exploitDetails.maturityLevels.find(
+      (level) => level.type === 'secondary',
+    );
+
+    if (secondaryLevel && secondaryLevel.level) {
+      return secondaryLevel.level;
+    }
+  } else if (vuln.exploit && vuln.exploit !== 'Not Defined') {
+    // Fallback to the old exploit field if present and not "Not Defined"
+    return vuln.exploit;
+  }
+
+  return undefined;
+}
+
 function metadataForVuln(vuln: any) {
   const { cveSpaced, cveLineBreaks } = concatenateCVEs(vuln);
 
@@ -151,26 +196,8 @@ function metadataForVuln(vuln: any) {
     disclosureTime: dateFromDateTimeString(vuln.disclosureTime || ''),
     publicationTime: dateFromDateTimeString(vuln.publicationTime || ''),
     license: vuln.license || undefined,
+    exploitMaturity: getExploitMaturity(vuln),
   };
-}
-
-function concatenateCVEs(vuln: any) {
-  let cveSpaced = '';
-  let cveLineBreaks = '';
-
-  if (vuln.identifiers) {
-    vuln.identifiers.CVE.forEach(function (c) {
-      const cveLink = `<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=${c}">${c}</a>`;
-      cveSpaced += `${cveLink}&nbsp;`;
-      cveLineBreaks += `${cveLink}</br>`;
-    });
-  }
-
-  return { cveSpaced, cveLineBreaks };
-}
-
-function dateFromDateTimeString(dateTimeString: string) {
-  return dateTimeString.substr(0, 10);
 }
 
 function groupVulns(vulns) {
