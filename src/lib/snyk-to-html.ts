@@ -197,6 +197,8 @@ function metadataForVuln(vuln: any) {
     publicationTime: dateFromDateTimeString(vuln.publicationTime || ''),
     license: vuln.license || undefined,
     exploitMaturity: getExploitMaturity(vuln),
+    epssDetails: vuln.epssDetails || undefined,
+    identifiers: vuln.identifiers || undefined,
   };
 }
 
