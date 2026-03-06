@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+{{#each vulnerabilities}}
+<div class="vuln-metadata">
+  {{#if metadata.epssDetails}}
+  <span class="epss-probability">{{metadata.epssDetails.probability}}</span>
+  <span class="epss-percentile">{{metadata.epssDetails.percentile}}</span>
+  {{/if}}
+  {{#if metadata.identifiers}}
+  {{#each metadata.identifiers.CWE}}
+  <span class="cwe-id">{{this}}</span>
+  {{/each}}
+  {{/if}}
+</div>
+{{/each}}
+</body>
+</html>
