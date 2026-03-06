@@ -682,6 +682,29 @@ describe('test running SnykToHtml.run', () => {
     );
   });
 
+  it('exposes epssDetails and identifiers in metadata for custom templates', (done) => {
+    SnykToHtml.run(
+      path.join(__dirname, 'fixtures', 'test-report-with-reachability.json'),
+      WITHOUT_REMEDIATION,
+      path.join(__dirname, '..', 'template', 'test-report.additionalFields.hbs'),
+      WITHOUT_SUMMARY,
+      (report) => {
+        try {
+          expect(report).toContain(
+            '<span class="epss-probability">0.00328</span>',
+          );
+          expect(report).toContain(
+            '<span class="epss-percentile">0.55188</span>',
+          );
+          expect(report).toContain('<span class="cwe-id">CWE-79</span>');
+          done();
+        } catch (error: any) {
+          done(error);
+        }
+      },
+    );
+  });
+
   describe('exploit maturity handling', () => {
     // Helper function to extract card content for a specific vulnerability
     const getCardContent = (report: string, vulnId: string): string => {
