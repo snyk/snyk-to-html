@@ -35,6 +35,20 @@ node ./dist/index.js
 
 When in doubt, use `snyk-to-html --help` or `snyk-to-html -h`.
 
+### Custom templates
+
+Use the `-t` or `--template` option to supply your own Handlebars template for dependency and container reports. Each vulnerability card receives a `metadata` object (and a `list` of vuln instances). The following fields are available on `metadata` for use in custom templates:
+
+| Category              | Fields |
+| --------------------- | ------ |
+| Core                  | `id`, `title`, `name`, `info`, `severity`, `severityValue`, `description`, `fixedIn`, `packageManager`, `version`, `cvssScore`, `license` |
+| CVE/identifiers       | `cveSpaced`, `cveLineBreaks`, `identifiers` (object with `CVE`, `CWE`, `GHSA` arrays) |
+| Dates                 | `disclosureTime`, `publicationTime` |
+| Risk and reachability | `riskScore`, `reachability`, `exploitMaturity` |
+| EPSS                  | `epssDetails` (when present: `modelVersion`, `percentile`, `probability`) |
+
+Use `{{#if metadata.epssDetails}}` or `{{#if metadata.identifiers}}` before accessing these, as they may be absent or null for some vulnerabilities.
+
 ## Generate the HTML report
 
 Snyk JSON to HTML Mapper mapper works with the different Snyk Products.  Change the directory to your package's root folder, then use  one of the  ways below to generate the HTML report, using the appropriate product's command
