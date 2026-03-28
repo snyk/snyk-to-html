@@ -28,7 +28,7 @@
     "chalk": "4.1.2",
     "commander": "^14.0.0",
     "debug": "^4.4.1",
-    "handlebars": "^4.7.8",
+    "handlebars": "^4.7.9",
     "lodash.isempty": "^4.4.0",
     "lodash.orderby": "^4.6.0",
     "marked": "^4.0.12"
