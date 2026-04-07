@@ -21,3 +21,4 @@ playwright-report/
 # Don't accidentally add non-linux snapshots to the VRTs
 test/vrt/**/*.png
 !test/vrt/**/*-linux.png
+.cursor
