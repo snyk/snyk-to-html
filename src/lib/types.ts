@@ -20,6 +20,14 @@ export interface Vuln {
   severity: string;
 }
 
+export interface RemediationChanges {
+  unresolved?: unknown[];
+  upgrade?: Record<string, unknown>;
+  patch?: Record<string, unknown>;
+  ignore?: Record<string, unknown>;
+  pin?: Record<string, unknown>;
+}
+
 export type SuppressionStatus = 'accepted' | 'rejected' | 'underReview';
 
 export interface Suppression {

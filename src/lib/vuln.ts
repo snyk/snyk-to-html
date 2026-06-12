@@ -1,5 +1,26 @@
 import * as orderBy from 'lodash.orderby';
-import { PatchRemediation, UpgradeRemediation, Vuln } from './types';
+import {
+  PatchRemediation,
+  RemediationChanges,
+  UpgradeRemediation,
+  Vuln,
+} from './types';
+
+export function normalizeRemediationChanges(
+  remediation?: RemediationChanges,
+): RemediationChanges | undefined {
+  if (!remediation) {
+    return undefined;
+  }
+
+  return {
+    unresolved: remediation.unresolved ?? [],
+    upgrade: remediation.upgrade ?? {},
+    patch: remediation.patch ?? {},
+    ignore: remediation.ignore ?? {},
+    pin: remediation.pin ?? {},
+  };
+}
 
 export const severityMap = { low: 0, medium: 1, high: 2, critical: 3 };
 
