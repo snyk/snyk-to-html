@@ -43,6 +43,16 @@ describe('normalizeRemediationChanges', () => {
     });
   });
 
+  it('adds empty defaults when remediation has no sub-fields', () => {
+    expect(normalizeRemediationChanges({})).toEqual({
+      unresolved: [],
+      upgrade: {},
+      patch: {},
+      ignore: {},
+      pin: {},
+    });
+  });
+
   it('leaves complete remediation objects unchanged', () => {
     const remediation = {
       upgrade: {},
@@ -88,6 +98,25 @@ describe('SnykToHtml remediation normalization', () => {
         unresolved: [],
         ignore: {},
       },
+    });
+
+    SnykToHtml.run(reportPath, true, remediationTemplate, false, (report) => {
+      try {
+        expect(report).toContain('remediation-card');
+        done();
+      } catch (error: any) {
+        done(error);
+      } finally {
+        fs.unlinkSync(reportPath);
+      }
+    });
+  });
+
+  it('generates actionable remediation when remediation is an empty object', (done) => {
+    const reportPath = writeTempReport({
+      ok: false,
+      vulnerabilities: [],
+      remediation: {},
     });
 
     SnykToHtml.run(reportPath, true, remediationTemplate, false, (report) => {
