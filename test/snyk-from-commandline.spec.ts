@@ -53,6 +53,7 @@ describe('test calling snyk-to-html from command line', () => {
     expect(cleanedReport).toContain(
       '<body class="test-remediation-section-projects">',
     );
+    expect(cleanedReport).toContain('Issues with no direct upgrade or patch');
     expect(cleanedReport).toMatchSnapshot();
   });
 
@@ -87,6 +88,7 @@ describe('test calling snyk-to-html from command line', () => {
       expect(cleanedReport).toContain(
         "<div class='remediation-card__pane shown test-remediation-pins'",
       );
+      expect(cleanedReport).toContain('Issues with no direct upgrade or patch');
       expect(cleanedReport).toMatchSnapshot();
     },
   );

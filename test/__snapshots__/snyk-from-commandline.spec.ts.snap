@@ -822,6 +822,183 @@ exports[`test calling snyk-to-html from command line handles the -a argument cor
         </div>
       </section>
 
+      <!-- unresolved -->
+      <section class="layout-container" style="padding-top: 35px;">
+        <h2>Issues with no direct upgrade or patch</h2>
+          <div class="card card--vuln  disclosure--not-new severity--medium" data-snyk-test="medium">
+              <h2 class="card__title">Prototype Pollution</h2>
+              <div class="card__section">
+          
+                  <div class="card__labels">
+                      <div class="label label--medium">
+                          <span class="label__text">medium severity</span>
+                      </div>
+                      <div class="label label--exploit">
+                          <span class="label__text">Exploit: Proof of Concept</span>
+                      </div>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              minimist
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+          
+                                      npm-two-vuln-deps@1.0.0, sharp@0.17.3 and others
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+                          <h3 class="card__section__title">Detailed paths</h3>
+          
+                      <ul class="card__meta__paths">
+                                  <li>
+                                  <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                                          npm-two-vuln-deps@1.0.0
+                                           <span class="list-paths__item__arrow">›</span> 
+                                          sharp@0.17.3
+                                           <span class="list-paths__item__arrow">›</span> 
+                                          tar@2.2.2
+                                           <span class="list-paths__item__arrow">›</span> 
+                                          fstream@1.0.12
+                                           <span class="list-paths__item__arrow">›</span> 
+                                          mkdirp@0.5.1
+                                           <span class="list-paths__item__arrow">›</span> 
+                                          minimist@0.0.8
+                                          
+                                  </span>
+          
+                              </li>
+                      </ul><!-- .list-paths -->
+          
+              </div><!-- .card__section -->
+          
+                <hr/>
+                <!-- Overview -->
+                <h2 id="overview">Overview</h2>
+          <p><a href="https://www.npmjs.com/package/minimist">minimist</a> is a parse argument options module.</p>
+          <p>Affected versions of this package are vulnerable to Prototype Pollution.
+          The library could be tricked into adding or modifying properties of <code>Object.prototype</code> using a <code>constructor</code> or <code>__proto__</code> payload.</p>
+          <h2 id="poc-by-snyk">PoC by Snyk</h2>
+          <pre><code>require(&#39;minimist&#39;)(&#39;--__proto__.injected0 value0&#39;.split(&#39; &#39;));
+          console.log(({}).injected0 === &#39;value0&#39;); // true
+          
+          require(&#39;minimist&#39;)(&#39;--constructor.prototype.injected1 value1&#39;.split(&#39; &#39;));
+          console.log(({}).injected1 === &#39;value1&#39;); // true
+          </code></pre>
+          <h2 id="details">Details</h2>
+          <p>Prototype Pollution is a vulnerability affecting JavaScript. Prototype Pollution refers to the ability to inject properties into existing JavaScript language construct prototypes, such as objects. JavaScript allows all Object attributes to be altered, including their magical attributes such as <code>_proto_</code>, <code>constructor</code> and <code>prototype</code>. An attacker manipulates these attributes to overwrite, or pollute, a JavaScript application object prototype of the base object by injecting other values.  Properties on the <code>Object.prototype</code> are then inherited by all the JavaScript objects through the prototype chain. When that happens, this leads to either denial of service by triggering JavaScript exceptions, or it tampers with the application source code to force the code path that the attacker injects, thereby leading to remote code execution.</p>
+          <p>There are two main ways in which the pollution of prototypes occurs:</p>
+          <ul>
+          <li><p>Unsafe <code>Object</code> recursive merge</p>
+          </li>
+          <li><p>Property definition by path</p>
+          </li>
+          </ul>
+          <h3 id="unsafe-object-recursive-merge">Unsafe Object recursive merge</h3>
+          <p>The logic of a vulnerable recursive merge function follows the following high-level model:</p>
+          <pre><code>merge (target, source)
+          
+            foreach property of source
+          
+              if property exists and is an object on both the target and the source
+          
+                merge(target[property], source[property])
+          
+              else
+          
+                target[property] = source[property]
+          </code></pre>
+          <br>  
+          
+          <p>When the source object contains a property named <code>_proto_</code> defined with <code>Object.defineProperty()</code> , the condition that checks if the property exists and is an object on both the target and the source passes and the merge recurses with the target, being the prototype of <code>Object</code> and the source of <code>Object</code> as defined by the attacker. Properties are then copied on the <code>Object</code> prototype.</p>
+          <p>Clone operations are a special sub-class of unsafe recursive merges, which occur when a recursive merge is conducted on an empty object: <code>merge({},source)</code>.</p>
+          <p><code>lodash</code> and <code>Hoek</code> are examples of libraries susceptible to recursive merge attacks.</p>
+          <h3 id="property-definition-by-path">Property definition by path</h3>
+          <p>There are a few JavaScript libraries that use an API to define property values on an object based on a given path. The function that is generally affected contains this signature: <code>theFunction(object, path, value)</code></p>
+          <p>If the attacker can control the value of “path”, they can set this value to <code>_proto_.myValue</code>. <code>myValue</code> is then assigned to the prototype of the class of the object.</p>
+          <h2 id="types-of-attacks">Types of attacks</h2>
+          <p>There are a few methods by which Prototype Pollution can be manipulated:</p>
+          <table>
+          <thead>
+          <tr>
+          <th>Type</th>
+          <th>Origin</th>
+          <th>Short description</th>
+          </tr>
+          </thead>
+          <tbody><tr>
+          <td><strong>Denial of service (DoS)</strong></td>
+          <td>Client</td>
+          <td>This is the most likely attack. <br>DoS occurs when <code>Object</code> holds generic functions that are implicitly called for various operations (for example, <code>toString</code> and <code>valueOf</code>). <br> The attacker pollutes <code>Object.prototype.someattr</code> and alters its state to an unexpected value such as <code>Int</code> or <code>Object</code>. In this case, the code fails and is likely to cause a denial of service.  <br><strong>For example:</strong> if an attacker pollutes <code>Object.prototype.toString</code> by defining it as an integer, if the codebase at any point was reliant on <code>someobject.toString()</code> it would fail.</td>
+          </tr>
+          <tr>
+          <td><strong>Remote Code Execution</strong></td>
+          <td>Client</td>
+          <td>Remote code execution is generally only possible in cases where the codebase evaluates a specific attribute of an object, and then executes that evaluation.<br><strong>For example:</strong> <code>eval(someobject.someattr)</code>. In this case, if the attacker pollutes <code>Object.prototype.someattr</code> they are likely to be able to leverage this in order to execute code.</td>
+          </tr>
+          <tr>
+          <td><strong>Property Injection</strong></td>
+          <td>Client</td>
+          <td>The attacker pollutes properties that the codebase relies on for their informative value, including security properties such as cookies or tokens.<br>  <strong>For example:</strong> if a codebase checks privileges for <code>someuser.isAdmin</code>, then when the attacker pollutes <code>Object.prototype.isAdmin</code> and sets it to equal <code>true</code>, they can then achieve admin privileges.</td>
+          </tr>
+          </tbody></table>
+          <h2 id="affected-environments">Affected environments</h2>
+          <p>The following environments are susceptible to a Prototype Pollution attack:</p>
+          <ul>
+          <li><p>Application server</p>
+          </li>
+          <li><p>Web server</p>
+          </li>
+          </ul>
+          <h2 id="how-to-prevent">How to prevent</h2>
+          <ol>
+          <li><p>Freeze the prototype— use <code>Object.freeze (Object.prototype)</code>.</p>
+          </li>
+          <li><p>Require schema validation of JSON input.</p>
+          </li>
+          <li><p>Avoid using unsafe recursive merge functions.</p>
+          </li>
+          <li><p>Consider using objects without prototypes (for example, <code>Object.create(null)</code>), breaking the prototype chain and preventing pollution.</p>
+          </li>
+          <li><p>As a best practice use <code>Map</code> instead of <code>Object</code>.</p>
+          </li>
+          </ol>
+          <h3 id="for-more-information-on-this-vulnerability-type">For more information on this vulnerability type:</h3>
+          <p><a href="https://github.com/HoLyVieR/prototype-pollution-nsec18/blob/master/paper/JavaScript_prototype_pollution_attack_in_NodeJS.pdf">Arteau, Oliver. “JavaScript prototype pollution attack in NodeJS application.” GitHub, 26 May 2018</a></p>
+          <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>minimist</code> to version 0.2.1, 1.2.3 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://gist.github.com/Kirill89/47feb345b09bf081317f08dd43403a8a">Command Injection PoC</a></p>
+          </li>
+          <li><p><a href="https://github.com/substack/minimist/commit/63e7ed05aa4b1889ec2f3b196426db4500cbda94">GitHub Fix Commit #1</a></p>
+          </li>
+          <li><p><a href="https://github.com/substack/minimist/commit/38a4d1caead72ef99e824bb420a2528eec03d9ab">GitHub Fix Commit #2</a></p>
+          </li>
+          <li><p><a href="https://snyk.io/blog/prototype-pollution-minimist/">Snyk Research Blog</a></p>
+          </li>
+          </ul>
+          
+                <hr/>
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/SNYK-JS-MINIMIST-559764">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+      </section><!-- end unresolved -->
 
       <div class="layout-container" style="padding-top: 35px;">
           <div class="cards--vuln filter--patch filter--ignore">
@@ -4983,6 +5160,59 @@ exports[`test calling snyk-to-html from command line shows remediation with vuln
         </div>
       </section>
 
+      <!-- unresolved -->
+      <section class="layout-container" style="padding-top: 35px;">
+        <h2>Issues with no direct upgrade or patch</h2>
+          <div class="card card--vuln  disclosure--not-new severity--medium" data-snyk-test="medium">
+              <h2 class="card__title">Arbitrary Code Execution</h2>
+              <div class="card__section">
+          
+                  <div class="card__labels">
+                      <div class="label label--medium">
+                          <span class="label__text">medium severity</span>
+                      </div>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: pip
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              django
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+                                  python-pip-app-with-vulns@0.0.0 and django@1.6.1
+          
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                  <h2 id="remediation">Remediation</h2>
+          <p>Upgrade to versions <code>1.7b2</code>, <code>1.6.3</code>, <code>1.5.6</code>, <code>1.4.11</code> or greater.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><a href="https://www.djangoproject.com/weblog/2014/apr/21/security/">Django Vulnerability Description</a></li>
+          <li><a href="https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2014-0472">Redhat Bugzilla</a></li>
+          <li><a href="https://rhn.redhat.com/errata/RHSA-2014-0456.html">Redhat Vulnerability Advisory</a></li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40025">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+      </section><!-- end unresolved -->
 
       <div class="layout-container" style="padding-top: 35px;">
           <div class="cards--vuln filter--patch filter--ignore">
@@ -5873,6 +6103,79 @@ exports[`test calling snyk-to-html from command line shows remediation with vuln
         </div>
       </section>
 
+      <!-- unresolved -->
+      <section class="layout-container" style="padding-top: 35px;">
+        <h2>Issues with no direct upgrade or patch</h2>
+          <div class="card card--vuln  disclosure--not-new severity--medium" data-snyk-test="medium">
+              <h2 class="card__title">Arbitrary Code Execution</h2>
+              <div class="card__section">
+          
+                  <div class="card__labels">
+                      <div class="label label--medium">
+                          <span class="label__text">medium severity</span>
+                      </div>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: pip
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              django
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+                                  python-pip-app-with-vulns@0.0.0 and django@1.6.1
+          
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+                          <h3 class="card__section__title">Detailed paths</h3>
+          
+                      <ul class="card__meta__paths">
+                                  <li>
+                                  <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                                          python-pip-app-with-vulns@0.0.0
+                                           <span class="list-paths__item__arrow">›</span> 
+                                          django@1.6.1
+                                          
+                                  </span>
+          
+                              </li>
+                      </ul><!-- .list-paths -->
+          
+              </div><!-- .card__section -->
+          
+                <hr/>
+                <!-- Overview -->
+                <h2 id="overview">Overview</h2>
+          <p><a href="https://pypi.python.org/pypi/Django"><code>Django</code></a> is a high-level Python Web framework that encourages rapid development and clean, pragmatic design.</p>
+          <p>Affected versions of this package are vulnerable to Arbitrary Code Execution attacks. The <code>django.core.urlresolvers.reverse</code> function allows remote attackers to import and execute arbitrary Python modules by leveraging a view that constructs URLs using user input and a &quot;dotted Python path.&quot;</p>
+          <h2 id="remediation">Remediation</h2>
+          <p>Upgrade to versions <code>1.7b2</code>, <code>1.6.3</code>, <code>1.5.6</code>, <code>1.4.11</code> or greater.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><a href="https://www.djangoproject.com/weblog/2014/apr/21/security/">Django Vulnerability Description</a></li>
+          <li><a href="https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2014-0472">Redhat Bugzilla</a></li>
+          <li><a href="https://rhn.redhat.com/errata/RHSA-2014-0456.html">Redhat Vulnerability Advisory</a></li>
+          </ul>
+          
+                <hr/>
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40025">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+      </section><!-- end unresolved -->
 
       <div class="layout-container" style="padding-top: 35px;">
           <div class="cards--vuln filter--patch filter--ignore">
