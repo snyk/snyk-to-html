@@ -12,6 +12,7 @@ import {
   addIssueDataToPatch,
   getUpgrades,
   IacProjectType,
+  normalizeRemediationChanges,
   severityMap,
 } from './vuln';
 import {
@@ -252,10 +253,11 @@ async function generateTemplate(
 ): Promise<string> {
   if (showRemediation && data.remediation) {
     data.showRemediations = showRemediation;
-    const { upgrade, pin, unresolved, patch } = data.remediation;
+    const remediation = normalizeRemediationChanges(data.remediation)!;
+    const { upgrade, pin, unresolved, patch } = remediation;
     data.anyRemediations =
       !isEmpty(upgrade) || !isEmpty(patch) || !isEmpty(pin);
-    data.anyUnresolved = !!unresolved?.vulnerabilities;
+    data.anyUnresolved = Array.isArray(unresolved) && unresolved.length > 0;
     data.unresolved = groupVulns(unresolved);
     data.upgrades = getUpgrades(upgrade, data.vulnerabilities);
     data.pins = getUpgrades(pin, data.vulnerabilities);
