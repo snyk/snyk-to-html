@@ -253,7 +253,7 @@ async function generateTemplate(
 ): Promise<string> {
   if (showRemediation && data.remediation) {
     data.showRemediations = showRemediation;
-    const remediation: any = normalizeRemediationChanges(data.remediation);
+    const remediation = normalizeRemediationChanges(data.remediation)!;
     const { upgrade, pin, unresolved, patch } = remediation;
     data.anyRemediations =
       !isEmpty(upgrade) || !isEmpty(patch) || !isEmpty(pin);
