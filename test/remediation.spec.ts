@@ -26,7 +26,19 @@ describe('normalizeRemediationChanges', () => {
     expect(normalizeRemediationChanges(undefined)).toBeUndefined();
   });
 
-  it('adds empty defaults for missing sub-fields', () => {
+  it('leaves remediation unchanged when all sub-fields are present', () => {
+    const remediation = {
+      upgrade: { 'lodash@4.17.15': { upgradeTo: 'lodash@4.17.21' } },
+      pin: { 'pkg@1.0.0': { upgradeTo: 'pkg@1.0.1', vulns: [] } },
+      patch: { 'SNYK-123': { paths: [] } },
+      ignore: { 'SNYK-123': [] },
+      unresolved: [{ id: 'SNYK-456' }],
+    };
+
+    expect(normalizeRemediationChanges(remediation)).toEqual(remediation);
+  });
+
+  it('adds empty defaults when remediation contains only some sub-fields', () => {
     const remediation = {
       upgrade: { 'lodash@4.17.15': { upgradeTo: 'lodash@4.17.21' } },
       pin: {},
@@ -43,7 +55,7 @@ describe('normalizeRemediationChanges', () => {
     });
   });
 
-  it('adds empty defaults when remediation has no sub-fields', () => {
+  it('adds empty defaults when remediation contains none of the sub-fields', () => {
     expect(normalizeRemediationChanges({})).toEqual({
       unresolved: [],
       upgrade: {},
@@ -52,21 +64,26 @@ describe('normalizeRemediationChanges', () => {
       pin: {},
     });
   });
-
-  it('leaves complete remediation objects unchanged', () => {
-    const remediation = {
-      upgrade: {},
-      pin: {},
-      patch: { 'SNYK-123': { paths: [] } },
-      ignore: { 'SNYK-123': [] },
-      unresolved: [{ id: 'SNYK-123' }],
-    };
-
-    expect(normalizeRemediationChanges(remediation)).toEqual(remediation);
-  });
 });
 
 describe('SnykToHtml remediation normalization', () => {
+  it('generates actionable remediation when all sub-fields are present', (done) => {
+    SnykToHtml.run(
+      path.join(__dirname, 'fixtures', 'test-report-with-remediation.json'),
+      true,
+      remediationTemplate,
+      false,
+      (report) => {
+        try {
+          expect(report).toContain('remediation-card');
+          done();
+        } catch (error: any) {
+          done(error);
+        }
+      },
+    );
+  });
+
   it('generates actionable remediation when patch is omitted', (done) => {
     SnykToHtml.run(
       path.join(
@@ -88,7 +105,7 @@ describe('SnykToHtml remediation normalization', () => {
     );
   });
 
-  it('generates actionable remediation for CLI-shaped JSON missing patch', (done) => {
+  it('generates actionable remediation when only some sub-fields are present', (done) => {
     const reportPath = writeTempReport({
       ok: false,
       vulnerabilities: [],
@@ -112,7 +129,7 @@ describe('SnykToHtml remediation normalization', () => {
     });
   });
 
-  it('generates actionable remediation when remediation is an empty object', (done) => {
+  it('generates actionable remediation when none of the sub-fields are present', (done) => {
     const reportPath = writeTempReport({
       ok: false,
       vulnerabilities: [],
