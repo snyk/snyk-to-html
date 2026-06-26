@@ -1,4 +1,4 @@
-FROM node:23.11.1-alpine3.21
+FROM node:24.13.1-alpine3.23
 
 RUN npm install snyk-to-html -g
 
