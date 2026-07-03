@@ -110,7 +110,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          registry-url: 'https://registry.npmjs.org'
       - name: npm config get cache
         id: npm-cache-dir
         run: echo "NPM_CACHE_DIR=$(npm config get cache)" >> $GITHUB_ENV
