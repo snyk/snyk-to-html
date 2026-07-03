@@ -118,6 +118,8 @@ jobs:
           path: ${{ env.NPM_CACHE_DIR }}
           key: ${{ runner.os }}-node-22-${{ hashFiles('**/package.json') }}
           restore-keys: ${{ runner.os }}-node-22-
+      - name: Upgrade npm for trusted publishing support (requires >=11.5.1)
+        run: npm install -g npm@11
       - run: npm install
       - run: npm i -g --save-exact semantic-release@25.0.3 @semantic-release/exec@7.1.0
       - run: semantic-release --branches main
