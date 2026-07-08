@@ -28,6 +28,15 @@ registerHandlebarsHelpers();
 
 const debug = debugModule('snyk-to-html');
 
+const defaultTemplateNames = ['test-report.hbs', 'remediation-report.hbs'];
+
+function isDefaultTemplate(template: string): boolean {
+  const templateDir = path.join(__dirname, '../../template');
+  return defaultTemplateNames.some(
+    (name) => path.resolve(template) === path.resolve(templateDir, name),
+  );
+}
+
 const defaultRemediationText =
   '## Remediation\nThere is no remediation at the moment';
 
@@ -99,16 +108,14 @@ class SnykToHtml {
       ) {
         // for IaC input we need to change the default template to an IaC specific template
         // at the same time we also want to support the -t / --template flag
-        template =
-          template === path.join(__dirname, '../../template/test-report.hbs')
-            ? path.join(__dirname, '../../template/iac/test-report.hbs')
-            : template;
+        template = isDefaultTemplate(template)
+          ? path.join(__dirname, '../../template/iac/test-report.hbs')
+          : template;
         return processIacData(data, template, summary);
       } else if (data?.runs && data?.runs[0].tool.driver.name === 'SnykCode') {
-        template =
-          template === path.join(__dirname, '../../template/test-report.hbs')
-            ? path.join(__dirname, '../../template/code/test-report.hbs')
-            : template;
+        template = isDefaultTemplate(template)
+          ? path.join(__dirname, '../../template/code/test-report.hbs')
+          : template;
         return processCodeData(data, template, summary);
       } else if (data.docker) {
         return processContainerData(data, remediation, template, summary);

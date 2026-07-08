@@ -500,6 +500,45 @@ describe('test running SnykToHtml.run', () => {
     );
   });
 
+  it('generates a Code report when default template is remediation-report.hbs', (done) => {
+    SnykToHtml.run(
+      path.join(__dirname, 'fixtures/test-code-openrefine.json'),
+      WITH_REMEDIATION,
+      path.join(__dirname, '..', 'template', 'remediation-report.hbs'),
+      WITHOUT_SUMMARY,
+      (report) => {
+        try {
+          expect(report).toContain('Snyk Code Report');
+          expect(report).toContain(
+            '<h2 class="card__title">Path Traversal</h2>',
+          );
+          done();
+        } catch (error: any) {
+          done(error);
+        }
+      },
+    );
+  });
+
+  it('generates an IaC report when default template is remediation-report.hbs', (done) => {
+    SnykToHtml.run(
+      path.join(__dirname, 'fixtures/iac-test-report.json'),
+      WITH_REMEDIATION,
+      path.join(__dirname, '..', 'template', 'remediation-report.hbs'),
+      WITHOUT_SUMMARY,
+      (report) => {
+        try {
+          expect(report).toContain(
+            '<h2 class="card__title">App Service allows FTP deployments</h2>',
+          );
+          done();
+        } catch (error: any) {
+          done(error);
+        }
+      },
+    );
+  });
+
   it('generates a report with container app vulnerabilities', (done) => {
     // report generated with "snyk container test --app-vulns --json" against an image that is using an old debian-based
     // python image and the golang.org/x/crypto/ssh package at a version with a known vulnerability.
