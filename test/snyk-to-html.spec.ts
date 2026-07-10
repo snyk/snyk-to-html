@@ -500,43 +500,170 @@ describe('test running SnykToHtml.run', () => {
     );
   });
 
-  it('generates a Code report when default template is remediation-report.hbs', (done) => {
-    SnykToHtml.run(
-      path.join(__dirname, 'fixtures/test-code-openrefine.json'),
-      WITH_REMEDIATION,
-      path.join(__dirname, '..', 'template', 'remediation-report.hbs'),
-      WITHOUT_SUMMARY,
-      (report) => {
-        try {
-          expect(report).toContain('Snyk Code Report');
-          expect(report).toContain(
-            '<h2 class="card__title">Path Traversal</h2>',
-          );
-          done();
-        } catch (error: any) {
-          done(error);
-        }
-      },
-    );
-  });
+  describe('template selection (-a / -t combinations)', () => {
+    const templateDir = path.join(__dirname, '..', 'template');
+    const fixturesDir = path.join(__dirname, 'fixtures');
+    const codeMarker = '<h2 class="card__title">Path Traversal</h2>';
+    const iacMarker =
+      '<h2 class="card__title">App Service allows FTP deployments</h2>';
+    const ossMarker =
+      '<h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>';
 
-  it('generates an IaC report when default template is remediation-report.hbs', (done) => {
-    SnykToHtml.run(
-      path.join(__dirname, 'fixtures/iac-test-report.json'),
-      WITH_REMEDIATION,
-      path.join(__dirname, '..', 'template', 'remediation-report.hbs'),
-      WITHOUT_SUMMARY,
-      (report) => {
-        try {
-          expect(report).toContain(
-            '<h2 class="card__title">App Service allows FTP deployments</h2>',
-          );
-          done();
-        } catch (error: any) {
-          done(error);
-        }
+    it.each([
+      {
+        scan: 'Code',
+        flags: 'no -a, no -t (default test-report.hbs)',
+        fixture: 'test-code-openrefine.json',
+        remediation: false,
+        template: path.join(templateDir, 'test-report.hbs'),
+        expectContains: ['Snyk Code Report', codeMarker],
       },
-    );
+      {
+        scan: 'Code',
+        flags: 'only -a (default remediation-report.hbs)',
+        fixture: 'test-code-openrefine.json',
+        remediation: true,
+        template: path.join(templateDir, 'remediation-report.hbs'),
+        expectContains: ['Snyk Code Report', codeMarker],
+      },
+      {
+        scan: 'Code',
+        flags: 'only -t (explicit code template)',
+        fixture: 'test-code-openrefine.json',
+        remediation: false,
+        template: path.join(templateDir, 'code', 'test-report.hbs'),
+        expectContains: ['Snyk Code Report', codeMarker],
+      },
+      {
+        scan: 'Code',
+        flags: '-a and -t (explicit code template)',
+        fixture: 'test-code-openrefine.json',
+        remediation: true,
+        template: path.join(templateDir, 'code', 'test-report.hbs'),
+        expectContains: ['Snyk Code Report', codeMarker],
+      },
+      {
+        scan: 'Code',
+        flags: 'only -t (custom non-code template)',
+        fixture: 'test-code-openrefine.json',
+        remediation: false,
+        template: path.join(templateDir, 'test-cve-report.hbs'),
+        rejects: true,
+      },
+      {
+        scan: 'IaC',
+        flags: 'no -a, no -t (default test-report.hbs)',
+        fixture: 'iac-test-report.json',
+        remediation: false,
+        template: path.join(templateDir, 'test-report.hbs'),
+        expectContains: [iacMarker],
+      },
+      {
+        scan: 'IaC',
+        flags: 'only -a (default remediation-report.hbs)',
+        fixture: 'iac-test-report.json',
+        remediation: true,
+        template: path.join(templateDir, 'remediation-report.hbs'),
+        expectContains: [iacMarker],
+      },
+      {
+        scan: 'IaC',
+        flags: 'only -t (explicit IaC template)',
+        fixture: 'iac-test-report.json',
+        remediation: false,
+        template: path.join(templateDir, 'iac', 'test-report.hbs'),
+        expectContains: [iacMarker],
+      },
+      {
+        scan: 'IaC',
+        flags: '-a and -t (explicit IaC template)',
+        fixture: 'iac-test-report.json',
+        remediation: true,
+        template: path.join(templateDir, 'iac', 'test-report.hbs'),
+        expectContains: [iacMarker],
+      },
+      {
+        scan: 'IaC',
+        flags: 'only -t (custom non-IaC template)',
+        fixture: 'iac-test-report.json',
+        remediation: false,
+        template: path.join(templateDir, 'test-cve-report.hbs'),
+        expectNotContains: [iacMarker],
+      },
+      {
+        scan: 'Open Source',
+        flags: 'no -a, no -t (default test-report.hbs)',
+        fixture: 'test-report.json',
+        remediation: false,
+        template: path.join(templateDir, 'test-report.hbs'),
+        expectContains: [ossMarker],
+        expectNotContains: ['Snyk Code Report', iacMarker],
+      },
+      {
+        scan: 'Open Source',
+        flags: 'only -a (default remediation-report.hbs)',
+        fixture: 'test-report.json',
+        remediation: true,
+        template: path.join(templateDir, 'remediation-report.hbs'),
+        expectContains: [
+          ossMarker,
+          '<body class="test-remediation-section-projects">',
+        ],
+        expectNotContains: ['Snyk Code Report', iacMarker],
+      },
+      {
+        scan: 'Open Source',
+        flags: 'only -t (custom template)',
+        fixture: 'test-report.json',
+        remediation: false,
+        template: path.join(templateDir, 'test-cve-report.hbs'),
+        expectContains: [ossMarker],
+        expectNotContains: ['Snyk Code Report', iacMarker],
+      },
+      {
+        scan: 'Open Source',
+        flags: '-a and -t (custom template)',
+        fixture: 'test-report.json',
+        remediation: true,
+        template: path.join(templateDir, 'test-cve-report.hbs'),
+        expectContains: [ossMarker],
+        expectNotContains: ['Snyk Code Report', iacMarker],
+      },
+    ])('$scan | $flags', (testCase, done) => {
+      const input = path.join(fixturesDir, testCase.fixture);
+
+      if (testCase.rejects) {
+        SnykToHtml.runAsync(
+          input,
+          testCase.remediation,
+          testCase.template,
+          WITHOUT_SUMMARY,
+        )
+          .then(() => done(new Error('expected template render to fail')))
+          .catch(() => done());
+        return;
+      }
+
+      SnykToHtml.run(
+        input,
+        testCase.remediation,
+        testCase.template,
+        WITHOUT_SUMMARY,
+        (report) => {
+          try {
+            for (const text of testCase.expectContains ?? []) {
+              expect(report).toContain(text);
+            }
+            for (const text of testCase.expectNotContains ?? []) {
+              expect(report).not.toContain(text);
+            }
+            done();
+          } catch (error: any) {
+            done(error);
+          }
+        },
+      );
+    });
   });
 
   it('generates a report with container app vulnerabilities', (done) => {
